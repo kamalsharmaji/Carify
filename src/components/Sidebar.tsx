@@ -194,7 +194,7 @@ export function Sidebar({ onClose, isCollapsed, onToggleCollapse }: SidebarProps
                 </NavLink><NavLink to="/fleet/booking" onClick={onClose} className={subLinkClass}>
                   <div className="w-1.5 h-1.5 rounded-full bg-current opacity-40"></div>
                   Booking
-                </NavLink><NavLink to="/fleet/Availability" onClick={onClose} className={subLinkClass}>
+                </NavLink><NavLink to="/fleet/availability" onClick={onClose} className={subLinkClass}>
                   <div className="w-1.5 h-1.5 rounded-full bg-current opacity-40"></div>
                   Availability
                 </NavLink><NavLink to="/fleet/insurance" onClick={onClose} className={subLinkClass}>
