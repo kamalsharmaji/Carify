@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSettings } from '../context/SettingsContext';
-import { Palette, Type, Image as ImageIcon, Moon, Sun, Layout } from 'lucide-react';
+import { Palette,Image as  Moon, Sun, Layout } from 'lucide-react';
 
 const Settings: React.FC = () => {
   const { settings, updateSettings } = useSettings();

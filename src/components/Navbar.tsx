@@ -2,8 +2,6 @@ import { useState } from "react";
 import { 
   Bell, 
   ChevronDown, 
-  Plus, 
-  Globe, 
   User, 
   LogOut, 
   Check, 

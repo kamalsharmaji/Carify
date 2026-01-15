@@ -1,4 +1,4 @@
-import { Truck, MapPin, Gauge, AlertCircle, Plus } from "lucide-react";
+import { Truck,   Plus } from "lucide-react";
 
 export default function Fleet() {
   const vehicles = [

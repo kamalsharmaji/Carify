@@ -7,7 +7,12 @@ describe('Sidebar Component', () => {
   const renderSidebar = (onClose = vi.fn()) => {
     return render(
       <BrowserRouter>
-        <Sidebar onClose={onClose} />
+         <Sidebar
+  onClose={onClose}
+  isCollapsed={false}
+  onToggleCollapse={vi.fn()}
+/>
+
       </BrowserRouter>
     );
   };
