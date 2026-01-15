@@ -1,31 +1,61 @@
  import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
-  const [form, setForm] = useState({ email: "", password: "" });
+  const navigate = useNavigate();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = () => {
+    // TEMP: fake login
+    localStorage.setItem("accessToken", "demo-token");
+    localStorage.setItem(
+      "user",
+      JSON.stringify({
+        role: "SUPER_ADMIN",
+        permissions: [
+          "USER_VIEW",
+          "ROLE_MANAGE",
+          "FLEET_VIEW",
+          "VEHICLE_INSPECTION_VIEW",
+          "HRM_VIEW",
+        ],
+      })
+    );
+    navigate("/dashboard/inspection");
+  };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <div className="bg-white p-8 rounded-xl shadow w-full max-w-sm">
-        <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
+    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <div className="bg-white p-6 rounded shadow w-80">
+        <h2 className="text-xl mb-4 font-bold text-center">Carify Login</h2>
 
-        <Input
+        <input
+          value={email}
           placeholder="Email"
-          value={form.email}
-          onChange={(e) => setForm({ ...form, email: e.target.value })}
-          className="mb-4"
+          className="border w-full p-2 mb-3"
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setEmail(e.target.value)
+          }
         />
 
-        <Input
+        <input
+          value={password}
           type="password"
           placeholder="Password"
-          value={form.password}
-          onChange={(e) => setForm({ ...form, password: e.target.value })}
-          className="mb-6"
+          className="border w-full p-2 mb-3"
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setPassword(e.target.value)
+          }
         />
 
-        <Button className="w-full">Login</Button>
+        <button
+          onClick={handleLogin}
+          className="bg-blue-600 text-white w-full py-2 rounded"
+        >
+          Login
+        </button>
       </div>
     </div>
   );
