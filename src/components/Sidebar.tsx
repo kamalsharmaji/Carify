@@ -64,12 +64,16 @@ export function Sidebar({ onClose, isCollapsed, onToggleCollapse }: SidebarProps
   src="/images/carifypdi_logo1.jpeg.png"
   alt="Carify Logo"
   className="h-16 w-auto object-contain"
-/> <button 
-          onClick={onToggleCollapse} 
-          className="w-full flex items-center justify-center gap-2 p-2  rounded-xl bg-gray-100 hover:bg-red-200 transition-colors"
-        >
-          <ChevronLeft size={20} className={`transition-transform duration-300 ${isCollapsed ? 'rotate-180' : ''}`} />
-        </button>
+/>  <button 
+  onClick={onToggleCollapse} 
+  className="hidden lg:flex w-full items-center justify-center gap-2 p-2 rounded-xl bg-gray-100 hover:bg-red-200 transition-colors"
+>
+  <ChevronLeft 
+    size={20} 
+    className={`transition-transform duration-300 ${isCollapsed ? 'rotate-180' : ''}`} 
+  />
+</button>
+
           </div>
           <button onClick={onClose} aria-label="Close sidebar" className="lg:hidden p-2 text-black-500 rounded-xlhover:bg-gray-50 rounded-lg">
             <X size={20} />
