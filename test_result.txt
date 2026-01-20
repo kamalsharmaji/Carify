@@ -1,0 +1,2503 @@
+
+> my-react-ts-app@0.0.0 test
+> vitest --run
+
+
+[7m[1m[36m RUN [39m[22m[27m [36mv1.6.1[39m [90mc:/Users/puran/Desktop/ERP MODLE/my-react-ts-app[39m
+
+ [33m❯[39m src/components/Navbar.test.tsx [2m ([22m[2m12 tests[22m [2m|[22m [31m4 failed[39m[2m)[22m[33m 1768[2mms[22m[39m
+[31m   [33m❯[31m src/components/Navbar.test.tsx[2m > [22mNavbar - Responsive Design & Functionality[2m > [22mmenu button visible on mobile (hidden on lg)[39m
+[31m     → Unable to find an accessible element with the role "button" and name `/menu/i`
+
+Here are the accessible roles:
+
+  banner:
+
+  Name "":
+  [36m<header[31m
+    [33mclass[31m=[32m"sticky top-0 z-40 w-full bg-white border-b border-gray-100"[31m
+  [36m/>[31m
+
+  --------------------------------------------------
+  button:
+
+  Name "":
+  [36m<button[31m
+    [33mclass[31m=[32m"lg:hidden p-2 rounded-xl bg-gray-100 text-gray-600"[31m
+  [36m/>[31m
+
+  Name "":
+  [36m<button[31m
+    [33mclass[31m=[32m"p-2 rounded-xl text-gray-500 hover:bg-gray-100"[31m
+  [36m/>[31m
+
+  Name "CA":
+  [36m<button[31m
+    [33mclass[31m=[32m"flex items-center gap-2 p-1.5 rounded-xl hover:bg-gray-100"[31m
+  [36m/>[31m
+
+  --------------------------------------------------
+  img:
+
+  Name "Carify":
+  [36m<img[31m
+    [33malt[31m=[32m"Carify"[31m
+    [33mclass[31m=[32m"h-8 sm:h-9 w-auto object-contain lg:hidden"[31m
+    [33msrc[31m=[32m"/images/carifypdi_logo1.jpeg.png"[31m
+  [36m/>[31m
+
+  --------------------------------------------------
+  textbox:
+
+  Name "":
+  [36m<input[31m
+    [33mclass[31m=[32m"pl-9 pr-3 py-1.5 rounded-xl bg-gray-100 text-sm outline-none focus:ring-2 focus:ring-red-500/20"[31m
+    [33mplaceholder[31m=[32m"Search..."[31m
+  [36m/>[31m
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+[36m<body>[31m
+  [36m<div>[31m
+    [36m<header[31m
+      [33mclass[31m=[32m"sticky top-0 z-40 w-full bg-white border-b border-gray-100"[31m
+    [36m>[31m
+      [36m<div[31m
+        [33mclass[31m=[32m"h-16 flex items-center justify-between px-3 sm:px-4 md:px-6"[31m
+      [36m>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"flex items-center gap-2"[31m
+        [36m>[31m
+          [36m<button[31m
+            [33mclass[31m=[32m"lg:hidden p-2 rounded-xl bg-gray-100 text-gray-600"[31m
+          [36m>[31m
+            [36m<svg[31m
+              [33maria-hidden[31m=[32m"true"[31m
+              [33mclass[31m=[32m"lucide lucide-menu"[31m
+              [33mfill[31m=[32m"none"[31m
+              [33mheight[31m=[32m"22"[31m
+              [33mstroke[31m=[32m"currentColor"[31m
+              [33mstroke-linecap[31m=[32m"round"[31m
+              [33mstroke-linejoin[31m=[32m"round"[31m
+              [33mstroke-width[31m=[32m"2"[31m
+              [33mviewBox[31m=[32m"0 0 24 24"[31m
+              [33mwidth[31m=[32m"22"[31m
+              [33mxmlns[31m=[32m"http://www.w3.org/2000/svg"[31m
+            [36m>[31m
+              [36m<path[31m
+                [33md[31m=[32m"M4 5h16"[31m
+              [36m/>[31m
+              [36m<path[31m
+                [33md[31m=[32m"M4 12h16"[31m
+              [36m/>[31m
+              [36m<path[31m
+                [33md[31m=[32m"M4 19h16"[31m
+              [36m/>[31m
+            [36m</svg>[31m
+          [36m</button>[31m
+          [36m<img[31m
+            [33malt[31m=[32m"Carify"[31m
+            [33mclass[31m=[32m"h-8 sm:h-9 w-auto object-contain lg:hidden"[31m
+            [33msrc[31m=[32m"/images/carifypdi_logo1.jpeg.png"[31m
+          [36m/>[31m
+        [36m</div>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"hidden md:flex relative"[31m
+        [36m>[31m
+          [36m<svg[31m
+            [33maria-hidden[31m=[32m"true"[31m
+            [33mclass[31m=[32m"lucide lucide-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"[31m
+            [33mfill[31m=[32m"none"[31m
+            [33mheight[31m=[32m"18"[31m
+            [33mstroke[31m=[32m"currentColor"[31m
+            [33mstroke-linecap[31m=[32m"round"[31m
+            [33mstroke-linejoin[31m=[32m"round"[31m
+            [33mstroke-width[31m=[32m"2"[31m
+            [33mviewBox[31m=[32m"0 0 24 24"[31m
+            [33mwidth[31m=[32m"18"[31m
+            [33mxmlns[31m=[32m"http://www.w3.org/2000/svg"[31m
+          [36m>[31m
+            [36m<path[31m
+              [33md[31m=[32m"m21 21-4.34-4.34"[31m
+            [36m/>[31m
+            [36m<circle[31m
+              [33mcx[31m=[32m"11"[31m
+              [33mcy[31m=[32m"11"[31m
+              [33mr[31m=[32m"8"[31m
+            [36m/>[31m
+          [36m</svg>[31m
+          [36m<input[31m
+            [33mclass[31m=[32m"pl-9 pr-3 py-1.5 rounded-xl bg-gray-100 text-sm outline-none focus:ring-2 focus:ring-red-500/20"[31m
+            [33mplaceholder[31m=[32m"Search..."[31m
+          [36m/>[31m
+        [36m</div>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"flex items-center gap-3 relative"[31m
+        [36m>[31m
+          [36m<button[31m
+            [33mclass[31m=[32m"p-2 rounded-xl text-gray-500 hover:bg-gray-100"[31m
+          [36m>[31m
+            [36m<svg[31m
+              [33maria-hidden[31m=[32m"true"[31m
+              [33mclass[31m=[32m"lucide lucide-bell"[31m
+              [33mfill[31m=[32m"none"[31m
+              [33mheight[31m=[32m"20"[31m
+              [33mstroke[31m=[32m"currentColor"[31m
+              [33mstroke-linecap[31m=[32m"round"[31m
+              [33mstroke-linejoin[31m=[32m"round"[31m
+              [33mstroke-width[31m=[32m"2"[31m
+              [33mviewBox[31m=[32m"0 0 24 24"[31m
+              [33mwidth[31m=[32m"20"[31m
+              [33mxmlns[31m=[32m"http://www.w3.org/2000/svg"[31m
+            [36m>[31m
+              [36m<path[31m
+                [33md[31m=[32m"M10.268 21a2 2 0 0 0 3.464 0"[31m
+              [36m/>[31m
+              [36m<path[31m
+                [33md[31m=[32m"M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"[31m
+              [36m/>[31m
+            [36m</svg>[31m
+          [36m</button>[31m
+          [36m<div[31m
+            [33mclass[31m=[32m"relative"[31m
+          [36m>[31m
+            [36m<button[31m
+              [33mclass[31m=[32m"flex items-center gap-2 p-1.5 rounded-xl hover:bg-gray-100"[31m
+            [36m>[31m
+              [36m<div[31m
+                [33mclass[31m=[32m"h-8 w-8 rounded-full bg-red-600 text-white flex items-center justify-center text-sm font-bold"[31m
+              [36m>[31m
+                [0mCA[0m
+              [36m</div>[31m
+              [36m<svg[31m
+                [33maria-hidden[31m=[32m"true"[31m
+                [33mclass[31m=[32m"lucide lucide-chevron-down"[31m
+                [33mfill[31m=[32m"none"[31m
+                [33mheight[31m=[32m"14"[31m
+                [33mstroke[31m=[32m"currentColor"[31m
+                [33mstroke-linecap[31m=[32m"round"[31m
+                [33mstroke-linejoin[31m=[32m"round"[31m
+                [33mstroke-width[31m=[32m"2"[31m
+                [33mviewBox[31m=[32m"0 0 24 24"[31m
+                [33mwidth[31m=[32m"14"[31m
+                [33mxmlns[31m=[32m"http://www.w3.org/2000/svg"[31m
+              [36m>[31m
+                [36m<path[31m
+                  [33md[31m=[32m"m6 9 6 6 6-6"[31m
+                [36m/>[31m
+              [36m</svg>[31m
+            [36m</button>[31m
+          [36m</div>[31m
+        [36m</div>[31m
+      [36m</div>[31m
+    [36m</header>[31m
+  [36m</div>[31m
+[36m</body>[31m[39m
+[31m   [33m❯[31m src/components/Navbar.test.tsx[2m > [22mNavbar - Responsive Design & Functionality[2m > [22muser dropdown toggles when user button clicked[39m
+[31m     → Unable to find an element with the text: /Profile/i. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+[36m<body>[31m
+  [36m<div>[31m
+    [36m<header[31m
+      [33mclass[31m=[32m"sticky top-0 z-40 w-full bg-white border-b border-gray-100"[31m
+    [36m>[31m
+      [36m<div[31m
+        [33mclass[31m=[32m"h-16 flex items-center justify-between px-3 sm:px-4 md:px-6"[31m
+      [36m>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"flex items-center gap-2"[31m
+        [36m>[31m
+          [36m<button[31m
+            [33mclass[31m=[32m"lg:hidden p-2 rounded-xl bg-gray-100 text-gray-600"[31m
+          [36m>[31m
+            [36m<svg[31m
+              [33maria-hidden[31m=[32m"true"[31m
+              [33mclass[31m=[32m"lucide lucide-menu"[31m
+              [33mfill[31m=[32m"none"[31m
+              [33mheight[31m=[32m"22"[31m
+              [33mstroke[31m=[32m"currentColor"[31m
+              [33mstroke-linecap[31m=[32m"round"[31m
+              [33mstroke-linejoin[31m=[32m"round"[31m
+              [33mstroke-width[31m=[32m"2"[31m
+              [33mviewBox[31m=[32m"0 0 24 24"[31m
+              [33mwidth[31m=[32m"22"[31m
+              [33mxmlns[31m=[32m"http://www.w3.org/2000/svg"[31m
+            [36m>[31m
+              [36m<path[31m
+                [33md[31m=[32m"M4 5h16"[31m
+              [36m/>[31m
+              [36m<path[31m
+                [33md[31m=[32m"M4 12h16"[31m
+              [36m/>[31m
+              [36m<path[31m
+                [33md[31m=[32m"M4 19h16"[31m
+              [36m/>[31m
+            [36m</svg>[31m
+          [36m</button>[31m
+          [36m<img[31m
+            [33malt[31m=[32m"Carify"[31m
+            [33mclass[31m=[32m"h-8 sm:h-9 w-auto object-contain lg:hidden"[31m
+            [33msrc[31m=[32m"/images/carifypdi_logo1.jpeg.png"[31m
+          [36m/>[31m
+        [36m</div>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"hidden md:flex relative"[31m
+        [36m>[31m
+          [36m<svg[31m
+            [33maria-hidden[31m=[32m"true"[31m
+            [33mclass[31m=[32m"lucide lucide-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"[31m
+            [33mfill[31m=[32m"none"[31m
+            [33mheight[31m=[32m"18"[31m
+            [33mstroke[31m=[32m"currentColor"[31m
+            [33mstroke-linecap[31m=[32m"round"[31m
+            [33mstroke-linejoin[31m=[32m"round"[31m
+            [33mstroke-width[31m=[32m"2"[31m
+            [33mviewBox[31m=[32m"0 0 24 24"[31m
+            [33mwidth[31m=[32m"18"[31m
+            [33mxmlns[31m=[32m"http://www.w3.org/2000/svg"[31m
+          [36m>[31m
+            [36m<path[31m
+              [33md[31m=[32m"m21 21-4.34-4.34"[31m
+            [36m/>[31m
+            [36m<circle[31m
+              [33mcx[31m=[32m"11"[31m
+              [33mcy[31m=[32m"11"[31m
+              [33mr[31m=[32m"8"[31m
+            [36m/>[31m
+          [36m</svg>[31m
+          [36m<input[31m
+            [33mclass[31m=[32m"pl-9 pr-3 py-1.5 rounded-xl bg-gray-100 text-sm outline-none focus:ring-2 focus:ring-red-500/20"[31m
+            [33mplaceholder[31m=[32m"Search..."[31m
+          [36m/>[31m
+        [36m</div>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"flex items-center gap-3 relative"[31m
+        [36m>[31m
+          [36m<button[31m
+            [33mclass[31m=[32m"p-2 rounded-xl text-gray-500 hover:bg-gray-100"[31m
+          [36m>[31m
+            [36m<svg[31m
+              [33maria-hidden[31m=[32m"true"[31m
+              [33mclass[31m=[32m"lucide lucide-bell"[31m
+              [33mfill[31m=[32m"none"[31m
+              [33mheight[31m=[32m"20"[31m
+              [33mstroke[31m=[32m"currentColor"[31m
+              [33mstroke-linecap[31m=[32m"round"[31m
+              [33mstroke-linejoin[31m=[32m"round"[31m
+              [33mstroke-width[31m=[32m"2"[31m
+              [33mviewBox[31m=[32m"0 0 24 24"[31m
+              [33mwidth[31m=[32m"20"[31m
+              [33mxmlns[31m=[32m"http://www.w3.org/2000/svg"[31m
+            [36m>[31m
+              [36m<path[31m
+                [33md[31m=[32m"M10.268 21a2 2 0 0 0 3.464 0"[31m
+              [36m/>[31m
+              [36m<path[31m
+                [33md[31m=[32m"M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"[31m
+              [36m/>[31m
+            [36m</svg>[31m
+          [36m</button>[31m
+          [36m<div[31m
+            [33mclass[31m=[32m"relative"[31m
+          [36m>[31m
+            [36m<button[31m
+              [33mclass[31m=[32m"flex items-center gap-2 p-1.5 rounded-xl hover:bg-gray-100"[31m
+            [36m>[31m
+              [36m<div[31m
+                [33mclass[31m=[32m"h-8 w-8 rounded-full bg-red-600 text-white flex items-center justify-center text-sm font-bold"[31m
+              [36m>[31m
+                [0mCA[0m
+              [36m</div>[31m
+              [36m<svg[31m
+                [33maria-hidden[31m=[32m"true"[31m
+                [33mclass[31m=[32m"lucide lucide-chevron-down"[31m
+                [33mfill[31m=[32m"none"[31m
+                [33mheight[31m=[32m"14"[31m
+                [33mstroke[31m=[32m"currentColor"[31m
+                [33mstroke-linecap[31m=[32m"round"[31m
+                [33mstroke-linejoin[31m=[32m"round"[31m
+                [33mstroke-width[31m=[32m"2"[31m
+                [33mviewBox[31m=[32m"0 0 24 24"[31m
+                [33mwidth[31m=[32m"14"[31m
+                [33mxmlns[31m=[32m"http://www.w3.org/2000/svg"[31m
+              [36m>[31m
+                [36m<path[31m
+                  [33md[31m=[32m"m6 9 6 6 6-6"[31m
+                [36m/>[31m
+              [36m</svg>[31m
+            [36m</button>[31m
+          [36m</div>[31m
+        [36m</div>[31m
+      [36m</div>[31m
+    [36m</header>[31m
+  [36m</div>[31m
+[36m</body>[31m[39m
+[31m   [33m❯[31m src/components/Navbar.test.tsx[2m > [22mNavbar - Responsive Design & Functionality[2m > [22mlogout button clears localStorage and removes tokens[39m
+[31m     → Unable to find an element with the text: /Logout/i. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+[36m<body>[31m
+  [36m<div>[31m
+    [36m<header[31m
+      [33mclass[31m=[32m"sticky top-0 z-40 w-full bg-white border-b border-gray-100"[31m
+    [36m>[31m
+      [36m<div[31m
+        [33mclass[31m=[32m"h-16 flex items-center justify-between px-3 sm:px-4 md:px-6"[31m
+      [36m>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"flex items-center gap-2"[31m
+        [36m>[31m
+          [36m<button[31m
+            [33mclass[31m=[32m"lg:hidden p-2 rounded-xl bg-gray-100 text-gray-600"[31m
+          [36m>[31m
+            [36m<svg[31m
+              [33maria-hidden[31m=[32m"true"[31m
+              [33mclass[31m=[32m"lucide lucide-menu"[31m
+              [33mfill[31m=[32m"none"[31m
+              [33mheight[31m=[32m"22"[31m
+              [33mstroke[31m=[32m"currentColor"[31m
+              [33mstroke-linecap[31m=[32m"round"[31m
+              [33mstroke-linejoin[31m=[32m"round"[31m
+              [33mstroke-width[31m=[32m"2"[31m
+              [33mviewBox[31m=[32m"0 0 24 24"[31m
+              [33mwidth[31m=[32m"22"[31m
+              [33mxmlns[31m=[32m"http://www.w3.org/2000/svg"[31m
+            [36m>[31m
+              [36m<path[31m
+                [33md[31m=[32m"M4 5h16"[31m
+              [36m/>[31m
+              [36m<path[31m
+                [33md[31m=[32m"M4 12h16"[31m
+              [36m/>[31m
+              [36m<path[31m
+                [33md[31m=[32m"M4 19h16"[31m
+              [36m/>[31m
+            [36m</svg>[31m
+          [36m</button>[31m
+          [36m<img[31m
+            [33malt[31m=[32m"Carify"[31m
+            [33mclass[31m=[32m"h-8 sm:h-9 w-auto object-contain lg:hidden"[31m
+            [33msrc[31m=[32m"/images/carifypdi_logo1.jpeg.png"[31m
+          [36m/>[31m
+        [36m</div>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"hidden md:flex relative"[31m
+        [36m>[31m
+          [36m<svg[31m
+            [33maria-hidden[31m=[32m"true"[31m
+            [33mclass[31m=[32m"lucide lucide-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"[31m
+            [33mfill[31m=[32m"none"[31m
+            [33mheight[31m=[32m"18"[31m
+            [33mstroke[31m=[32m"currentColor"[31m
+            [33mstroke-linecap[31m=[32m"round"[31m
+            [33mstroke-linejoin[31m=[32m"round"[31m
+            [33mstroke-width[31m=[32m"2"[31m
+            [33mviewBox[31m=[32m"0 0 24 24"[31m
+            [33mwidth[31m=[32m"18"[31m
+            [33mxmlns[31m=[32m"http://www.w3.org/2000/svg"[31m
+          [36m>[31m
+            [36m<path[31m
+              [33md[31m=[32m"m21 21-4.34-4.34"[31m
+            [36m/>[31m
+            [36m<circle[31m
+              [33mcx[31m=[32m"11"[31m
+              [33mcy[31m=[32m"11"[31m
+              [33mr[31m=[32m"8"[31m
+            [36m/>[31m
+          [36m</svg>[31m
+          [36m<input[31m
+            [33mclass[31m=[32m"pl-9 pr-3 py-1.5 rounded-xl bg-gray-100 text-sm outline-none focus:ring-2 focus:ring-red-500/20"[31m
+            [33mplaceholder[31m=[32m"Search..."[31m
+          [36m/>[31m
+        [36m</div>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"flex items-center gap-3 relative"[31m
+        [36m>[31m
+          [36m<button[31m
+            [33mclass[31m=[32m"p-2 rounded-xl text-gray-500 hover:bg-gray-100"[31m
+          [36m>[31m
+            [36m<svg[31m
+              [33maria-hidden[31m=[32m"true"[31m
+              [33mclass[31m=[32m"lucide lucide-bell"[31m
+              [33mfill[31m=[32m"none"[31m
+              [33mheight[31m=[32m"20"[31m
+              [33mstroke[31m=[32m"currentColor"[31m
+              [33mstroke-linecap[31m=[32m"round"[31m
+              [33mstroke-linejoin[31m=[32m"round"[31m
+              [33mstroke-width[31m=[32m"2"[31m
+              [33mviewBox[31m=[32m"0 0 24 24"[31m
+              [33mwidth[31m=[32m"20"[31m
+              [33mxmlns[31m=[32m"http://www.w3.org/2000/svg"[31m
+            [36m>[31m
+              [36m<path[31m
+                [33md[31m=[32m"M10.268 21a2 2 0 0 0 3.464 0"[31m
+              [36m/>[31m
+              [36m<path[31m
+                [33md[31m=[32m"M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"[31m
+              [36m/>[31m
+            [36m</svg>[31m
+          [36m</button>[31m
+          [36m<div[31m
+            [33mclass[31m=[32m"relative"[31m
+          [36m>[31m
+            [36m<button[31m
+              [33mclass[31m=[32m"flex items-center gap-2 p-1.5 rounded-xl hover:bg-gray-100"[31m
+            [36m>[31m
+              [36m<div[31m
+                [33mclass[31m=[32m"h-8 w-8 rounded-full bg-red-600 text-white flex items-center justify-center text-sm font-bold"[31m
+              [36m>[31m
+                [0mCA[0m
+              [36m</div>[31m
+              [36m<svg[31m
+                [33maria-hidden[31m=[32m"true"[31m
+                [33mclass[31m=[32m"lucide lucide-chevron-down"[31m
+                [33mfill[31m=[32m"none"[31m
+                [33mheight[31m=[32m"14"[31m
+                [33mstroke[31m=[32m"currentColor"[31m
+                [33mstroke-linecap[31m=[32m"round"[31m
+                [33mstroke-linejoin[31m=[32m"round"[31m
+                [33mstroke-width[31m=[32m"2"[31m
+                [33mviewBox[31m=[32m"0 0 24 24"[31m
+                [33mwidth[31m=[32m"14"[31m
+                [33mxmlns[31m=[32m"http://www.w3.org/2000/svg"[31m
+              [36m>[31m
+                [36m<path[31m
+                  [33md[31m=[32m"m6 9 6 6 6-6"[31m
+                [36m/>[31m
+              [36m</svg>[31m
+            [36m</button>[31m
+          [36m</div>[31m
+        [36m</div>[31m
+      [36m</div>[31m
+    [36m</header>[31m
+  [36m</div>[31m
+[36m</body>[31m[39m
+[31m   [33m❯[31m src/components/Navbar.test.tsx[2m > [22mNavbar - Responsive Design & Functionality[2m > [22muser profile avatar displays correctly[39m
+[31m     → Unable to find an element with the text: /Profile/i. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+[36m<body>[31m
+  [36m<div>[31m
+    [36m<header[31m
+      [33mclass[31m=[32m"sticky top-0 z-40 w-full bg-white border-b border-gray-100"[31m
+    [36m>[31m
+      [36m<div[31m
+        [33mclass[31m=[32m"h-16 flex items-center justify-between px-3 sm:px-4 md:px-6"[31m
+      [36m>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"flex items-center gap-2"[31m
+        [36m>[31m
+          [36m<button[31m
+            [33mclass[31m=[32m"lg:hidden p-2 rounded-xl bg-gray-100 text-gray-600"[31m
+          [36m>[31m
+            [36m<svg[31m
+              [33maria-hidden[31m=[32m"true"[31m
+              [33mclass[31m=[32m"lucide lucide-menu"[31m
+              [33mfill[31m=[32m"none"[31m
+              [33mheight[31m=[32m"22"[31m
+              [33mstroke[31m=[32m"currentColor"[31m
+              [33mstroke-linecap[31m=[32m"round"[31m
+              [33mstroke-linejoin[31m=[32m"round"[31m
+              [33mstroke-width[31m=[32m"2"[31m
+              [33mviewBox[31m=[32m"0 0 24 24"[31m
+              [33mwidth[31m=[32m"22"[31m
+              [33mxmlns[31m=[32m"http://www.w3.org/2000/svg"[31m
+            [36m>[31m
+              [36m<path[31m
+                [33md[31m=[32m"M4 5h16"[31m
+              [36m/>[31m
+              [36m<path[31m
+                [33md[31m=[32m"M4 12h16"[31m
+              [36m/>[31m
+              [36m<path[31m
+                [33md[31m=[32m"M4 19h16"[31m
+              [36m/>[31m
+            [36m</svg>[31m
+          [36m</button>[31m
+          [36m<img[31m
+            [33malt[31m=[32m"Carify"[31m
+            [33mclass[31m=[32m"h-8 sm:h-9 w-auto object-contain lg:hidden"[31m
+            [33msrc[31m=[32m"/images/carifypdi_logo1.jpeg.png"[31m
+          [36m/>[31m
+        [36m</div>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"hidden md:flex relative"[31m
+        [36m>[31m
+          [36m<svg[31m
+            [33maria-hidden[31m=[32m"true"[31m
+            [33mclass[31m=[32m"lucide lucide-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"[31m
+            [33mfill[31m=[32m"none"[31m
+            [33mheight[31m=[32m"18"[31m
+            [33mstroke[31m=[32m"currentColor"[31m
+            [33mstroke-linecap[31m=[32m"round"[31m
+            [33mstroke-linejoin[31m=[32m"round"[31m
+            [33mstroke-width[31m=[32m"2"[31m
+            [33mviewBox[31m=[32m"0 0 24 24"[31m
+            [33mwidth[31m=[32m"18"[31m
+            [33mxmlns[31m=[32m"http://www.w3.org/2000/svg"[31m
+          [36m>[31m
+            [36m<path[31m
+              [33md[31m=[32m"m21 21-4.34-4.34"[31m
+            [36m/>[31m
+            [36m<circle[31m
+              [33mcx[31m=[32m"11"[31m
+              [33mcy[31m=[32m"11"[31m
+              [33mr[31m=[32m"8"[31m
+            [36m/>[31m
+          [36m</svg>[31m
+          [36m<input[31m
+            [33mclass[31m=[32m"pl-9 pr-3 py-1.5 rounded-xl bg-gray-100 text-sm outline-none focus:ring-2 focus:ring-red-500/20"[31m
+            [33mplaceholder[31m=[32m"Search..."[31m
+          [36m/>[31m
+        [36m</div>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"flex items-center gap-3 relative"[31m
+        [36m>[31m
+          [36m<button[31m
+            [33mclass[31m=[32m"p-2 rounded-xl text-gray-500 hover:bg-gray-100"[31m
+          [36m>[31m
+            [36m<svg[31m
+              [33maria-hidden[31m=[32m"true"[31m
+              [33mclass[31m=[32m"lucide lucide-bell"[31m
+              [33mfill[31m=[32m"none"[31m
+              [33mheight[31m=[32m"20"[31m
+              [33mstroke[31m=[32m"currentColor"[31m
+              [33mstroke-linecap[31m=[32m"round"[31m
+              [33mstroke-linejoin[31m=[32m"round"[31m
+              [33mstroke-width[31m=[32m"2"[31m
+              [33mviewBox[31m=[32m"0 0 24 24"[31m
+              [33mwidth[31m=[32m"20"[31m
+              [33mxmlns[31m=[32m"http://www.w3.org/2000/svg"[31m
+            [36m>[31m
+              [36m<path[31m
+                [33md[31m=[32m"M10.268 21a2 2 0 0 0 3.464 0"[31m
+              [36m/>[31m
+              [36m<path[31m
+                [33md[31m=[32m"M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"[31m
+              [36m/>[31m
+            [36m</svg>[31m
+          [36m</button>[31m
+          [36m<div[31m
+            [33mclass[31m=[32m"relative"[31m
+          [36m>[31m
+            [36m<button[31m
+              [33mclass[31m=[32m"flex items-center gap-2 p-1.5 rounded-xl hover:bg-gray-100"[31m
+            [36m>[31m
+              [36m<div[31m
+                [33mclass[31m=[32m"h-8 w-8 rounded-full bg-red-600 text-white flex items-center justify-center text-sm font-bold"[31m
+              [36m>[31m
+                [0mCA[0m
+              [36m</div>[31m
+              [36m<svg[31m
+                [33maria-hidden[31m=[32m"true"[31m
+                [33mclass[31m=[32m"lucide lucide-chevron-down"[31m
+                [33mfill[31m=[32m"none"[31m
+                [33mheight[31m=[32m"14"[31m
+                [33mstroke[31m=[32m"currentColor"[31m
+                [33mstroke-linecap[31m=[32m"round"[31m
+                [33mstroke-linejoin[31m=[32m"round"[31m
+                [33mstroke-width[31m=[32m"2"[31m
+                [33mviewBox[31m=[32m"0 0 24 24"[31m
+                [33mwidth[31m=[32m"14"[31m
+                [33mxmlns[31m=[32m"http://www.w3.org/2000/svg"[31m
+              [36m>[31m
+                [36m<path[31m
+                  [33md[31m=[32m"m6 9 6 6 6-6"[31m
+                [36m/>[31m
+              [36m</svg>[31m
+            [36m</button>[31m
+          [36m</div>[31m
+        [36m</div>[31m
+      [36m</div>[31m
+    [36m</header>[31m
+  [36m</div>[31m
+[36m</body>[31m[39m
+[90mstderr[2m | src/components/Navbar.test.tsx[2m > [22m[2mNavbar - Responsive Design & Functionality[2m > [22m[2mrenders navbar with all elements[22m[39m
+⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+
+[90mstderr[2m | src/components/DashboardLayout.test.tsx[2m > [22m[2mDashboardLayout - Responsive Design[2m > [22m[2mrenders layout with sidebar, navbar and main content[22m[39m
+⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+
+ [33m❯[39m src/components/DashboardLayout.test.tsx [2m ([22m[2m7 tests[22m [2m|[22m [31m1 failed[39m[2m)[22m[33m 2150[2mms[22m[39m
+[31m   [33m❯[31m src/components/DashboardLayout.test.tsx[2m > [22mDashboardLayout - Responsive Design[2m > [22msidebar overlay appears when sidebar opens on mobile[39m
+[31m     → expected undefined not to be undefined[39m
+ [33m❯[39m src/components/Sidebar.test.tsx [2m ([22m[2m13 tests[22m [2m|[22m [31m3 failed[39m[2m)[22m[33m 3413[2mms[22m[39m
+[31m   [33m❯[31m src/components/Sidebar.test.tsx[2m > [22mSidebar - Responsive Design & Navigation[2m > [22mcollapse button visible and functional on desktop[39m
+[31m     → [2mexpect([22m[31melement[31m[2m).toHaveClass([22m[32m[32m"hidden lg:flex"[32m[31m[2m)[22m
+
+Expected the element to have class:
+[32m  hidden lg:flex[31m
+Received:
+[31m  flex items-center gap-3[31m[39m
+[31m   [33m❯[31m src/components/Sidebar.test.tsx[2m > [22mSidebar - Responsive Design & Navigation[2m > [22mdashboard dropdown expands on click[39m
+[31m     → Found multiple elements with the text: /Vehicle Inspection/i
+
+Here are the matching elements:
+
+Ignored nodes: comments, script, style
+[36m<a[31m
+  [33mclass[31m=[32m"flex items-center gap-3 py-2.5 pl-12 pr-4 text-sm font-medium transition-all duration-200 rounded-lg text-[#64748b] hover:text-red-600 hover:translate-x-1"[31m
+  [33mhref[31m=[32m"/dashboard/inspection"[31m
+[36m>[31m
+  [36m<div[31m
+    [33mclass[31m=[32m"w-1.5 h-1.5 rounded-full bg-current opacity-40"[31m
+  [36m/>[31m
+  [0mVehicle Inspection[0m
+[36m</a>[31m
+
+Ignored nodes: comments, script, style
+[36m<span[31m
+  [33mclass[31m=[32m"text-[15px]"[31m
+[36m>[31m
+  [0mVehicle Inspection[0m
+[36m</span>[31m
+
+(If this is intentional, then use the `*AllBy*` variant of the query (like `queryAllByText`, `getAllByText`, or `findAllByText`)).
+
+Ignored nodes: comments, script, style
+[36m<body>[31m
+  [36m<div>[31m
+    [36m<aside[31m
+      [33mclass[31m=[32m"h-full bg-white border-r border-gray-100 flex flex-col shadow-2xl shadow-gray-200/50 transition-all duration-300 w-[280px]"[31m
+    [36m>[31m
+      [36m<div[31m
+        [33mclass[31m=[32m"p-6 pb-2 "[31m
+      [36m>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"flex items-center justify-between mb-2"[31m
+        [36m>[31m
+          [36m<div[31m
+            [33mclass[31m=[32m"flex items-center gap-3"[31m
+          [36m>[31m
+            [36m<img[31m
+              [33malt[31m=[32m"Carify Logo"[31m
+              [33mclass[31m=[32m"h-16 w-auto object-contain"[31m
+              [33msrc[31m=[32m"/images/carifypdi_logo1.jpeg.png"[31m
+            [36m/>[31m
+            [0m  [0m
+            [36m<button[31m
+              [33mclass[31m=[32m"hidden lg:flex w-full items-center justify-center gap-2 p-2 rounded-xl bg-gray-100 hover:bg-red-200 transition-colors"[31m
+            [36m>[31m
+              [36m<svg[31m
+                [33maria-hidden[31m=[32m"true"[31m
+                [33mclass[31m=[32m"lucide lucide-chevron-left transition-transform duration-300"[31m
+                [33mfill[31m=[32m"none"[31m
+                [33mheight[31m=[32m"20"[31m
+                [33mstroke[31m=[32m"currentColor"[31m
+                [33mstroke-linecap[31m=[32m"round"[31m
+                [33mstroke-linejoin[31m=[32m"round"[31m
+                [33mstroke-width[31m=[32m"2"[31m
+                [33mviewBox[31m=[32m"0 0 24 24"[31m
+                [33mwidth[31m=[32m"20"[31m
+                [33mxmlns[31m=[32m"http://www.w3.org/2000/svg"[31m
+              [36m>[31m
+                [36m<path[31m
+                  [33md[31m=[32m"m15 18-6-6 6-6"[31m
+                [36m/>[31m
+              [36m</svg>[31m
+            [36m</button>[31m
+          [36m</div>[31m
+          [36m<button[31m
+            [33maria-label[31m=[32m"Close sidebar"[31m
+            [33mclass[31m=[32m"lg:hidden p-2 text-black-500 rounded-xlhover:bg-gray-50 rounded-lg"[31m
+          [36m>[31m
+            [36m<svg[31m
+              [33maria-hidden[31m=[32m"true"[31m
+              [33mclass[31m=[32m"lucide lucide-x"[31m
+              [33mfill[31m=[32m"none"[31m
+              [33mheight[31m=[32m"20"[31m
+              [33mstroke[31m=[32m"currentColor"[31m
+              [33mstroke-linecap[31m=[32m"round"[31m
+              [33mstroke-linejoin[31m=[32m"round"[31m
+              [33mstroke-width[31m=[32m"2"[31m
+              [33mviewBox[31m=[32m"0 0 24 24"[31m
+              [33mwidth[31m=[32m"20"[31m
+              [33mxmlns[31m=[32m"http://www.w3.org/2000/svg"[31m
+            [36m>[31m
+              [36m<path[31m
+                [33md[31m=[32m"M18 6 6 18"[31m
+              [36m/>[31m
+              [36m<path[31m
+                [33md[31m=[32m"m6 6 12 12"[31m
+              [36m/>[31m
+            [36m</svg>[31m
+          [36m</button>[31m
+        [36m</div>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"px-1 mb-4"[31m
+        [36m>[31m
+          [36m<span[31m
+            [33mclass[31m=[32m"text-[10px] font-bold text-red-500 uppercase tracking-widest"[31m
+          [36m>[31m
+            [0madvance modern i 2026[0m
+          [36m</span>[31m
+        [36m</div>[31m
+      [36m</div>[31m
+      [36m<div[31m
+        [33mclass[31m=[32m"flex-1 overflow-y-auto px-6 pb-6 custom-scrollbar "[31m
+      [36m>[31m
+        [36m<nav[31m
+          [33mclass[31m=[32m"space-y-1 font-semibold"[31m
+        [36m>[31m
+          [36m<div[31m
+            [33mclass[31m=[32m"space-y-1"[31m
+          [36m>[31m
+            [36m<button[31m
+              [33mclass[31m=[32m"w-full flex items-center justify-between px-4 py-3 rounded-xl transition-all duration-300 bg-gray-50/50 text-[#1e293b] "[31m
+            [36m>[31m
+              [36m<div[31m
+                [33mclass[31m=[32m"flex items-center gap-3"[31m
+              [36m>[31m
+                [36m<svg[31m
+                  [33maria-hidden[31m=[32m"true"[31m
+                  [33mclass[31m=[32m"lucide lucide-layout-dashboard text-red-600"[31m
+                  [33mfill[31m=[32m"none"[31m
+                  [33mheight[31m=[32m"20"[31m
+                  [33mstroke[31m=[32m"currentColor"[31m
+                  [33mstroke-linecap[31m=[32m"round"[31m
+                  [33mstroke-linejoin[31m=[32m"round"[31m
+                  [33mstroke-width[31m=[32m"2"[31m
+                  [33mviewBox[31m=[32m"0 0 24 24"[31m
+                  [33mwidth[31m=[32m"20"[31m
+                  [33mxmlns[31m=[32m"http://www.w3.org/2000/svg"[31m
+                [36m>[31m
+                  [36m<rect[31m
+                    [33mheight[31m=[32m"9"[31m
+                    [33mrx[31m=[32m"1"[31m
+                    [33mwidth[31m=[32m"7"[31m
+                    [33mx[31m=[32m"3"[31m
+                    [33my[31m=[32m"3"[31m
+                  [36m/>[31m
+                  [36m<rect[31m
+                    [33mheight[31m=[32m"5"[31m
+                    [33mrx[31m=[32m"1"[31m
+                    [33mwidth[31m=[32m"7"[31m
+                    [33mx[31m=[32m"14"[31m
+                    [33my[31m=[32m"3"[31m
+                  [36m/>[31m
+                  [36m<rect[31m
+                    [33mheight[31m=[32m"9"[31m
+                    [33mrx[31m=[32m"1"[31m
+                    [33mwidth[31m=[32m"7"[31m
+                    [33mx[31m=[32m"14"[31m
+                    [33my[31m=[32m"12"[31m
+                  [36m/>[31m
+                  [36m<rect[31m
+                    [33mheight[31m=[32m"5"[31m
+                    [33mrx[31m=[32m"1"[31m
+                    [33mwidth[31m=[32m"7"[31m
+                    [33mx[31m=[32m"3"[31m
+                    [33my[31m=[32m"16"[31m
+                  [36m/>[31m
+                [36m</svg>[31m
+                [36m<span[31m
+                  [33mclass[31m=[32m"text-[15px]"[31m
+                [36m>[31m
+                  [0mDashboard[0m
+                [36m</span>[31m
+              [36m</div>[31m
+              [36m<svg[31m
+                [33maria-hidden[31m=[32m"true"[31m
+                [33mclass[31m=[32m"lucide lucide-chevron-down transition-transform duration-300 rotate-180"[31m
+                [33mfill[31m=[32m"none"[31m
+                [33mheight[31m=[32m"14"[31m
+                [33mstroke[31m=[32m"currentColor"[31m
+                [33mstroke-linecap[31m=[32m"round"[31m
+                [33mstroke-linejoin[31m=[32m"round"[31m
+                [33mstroke-width[31m=[32m"2"[31m
+                [33mviewBox[31m=[32m"0 0 24 24"[31m
+                [33mwidth[31m=[32m"14"[31m
+                [33mxmlns[31m=[3...[39m
+[31m   [33m❯[31m src/components/Sidebar.test.tsx[2m > [22mSidebar - Responsive Design & Navigation[2m > [22msidebar text hidden when collapsed[39m
+[31m     → [2mexpect([22m[31mreceived[31m[2m).not.toBeVisible()[22m
+
+[31mreceived[31m value must be an HTMLElement or an SVGElement.
+[39m
+[90mstderr[2m | src/components/Sidebar.test.tsx[2m > [22m[2mSidebar - Responsive Design & Navigation[2m > [22m[2mrenders sidebar with navigation items[22m[39m
+⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+
+ [32m✓[39m src/components/ProtectedRoute.test.tsx [2m ([22m[2m4 tests[22m[2m)[22m[90m 125[2mms[22m[39m
+[90mstderr[2m | src/components/ProtectedRoute.test.tsx[2m > [22m[2mProtectedRoute - Access Control[2m > [22m[2mrenders children when user is authenticated[22m[39m
+⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+
+ [33m❯[39m src/pages/fleet/Driver.test.tsx [2m ([22m[2m4 tests[22m [2m|[22m [31m1 failed[39m[2m)[22m[33m 389[2mms[22m[39m
+[31m   [33m❯[31m src/pages/fleet/Driver.test.tsx[2m > [22mDriver Component Responsiveness and UI[2m > [22mtoggles between table and card view[39m
+[31m     → Unable to find an element by: [data-testid="layout-grid-icon"]
+
+Ignored nodes: comments, script, style
+[36m<body>[31m
+  [36m<div>[31m
+    [36m<div[31m
+      [33mclass[31m=[32m"min-h-screen bg-slate-50/50"[31m
+    [36m>[31m
+      [36m<div[31m
+        [33mclass[31m=[32m"max-w-7xl mx-auto space-y-6"[31m
+      [36m>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"flex flex-col md:flex-row md:items-center justify-between gap-4"[31m
+        [36m>[31m
+          [36m<div>[31m
+            [36m<h1[31m
+              [33mclass[31m=[32m"text-3xl font-extrabold text-slate-900 flex items-center gap-2"[31m
+            [36m>[31m
+              [36m<span[31m
+                [33mclass[31m=[32m"w-2 h-8 bg-red-400 rounded-full"[31m
+              [36m/>[31m
+              [0mManage Drivers[0m
+            [36m</h1>[31m
+            [36m<p[31m
+              [33mclass[31m=[32m"text-slate-500 mt-1 font-medium"[31m
+            [36m>[31m
+              [0mFleet Management › Driver Directory[0m
+            [36m</p>[31m
+          [36m</div>[31m
+          [36m<div[31m
+            [33mclass[31m=[32m"flex items-center gap-3"[31m
+          [36m>[31m
+            [36m<div[31m
+              [33mclass[31m=[32m"relative group"[31m
+            [36m>[31m
+              [36m<svg[31m
+                [33maria-hidden[31m=[32m"true"[31m
+                [33mclass[31m=[32m"lucide lucide-search absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-red-400 transition-colors"[31m
+                [33mfill[31m=[32m"none"[31m
+                [33mheight[31m=[32m"18"[31m
+                [33mstroke[31m=[32m"currentColor"[31m
+                [33mstroke-linecap[31m=[32m"round"[31m
+                [33mstroke-linejoin[31m=[32m"round"[31m
+                [33mstroke-width[31m=[32m"2"[31m
+                [33mviewBox[31m=[32m"0 0 24 24"[31m
+                [33mwidth[31m=[32m"18"[31m
+                [33mxmlns[31m=[32m"http://www.w3.org/2000/svg"[31m
+              [36m>[31m
+                [36m<path[31m
+                  [33md[31m=[32m"m21 21-4.34-4.34"[31m
+                [36m/>[31m
+                [36m<circle[31m
+                  [33mcx[31m=[32m"11"[31m
+                  [33mcy[31m=[32m"11"[31m
+                  [33mr[31m=[32m"8"[31m
+                [36m/>[31m
+              [36m</svg>[31m
+              [36m<input[31m
+                [33mclass[31m=[32m"pl-10 pr-4 py-2 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-red-400/20 focus:border-red-400 transition-all w-full md:w-64"[31m
+                [33mplaceholder[31m=[32m"Search drivers..."[31m
+                [33mtype[31m=[32m"text"[31m
+                [33mvalue[31m=[32m""[31m
+              [36m/>[31m
+            [36m</div>[31m
+            [36m<div[31m
+              [33mclass[31m=[32m"flex border border-slate-200 rounded-xl bg-white p-1"[31m
+            [36m>[31m
+              [36m<button[31m
+                [33mclass[31m=[32m"p-2 rounded-lg transition-all bg-red-400 text-white shadow-sm"[31m
+              [36m>[31m
+                [36m<svg[31m
+                  [33maria-hidden[31m=[32m"true"[31m
+                  [33mclass[31m=[32m"lucide lucide-table"[31m
+                  [33mfill[31m=[32m"none"[31m
+                  [33mheight[31m=[32m"18"[31m
+                  [33mstroke[31m=[32m"currentColor"[31m
+                  [33mstroke-linecap[31m=[32m"round"[31m
+                  [33mstroke-linejoin[31m=[32m"round"[31m
+                  [33mstroke-width[31m=[32m"2"[31m
+                  [33mviewBox[31m=[32m"0 0 24 24"[31m
+                  [33mwidth[31m=[32m"18"[31m
+                  [33mxmlns[31m=[32m"http://www.w3.org/2000/svg"[31m
+                [36m>[31m
+                  [36m<path[31m
+                    [33md[31m=[32m"M12 3v18"[31m
+                  [36m/>[31m
+                  [36m<rect[31m
+                    [33mheight[31m=[32m"18"[31m
+                    [33mrx[31m=[32m"2"[31m
+                    [33mwidth[31m=[32m"18"[31m
+                    [33mx[31m=[32m"3"[31m
+                    [33my[31m=[32m"3"[31m
+                  [36m/>[31m
+                  [36m<path[31m
+                    [33md[31m=[32m"M3 9h18"[31m
+                  [36m/>[31m
+                  [36m<path[31m
+                    [33md[31m=[32m"M3 15h18"[31m
+                  [36m/>[31m
+                [36m</svg>[31m
+              [36m</button>[31m
+              [36m<button[31m
+                [33mclass[31m=[32m"p-2 rounded-lg transition-all text-slate-500 hover:bg-slate-50"[31m
+              [36m>[31m
+                [36m<svg[31m
+                  [33maria-hidden[31m=[32m"true"[31m
+                  [33mclass[31m=[32m"lucide lucide-layout-grid"[31m
+                  [33mfill[31m=[32m"none"[31m
+                  [33mheight[31m=[32m"18"[31m
+                  [33mstroke[31m=[32m"currentColor"[31m
+                  [33mstroke-linecap[31m=[32m"round"[31m
+                  [33mstroke-linejoin[31m=[32m"round"[31m
+                  [33mstroke-width[31m=[32m"2"[31m
+                  [33mviewBox[31m=[32m"0 0 24 24"[31m
+                  [33mwidth[31m=[32m"18"[31m
+                  [33mxmlns[31m=[32m"http://www.w3.org/2000/svg"[31m
+                [36m>[31m
+                  [36m<rect[31m
+                    [33mheight[31m=[32m"7"[31m
+                    [33mrx[31m=[32m"1"[31m
+                    [33mwidth[31m=[32m"7"[31m
+                    [33mx[31m=[32m"3"[31m
+                    [33my[31m=[32m"3"[31m
+                  [36m/>[31m
+                  [36m<rect[31m
+                    [33mheight[31m=[32m"7"[31m
+                    [33mrx[31m=[32m"1"[31m
+                    [33mwidth[31m=[32m"7"[31m
+                    [33mx[31m=[32m"14"[31m
+                    [33my[31m=[32m"3"[31m
+                  [36m/>[31m
+                  [36m<rect[31m
+                    [33mheight[31m=[32m"7"[31m
+                    [33mrx[31m=[32m"1"[31m
+                    [33mwidth[31m=[32m"7"[31m
+                    [33mx[31m=[32m"14"[31m
+                    [33my[31m=[32m"14"[31m
+                  [36m/>[31m
+                  [36m<rect[31m
+                    [33mheight[31m=[32m"7"[31m
+                    [33mrx[31m=[32m"1"[31m
+                    [33mwidth[31m=[32m"7"[31m
+                    [33mx[31m=[32m"3"[31m
+                    [33my[31m=[32m"14"[31m
+                  [36m/>[31m
+                [36m</svg>[31m
+              [36m</button>[31m
+            [36m</div>[31m
+            [36m<button[31m
+              [33mclass[31m=[32m"flex items-center gap-2 bg-red-400 hover:bg-red-500 text-white px-5 py-2.5 rounded-xl text-sm font-bold transition-all shadow-lg shadow-red-400/20 active:scale-95"[31m
+            [36m>[31m
+              [36m<svg[31m
+                [33maria-hidden[31m=[32m"true"[31m
+                [33mclass[31m=[32m"lucide lucide-plus"[31m
+                [33mfill[31m=[32m"none"[31m
+                [33mheight[31m=[32m"18"[31m
+                [33mstroke[31m=[32m"currentColor"[31m
+                [33mstroke-linecap[31m=[32m"round"[31m
+                [33mstroke-linejoin[31m=[32m"round"[31m
+                [33mstroke-width[31m=[32m"3"[31m
+                [33mviewBox[31m=[32m"0 0 24 24"[31m
+                [33mwidth[31m=[32m"18"[31m
+                [33mxmlns[31m=[32m"http://www.w3.org/2000/svg"[31m
+              [36m>[31m
+                [36m<path[31m
+                  [33md[31m=[32m"M5 12h14"[31m
+                [36m/>[31m
+                [36m<path[31m
+                  [33md[31m=[32m"M12 5v14"[31m
+                [36m/>[31m
+              [36m</svg>[31m
+              [36m<span[31m
+                [33mclass[31m=[32m"hidden sm:inline"[31m
+              [36m>[31m
+                [0mAdd Driver[0m
+              [36m</span>[31m
+            [36m</button>[31m
+          [36m</div>[31m
+        [36m</div>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden transition-all"[31m
+        [36m>[31m
+          [36m<div[31m
+            [33mclass[31m=[32m"overflow-x-auto custom-scrollbar"[31m
+          [36m>[31m
+            [36m<table[31m
+              [33mclass[31m=[32m"w-full text-sm text-left"[31m
+            [36m>[31m
+              [36m<thead[31m
+                [33mclass[31m=[32m"bg-slate-50 border-b border-slate-100"[31m
+              [36m>[31m
+                [36m<tr>[31m
+                  [36m<th[31m
+                    [33mclass[31m=[32m"px-6 py-4 text-[11px] font-bold text-slate-500 uppercase tracking-wider"[31m
+                  [36m>[31m
+                    [0mDRIVER INFO[0m
+                  [36m</th>[31m
+                  [36m<th[31m
+                    [33mclass[31m=[32m"px-6 py-4 text-[11px] font-bold text-slate-500 uppercase tracking-wider"[31m
+                  [36m>[31m
+                    [0mLICENCE[0m
+                  [36m</th>[31m
+                  [36m<th[31m
+                    [33mclass[31m=[32m"px-6 py-4 text-[11px] font-bold text-slate-500 uppercase tracking-wider"[31m
+                  [36m>[31m
+                    [0mTYPE[0m
+                  [36m</th>[31m
+                  [36m<th[31m
+                    [33mclass[31m=[32m"px-6 py-4 text-[11px] font-bold text-slate-500 uppercase tracking-wider"[31m
+                  [36m>[31m
+                    [0mHOURS[0m
+                  [36m</th>[31m
+                  [36m<th[31m
+                    [33mclass[31m=[32m"px-6 py-4 text-[11px] font-bold text-slate-500 uppercase tracking-wider"[31m
+                  [36m>[31m
+                    [0mEXPIRE[0m
+                  [36m</th>[31m
+                  [36m<th[31m
+                    [33mclass[31m=[32m"px-6 py-4 text-[11px] font-bold text-slate-500 uppercase tracking-wider"[31m
+                  [36m>[31m
+                    [0mJOINED[0m
+                  [36m</th>[31m
+                  [36m<th[31m
+                    [33mclass[31m=[32m"px-6 py-4 text-[11px] font-bold text-slate-500 uppercase tracking-wider"[31m
+                  [36m>[31m
+                    [0mACTIONS[0m
+                  [36m</th>[31m
+                [36m</tr>[31m
+              [36m</thead>[31m
+              [36m<tbody[31m
+                [33mclass[31m=[32m"divide-y divide-slate-50"[31m
+              [36m>[31m
+                [36m<tr[31m
+                  [33mclass[31m=[32m"hover:bg-slate-50/80 transition-colors group"[31m
+                [36m>[31m
+                  [36m<td[31m
+                    [33mclass[31m=[32m"px-6 py-4"[31m
+                  [36m>[31m
+                    [36m<div[31m
+                      [33mclass[31m=[32m"flex items-center gap-3"[31m
+                    [36m>[31m
+                      [36m<div[31m
+                        [33mclass[31m=[32m"h-10 w-10 rounded-xl bg-red-50 text-red-500 flex items-center justify-center font-bold text-sm border border-red-100 uppercase group-hover:scale-110 transition-transform"[31m
+                      [36m>[31m
+                        [0mD[0m
+                      [36m</div>[31m
+                      [36m<div>[31m
+                        [36m<div[31m
+                          [33mclass[31m=[32m"font-bold text-slate-900"[31m
+                        [36m>[31m
+                          [0mDeepak Sharma[0m
+                        [36m</div>[31m
+                        [36m<div[31m
+                          [33mclass[31m=[32m"text-xs text-slate-500 font-medium"[31m
+                        [36m>[31m
+                          [0mdeepak.sharma@example.com[0m
+                        [36m</div>[31m
+                      [36m</div>[31m
+                    [36m</div>[31m
+                  [36m</td>[31m
+                  [36m<td[31m
+                    [33mclass[31m=[32m"px-6 py-4"[31m
+                  [36m>[31m
+                    [36m<span[31m
+                      [33mclass[31m=[32m"font-mono font-medium text-slate-600 bg-slate-100 px-2 py-1 rounded"[31m
+                    [36m>[31m
+                      [0m123456[0m
+                    [36m</span>[31m
+                  [36m</td>[31m
+                  [36m<td[31m
+                    [33mclass[31m=[32m"px-6 py-4"[31m
+                  [36m>[31m
+                    [36m<span[31m
+                      [33mclass[31m=[32m"px-2.5 py-1 bg-blue-50 text-blue-600 rounded-full text-[10px] font-bold uppercase tracking-wide"[31m
+                    [36m>[31m
+                      [0mCommercial[0m
+                    [36m</span>[31m
+                  [36m</td>[31m
+                  [36m<td[31m
+                    [33mclass[31m=[32m"px-6 py-4 text-slate-600 font-medium"[31m
+                  [36m>[31m
+                    [0m10AM - 6PM[0m
+                  [36m</td>[31m
+                  [36m<td[31m
+                    [33mclass[31m=[32m"px-6 py-4"[31m
+                  [36m>[31m
+                    [36m<div[31m
+                      [33mclass[31m=[32m"flex flex-col"[31m
+                    [36m>[31m
+                      [36m<span[31m
+                        [33mclass[31m=[32m"font-semibold text-slate-700"[31m
+                      [36m>[31m
+                        [0m15-01-2025[0m
+                      [36m</span>[31m
+                    [36m</div>[31m
+                  [36m</td>[31m
+                  [36m<td[31m
+                    [33mclass[31m=[32m"px-6 py-4 text-slate-500 font-medium"[31m
+                  [36m>[31m
+                    [0m03-09-2024[0m
+                  [36m</td>[31m
+                  [36m<td[31m
+                    [33mclass[31m=[32m"px-6 py-4"[31m
+                  [36m>[31m
+                    [36m<div[31m
+                      [33mclass[31m=[32m"flex gap-1.5"[31m
+                    [36m>[31m
+                      [36m<button[31m
+                        [33mclass[31m=[32m"p-2 rounded-lg transition-all active:scale-90 text-blue-500 hover:bg-blue-50 hover:text-blue-600"[31m
+                      [36m>[31m
+                        [36m<svg[31m
+                          [33maria-hidden[31m=[32m"true"[31m
+                          [33mclass[31m=[32m"lucide lucide-eye"[31m
+                          [33mfill[31m=[32m"none"[31m
+                          [33mheight[31m=[32m"16"[31m
+                          [33mstroke[31m=[32m"currentColor"[31m
+                          [33mstroke-linecap[31m=[32m"round"[31m
+                          [33mstroke-linejoin[31m=[32m"round"[31m
+                          [33mstroke-width[31m=[32m"2"[31m
+                          [33mviewBox[31m=[32m"0 0 24 24"[31m
+                          [33mwidth[31m=[32m"16"[31m
+                          [33mxmlns[31m=[32m"http://www.w3.org/2000/svg"[31m
+                        [36m>[31m
+                          [36m<path[31m
+                            [33md[31m=[32m"M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"[31m
+                          [36m/>[31m
+                          [36m<circle[31m
+                            [33mcx[31m=[32m"12"[31m
+                            [33mcy[31m=[32m"12"[31m
+                            [33mr[31m=[32m"3"[31m
+                          [36m/>[31m
+                        [36m</svg>[31m
+                      [36m</button>[31m
+                      [36m<button[31m
+                        [33mclass[31m=[32m"p-2 rounded-lg transition-all active:scale-90 text-orange-500 hover:bg-orange-50 hover:text-orange-600"[31m
+                      [36m>[31m
+                        [36m<svg[31m
+                          [33maria-hidden[31m=[32m"true"[31m
+                          [33mclass[31m=[32m"lucide lucide-pencil"[31m
+                          [33mfill[31m=[32m"none"[31m
+                          [33mheight[31m=[32m"16"[31m
+                          [33mstroke[31m=[32m"currentColor"[31m
+                          [33mstroke-linecap[31m=[32m"round"[31m
+                          [33mstroke-linejoin[31m=[32m"round"[31m
+                          [33mstroke-width[31m=[32m"2"[31m
+                          [33mviewBox[31m=[32m"0 0 24 24"[31m
+                          [33mwidth[31m=[32m"16"[31m
+                          [33mxmlns[31m=[32m"http://www.w3.org/2000/svg"[31m
+                        [36m>[31m
+                          [36m<path[31m
+                            [33md[31m=[32m"M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"[31m
+                          [36m/>[31m
+                          [36m<path[31m
+                            [33md[31m=[32m"m15 5 4 4"[31m
+                          [36m/>[31m
+                        [36m</svg>[31m
+                      [36m</button>[31m
+                      [36m<button[31m
+                        [33mclass[31m=[32m"p-2 rounded-lg transition-all active:scale-90 text-red-500 hover:bg-red-50 hover:text-red-600"[31m
+                      [36m>[31m
+                        [36m<svg[31m
+                          [33maria-hidden[31m=[32m"true"[31m
+                          [33mclass[31m=[32m"lucide lucide-trash2 lucide-trash-2"[31m
+                          [33mfill[31m=[32m"none"[31m
+                          [33mheight[31m=[32m"16"[31m
+                          [33mstroke[31m=[32m"currentColor"[31m
+                          [33mstroke-linecap[31m=[32m"round"[31m
+                          [33mstroke-linejoin[31m=[32m"round"[31m
+                          [33mstroke-width[31m=[32m"2"[31m
+                          [33mviewBox[31m=[32m"0 0 24 24"[31m
+                          [33mwidth[31m=[32m"16"[31m
+                          [33mxmlns[31m=[32m"http://www.w3.org/2000/svg"[31m
+                        [36m>[31m
+                          [36m<path[31m
+                            [33md[31m=[32m"M10 11v6"[31m
+                          [36m/>[31m
+                          [36m<path[31m
+                            [33md[31m=[32m"M14 11v6"[31m
+                          [36m/>[31m
+                          [36m<path[31m
+                            [33md[31m=[32m"M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"[31m
+                          [36m/>[31m
+                          [36m<path[31m
+                            [33md[31m=[32m"M3 6h18"[31m
+                          [36m/>[31m
+                          [36m<path[31m
+                            [33md[31m=[32m"M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"[31m
+                          [36m/>[31m
+                        [36m</svg>[31m
+                      [36m</button>[31m
+                    [36m</div>[31m
+                  [36m</td>[31m
+                [36m</tr>[31m
+              [36m</tbody>[31m
+            [36m</table>[31m
+          [36m</div>[31m
+        [36m</div>[31m
+      [36m</div>[31m
+    [36m</div>[31m
+  [36m</div>[31m
+[36m</body>[31m[39m
+
+[31m⎯⎯⎯⎯⎯⎯⎯[1m[7m Failed Tests 9 [27m[22m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[31m[1m[7m FAIL [27m[22m[39m src/components/DashboardLayout.test.tsx[2m > [22mDashboardLayout - Responsive Design[2m > [22msidebar overlay appears when sidebar opens on mobile
+[31m[1mAssertionError[22m: expected undefined not to be undefined[39m
+[90m [2m❯[22m src/components/DashboardLayout.test.tsx:[2m94:34[22m[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/9]⎯[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m src/components/Navbar.test.tsx[2m > [22mNavbar - Responsive Design & Functionality[2m > [22mmenu button visible on mobile (hidden on lg)
+[31m[1mTestingLibraryElementError[22m[39m: Unable to find an accessible element with the role "button" and name `/menu/i`
+
+Here are the accessible roles:
+
+  banner:
+
+  Name "":
+  [36m<header[39m
+    [33mclass[39m=[32m"sticky top-0 z-40 w-full bg-white border-b border-gray-100"[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+  button:
+
+  Name "":
+  [36m<button[39m
+    [33mclass[39m=[32m"lg:hidden p-2 rounded-xl bg-gray-100 text-gray-600"[39m
+  [36m/>[39m
+
+  Name "":
+  [36m<button[39m
+    [33mclass[39m=[32m"p-2 rounded-xl text-gray-500 hover:bg-gray-100"[39m
+  [36m/>[39m
+
+  Name "CA":
+  [36m<button[39m
+    [33mclass[39m=[32m"flex items-center gap-2 p-1.5 rounded-xl hover:bg-gray-100"[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+  img:
+
+  Name "Carify":
+  [36m<img[39m
+    [33malt[39m=[32m"Carify"[39m
+    [33mclass[39m=[32m"h-8 sm:h-9 w-auto object-contain lg:hidden"[39m
+    [33msrc[39m=[32m"/images/carifypdi_logo1.jpeg.png"[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+  textbox:
+
+  Name "":
+  [36m<input[39m
+    [33mclass[39m=[32m"pl-9 pr-3 py-1.5 rounded-xl bg-gray-100 text-sm outline-none focus:ring-2 focus:ring-red-500/20"[39m
+    [33mplaceholder[39m=[32m"Search..."[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<header[39m
+      [33mclass[39m=[32m"sticky top-0 z-40 w-full bg-white border-b border-gray-100"[39m
+    [36m>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"h-16 flex items-center justify-between px-3 sm:px-4 md:px-6"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex items-center gap-2"[39m
+        [36m>[39m
+          [36m<button[39m
+            [33mclass[39m=[32m"lg:hidden p-2 rounded-xl bg-gray-100 text-gray-600"[39m
+          [36m>[39m
+            [36m<svg[39m
+              [33maria-hidden[39m=[32m"true"[39m
+              [33mclass[39m=[32m"lucide lucide-menu"[39m
+              [33mfill[39m=[32m"none"[39m
+              [33mheight[39m=[32m"22"[39m
+              [33mstroke[39m=[32m"currentColor"[39m
+              [33mstroke-linecap[39m=[32m"round"[39m
+              [33mstroke-linejoin[39m=[32m"round"[39m
+              [33mstroke-width[39m=[32m"2"[39m
+              [33mviewBox[39m=[32m"0 0 24 24"[39m
+              [33mwidth[39m=[32m"22"[39m
+              [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+            [36m>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M4 5h16"[39m
+              [36m/>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M4 12h16"[39m
+              [36m/>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M4 19h16"[39m
+              [36m/>[39m
+            [36m</svg>[39m
+          [36m</button>[39m
+          [36m<img[39m
+            [33malt[39m=[32m"Carify"[39m
+            [33mclass[39m=[32m"h-8 sm:h-9 w-auto object-contain lg:hidden"[39m
+            [33msrc[39m=[32m"/images/carifypdi_logo1.jpeg.png"[39m
+          [36m/>[39m
+        [36m</div>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"hidden md:flex relative"[39m
+        [36m>[39m
+          [36m<svg[39m
+            [33maria-hidden[39m=[32m"true"[39m
+            [33mclass[39m=[32m"lucide lucide-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"[39m
+            [33mfill[39m=[32m"none"[39m
+            [33mheight[39m=[32m"18"[39m
+            [33mstroke[39m=[32m"currentColor"[39m
+            [33mstroke-linecap[39m=[32m"round"[39m
+            [33mstroke-linejoin[39m=[32m"round"[39m
+            [33mstroke-width[39m=[32m"2"[39m
+            [33mviewBox[39m=[32m"0 0 24 24"[39m
+            [33mwidth[39m=[32m"18"[39m
+            [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+          [36m>[39m
+            [36m<path[39m
+              [33md[39m=[32m"m21 21-4.34-4.34"[39m
+            [36m/>[39m
+            [36m<circle[39m
+              [33mcx[39m=[32m"11"[39m
+              [33mcy[39m=[32m"11"[39m
+              [33mr[39m=[32m"8"[39m
+            [36m/>[39m
+          [36m</svg>[39m
+          [36m<input[39m
+            [33mclass[39m=[32m"pl-9 pr-3 py-1.5 rounded-xl bg-gray-100 text-sm outline-none focus:ring-2 focus:ring-red-500/20"[39m
+            [33mplaceholder[39m=[32m"Search..."[39m
+          [36m/>[39m
+        [36m</div>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex items-center gap-3 relative"[39m
+        [36m>[39m
+          [36m<button[39m
+            [33mclass[39m=[32m"p-2 rounded-xl text-gray-500 hover:bg-gray-100"[39m
+          [36m>[39m
+            [36m<svg[39m
+              [33maria-hidden[39m=[32m"true"[39m
+              [33mclass[39m=[32m"lucide lucide-bell"[39m
+              [33mfill[39m=[32m"none"[39m
+              [33mheight[39m=[32m"20"[39m
+              [33mstroke[39m=[32m"currentColor"[39m
+              [33mstroke-linecap[39m=[32m"round"[39m
+              [33mstroke-linejoin[39m=[32m"round"[39m
+              [33mstroke-width[39m=[32m"2"[39m
+              [33mviewBox[39m=[32m"0 0 24 24"[39m
+              [33mwidth[39m=[32m"20"[39m
+              [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+            [36m>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M10.268 21a2 2 0 0 0 3.464 0"[39m
+              [36m/>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"[39m
+              [36m/>[39m
+            [36m</svg>[39m
+          [36m</button>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"relative"[39m
+          [36m>[39m
+            [36m<button[39m
+              [33mclass[39m=[32m"flex items-center gap-2 p-1.5 rounded-xl hover:bg-gray-100"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"h-8 w-8 rounded-full bg-red-600 text-white flex items-center justify-center text-sm font-bold"[39m
+              [36m>[39m
+                [0mCA[0m
+              [36m</div>[39m
+              [36m<svg[39m
+                [33maria-hidden[39m=[32m"true"[39m
+                [33mclass[39m=[32m"lucide lucide-chevron-down"[39m
+                [33mfill[39m=[32m"none"[39m
+                [33mheight[39m=[32m"14"[39m
+                [33mstroke[39m=[32m"currentColor"[39m
+                [33mstroke-linecap[39m=[32m"round"[39m
+                [33mstroke-linejoin[39m=[32m"round"[39m
+                [33mstroke-width[39m=[32m"2"[39m
+                [33mviewBox[39m=[32m"0 0 24 24"[39m
+                [33mwidth[39m=[32m"14"[39m
+                [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+              [36m>[39m
+                [36m<path[39m
+                  [33md[39m=[32m"m6 9 6 6 6-6"[39m
+                [36m/>[39m
+              [36m</svg>[39m
+            [36m</button>[39m
+          [36m</div>[39m
+        [36m</div>[39m
+      [36m</div>[39m
+    [36m</header>[39m
+  [36m</div>[39m
+[36m</body>[39m
+[90m [2m❯[22m Object.getElementError node_modules/@testing-library/dom/dist/config.js:[2m37:19[22m[39m
+[90m [2m❯[22m node_modules/@testing-library/dom/dist/query-helpers.js:[2m76:38[22m[39m
+[90m [2m❯[22m node_modules/@testing-library/dom/dist/query-helpers.js:[2m52:17[22m[39m
+[90m [2m❯[22m node_modules/@testing-library/dom/dist/query-helpers.js:[2m95:19[22m[39m
+[90m [2m❯[22m src/components/Navbar.test.tsx:[2m52:31[22m[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/9]⎯[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m src/components/Navbar.test.tsx[2m > [22mNavbar - Responsive Design & Functionality[2m > [22muser dropdown toggles when user button clicked
+[31m[1mTestingLibraryElementError[22m[39m: Unable to find an element with the text: /Profile/i. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<header[39m
+      [33mclass[39m=[32m"sticky top-0 z-40 w-full bg-white border-b border-gray-100"[39m
+    [36m>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"h-16 flex items-center justify-between px-3 sm:px-4 md:px-6"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex items-center gap-2"[39m
+        [36m>[39m
+          [36m<button[39m
+            [33mclass[39m=[32m"lg:hidden p-2 rounded-xl bg-gray-100 text-gray-600"[39m
+          [36m>[39m
+            [36m<svg[39m
+              [33maria-hidden[39m=[32m"true"[39m
+              [33mclass[39m=[32m"lucide lucide-menu"[39m
+              [33mfill[39m=[32m"none"[39m
+              [33mheight[39m=[32m"22"[39m
+              [33mstroke[39m=[32m"currentColor"[39m
+              [33mstroke-linecap[39m=[32m"round"[39m
+              [33mstroke-linejoin[39m=[32m"round"[39m
+              [33mstroke-width[39m=[32m"2"[39m
+              [33mviewBox[39m=[32m"0 0 24 24"[39m
+              [33mwidth[39m=[32m"22"[39m
+              [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+            [36m>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M4 5h16"[39m
+              [36m/>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M4 12h16"[39m
+              [36m/>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M4 19h16"[39m
+              [36m/>[39m
+            [36m</svg>[39m
+          [36m</button>[39m
+          [36m<img[39m
+            [33malt[39m=[32m"Carify"[39m
+            [33mclass[39m=[32m"h-8 sm:h-9 w-auto object-contain lg:hidden"[39m
+            [33msrc[39m=[32m"/images/carifypdi_logo1.jpeg.png"[39m
+          [36m/>[39m
+        [36m</div>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"hidden md:flex relative"[39m
+        [36m>[39m
+          [36m<svg[39m
+            [33maria-hidden[39m=[32m"true"[39m
+            [33mclass[39m=[32m"lucide lucide-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"[39m
+            [33mfill[39m=[32m"none"[39m
+            [33mheight[39m=[32m"18"[39m
+            [33mstroke[39m=[32m"currentColor"[39m
+            [33mstroke-linecap[39m=[32m"round"[39m
+            [33mstroke-linejoin[39m=[32m"round"[39m
+            [33mstroke-width[39m=[32m"2"[39m
+            [33mviewBox[39m=[32m"0 0 24 24"[39m
+            [33mwidth[39m=[32m"18"[39m
+            [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+          [36m>[39m
+            [36m<path[39m
+              [33md[39m=[32m"m21 21-4.34-4.34"[39m
+            [36m/>[39m
+            [36m<circle[39m
+              [33mcx[39m=[32m"11"[39m
+              [33mcy[39m=[32m"11"[39m
+              [33mr[39m=[32m"8"[39m
+            [36m/>[39m
+          [36m</svg>[39m
+          [36m<input[39m
+            [33mclass[39m=[32m"pl-9 pr-3 py-1.5 rounded-xl bg-gray-100 text-sm outline-none focus:ring-2 focus:ring-red-500/20"[39m
+            [33mplaceholder[39m=[32m"Search..."[39m
+          [36m/>[39m
+        [36m</div>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex items-center gap-3 relative"[39m
+        [36m>[39m
+          [36m<button[39m
+            [33mclass[39m=[32m"p-2 rounded-xl text-gray-500 hover:bg-gray-100"[39m
+          [36m>[39m
+            [36m<svg[39m
+              [33maria-hidden[39m=[32m"true"[39m
+              [33mclass[39m=[32m"lucide lucide-bell"[39m
+              [33mfill[39m=[32m"none"[39m
+              [33mheight[39m=[32m"20"[39m
+              [33mstroke[39m=[32m"currentColor"[39m
+              [33mstroke-linecap[39m=[32m"round"[39m
+              [33mstroke-linejoin[39m=[32m"round"[39m
+              [33mstroke-width[39m=[32m"2"[39m
+              [33mviewBox[39m=[32m"0 0 24 24"[39m
+              [33mwidth[39m=[32m"20"[39m
+              [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+            [36m>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M10.268 21a2 2 0 0 0 3.464 0"[39m
+              [36m/>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"[39m
+              [36m/>[39m
+            [36m</svg>[39m
+          [36m</button>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"relative"[39m
+          [36m>[39m
+            [36m<button[39m
+              [33mclass[39m=[32m"flex items-center gap-2 p-1.5 rounded-xl hover:bg-gray-100"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"h-8 w-8 rounded-full bg-red-600 text-white flex items-center justify-center text-sm font-bold"[39m
+              [36m>[39m
+                [0mCA[0m
+              [36m</div>[39m
+              [36m<svg[39m
+                [33maria-hidden[39m=[32m"true"[39m
+                [33mclass[39m=[32m"lucide lucide-chevron-down"[39m
+                [33mfill[39m=[32m"none"[39m
+                [33mheight[39m=[32m"14"[39m
+                [33mstroke[39m=[32m"currentColor"[39m
+                [33mstroke-linecap[39m=[32m"round"[39m
+                [33mstroke-linejoin[39m=[32m"round"[39m
+                [33mstroke-width[39m=[32m"2"[39m
+                [33mviewBox[39m=[32m"0 0 24 24"[39m
+                [33mwidth[39m=[32m"14"[39m
+                [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+              [36m>[39m
+                [36m<path[39m
+                  [33md[39m=[32m"m6 9 6 6 6-6"[39m
+                [36m/>[39m
+              [36m</svg>[39m
+            [36m</button>[39m
+          [36m</div>[39m
+        [36m</div>[39m
+      [36m</div>[39m
+    [36m</header>[39m
+  [36m</div>[39m
+[36m</body>[39m
+[90m [2m❯[22m Object.getElementError node_modules/@testing-library/dom/dist/config.js:[2m37:19[22m[39m
+[90m [2m❯[22m node_modules/@testing-library/dom/dist/query-helpers.js:[2m76:38[22m[39m
+[90m [2m❯[22m node_modules/@testing-library/dom/dist/query-helpers.js:[2m52:17[22m[39m
+[90m [2m❯[22m node_modules/@testing-library/dom/dist/query-helpers.js:[2m95:19[22m[39m
+[90m [2m❯[22m src/components/Navbar.test.tsx:[2m123:29[22m[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/9]⎯[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m src/components/Navbar.test.tsx[2m > [22mNavbar - Responsive Design & Functionality[2m > [22mlogout button clears localStorage and removes tokens
+[31m[1mTestingLibraryElementError[22m[39m: Unable to find an element with the text: /Logout/i. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<header[39m
+      [33mclass[39m=[32m"sticky top-0 z-40 w-full bg-white border-b border-gray-100"[39m
+    [36m>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"h-16 flex items-center justify-between px-3 sm:px-4 md:px-6"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex items-center gap-2"[39m
+        [36m>[39m
+          [36m<button[39m
+            [33mclass[39m=[32m"lg:hidden p-2 rounded-xl bg-gray-100 text-gray-600"[39m
+          [36m>[39m
+            [36m<svg[39m
+              [33maria-hidden[39m=[32m"true"[39m
+              [33mclass[39m=[32m"lucide lucide-menu"[39m
+              [33mfill[39m=[32m"none"[39m
+              [33mheight[39m=[32m"22"[39m
+              [33mstroke[39m=[32m"currentColor"[39m
+              [33mstroke-linecap[39m=[32m"round"[39m
+              [33mstroke-linejoin[39m=[32m"round"[39m
+              [33mstroke-width[39m=[32m"2"[39m
+              [33mviewBox[39m=[32m"0 0 24 24"[39m
+              [33mwidth[39m=[32m"22"[39m
+              [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+            [36m>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M4 5h16"[39m
+              [36m/>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M4 12h16"[39m
+              [36m/>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M4 19h16"[39m
+              [36m/>[39m
+            [36m</svg>[39m
+          [36m</button>[39m
+          [36m<img[39m
+            [33malt[39m=[32m"Carify"[39m
+            [33mclass[39m=[32m"h-8 sm:h-9 w-auto object-contain lg:hidden"[39m
+            [33msrc[39m=[32m"/images/carifypdi_logo1.jpeg.png"[39m
+          [36m/>[39m
+        [36m</div>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"hidden md:flex relative"[39m
+        [36m>[39m
+          [36m<svg[39m
+            [33maria-hidden[39m=[32m"true"[39m
+            [33mclass[39m=[32m"lucide lucide-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"[39m
+            [33mfill[39m=[32m"none"[39m
+            [33mheight[39m=[32m"18"[39m
+            [33mstroke[39m=[32m"currentColor"[39m
+            [33mstroke-linecap[39m=[32m"round"[39m
+            [33mstroke-linejoin[39m=[32m"round"[39m
+            [33mstroke-width[39m=[32m"2"[39m
+            [33mviewBox[39m=[32m"0 0 24 24"[39m
+            [33mwidth[39m=[32m"18"[39m
+            [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+          [36m>[39m
+            [36m<path[39m
+              [33md[39m=[32m"m21 21-4.34-4.34"[39m
+            [36m/>[39m
+            [36m<circle[39m
+              [33mcx[39m=[32m"11"[39m
+              [33mcy[39m=[32m"11"[39m
+              [33mr[39m=[32m"8"[39m
+            [36m/>[39m
+          [36m</svg>[39m
+          [36m<input[39m
+            [33mclass[39m=[32m"pl-9 pr-3 py-1.5 rounded-xl bg-gray-100 text-sm outline-none focus:ring-2 focus:ring-red-500/20"[39m
+            [33mplaceholder[39m=[32m"Search..."[39m
+          [36m/>[39m
+        [36m</div>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex items-center gap-3 relative"[39m
+        [36m>[39m
+          [36m<button[39m
+            [33mclass[39m=[32m"p-2 rounded-xl text-gray-500 hover:bg-gray-100"[39m
+          [36m>[39m
+            [36m<svg[39m
+              [33maria-hidden[39m=[32m"true"[39m
+              [33mclass[39m=[32m"lucide lucide-bell"[39m
+              [33mfill[39m=[32m"none"[39m
+              [33mheight[39m=[32m"20"[39m
+              [33mstroke[39m=[32m"currentColor"[39m
+              [33mstroke-linecap[39m=[32m"round"[39m
+              [33mstroke-linejoin[39m=[32m"round"[39m
+              [33mstroke-width[39m=[32m"2"[39m
+              [33mviewBox[39m=[32m"0 0 24 24"[39m
+              [33mwidth[39m=[32m"20"[39m
+              [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+            [36m>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M10.268 21a2 2 0 0 0 3.464 0"[39m
+              [36m/>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"[39m
+              [36m/>[39m
+            [36m</svg>[39m
+          [36m</button>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"relative"[39m
+          [36m>[39m
+            [36m<button[39m
+              [33mclass[39m=[32m"flex items-center gap-2 p-1.5 rounded-xl hover:bg-gray-100"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"h-8 w-8 rounded-full bg-red-600 text-white flex items-center justify-center text-sm font-bold"[39m
+              [36m>[39m
+                [0mCA[0m
+              [36m</div>[39m
+              [36m<svg[39m
+                [33maria-hidden[39m=[32m"true"[39m
+                [33mclass[39m=[32m"lucide lucide-chevron-down"[39m
+                [33mfill[39m=[32m"none"[39m
+                [33mheight[39m=[32m"14"[39m
+                [33mstroke[39m=[32m"currentColor"[39m
+                [33mstroke-linecap[39m=[32m"round"[39m
+                [33mstroke-linejoin[39m=[32m"round"[39m
+                [33mstroke-width[39m=[32m"2"[39m
+                [33mviewBox[39m=[32m"0 0 24 24"[39m
+                [33mwidth[39m=[32m"14"[39m
+                [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+              [36m>[39m
+                [36m<path[39m
+                  [33md[39m=[32m"m6 9 6 6 6-6"[39m
+                [36m/>[39m
+              [36m</svg>[39m
+            [36m</button>[39m
+          [36m</div>[39m
+        [36m</div>[39m
+      [36m</div>[39m
+    [36m</header>[39m
+  [36m</div>[39m
+[36m</body>[39m
+[90m [2m❯[22m Object.getElementError node_modules/@testing-library/dom/dist/config.js:[2m37:19[22m[39m
+[90m [2m❯[22m node_modules/@testing-library/dom/dist/query-helpers.js:[2m76:38[22m[39m
+[90m [2m❯[22m node_modules/@testing-library/dom/dist/query-helpers.js:[2m52:17[22m[39m
+[90m [2m❯[22m node_modules/@testing-library/dom/dist/query-helpers.js:[2m95:19[22m[39m
+[90m [2m❯[22m src/components/Navbar.test.tsx:[2m140:30[22m[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/9]⎯[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m src/components/Navbar.test.tsx[2m > [22mNavbar - Responsive Design & Functionality[2m > [22muser profile avatar displays correctly
+[31m[1mTestingLibraryElementError[22m[39m: Unable to find an element with the text: /Profile/i. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<header[39m
+      [33mclass[39m=[32m"sticky top-0 z-40 w-full bg-white border-b border-gray-100"[39m
+    [36m>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"h-16 flex items-center justify-between px-3 sm:px-4 md:px-6"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex items-center gap-2"[39m
+        [36m>[39m
+          [36m<button[39m
+            [33mclass[39m=[32m"lg:hidden p-2 rounded-xl bg-gray-100 text-gray-600"[39m
+          [36m>[39m
+            [36m<svg[39m
+              [33maria-hidden[39m=[32m"true"[39m
+              [33mclass[39m=[32m"lucide lucide-menu"[39m
+              [33mfill[39m=[32m"none"[39m
+              [33mheight[39m=[32m"22"[39m
+              [33mstroke[39m=[32m"currentColor"[39m
+              [33mstroke-linecap[39m=[32m"round"[39m
+              [33mstroke-linejoin[39m=[32m"round"[39m
+              [33mstroke-width[39m=[32m"2"[39m
+              [33mviewBox[39m=[32m"0 0 24 24"[39m
+              [33mwidth[39m=[32m"22"[39m
+              [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+            [36m>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M4 5h16"[39m
+              [36m/>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M4 12h16"[39m
+              [36m/>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M4 19h16"[39m
+              [36m/>[39m
+            [36m</svg>[39m
+          [36m</button>[39m
+          [36m<img[39m
+            [33malt[39m=[32m"Carify"[39m
+            [33mclass[39m=[32m"h-8 sm:h-9 w-auto object-contain lg:hidden"[39m
+            [33msrc[39m=[32m"/images/carifypdi_logo1.jpeg.png"[39m
+          [36m/>[39m
+        [36m</div>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"hidden md:flex relative"[39m
+        [36m>[39m
+          [36m<svg[39m
+            [33maria-hidden[39m=[32m"true"[39m
+            [33mclass[39m=[32m"lucide lucide-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"[39m
+            [33mfill[39m=[32m"none"[39m
+            [33mheight[39m=[32m"18"[39m
+            [33mstroke[39m=[32m"currentColor"[39m
+            [33mstroke-linecap[39m=[32m"round"[39m
+            [33mstroke-linejoin[39m=[32m"round"[39m
+            [33mstroke-width[39m=[32m"2"[39m
+            [33mviewBox[39m=[32m"0 0 24 24"[39m
+            [33mwidth[39m=[32m"18"[39m
+            [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+          [36m>[39m
+            [36m<path[39m
+              [33md[39m=[32m"m21 21-4.34-4.34"[39m
+            [36m/>[39m
+            [36m<circle[39m
+              [33mcx[39m=[32m"11"[39m
+              [33mcy[39m=[32m"11"[39m
+              [33mr[39m=[32m"8"[39m
+            [36m/>[39m
+          [36m</svg>[39m
+          [36m<input[39m
+            [33mclass[39m=[32m"pl-9 pr-3 py-1.5 rounded-xl bg-gray-100 text-sm outline-none focus:ring-2 focus:ring-red-500/20"[39m
+            [33mplaceholder[39m=[32m"Search..."[39m
+          [36m/>[39m
+        [36m</div>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex items-center gap-3 relative"[39m
+        [36m>[39m
+          [36m<button[39m
+            [33mclass[39m=[32m"p-2 rounded-xl text-gray-500 hover:bg-gray-100"[39m
+          [36m>[39m
+            [36m<svg[39m
+              [33maria-hidden[39m=[32m"true"[39m
+              [33mclass[39m=[32m"lucide lucide-bell"[39m
+              [33mfill[39m=[32m"none"[39m
+              [33mheight[39m=[32m"20"[39m
+              [33mstroke[39m=[32m"currentColor"[39m
+              [33mstroke-linecap[39m=[32m"round"[39m
+              [33mstroke-linejoin[39m=[32m"round"[39m
+              [33mstroke-width[39m=[32m"2"[39m
+              [33mviewBox[39m=[32m"0 0 24 24"[39m
+              [33mwidth[39m=[32m"20"[39m
+              [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+            [36m>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M10.268 21a2 2 0 0 0 3.464 0"[39m
+              [36m/>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"[39m
+              [36m/>[39m
+            [36m</svg>[39m
+          [36m</button>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"relative"[39m
+          [36m>[39m
+            [36m<button[39m
+              [33mclass[39m=[32m"flex items-center gap-2 p-1.5 rounded-xl hover:bg-gray-100"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"h-8 w-8 rounded-full bg-red-600 text-white flex items-center justify-center text-sm font-bold"[39m
+              [36m>[39m
+                [0mCA[0m
+              [36m</div>[39m
+              [36m<svg[39m
+                [33maria-hidden[39m=[32m"true"[39m
+                [33mclass[39m=[32m"lucide lucide-chevron-down"[39m
+                [33mfill[39m=[32m"none"[39m
+                [33mheight[39m=[32m"14"[39m
+                [33mstroke[39m=[32m"currentColor"[39m
+                [33mstroke-linecap[39m=[32m"round"[39m
+                [33mstroke-linejoin[39m=[32m"round"[39m
+                [33mstroke-width[39m=[32m"2"[39m
+                [33mviewBox[39m=[32m"0 0 24 24"[39m
+                [33mwidth[39m=[32m"14"[39m
+                [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+              [36m>[39m
+                [36m<path[39m
+                  [33md[39m=[32m"m6 9 6 6 6-6"[39m
+                [36m/>[39m
+              [36m</svg>[39m
+            [36m</button>[39m
+          [36m</div>[39m
+        [36m</div>[39m
+      [36m</div>[39m
+    [36m</header>[39m
+  [36m</div>[39m
+[36m</body>[39m
+[90m [2m❯[22m Object.getElementError node_modules/@testing-library/dom/dist/config.js:[2m37:19[22m[39m
+[90m [2m❯[22m node_modules/@testing-library/dom/dist/query-helpers.js:[2m76:38[22m[39m
+[90m [2m❯[22m node_modules/@testing-library/dom/dist/query-helpers.js:[2m52:17[22m[39m
+[90m [2m❯[22m node_modules/@testing-library/dom/dist/query-helpers.js:[2m95:19[22m[39m
+[90m [2m❯[22m src/components/Navbar.test.tsx:[2m180:35[22m[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/9]⎯[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m src/components/Sidebar.test.tsx[2m > [22mSidebar - Responsive Design & Navigation[2m > [22mcollapse button visible and functional on desktop
+[31m[1mError[22m: [2mexpect([22m[31melement[31m[2m).toHaveClass([22m[32m[32m"hidden lg:flex"[32m[31m[2m)[22m
+
+Expected the element to have class:
+[32m  hidden lg:flex[31m
+Received:
+[31m  flex items-center gap-3[31m[39m
+[90m [2m❯[22m src/components/Sidebar.test.tsx:[2m71:40[22m[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/9]⎯[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m src/components/Sidebar.test.tsx[2m > [22mSidebar - Responsive Design & Navigation[2m > [22mdashboard dropdown expands on click
+[31m[1mTestingLibraryElementError[22m[39m: Found multiple elements with the text: /Vehicle Inspection/i
+
+Here are the matching elements:
+
+Ignored nodes: comments, script, style
+[36m<a[39m
+  [33mclass[39m=[32m"flex items-center gap-3 py-2.5 pl-12 pr-4 text-sm font-medium transition-all duration-200 rounded-lg text-[#64748b] hover:text-red-600 hover:translate-x-1"[39m
+  [33mhref[39m=[32m"/dashboard/inspection"[39m
+[36m>[39m
+  [36m<div[39m
+    [33mclass[39m=[32m"w-1.5 h-1.5 rounded-full bg-current opacity-40"[39m
+  [36m/>[39m
+  [0mVehicle Inspection[0m
+[36m</a>[39m
+
+Ignored nodes: comments, script, style
+[36m<span[39m
+  [33mclass[39m=[32m"text-[15px]"[39m
+[36m>[39m
+  [0mVehicle Inspection[0m
+[36m</span>[39m
+
+(If this is intentional, then use the `*AllBy*` variant of the query (like `queryAllByText`, `getAllByText`, or `findAllByText`)).
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<aside[39m
+      [33mclass[39m=[32m"h-full bg-white border-r border-gray-100 flex flex-col shadow-2xl shadow-gray-200/50 transition-all duration-300 w-[280px]"[39m
+    [36m>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"p-6 pb-2 "[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex items-center justify-between mb-2"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"flex items-center gap-3"[39m
+          [36m>[39m
+            [36m<img[39m
+              [33malt[39m=[32m"Carify Logo"[39m
+              [33mclass[39m=[32m"h-16 w-auto object-contain"[39m
+              [33msrc[39m=[32m"/images/carifypdi_logo1.jpeg.png"[39m
+            [36m/>[39m
+            [0m  [0m
+            [36m<button[39m
+              [33mclass[39m=[32m"hidden lg:flex w-full items-center justify-center gap-2 p-2 rounded-xl bg-gray-100 hover:bg-red-200 transition-colors"[39m
+            [36m>[39m
+              [36m<svg[39m
+                [33maria-hidden[39m=[32m"true"[39m
+                [33mclass[39m=[32m"lucide lucide-chevron-left transition-transform duration-300"[39m
+                [33mfill[39m=[32m"none"[39m
+                [33mheight[39m=[32m"20"[39m
+                [33mstroke[39m=[32m"currentColor"[39m
+                [33mstroke-linecap[39m=[32m"round"[39m
+                [33mstroke-linejoin[39m=[32m"round"[39m
+                [33mstroke-width[39m=[32m"2"[39m
+                [33mviewBox[39m=[32m"0 0 24 24"[39m
+                [33mwidth[39m=[32m"20"[39m
+                [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+              [36m>[39m
+                [36m<path[39m
+                  [33md[39m=[32m"m15 18-6-6 6-6"[39m
+                [36m/>[39m
+              [36m</svg>[39m
+            [36m</button>[39m
+          [36m</div>[39m
+          [36m<button[39m
+            [33maria-label[39m=[32m"Close sidebar"[39m
+            [33mclass[39m=[32m"lg:hidden p-2 text-black-500 rounded-xlhover:bg-gray-50 rounded-lg"[39m
+          [36m>[39m
+            [36m<svg[39m
+              [33maria-hidden[39m=[32m"true"[39m
+              [33mclass[39m=[32m"lucide lucide-x"[39m
+              [33mfill[39m=[32m"none"[39m
+              [33mheight[39m=[32m"20"[39m
+              [33mstroke[39m=[32m"currentColor"[39m
+              [33mstroke-linecap[39m=[32m"round"[39m
+              [33mstroke-linejoin[39m=[32m"round"[39m
+              [33mstroke-width[39m=[32m"2"[39m
+              [33mviewBox[39m=[32m"0 0 24 24"[39m
+              [33mwidth[39m=[32m"20"[39m
+              [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+            [36m>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M18 6 6 18"[39m
+              [36m/>[39m
+              [36m<path[39m
+                [33md[39m=[32m"m6 6 12 12"[39m
+              [36m/>[39m
+            [36m</svg>[39m
+          [36m</button>[39m
+        [36m</div>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"px-1 mb-4"[39m
+        [36m>[39m
+          [36m<span[39m
+            [33mclass[39m=[32m"text-[10px] font-bold text-red-500 uppercase tracking-widest"[39m
+          [36m>[39m
+            [0madvance modern i 2026[0m
+          [36m</span>[39m
+        [36m</div>[39m
+      [36m</div>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"flex-1 overflow-y-auto px-6 pb-6 custom-scrollbar "[39m
+      [36m>[39m
+        [36m<nav[39m
+          [33mclass[39m=[32m"space-y-1 font-semibold"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"space-y-1"[39m
+          [36m>[39m
+            [36m<button[39m
+              [33mclass[39m=[32m"w-full flex items-center justify-between px-4 py-3 rounded-xl transition-all duration-300 bg-gray-50/50 text-[#1e293b] "[39m
+            [36m>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"flex items-center gap-3"[39m
+              [36m>[39m
+                [36m<svg[39m
+                  [33maria-hidden[39m=[32m"true"[39m
+                  [33mclass[39m=[32m"lucide lucide-layout-dashboard text-red-600"[39m
+                  [33mfill[39m=[32m"none"[39m
+                  [33mheight[39m=[32m"20"[39m
+                  [33mstroke[39m=[32m"currentColor"[39m
+                  [33mstroke-linecap[39m=[32m"round"[39m
+                  [33mstroke-linejoin[39m=[32m"round"[39m
+                  [33mstroke-width[39m=[32m"2"[39m
+                  [33mviewBox[39m=[32m"0 0 24 24"[39m
+                  [33mwidth[39m=[32m"20"[39m
+                  [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+                [36m>[39m
+                  [36m<rect[39m
+                    [33mheight[39m=[32m"9"[39m
+                    [33mrx[39m=[32m"1"[39m
+                    [33mwidth[39m=[32m"7"[39m
+                    [33mx[39m=[32m"3"[39m
+                    [33my[39m=[32m"3"[39m
+                  [36m/>[39m
+                  [36m<rect[39m
+                    [33mheight[39m=[32m"5"[39m
+                    [33mrx[39m=[32m"1"[39m
+                    [33mwidth[39m=[32m"7"[39m
+                    [33mx[39m=[32m"14"[39m
+                    [33my[39m=[32m"3"[39m
+                  [36m/>[39m
+                  [36m<rect[39m
+                    [33mheight[39m=[32m"9"[39m
+                    [33mrx[39m=[32m"1"[39m
+                    [33mwidth[39m=[32m"7"[39m
+                    [33mx[39m=[32m"14"[39m
+                    [33my[39m=[32m"12"[39m
+                  [36m/>[39m
+                  [36m<rect[39m
+                    [33mheight[39m=[32m"5"[39m
+                    [33mrx[39m=[32m"1"[39m
+                    [33mwidth[39m=[32m"7"[39m
+                    [33mx[39m=[32m"3"[39m
+                    [33my[39m=[32m"16"[39m
+                  [36m/>[39m
+                [36m</svg>[39m
+                [36m<span[39m
+                  [33mclass[39m=[32m"text-[15px]"[39m
+                [36m>[39m
+                  [0mDashboard[0m
+                [36m</span>[39m
+              [36m</div>[39m
+              [36m<svg[39m
+                [33maria-hidden[39m=[32m"true"[39m
+                [33mclass[39m=[32m"lucide lucide-chevron-down transition-transform duration-300 rotate-180"[39m
+                [33mfill[39m=[32m"none"[39m
+                [33mheight[39m=[32m"14"[39m
+                [33mstroke[39m=[32m"currentColor"[39m
+                [33mstroke-linecap[39m=[32m"round"[39m
+                [33mstroke-linejoin[39m=[32m"round"[39m
+                [33mstroke-width[39m=[32m"2"[39m
+                [33mviewBox[39m=[32m"0 0 24 24"[39m
+                [33mwidth[39m=[32m"14"[39m
+                [33mxmlns[39m=[3...
+[90m [2m❯[22m Object.getElementError node_modules/@testing-library/dom/dist/config.js:[2m37:19[22m[39m
+[90m [2m❯[22m getElementError node_modules/@testing-library/dom/dist/query-helpers.js:[2m20:35[22m[39m
+[90m [2m❯[22m getMultipleElementsFoundError node_modules/@testing-library/dom/dist/query-helpers.js:[2m23:10[22m[39m
+[90m [2m❯[22m node_modules/@testing-library/dom/dist/query-helpers.js:[2m55:13[22m[39m
+[90m [2m❯[22m node_modules/@testing-library/dom/dist/query-helpers.js:[2m95:19[22m[39m
+[90m [2m❯[22m src/components/Sidebar.test.tsx:[2m122:40[22m[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/9]⎯[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m src/components/Sidebar.test.tsx[2m > [22mSidebar - Responsive Design & Navigation[2m > [22msidebar text hidden when collapsed
+[31m[1mError[22m: [2mexpect([22m[31mreceived[31m[2m).not.toBeVisible()[22m
+
+[31mreceived[31m value must be an HTMLElement or an SVGElement.
+[39m
+[90m [2m❯[22m src/components/Sidebar.test.tsx:[2m170:27[22m[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/9]⎯[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m src/pages/fleet/Driver.test.tsx[2m > [22mDriver Component Responsiveness and UI[2m > [22mtoggles between table and card view
+[31m[1mTestingLibraryElementError[22m[39m: Unable to find an element by: [data-testid="layout-grid-icon"]
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"min-h-screen bg-slate-50/50"[39m
+    [36m>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"max-w-7xl mx-auto space-y-6"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex flex-col md:flex-row md:items-center justify-between gap-4"[39m
+        [36m>[39m
+          [36m<div>[39m
+            [36m<h1[39m
+              [33mclass[39m=[32m"text-3xl font-extrabold text-slate-900 flex items-center gap-2"[39m
+            [36m>[39m
+              [36m<span[39m
+                [33mclass[39m=[32m"w-2 h-8 bg-red-400 rounded-full"[39m
+              [36m/>[39m
+              [0mManage Drivers[0m
+            [36m</h1>[39m
+            [36m<p[39m
+              [33mclass[39m=[32m"text-slate-500 mt-1 font-medium"[39m
+            [36m>[39m
+              [0mFleet Management › Driver Directory[0m
+            [36m</p>[39m
+          [36m</div>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"flex items-center gap-3"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"relative group"[39m
+            [36m>[39m
+              [36m<svg[39m
+                [33maria-hidden[39m=[32m"true"[39m
+                [33mclass[39m=[32m"lucide lucide-search absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-red-400 transition-colors"[39m
+                [33mfill[39m=[32m"none"[39m
+                [33mheight[39m=[32m"18"[39m
+                [33mstroke[39m=[32m"currentColor"[39m
+                [33mstroke-linecap[39m=[32m"round"[39m
+                [33mstroke-linejoin[39m=[32m"round"[39m
+                [33mstroke-width[39m=[32m"2"[39m
+                [33mviewBox[39m=[32m"0 0 24 24"[39m
+                [33mwidth[39m=[32m"18"[39m
+                [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+              [36m>[39m
+                [36m<path[39m
+                  [33md[39m=[32m"m21 21-4.34-4.34"[39m
+                [36m/>[39m
+                [36m<circle[39m
+                  [33mcx[39m=[32m"11"[39m
+                  [33mcy[39m=[32m"11"[39m
+                  [33mr[39m=[32m"8"[39m
+                [36m/>[39m
+              [36m</svg>[39m
+              [36m<input[39m
+                [33mclass[39m=[32m"pl-10 pr-4 py-2 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-red-400/20 focus:border-red-400 transition-all w-full md:w-64"[39m
+                [33mplaceholder[39m=[32m"Search drivers..."[39m
+                [33mtype[39m=[32m"text"[39m
+                [33mvalue[39m=[32m""[39m
+              [36m/>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"flex border border-slate-200 rounded-xl bg-white p-1"[39m
+            [36m>[39m
+              [36m<button[39m
+                [33mclass[39m=[32m"p-2 rounded-lg transition-all bg-red-400 text-white shadow-sm"[39m
+              [36m>[39m
+                [36m<svg[39m
+                  [33maria-hidden[39m=[32m"true"[39m
+                  [33mclass[39m=[32m"lucide lucide-table"[39m
+                  [33mfill[39m=[32m"none"[39m
+                  [33mheight[39m=[32m"18"[39m
+                  [33mstroke[39m=[32m"currentColor"[39m
+                  [33mstroke-linecap[39m=[32m"round"[39m
+                  [33mstroke-linejoin[39m=[32m"round"[39m
+                  [33mstroke-width[39m=[32m"2"[39m
+                  [33mviewBox[39m=[32m"0 0 24 24"[39m
+                  [33mwidth[39m=[32m"18"[39m
+                  [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+                [36m>[39m
+                  [36m<path[39m
+                    [33md[39m=[32m"M12 3v18"[39m
+                  [36m/>[39m
+                  [36m<rect[39m
+                    [33mheight[39m=[32m"18"[39m
+                    [33mrx[39m=[32m"2"[39m
+                    [33mwidth[39m=[32m"18"[39m
+                    [33mx[39m=[32m"3"[39m
+                    [33my[39m=[32m"3"[39m
+                  [36m/>[39m
+                  [36m<path[39m
+                    [33md[39m=[32m"M3 9h18"[39m
+                  [36m/>[39m
+                  [36m<path[39m
+                    [33md[39m=[32m"M3 15h18"[39m
+                  [36m/>[39m
+                [36m</svg>[39m
+              [36m</button>[39m
+              [36m<button[39m
+                [33mclass[39m=[32m"p-2 rounded-lg transition-all text-slate-500 hover:bg-slate-50"[39m
+              [36m>[39m
+                [36m<svg[39m
+                  [33maria-hidden[39m=[32m"true"[39m
+                  [33mclass[39m=[32m"lucide lucide-layout-grid"[39m
+                  [33mfill[39m=[32m"none"[39m
+                  [33mheight[39m=[32m"18"[39m
+                  [33mstroke[39m=[32m"currentColor"[39m
+                  [33mstroke-linecap[39m=[32m"round"[39m
+                  [33mstroke-linejoin[39m=[32m"round"[39m
+                  [33mstroke-width[39m=[32m"2"[39m
+                  [33mviewBox[39m=[32m"0 0 24 24"[39m
+                  [33mwidth[39m=[32m"18"[39m
+                  [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+                [36m>[39m
+                  [36m<rect[39m
+                    [33mheight[39m=[32m"7"[39m
+                    [33mrx[39m=[32m"1"[39m
+                    [33mwidth[39m=[32m"7"[39m
+                    [33mx[39m=[32m"3"[39m
+                    [33my[39m=[32m"3"[39m
+                  [36m/>[39m
+                  [36m<rect[39m
+                    [33mheight[39m=[32m"7"[39m
+                    [33mrx[39m=[32m"1"[39m
+                    [33mwidth[39m=[32m"7"[39m
+                    [33mx[39m=[32m"14"[39m
+                    [33my[39m=[32m"3"[39m
+                  [36m/>[39m
+                  [36m<rect[39m
+                    [33mheight[39m=[32m"7"[39m
+                    [33mrx[39m=[32m"1"[39m
+                    [33mwidth[39m=[32m"7"[39m
+                    [33mx[39m=[32m"14"[39m
+                    [33my[39m=[32m"14"[39m
+                  [36m/>[39m
+                  [36m<rect[39m
+                    [33mheight[39m=[32m"7"[39m
+                    [33mrx[39m=[32m"1"[39m
+                    [33mwidth[39m=[32m"7"[39m
+                    [33mx[39m=[32m"3"[39m
+                    [33my[39m=[32m"14"[39m
+                  [36m/>[39m
+                [36m</svg>[39m
+              [36m</button>[39m
+            [36m</div>[39m
+            [36m<button[39m
+              [33mclass[39m=[32m"flex items-center gap-2 bg-red-400 hover:bg-red-500 text-white px-5 py-2.5 rounded-xl text-sm font-bold transition-all shadow-lg shadow-red-400/20 active:scale-95"[39m
+            [36m>[39m
+              [36m<svg[39m
+                [33maria-hidden[39m=[32m"true"[39m
+                [33mclass[39m=[32m"lucide lucide-plus"[39m
+                [33mfill[39m=[32m"none"[39m
+                [33mheight[39m=[32m"18"[39m
+                [33mstroke[39m=[32m"currentColor"[39m
+                [33mstroke-linecap[39m=[32m"round"[39m
+                [33mstroke-linejoin[39m=[32m"round"[39m
+                [33mstroke-width[39m=[32m"3"[39m
+                [33mviewBox[39m=[32m"0 0 24 24"[39m
+                [33mwidth[39m=[32m"18"[39m
+                [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+              [36m>[39m
+                [36m<path[39m
+                  [33md[39m=[32m"M5 12h14"[39m
+                [36m/>[39m
+                [36m<path[39m
+                  [33md[39m=[32m"M12 5v14"[39m
+                [36m/>[39m
+              [36m</svg>[39m
+              [36m<span[39m
+                [33mclass[39m=[32m"hidden sm:inline"[39m
+              [36m>[39m
+                [0mAdd Driver[0m
+              [36m</span>[39m
+            [36m</button>[39m
+          [36m</div>[39m
+        [36m</div>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden transition-all"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"overflow-x-auto custom-scrollbar"[39m
+          [36m>[39m
+            [36m<table[39m
+              [33mclass[39m=[32m"w-full text-sm text-left"[39m
+            [36m>[39m
+              [36m<thead[39m
+                [33mclass[39m=[32m"bg-slate-50 border-b border-slate-100"[39m
+              [36m>[39m
+                [36m<tr>[39m
+                  [36m<th[39m
+                    [33mclass[39m=[32m"px-6 py-4 text-[11px] font-bold text-slate-500 uppercase tracking-wider"[39m
+                  [36m>[39m
+                    [0mDRIVER INFO[0m
+                  [36m</th>[39m
+                  [36m<th[39m
+                    [33mclass[39m=[32m"px-6 py-4 text-[11px] font-bold text-slate-500 uppercase tracking-wider"[39m
+                  [36m>[39m
+                    [0mLICENCE[0m
+                  [36m</th>[39m
+                  [36m<th[39m
+                    [33mclass[39m=[32m"px-6 py-4 text-[11px] font-bold text-slate-500 uppercase tracking-wider"[39m
+                  [36m>[39m
+                    [0mTYPE[0m
+                  [36m</th>[39m
+                  [36m<th[39m
+                    [33mclass[39m=[32m"px-6 py-4 text-[11px] font-bold text-slate-500 uppercase tracking-wider"[39m
+                  [36m>[39m
+                    [0mHOURS[0m
+                  [36m</th>[39m
+                  [36m<th[39m
+                    [33mclass[39m=[32m"px-6 py-4 text-[11px] font-bold text-slate-500 uppercase tracking-wider"[39m
+                  [36m>[39m
+                    [0mEXPIRE[0m
+                  [36m</th>[39m
+                  [36m<th[39m
+                    [33mclass[39m=[32m"px-6 py-4 text-[11px] font-bold text-slate-500 uppercase tracking-wider"[39m
+                  [36m>[39m
+                    [0mJOINED[0m
+                  [36m</th>[39m
+                  [36m<th[39m
+                    [33mclass[39m=[32m"px-6 py-4 text-[11px] font-bold text-slate-500 uppercase tracking-wider"[39m
+                  [36m>[39m
+                    [0mACTIONS[0m
+                  [36m</th>[39m
+                [36m</tr>[39m
+              [36m</thead>[39m
+              [36m<tbody[39m
+                [33mclass[39m=[32m"divide-y divide-slate-50"[39m
+              [36m>[39m
+                [36m<tr[39m
+                  [33mclass[39m=[32m"hover:bg-slate-50/80 transition-colors group"[39m
+                [36m>[39m
+                  [36m<td[39m
+                    [33mclass[39m=[32m"px-6 py-4"[39m
+                  [36m>[39m
+                    [36m<div[39m
+                      [33mclass[39m=[32m"flex items-center gap-3"[39m
+                    [36m>[39m
+                      [36m<div[39m
+                        [33mclass[39m=[32m"h-10 w-10 rounded-xl bg-red-50 text-red-500 flex items-center justify-center font-bold text-sm border border-red-100 uppercase group-hover:scale-110 transition-transform"[39m
+                      [36m>[39m
+                        [0mD[0m
+                      [36m</div>[39m
+                      [36m<div>[39m
+                        [36m<div[39m
+                          [33mclass[39m=[32m"font-bold text-slate-900"[39m
+                        [36m>[39m
+                          [0mDeepak Sharma[0m
+                        [36m</div>[39m
+                        [36m<div[39m
+                          [33mclass[39m=[32m"text-xs text-slate-500 font-medium"[39m
+                        [36m>[39m
+                          [0mdeepak.sharma@example.com[0m
+                        [36m</div>[39m
+                      [36m</div>[39m
+                    [36m</div>[39m
+                  [36m</td>[39m
+                  [36m<td[39m
+                    [33mclass[39m=[32m"px-6 py-4"[39m
+                  [36m>[39m
+                    [36m<span[39m
+                      [33mclass[39m=[32m"font-mono font-medium text-slate-600 bg-slate-100 px-2 py-1 rounded"[39m
+                    [36m>[39m
+                      [0m123456[0m
+                    [36m</span>[39m
+                  [36m</td>[39m
+                  [36m<td[39m
+                    [33mclass[39m=[32m"px-6 py-4"[39m
+                  [36m>[39m
+                    [36m<span[39m
+                      [33mclass[39m=[32m"px-2.5 py-1 bg-blue-50 text-blue-600 rounded-full text-[10px] font-bold uppercase tracking-wide"[39m
+                    [36m>[39m
+                      [0mCommercial[0m
+                    [36m</span>[39m
+                  [36m</td>[39m
+                  [36m<td[39m
+                    [33mclass[39m=[32m"px-6 py-4 text-slate-600 font-medium"[39m
+                  [36m>[39m
+                    [0m10AM - 6PM[0m
+                  [36m</td>[39m
+                  [36m<td[39m
+                    [33mclass[39m=[32m"px-6 py-4"[39m
+                  [36m>[39m
+                    [36m<div[39m
+                      [33mclass[39m=[32m"flex flex-col"[39m
+                    [36m>[39m
+                      [36m<span[39m
+                        [33mclass[39m=[32m"font-semibold text-slate-700"[39m
+                      [36m>[39m
+                        [0m15-01-2025[0m
+                      [36m</span>[39m
+                    [36m</div>[39m
+                  [36m</td>[39m
+                  [36m<td[39m
+                    [33mclass[39m=[32m"px-6 py-4 text-slate-500 font-medium"[39m
+                  [36m>[39m
+                    [0m03-09-2024[0m
+                  [36m</td>[39m
+                  [36m<td[39m
+                    [33mclass[39m=[32m"px-6 py-4"[39m
+                  [36m>[39m
+                    [36m<div[39m
+                      [33mclass[39m=[32m"flex gap-1.5"[39m
+                    [36m>[39m
+                      [36m<button[39m
+                        [33mclass[39m=[32m"p-2 rounded-lg transition-all active:scale-90 text-blue-500 hover:bg-blue-50 hover:text-blue-600"[39m
+                      [36m>[39m
+                        [36m<svg[39m
+                          [33maria-hidden[39m=[32m"true"[39m
+                          [33mclass[39m=[32m"lucide lucide-eye"[39m
+                          [33mfill[39m=[32m"none"[39m
+                          [33mheight[39m=[32m"16"[39m
+                          [33mstroke[39m=[32m"currentColor"[39m
+                          [33mstroke-linecap[39m=[32m"round"[39m
+                          [33mstroke-linejoin[39m=[32m"round"[39m
+                          [33mstroke-width[39m=[32m"2"[39m
+                          [33mviewBox[39m=[32m"0 0 24 24"[39m
+                          [33mwidth[39m=[32m"16"[39m
+                          [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+                        [36m>[39m
+                          [36m<path[39m
+                            [33md[39m=[32m"M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"[39m
+                          [36m/>[39m
+                          [36m<circle[39m
+                            [33mcx[39m=[32m"12"[39m
+                            [33mcy[39m=[32m"12"[39m
+                            [33mr[39m=[32m"3"[39m
+                          [36m/>[39m
+                        [36m</svg>[39m
+                      [36m</button>[39m
+                      [36m<button[39m
+                        [33mclass[39m=[32m"p-2 rounded-lg transition-all active:scale-90 text-orange-500 hover:bg-orange-50 hover:text-orange-600"[39m
+                      [36m>[39m
+                        [36m<svg[39m
+                          [33maria-hidden[39m=[32m"true"[39m
+                          [33mclass[39m=[32m"lucide lucide-pencil"[39m
+                          [33mfill[39m=[32m"none"[39m
+                          [33mheight[39m=[32m"16"[39m
+                          [33mstroke[39m=[32m"currentColor"[39m
+                          [33mstroke-linecap[39m=[32m"round"[39m
+                          [33mstroke-linejoin[39m=[32m"round"[39m
+                          [33mstroke-width[39m=[32m"2"[39m
+                          [33mviewBox[39m=[32m"0 0 24 24"[39m
+                          [33mwidth[39m=[32m"16"[39m
+                          [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+                        [36m>[39m
+                          [36m<path[39m
+                            [33md[39m=[32m"M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"[39m
+                          [36m/>[39m
+                          [36m<path[39m
+                            [33md[39m=[32m"m15 5 4 4"[39m
+                          [36m/>[39m
+                        [36m</svg>[39m
+                      [36m</button>[39m
+                      [36m<button[39m
+                        [33mclass[39m=[32m"p-2 rounded-lg transition-all active:scale-90 text-red-500 hover:bg-red-50 hover:text-red-600"[39m
+                      [36m>[39m
+                        [36m<svg[39m
+                          [33maria-hidden[39m=[32m"true"[39m
+                          [33mclass[39m=[32m"lucide lucide-trash2 lucide-trash-2"[39m
+                          [33mfill[39m=[32m"none"[39m
+                          [33mheight[39m=[32m"16"[39m
+                          [33mstroke[39m=[32m"currentColor"[39m
+                          [33mstroke-linecap[39m=[32m"round"[39m
+                          [33mstroke-linejoin[39m=[32m"round"[39m
+                          [33mstroke-width[39m=[32m"2"[39m
+                          [33mviewBox[39m=[32m"0 0 24 24"[39m
+                          [33mwidth[39m=[32m"16"[39m
+                          [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+                        [36m>[39m
+                          [36m<path[39m
+                            [33md[39m=[32m"M10 11v6"[39m
+                          [36m/>[39m
+                          [36m<path[39m
+                            [33md[39m=[32m"M14 11v6"[39m
+                          [36m/>[39m
+                          [36m<path[39m
+                            [33md[39m=[32m"M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"[39m
+                          [36m/>[39m
+                          [36m<path[39m
+                            [33md[39m=[32m"M3 6h18"[39m
+                          [36m/>[39m
+                          [36m<path[39m
+                            [33md[39m=[32m"M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"[39m
+                          [36m/>[39m
+                        [36m</svg>[39m
+                      [36m</button>[39m
+                    [36m</div>[39m
+                  [36m</td>[39m
+                [36m</tr>[39m
+              [36m</tbody>[39m
+            [36m</table>[39m
+          [36m</div>[39m
+        [36m</div>[39m
+      [36m</div>[39m
+    [36m</div>[39m
+  [36m</div>[39m
+[36m</body>[39m
+[90m [2m❯[22m Object.getElementError node_modules/@testing-library/dom/dist/config.js:[2m37:19[22m[39m
+[90m [2m❯[22m node_modules/@testing-library/dom/dist/query-helpers.js:[2m76:38[22m[39m
+[90m [2m❯[22m node_modules/@testing-library/dom/dist/query-helpers.js:[2m52:17[22m[39m
+[90m [2m❯[22m node_modules/@testing-library/dom/dist/query-helpers.js:[2m95:19[22m[39m
+[90m [2m❯[22m src/pages/fleet/Driver.test.tsx:[2m43:32[22m[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/9]⎯[22m[39m
+
+[2m Test Files [22m [1m[31m4 failed[39m[22m[2m | [22m[1m[32m1 passed[39m[22m[90m (5)[39m
+[2m      Tests [22m [1m[31m9 failed[39m[22m[2m | [22m[1m[32m31 passed[39m[22m[90m (40)[39m
+[2m   Start at [22m 14:35:14
+[2m   Duration [22m 17.60s[2m (transform 1.91s, setup 2.51s, collect 13.77s, tests 7.84s, environment 12.53s, prepare 5.91s)[22m
+
