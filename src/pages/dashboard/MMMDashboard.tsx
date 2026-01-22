@@ -67,13 +67,13 @@ export default function MMMDashboard() {
   ];
 
   return (
-    <div className="space-y-6 pb-10 animate-in fade-in duration-700 bg-[#f8fafc]">
+    <div className="space-y-3 pb-10 animate-in fade-in duration-700 bg-[#f8fafc]">
       
       {/* Greeting Section */}
       <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-6">
-        <h2 className="text-2xl font-black text-slate-900 flex items-center gap-2">
-          {greeting}, {userRole}! 👋
-        </h2>
+         <h3 className="text-2xl font-sm text-slate-900 pb-2  inline-block">
+          {greeting}, {userRole}! 
+        </h3> 
         <p className="text-sm text-slate-500 font-medium mt-1">
           Here's what's happening in your marketing department today.
         </p>
@@ -85,7 +85,7 @@ export default function MMMDashboard() {
           <h3 className="text-sm font-bold text-slate-900 pb-2 border-b-2 border-blue-500 inline-block">Active Campaign Experts</h3>
           <button className="text-[10px] font-black text-blue-600 uppercase tracking-widest hover:underline">View Team</button>
         </div>
-        <div className="flex gap-8 overflow-x-auto pb-2 scrollbar-hide">
+        <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
           {marketingTeam.map((member, i) => (
             <div key={i} className="flex flex-col items-center gap-2 min-w-[80px]">
               <div className="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center text-2xl shadow-sm border border-slate-100 group cursor-pointer hover:border-blue-300 transition-all">
@@ -101,7 +101,7 @@ export default function MMMDashboard() {
       </div>
 
       {/* Main Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-3">
         {stats.map((stat, i) => (
           <div key={i} className="bg-white p-5 rounded-xl border border-slate-100 shadow-sm flex flex-col justify-between group hover:shadow-md transition-all">
             <div className="flex justify-between items-start mb-4">
@@ -122,7 +122,7 @@ export default function MMMDashboard() {
           </div>
         ))}
         {/* Campaign Health Alert */}
-        <div className="bg-white p-5 rounded-xl border-l-4 border-orange-500 border-t border-r border-b border-slate-100 shadow-sm">
+        <div className="bg-white p-5 rounded-xl  shadow-sm">
           <div className="flex items-start gap-3">
             <div className="text-orange-500 mt-1">
               <Megaphone size={20} strokeWidth={3} />
@@ -136,7 +136,7 @@ export default function MMMDashboard() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-3">
         {/* ROI Performance Section */}
         <div className="lg:col-span-2 bg-white rounded-xl shadow-sm border border-slate-100 p-6">
           <div className="flex items-center justify-between mb-8">
@@ -144,7 +144,7 @@ export default function MMMDashboard() {
                <h3 className="text-lg font-bold text-slate-900">Campaign ROI Analysis</h3>
                <p className="text-[11px] text-slate-400 font-bold uppercase tracking-wider">Return on investment per channel</p>
             </div>
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3">
               <div className="flex bg-slate-50 p-1 rounded-lg border border-slate-100">
                 <button className="px-3 py-1 text-[10px] font-black text-blue-600 bg-white rounded shadow-sm border border-slate-200">Weekly</button>
                 <button className="px-3 py-1 text-[10px] font-bold text-slate-400">Monthly</button>
@@ -174,7 +174,7 @@ export default function MMMDashboard() {
           </div>
 
           <div className="mt-8 pt-6 border-t border-slate-50 flex items-center justify-between">
-            <div className="flex gap-6">
+            <div className="flex gap-3">
                <div className="flex items-center gap-2">
                  <div className="w-2 h-2 rounded-full bg-blue-600"></div>
                  <span className="text-[10px] font-bold text-slate-500 uppercase">Search Ads</span>
@@ -225,7 +225,7 @@ export default function MMMDashboard() {
                 </div>
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-4 mt-6">
+            <div className="grid grid-cols-2 gap-3 mt-6">
               <div className="p-3 bg-slate-50 rounded-lg text-center">
                 <p className="text-[9px] font-bold text-slate-400 uppercase mb-1">Paid</p>
                 <p className="text-lg font-black text-slate-900">26%</p>
@@ -270,7 +270,7 @@ export default function MMMDashboard() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
         {/* Campaign Roadmap */}
         <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-6 overflow-hidden">
           <div className="flex items-center justify-between mb-6">
@@ -334,7 +334,7 @@ export default function MMMDashboard() {
             <h3 className="text-sm font-bold text-slate-900">Media Assets</h3>
             <button className="text-[10px] font-black text-slate-400 uppercase tracking-widest hover:text-slate-900 transition-colors">Go to Library</button>
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-3">
             {[
               { label: "Banner_v1.jpg", size: "2.4 MB", type: "Image", color: "bg-blue-50" },
               { label: "Launch_Vid.mp4", size: "128 MB", type: "Video", color: "bg-purple-50" },
@@ -364,7 +364,7 @@ export default function MMMDashboard() {
       {/* Marketing Intelligence Banner */}
       <div className="bg-[#1e1b4b] rounded-xl p-8 text-white relative overflow-hidden">
         <div className="absolute bottom-0 right-0 w-80 h-80 bg-blue-600/20 rounded-full blur-[100px] pointer-events-none"></div>
-        <div className="relative z-10 flex flex-col md:flex-row justify-between items-center gap-8">
+        <div className="relative z-10 flex flex-col md:flex-row justify-between items-center gap-3">
            <div className="max-w-md">
               <div className="flex items-center gap-2 mb-4">
                  <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
@@ -375,7 +375,7 @@ export default function MMMDashboard() {
                 AI-driven insights suggest a 15% budget shift towards search ads for the upcoming weekend to maximize conversion efficiency.
               </p>
            </div>
-           <div className="flex gap-4">
+           <div className="flex gap-3">
               <div className="p-6 bg-white/5 border border-white/10 rounded-2xl backdrop-blur-sm text-center min-w-[140px]">
                  <p className="text-[10px] font-bold text-slate-400 uppercase mb-2">Estimated Growth</p>
                  <p className="text-3xl font-black text-emerald-400">+18.5%</p>

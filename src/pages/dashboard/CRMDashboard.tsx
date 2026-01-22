@@ -70,13 +70,14 @@ export default function CRMDashboard() {
   ];
 
   return (
-    <div className="space-y-6 pb-10 animate-in fade-in duration-700 bg-[#f8fafc]">
+    <div className="space-y-3 pb-10 animate-in fade-in duration-700 bg-[#f8fafc]">
       
       {/* Greeting Section */}
       <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-6">
-        <h2 className="text-2xl font-black text-slate-900 flex items-center gap-2">
-          {greeting}, {userRole}! 👋
-        </h2>
+        <h3 className="text-2xl font-sm text-slate-900 pb-2  inline-block">
+          {greeting}, {userRole}! 
+        </h3>
+         
         <p className="text-sm text-slate-500 font-medium mt-1">
           Here's what's happening with your customer relationships today.
         </p>
@@ -88,7 +89,7 @@ export default function CRMDashboard() {
           <h3 className="text-sm font-bold text-slate-900 pb-2 border-b-2 border-purple-500 inline-block">Today's Active Leads</h3>
           <button className="text-[10px] font-black text-purple-600 uppercase tracking-widest hover:underline">View All Leads</button>
         </div>
-        <div className="flex gap-8 overflow-x-auto pb-2 scrollbar-hide">
+        <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
           {activeLeads.map((lead, i) => (
             <div key={i} className="flex flex-col items-center gap-2 min-w-[80px]">
               <div className="w-12 h-12 rounded-full bg-purple-50 flex items-center justify-center text-2xl shadow-sm border border-slate-100 group cursor-pointer hover:border-purple-300 transition-all">
@@ -104,7 +105,7 @@ export default function CRMDashboard() {
       </div>
 
       {/* Main Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-3">
         {stats.map((stat, i) => (
           <div key={i} className="bg-white p-5 rounded-xl border border-slate-100 shadow-sm flex flex-col justify-between group hover:shadow-md transition-all">
             <div className="flex justify-between items-start mb-4">
@@ -125,7 +126,7 @@ export default function CRMDashboard() {
           </div>
         ))}
         {/* Sales Target Alert */}
-        <div className="bg-white p-5 rounded-xl border-l-4 border-emerald-500 border-t border-r border-b border-slate-100 shadow-sm">
+        <div className="bg-white p-5 rounded-xl   shadow-sm">
           <div className="flex items-start gap-3">
             <div className="text-emerald-500 mt-1">
               <Star size={20} strokeWidth={3} />
@@ -139,7 +140,7 @@ export default function CRMDashboard() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-3">
         {/* Sales Pipeline Section */}
         <div className="lg:col-span-2 bg-white rounded-xl shadow-sm border border-slate-100 p-6">
           <div className="flex items-center justify-between mb-8">
@@ -147,7 +148,7 @@ export default function CRMDashboard() {
                <h3 className="text-lg font-bold text-slate-900">Sales Pipeline</h3>
                <p className="text-[11px] text-slate-400 font-bold uppercase tracking-wider">Opportunity distribution by stage</p>
             </div>
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3">
               <select className="bg-slate-50 border border-slate-200 text-slate-600 text-[11px] font-bold py-1.5 px-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500/20 transition-all">
                 <option>This Quarter</option>
                 <option>Last Quarter</option>
@@ -159,7 +160,7 @@ export default function CRMDashboard() {
             </div>
           </div>
           
-          <div className="h-64 flex items-end justify-between gap-4 px-4">
+          <div className="h-64 flex items-end justify-between gap-3 px-4">
             {[
               { label: "Leads", value: 85, color: "bg-slate-200" },
               { label: "Contacted", value: 65, color: "bg-purple-200" },
@@ -168,7 +169,7 @@ export default function CRMDashboard() {
               { label: "Negotiation", value: 20, color: "bg-purple-800" },
               { label: "Closed", value: 15, color: "bg-emerald-500" },
             ].map((stage, i) => (
-              <div key={i} className="flex-1 flex flex-col items-center gap-4 group">
+              <div key={i} className="flex-1 flex flex-col items-center gap-3 group">
                 <div className="relative w-full flex flex-col items-center justify-end h-full">
                   <div 
                     className={`w-full ${stage.color} rounded-t-lg transition-all duration-700 ease-out group-hover:opacity-80 relative`}
@@ -186,7 +187,7 @@ export default function CRMDashboard() {
             ))}
           </div>
 
-          <div className="mt-10 grid grid-cols-3 gap-4 border-t border-slate-50 pt-6">
+          <div className="mt-10 grid grid-cols-3 gap-3 border-t border-slate-50 pt-6">
             <div className="text-center">
               <p className="text-[10px] font-bold text-slate-400 uppercase mb-1">Total Pipeline</p>
               <p className="text-xl font-black text-slate-900">$4.2M</p>
@@ -281,7 +282,7 @@ export default function CRMDashboard() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
         {/* Engagement Logs */}
         <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-6 overflow-hidden">
           <div className="flex items-center justify-between mb-6">
@@ -381,7 +382,7 @@ export default function CRMDashboard() {
       {/* Campaign Performance Summary */}
       <div className="bg-[#0f172a] rounded-xl p-8 text-white relative overflow-hidden">
         <div className="absolute top-0 right-0 w-64 h-64 bg-purple-600/20 rounded-full blur-[100px] pointer-events-none"></div>
-        <div className="relative z-10 flex flex-col md:flex-row justify-between items-center gap-8">
+        <div className="relative z-10 flex flex-col md:flex-row justify-between items-center gap-3">
            <div className="max-w-md">
               <div className="flex items-center gap-2 mb-4">
                  <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse"></div>
@@ -393,7 +394,7 @@ export default function CRMDashboard() {
                 Click below to see detailed engagement metrics and customer sentiment analysis.
               </p>
            </div>
-           <div className="flex gap-4">
+           <div className="flex gap-3">
               <div className="p-6 bg-white/5 border border-white/10 rounded-2xl backdrop-blur-sm text-center min-w-[120px]">
                  <p className="text-[10px] font-bold text-slate-400 uppercase mb-2">Open Rate</p>
                  <p className="text-3xl font-black">68.4%</p>
@@ -404,7 +405,7 @@ export default function CRMDashboard() {
               </div>
            </div>
         </div>
-        <div className="mt-10 flex items-center gap-6 relative z-10">
+        <div className="mt-10 flex items-center gap-3 relative z-10">
            <button className="px-8 py-3 bg-white text-slate-900 rounded-xl text-xs font-black uppercase tracking-widest hover:bg-slate-100 transition-all shadow-xl active:scale-95">
              Full Campaign Analytics
            </button>

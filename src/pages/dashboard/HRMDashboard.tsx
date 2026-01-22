@@ -71,13 +71,14 @@ export default function HRMDashboard() {
   ];
 
   return (
-    <div className="space-y-6 pb-10 animate-in fade-in duration-700 bg-[#f8fafc]">
+    <div className="space-y-3 pb-10 animate-in fade-in duration-700 bg-[#f8fafc]">
       
       {/* Greeting Section */}
       <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-6">
-        <h2 className="text-2xl font-black text-slate-900 flex items-center gap-2">
-          {greeting}, {userRole}! 👋
-        </h2>
+         <h3 className="text-2xl font-sm text-slate-900 pb-2  inline-block">
+          {greeting}, {userRole}! 
+
+        </h3>
         <p className="text-sm text-slate-500 font-medium mt-1">
           Here's what's happening in your organization today.
         </p>
@@ -86,7 +87,7 @@ export default function HRMDashboard() {
       {/* Today's Not Clock In */}
       <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-6">
         <h3 className="text-sm font-bold text-slate-900 mb-6 pb-2 border-b-2 border-orange-200 inline-block">Today's Not Clock In</h3>
-        <div className="flex gap-8 overflow-x-auto pb-2 scrollbar-hide">
+        <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
           {notClockedIn.map((emp, i) => (
             <div key={i} className="flex flex-col items-center gap-2 min-w-[70px]">
               <div className="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center text-2xl shadow-sm border border-slate-100">
@@ -99,7 +100,7 @@ export default function HRMDashboard() {
       </div>
 
       {/* Main Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-3">
         {stats.map((stat, i) => (
           <div key={i} className="bg-white p-5 rounded-xl border border-slate-100 shadow-sm flex flex-col justify-between">
             <div className="flex justify-between items-start mb-4">
@@ -117,7 +118,7 @@ export default function HRMDashboard() {
           </div>
         ))}
         {/* Compliance Alert */}
-        <div className="bg-white p-5 rounded-xl border-l-4 border-orange-500 border-t border-r border-b border-slate-100 shadow-sm">
+        <div className="bg-white p-5 rounded-xl  shadow-sm">
           <div className="flex items-start gap-3">
             <div className="text-orange-500 mt-1">
               <AlertCircle size={20} strokeWidth={3} />
@@ -131,12 +132,12 @@ export default function HRMDashboard() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-3">
         {/* Event Calendar Section */}
         <div className="lg:col-span-2 bg-white rounded-xl shadow-sm border border-slate-100 p-6">
           <div className="flex items-center justify-between mb-8">
             <h3 className="text-lg font-bold text-slate-900">Event</h3>
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3">
               <div className="flex gap-2">
                 <button className="p-1 hover:bg-slate-50 rounded"><ChevronLeft size={18} /></button>
                 <button className="p-1 hover:bg-slate-50 rounded"><ChevronRight size={18} /></button>
@@ -264,7 +265,7 @@ export default function HRMDashboard() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
         {/* Meeting schedule */}
         <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-6 overflow-hidden">
           <h3 className="text-sm font-bold text-slate-900 mb-6">Meeting schedule</h3>
@@ -330,16 +331,16 @@ export default function HRMDashboard() {
       {/* Detailed Analytics Section */}
       <div>
         <h3 className="text-lg font-bold text-slate-900 mb-4">Detailed Analytics</h3>
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-3">
           <div className="lg:col-span-2 space-y-6">
             {/* Purple Banner Card */}
-            <div className="bg-[#7c3aed] rounded-xl p-8 text-white flex flex-col md:flex-row justify-between items-center gap-6 relative overflow-hidden">
+            <div className="bg-[#7c3aed] rounded-xl p-8 text-white flex flex-col md:flex-row justify-between items-center gap-3 relative overflow-hidden">
                <div className="relative z-10">
                  <p className="text-[10px] font-bold opacity-80 uppercase tracking-widest mb-1">Current Date & Time</p>
                  <h2 className="text-4xl font-black mb-1 tracking-tighter">12:06 PM</h2>
                  <p className="text-sm font-medium opacity-90">Wednesday, January 21, 2026</p>
                </div>
-               <div className="flex items-center gap-6 relative z-10">
+               <div className="flex items-center gap-3 relative z-10">
                   <div className="text-center bg-white/10 px-6 py-3 rounded-xl backdrop-blur-sm">
                     <p className="text-[10px] font-black opacity-80 uppercase mb-1">Punch In</p>
                     <p className="text-lg font-bold">09:00 AM</p>
@@ -362,7 +363,7 @@ export default function HRMDashboard() {
                 <h4 className="text-sm font-bold text-slate-900">Recruitment Pipeline</h4>
                 <button className="text-[10px] font-black text-blue-600 flex items-center gap-1">View All <ArrowRight size={10} /></button>
               </div>
-              <div className="grid grid-cols-3 gap-4 mb-10">
+              <div className="grid grid-cols-3 gap-3 mb-10">
                  <div className="p-4 bg-blue-50 border border-blue-100 rounded-lg">
                     <p className="text-[10px] text-blue-600 font-bold uppercase mb-2">Screening</p>
                     <p className="text-2xl font-black text-slate-900">14</p>
@@ -418,7 +419,7 @@ export default function HRMDashboard() {
                   <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Days Left</span>
                 </div>
               </div>
-              <div className="flex gap-4 w-full mt-10">
+              <div className="flex gap-3 w-full mt-10">
                  <button className="flex-1 py-3 bg-blue-50 text-blue-600 rounded-xl text-xs font-bold hover:bg-blue-100 transition-all">Apply Leave</button>
                  <button className="flex-1 py-3 bg-slate-50 text-slate-500 rounded-xl text-xs font-bold hover:bg-slate-100 transition-all">History</button>
               </div>
@@ -433,7 +434,7 @@ export default function HRMDashboard() {
                    { icon: <Briefcase size={14}/>, color: "blue", text: "John Doe completed training", time: "1 hour ago" },
                    { icon: <Bell size={14}/>, color: "purple", text: "HR System published policy", time: "3 hours ago" },
                  ].map((note, i) => (
-                   <div key={i} className="flex gap-4 group">
+                   <div key={i} className="flex gap-3 group">
                       <div className={`w-8 h-8 rounded-lg bg-${note.color}-50 text-${note.color}-500 flex items-center justify-center shrink-0`}>
                         {note.icon}
                       </div>
@@ -450,7 +451,7 @@ export default function HRMDashboard() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-3">
         {/* Recent Employees */}
         <div className="lg:col-span-2 bg-white rounded-xl shadow-sm border border-slate-100 p-6 overflow-hidden">
           <div className="flex justify-between items-center mb-6">
@@ -518,7 +519,7 @@ export default function HRMDashboard() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-3">
         {/* Department Distribution */}
         <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-8">
           <h3 className="text-sm font-bold text-slate-900 mb-8">Department Distribution</h3>
@@ -581,7 +582,7 @@ export default function HRMDashboard() {
         {/* Learning Hub */}
         <div className="bg-[#1e1e2d] rounded-xl shadow-xl p-8 text-white relative overflow-hidden flex flex-col justify-between">
            <div className="relative z-10">
-              <div className="flex items-center gap-4 mb-8">
+              <div className="flex items-center gap-3 mb-8">
                  <div className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center text-yellow-500"><Award size={24} /></div>
                  <div>
                     <h4 className="text-lg font-black tracking-tight">Top Performer</h4>

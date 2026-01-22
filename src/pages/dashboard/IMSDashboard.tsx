@@ -66,13 +66,13 @@ export default function IMSDashboard() {
   ];
 
   return (
-    <div className="space-y-6 pb-10 animate-in fade-in duration-700 bg-[#f8fafc]">
+    <div className="space-y-3 pb-10 animate-in fade-in duration-700 bg-[#f8fafc]">
       
       {/* Greeting Section */}
       <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-6">
-        <h2 className="text-2xl font-black text-slate-900 flex items-center gap-2">
-          {greeting}, {userRole}! 👋
-        </h2>
+        <h3 className="text-2xl font-sm text-slate-900 pb-2  inline-block">
+          {greeting}, {userRole}! 
+        </h3>
         <p className="text-sm text-slate-500 font-medium mt-1">
           Here's what's happening in your inventory today.
         </p>
@@ -84,7 +84,7 @@ export default function IMSDashboard() {
           <h3 className="text-sm font-bold text-slate-900 pb-2 border-b-2 border-rose-500 inline-block">Active Warehouse Personnel</h3>
           <button className="text-[10px] font-black text-rose-600 uppercase tracking-widest hover:underline">Duty Roster</button>
         </div>
-        <div className="flex gap-8 overflow-x-auto pb-2 scrollbar-hide">
+        <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
           {warehouseStaff.map((staff, i) => (
             <div key={i} className="flex flex-col items-center gap-2 min-w-[80px]">
               <div className="w-12 h-12 rounded-full bg-rose-50 flex items-center justify-center text-2xl shadow-sm border border-slate-100 group cursor-pointer hover:border-rose-300 transition-all">
@@ -121,7 +121,7 @@ export default function IMSDashboard() {
           </div>
         ))}
         {/* Storage Capacity Alert */}
-        <div className="bg-white p-5 rounded-xl border-l-4 border-amber-500 border-t border-r border-b border-slate-100 shadow-sm">
+        <div className="bg-white p-5 rounded-xl  shadow-sm">
           <div className="flex items-start gap-3">
             <div className="text-amber-500 mt-1">
               <Archive size={20} strokeWidth={3} />
@@ -135,7 +135,7 @@ export default function IMSDashboard() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-3">
         {/* Inventory Valuation Section */}
         <div className="lg:col-span-2 bg-white rounded-xl shadow-sm border border-slate-100 p-6">
           <div className="flex items-center justify-between mb-8">
@@ -272,7 +272,7 @@ export default function IMSDashboard() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
         {/* Critical Thresholds */}
         <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-6 overflow-hidden">
           <div className="flex items-center justify-between mb-6">
@@ -360,7 +360,7 @@ export default function IMSDashboard() {
       {/* Warehouse Strategy Banner */}
       <div className="bg-[#450a0a] rounded-xl p-8 text-white relative overflow-hidden">
         <div className="absolute bottom-0 right-0 w-80 h-80 bg-rose-600/10 rounded-full blur-[100px] pointer-events-none"></div>
-        <div className="relative z-10 flex flex-col md:flex-row justify-between items-center gap-8">
+        <div className="relative z-10 flex flex-col md:flex-row justify-between items-center gap-3">
            <div className="max-w-md">
               <div className="flex items-center gap-2 mb-4">
                  <div className="w-2 h-2 bg-rose-400 rounded-full animate-pulse"></div>

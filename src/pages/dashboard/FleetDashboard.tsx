@@ -65,13 +65,13 @@ export default function FleetDashboard() {
   ];
 
   return (
-    <div className="space-y-6 pb-10 animate-in fade-in duration-700 bg-[#f8fafc]">
+    <div className="space-y-3 pb-10 animate-in fade-in duration-700 bg-[#f8fafc]">
       
       {/* Greeting Section */}
       <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-6">
-        <h2 className="text-2xl font-black text-slate-900 flex items-center gap-2">
-          {greeting}, {userRole}! 👋
-        </h2>
+        <h3 className="text-2xl font-sm text-slate-900 pb-2  inline-block">
+          {greeting}, {userRole}! 
+        </h3>
         <p className="text-sm text-slate-500 font-medium mt-1">
           Here's what's happening with your fleet today.
         </p>
@@ -105,7 +105,7 @@ export default function FleetDashboard() {
       </div>
 
       {/* Main Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-3">
         {stats.map((stat, i) => (
           <div key={i} className="bg-white p-5 rounded-xl border border-slate-100 shadow-sm flex flex-col justify-between group hover:shadow-md transition-all">
             <div className="flex justify-between items-start mb-4">
@@ -126,7 +126,7 @@ export default function FleetDashboard() {
           </div>
         ))}
         {/* Maintenance Alert */}
-        <div className="bg-white p-5 rounded-xl border-l-4 border-amber-500 border-t border-r border-b border-slate-100 shadow-sm">
+        <div className="bg-white p-5 rounded-xl   shadow-sm">
           <div className="flex items-start gap-3">
             <div className="text-amber-500 mt-1">
               <Wrench size={20} strokeWidth={3} />
@@ -140,7 +140,7 @@ export default function FleetDashboard() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-3">
         {/* Fuel Consumption Chart */}
         <div className="lg:col-span-2 bg-white rounded-xl shadow-sm border border-slate-100 p-6">
           <div className="flex items-center justify-between mb-8">
@@ -148,7 +148,7 @@ export default function FleetDashboard() {
                <h3 className="text-lg font-bold text-slate-900">Fuel Consumption Trend</h3>
                <p className="text-[11px] text-slate-400 font-bold uppercase tracking-wider">Litres consumed per day</p>
             </div>
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3">
               <div className="flex bg-slate-50 p-1 rounded-lg border border-slate-100">
                 <button className="px-3 py-1 text-[10px] font-black text-red-600 bg-white rounded shadow-sm border border-slate-200">Weekly</button>
                 <button className="px-3 py-1 text-[10px] font-bold text-slate-400">Monthly</button>
@@ -178,7 +178,7 @@ export default function FleetDashboard() {
           </div>
 
           <div className="mt-8 pt-6 border-t border-slate-50 flex items-center justify-between">
-            <div className="flex gap-6">
+            <div className="flex gap-3">
                <div className="flex items-center gap-2">
                  <div className="w-2 h-2 rounded-full bg-red-600"></div>
                  <span className="text-[10px] font-bold text-slate-500 uppercase">Heavy Duty</span>
@@ -228,7 +228,7 @@ export default function FleetDashboard() {
                 </div>
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-4 mt-6">
+            <div className="grid grid-cols-2 gap-3 mt-6">
               <div className="p-3 bg-slate-50 rounded-lg text-center">
                 <p className="text-[9px] font-bold text-slate-400 uppercase mb-1">Alerts</p>
                 <p className="text-lg font-black text-slate-900">2</p>
@@ -272,7 +272,7 @@ export default function FleetDashboard() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
         {/* Fleet Inventory Table */}
         <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-6 overflow-hidden">
           <div className="flex items-center justify-between mb-6">

@@ -146,7 +146,7 @@ export default function VehicleInspectionDashboard() {
           </div>
         ))}
         {/* Compliance Alert */}
-        <div className="bg-white p-5 rounded-xl border-l-4 border-rose-500 border-t border-r border-b border-slate-100 shadow-sm">
+        <div className="bg-white p-5 rounded-xl shadow-sm">
           <div className="flex items-start gap-3">
             <div className="text-rose-500 mt-1">
               <ShieldAlert size={20} strokeWidth={3} />

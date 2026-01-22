@@ -66,13 +66,14 @@ export default function VMSDashboard() {
   ];
 
   return (
-    <div className="space-y-6 pb-10 animate-in fade-in duration-700 bg-[#f8fafc]">
+    <div className="space-y-3 pb-10 animate-in fade-in duration-700 bg-[#f8fafc]">
       
       {/* Greeting Section */}
       <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-6">
-        <h2 className="text-2xl font-black text-slate-900 flex items-center gap-2">
-          {greeting}, {userRole}! 👋
-        </h2>
+         <h3 className="text-2xl font-sm text-slate-900 pb-2  inline-block">
+          {greeting}, {userRole}! 
+        </h3>         
+        
         <p className="text-sm text-slate-500 font-medium mt-1">
           Here's what's happening with your vendors today.
         </p>
@@ -84,7 +85,7 @@ export default function VMSDashboard() {
           <h3 className="text-sm font-bold text-slate-900 pb-2 border-b-2 border-emerald-500 inline-block">Key Vendor Partners</h3>
           <button className="text-[10px] font-black text-emerald-600 uppercase tracking-widest hover:underline">Manage Directory</button>
         </div>
-        <div className="flex gap-8 overflow-x-auto pb-2 scrollbar-hide">
+        <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
           {topVendors.map((vendor, i) => (
             <div key={i} className="flex flex-col items-center gap-2 min-w-[80px]">
               <div className="w-12 h-12 rounded-full bg-emerald-50 flex items-center justify-center text-2xl shadow-sm border border-slate-100 group cursor-pointer hover:border-emerald-300 transition-all">
@@ -100,7 +101,7 @@ export default function VMSDashboard() {
       </div>
 
       {/* Main Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-3">
         {stats.map((stat, i) => (
           <div key={i} className="bg-white p-5 rounded-xl border border-slate-100 shadow-sm flex flex-col justify-between group hover:shadow-md transition-all">
             <div className="flex justify-between items-start mb-4">
@@ -121,7 +122,7 @@ export default function VMSDashboard() {
           </div>
         ))}
         {/* Compliance Alert */}
-        <div className="bg-white p-5 rounded-xl border-l-4 border-emerald-500 border-t border-r border-b border-slate-100 shadow-sm">
+        <div className="bg-white p-5 rounded-xl shadow-sm">
           <div className="flex items-start gap-3">
             <div className="text-emerald-500 mt-1">
               <ShieldCheck size={20} strokeWidth={3} />
@@ -135,7 +136,7 @@ export default function VMSDashboard() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-3">
         {/* Procurement Analysis Section */}
         <div className="lg:col-span-2 bg-white rounded-xl shadow-sm border border-slate-100 p-6">
           <div className="flex items-center justify-between mb-8">
@@ -143,7 +144,7 @@ export default function VMSDashboard() {
                <h3 className="text-lg font-bold text-slate-900">Procurement Analysis</h3>
                <p className="text-[11px] text-slate-400 font-bold uppercase tracking-wider">Spend distribution by category</p>
             </div>
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3">
               <div className="flex bg-slate-50 p-1 rounded-lg border border-slate-100">
                 <button className="px-3 py-1 text-[10px] font-black text-emerald-600 bg-white rounded shadow-sm border border-slate-200">Category</button>
                 <button className="px-3 py-1 text-[10px] font-bold text-slate-400">Monthly</button>
@@ -154,9 +155,9 @@ export default function VMSDashboard() {
             </div>
           </div>
           
-          <div className="h-64 flex items-end justify-between gap-4 px-4">
+          <div className="h-64 flex items-end justify-between gap-3 px-4">
             {[75, 56, 92, 43, 68, 85, 32, 59, 74, 48, 62, 79, 88].map((val, i) => (
-              <div key={i} className="flex-1 flex flex-col items-center gap-4 group cursor-pointer">
+              <div key={i} className="flex-1 flex flex-col items-center gap-3 group cursor-pointer">
                 <div className="relative w-full flex items-end justify-center h-full">
                   <div 
                     className={`w-full max-w-[14px] rounded-t-lg transition-all duration-700 ease-out group-hover:max-w-[18px] ${val > 80 ? 'bg-emerald-600' : val > 50 ? 'bg-emerald-400' : 'bg-slate-200'}`}
@@ -172,7 +173,7 @@ export default function VMSDashboard() {
             ))}
           </div>
 
-          <div className="mt-10 grid grid-cols-3 gap-4 border-t border-slate-50 pt-6">
+          <div className="mt-10 grid grid-cols-3 gap-3 border-t border-slate-50 pt-6">
             <div className="text-center">
               <p className="text-[10px] font-bold text-slate-400 uppercase mb-1">Total Active Spend</p>
               <p className="text-xl font-black text-slate-900">₹84.2L</p>
@@ -267,7 +268,7 @@ export default function VMSDashboard() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
         {/* Partner Directory Table */}
         <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-6 overflow-hidden">
           <div className="flex items-center justify-between mb-6">
@@ -352,7 +353,7 @@ export default function VMSDashboard() {
       {/* VMS Strategy Banner */}
       <div className="bg-[#064e3b] rounded-xl p-8 text-white relative overflow-hidden">
         <div className="absolute top-0 right-0 w-80 h-80 bg-emerald-400/10 rounded-full blur-[100px] pointer-events-none"></div>
-        <div className="relative z-10 flex flex-col md:flex-row justify-between items-center gap-8">
+        <div className="relative z-10 flex flex-col md:flex-row justify-between items-center gap-3">
            <div className="max-w-md">
               <div className="flex items-center gap-2 mb-4">
                  <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
@@ -363,7 +364,7 @@ export default function VMSDashboard() {
                 Vendor consolidation opportunity identified in "Body Parts" category. Potential annual savings of ₹12.4L estimated.
               </p>
            </div>
-           <div className="flex gap-4">
+           <div className="flex gap-3">
               <div className="p-6 bg-white/5 border border-white/10 rounded-2xl backdrop-blur-sm text-center min-w-[140px]">
                  <p className="text-[10px] font-bold text-slate-400 uppercase mb-2">Savings Pot.</p>
                  <p className="text-3xl font-black text-emerald-400">₹12.4L</p>
