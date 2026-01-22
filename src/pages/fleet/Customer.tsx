@@ -565,7 +565,7 @@ function CustomerForm({ customer, onClose, onSave }: any) {
   );
 }
 
-/* ---------- CUSTOMER DETAILS MODAL ---------- */
+ 
 
 function CustomerDetails({ customer, onClose }: { customer: Customer, onClose: () => void }) {
   return (
