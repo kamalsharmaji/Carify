@@ -15,12 +15,10 @@ import {
   Building2,
   MapPin,
   Calendar,
-  CheckCircle2,
   Clock,
   X,
   TrendingUp,
-  ShieldCheck,
-  UserCheck
+  ShieldCheck
 } from "lucide-react";
 import toast from "react-hot-toast";
 
@@ -47,7 +45,6 @@ const STORAGE_KEY = "hrm_employees_v2";
 const ITEMS_PER_PAGE = 8;
 
 const DEPARTMENTS = ["Operations", "Human Resources", "Finance", "Fleet", "Engineering", "Marketing"];
-const ROLES = ["Manager", "Lead", "Associate", "Analyst", "Specialist", "Coordinator"];
 
 /* ================= DEFAULT DATA ================= */
 
@@ -459,25 +456,6 @@ export default function HRManagement() {
 }
 
 /* ================= HELPER COMPONENTS ================= */
-
-function StatCard({ title, value, icon, trend, color }: any) {
-  return (
-    <div className="bg-white border border-slate-200 p-6 rounded-[32px] shadow-sm hover:shadow-xl transition-all group">
-      <div className="flex items-center gap-5">
-        <div className={`w-14 h-14 rounded-2xl ${color} text-white flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform`}>
-          {icon}
-        </div>
-        <div>
-          <p className="text-slate-400 text-xs font-bold uppercase tracking-widest">{title}</p>
-          <div className="flex items-baseline gap-2">
-            <p className="text-2xl font-black text-slate-900">{value}</p>
-            <span className="text-[10px] font-bold text-slate-400">{trend}</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
 
 function StatusBadge({ status }: { status: EmployeeStatus }) {
   const styles = {

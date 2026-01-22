@@ -1,4 +1,3 @@
-import React from "react";
 import { Database, Plus, Search } from "lucide-react";
 
 export default function StockList() {

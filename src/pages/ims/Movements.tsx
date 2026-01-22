@@ -1,5 +1,4 @@
-import React from "react";
-import { ArrowRightLeft } from "lucide-react";
+ import { ArrowRightLeft } from "lucide-react";
 
 export default function StockMovements() {
   return (

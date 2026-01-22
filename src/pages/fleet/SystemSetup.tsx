@@ -6,7 +6,6 @@ import {
   X, 
   Search, 
   Settings, 
-  Navigation, 
   CreditCard, 
   Car, 
   Fuel, 

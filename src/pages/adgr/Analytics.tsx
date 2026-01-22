@@ -1,4 +1,3 @@
-import React from "react";
 import { BarChart3, PieChart, Zap } from "lucide-react";
 
 export default function ADGRAnalytics() {

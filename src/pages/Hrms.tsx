@@ -12,9 +12,7 @@ import {
   PieChart,
   Target,
   CreditCard,
-  UserCheck,
-  ArrowUpRight,
-  ArrowDownRight
+  UserCheck
 } from "lucide-react";
 
 /* ================= TYPES ================= */
@@ -136,7 +134,7 @@ export default function HRMS() {
                 {upcomingEvents.map(event => (
                   <div key={event.id} className="flex items-center gap-4 p-3 bg-slate-50 rounded-lg border border-slate-100 group hover:border-brand/20 transition-colors">
                     <div className="h-8 w-8 bg-white rounded-md flex items-center justify-center shadow-sm">
-                      {React.cloneElement(event.icon as React.ReactElement, { size: 16 })}
+                      {React.cloneElement(event.icon as React.ReactElement<any>, { size: 16 })}
                     </div>
                     <div className="flex-1">
                       <p className="text-xs font-bold text-slate-900">{event.name}</p>
@@ -181,6 +179,41 @@ export default function HRMS() {
 }
 
 /* ================= HELPER COMPONENTS ================= */
+
+function StatCard({ title, value, icon, trend, color }: StatCardProps) {
+  const colorMap = {
+    blue: "bg-blue-50 text-blue-600 border-blue-100",
+    emerald: "bg-emerald-50 text-emerald-600 border-emerald-100",
+    amber: "bg-amber-50 text-amber-600 border-amber-100",
+    slate: "bg-slate-50 text-slate-600 border-slate-100"
+  };
+
+  const iconBgMap = {
+    blue: "bg-blue-600",
+    emerald: "bg-emerald-600",
+    amber: "bg-amber-600",
+    slate: "bg-slate-600"
+  };
+
+  return (
+    <div className="bg-white rounded-xl p-6 border border-slate-100 shadow-sm hover:shadow-md transition-all group overflow-hidden relative">
+      <div className={`absolute top-0 right-0 w-16 h-16 ${iconBgMap[color]} opacity-[0.03] rounded-bl-full -mr-4 -mt-4 transition-all group-hover:scale-150`}></div>
+      <div className="flex items-center justify-between mb-4 relative z-10">
+        <div className={`w-10 h-10 rounded-lg flex items-center justify-center transition-transform group-hover:scale-110 duration-300 ${colorMap[color]}`}>
+          {icon}
+        </div>
+        <div className="flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 bg-emerald-50 text-emerald-600 rounded-md">
+          <TrendingUp size={12} />
+          {trend}
+        </div>
+      </div>
+      <div className="relative z-10">
+        <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">{title}</p>
+        <h3 className="text-2xl font-black text-slate-900 tracking-tight">{value}</h3>
+      </div>
+    </div>
+  );
+}
 
 function ModuleCard({ title, icon, link }: { title: string, icon: ReactNode, link: string }) {
   return (

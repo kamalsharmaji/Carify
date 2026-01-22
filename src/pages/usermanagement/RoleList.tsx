@@ -5,7 +5,6 @@ import {
   Trash2,
   Search,
   Shield,
-  Lock,
   X,
   CheckCircle2,
   ChevronLeft,

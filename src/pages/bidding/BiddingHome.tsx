@@ -1,17 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { 
   Gavel, 
-  ChevronRight, 
-  Timer, 
   Heart, 
-  Eye, 
-  TrendingUp,
-  ShieldCheck,
-  CheckCircle2,
-  Users,
-  Play,
-  ArrowRight,
-  Filter,
+  Users, 
+  Play, 
+  ArrowRight, 
   Zap,
   Star
 } from 'lucide-react';

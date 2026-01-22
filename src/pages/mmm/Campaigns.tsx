@@ -1,4 +1,4 @@
-import React from "react";
+ 
 import { Megaphone, TrendingUp, Plus, Search } from "lucide-react";
 
 export default function Campaigns() {

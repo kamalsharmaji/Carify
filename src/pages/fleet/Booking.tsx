@@ -11,8 +11,7 @@ import {
   Car,
   ChevronLeft,
   ChevronRight,
-  Clock,
-  AlertCircle,
+   
   X,
   MapPin,
   Tag,
@@ -20,7 +19,7 @@ import {
   CheckCircle2,
   Clock4,
   XCircle,
-  MoreHorizontal
+   
 } from "lucide-react";
 import toast from "react-hot-toast";
 

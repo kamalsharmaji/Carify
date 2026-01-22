@@ -20,6 +20,14 @@ import toast from "react-hot-toast";
 
 /* ================= TYPES ================= */
 
+interface StatCardProps {
+  title: string;
+  value: string;
+  icon: ReactNode;
+  trend: string;
+  color: "emerald" | "amber" | "blue" | "indigo";
+}
+
 type OrderStatus = "Pending" | "Processing" | "Shipped" | "Delivered" | "Cancelled";
 
 interface Order {
@@ -202,10 +210,10 @@ export default function Ecom() {
 
         {/* Stats Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          <StatCard label="Total Revenue" value={`₹${(totalRevenue / 1000).toFixed(1)}K`} icon={<DollarSign size={24} />} trend="+15.2%" color="emerald" />
-          <StatCard label="Pending Orders" value={pendingOrders.toString()} icon={<Clock size={24} />} trend="Action Required" color="amber" />
-          <StatCard label="Total Sales" value={orders.length.toString()} icon={<TrendingUp size={24} />} trend="+8 this week" color="blue" />
-          <StatCard label="Active Customers" value={totalCustomers.toString()} icon={<Users size={24} />} trend="Highly Engaged" color="indigo" />
+          <StatCard title="Total Revenue" value={`₹${(totalRevenue / 1000).toFixed(1)}K`} icon={<DollarSign size={24} />} trend="+15.2%" color="emerald" />
+          <StatCard title="Pending Orders" value={pendingOrders.toString()} icon={<Clock size={24} />} trend="Action Required" color="amber" />
+          <StatCard title="Total Sales" value={orders.length.toString()} icon={<TrendingUp size={24} />} trend="+8 this week" color="blue" />
+          <StatCard title="Active Customers" value={totalCustomers.toString()} icon={<Users size={24} />} trend="Highly Engaged" color="indigo" />
         </div>
 
         {/* Tab Switcher */}

@@ -1,4 +1,3 @@
-import React from 'react';
 import { Briefcase, MapPin, Clock, ArrowUpRight } from 'lucide-react';
 
 const Careers = () => {

@@ -1,22 +1,14 @@
-import React, { useState } from 'react';
-import { 
+ import { 
   Gavel, 
   TrendingUp, 
-  Clock, 
-  Users, 
-  ChevronRight, 
   ArrowUpRight,
   Zap,
   BarChart3,
-  Calendar,
   Wallet,
-  Settings,
   Bell
 } from 'lucide-react';
 
 const BiddingDashboard = () => {
-  const [activeLot, setActiveLot] = useState(1);
-
   const stats = [
     { label: 'Active Bids', value: '12', sub: '+2 today', icon: <Gavel />, color: 'text-blue-600', bg: 'bg-blue-50' },
     { label: 'Winning Lots', value: '04', sub: '₹2.4M value', icon: <TrendingUp />, color: 'text-green-600', bg: 'bg-green-50' },

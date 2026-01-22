@@ -1,4 +1,3 @@
-import React from 'react';
 import { Check, Shield, Zap, Star } from 'lucide-react';
 
 const Membership = () => {

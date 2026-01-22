@@ -1,4 +1,3 @@
-import React from "react";
 import { LayoutDashboard, FileText, Archive, BarChart3 } from "lucide-react";
 
 export default function ADGRDashboard() {

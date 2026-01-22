@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import {
   FileText,
   Plus,
@@ -84,7 +85,7 @@ export default function ADGR() {
 
   const handleDelete = (id: number) => {
     if (window.confirm("Permanent delete this report from archives?")) {
-      setReports(prev => prev.filter(r => r.id !== id));
+      setReports((prev: Report[]) => prev.filter((r: Report) => r.id !== id));
       toast.success("Report deleted successfully");
     }
   };
@@ -97,12 +98,12 @@ export default function ADGR() {
       status: "In Progress" as ReportStatus,
       size: "---"
     };
-    setReports(prev => [newReport, ...prev]);
+    setReports((prev: Report[]) => [newReport, ...prev]);
     toast.success("Report generation initiated");
     setShowForm(false);
 
     setTimeout(() => {
-      setReports(prev => prev.map(r => r.id === newReport.id ? { ...r, status: "Completed" as ReportStatus, size: "1.2 MB" } : r));
+      setReports((prev: Report[]) => prev.map((r: Report) => r.id === newReport.id ? { ...r, status: "Completed" as ReportStatus, size: "1.2 MB" } : r));
       toast.success(`'${newReport.name}' is now ready`, { icon: '📊' });
     }, 3000);
   };
@@ -110,7 +111,7 @@ export default function ADGR() {
   /* ---------- FILTER & PAGINATION ---------- */
 
   const filtered = reports.filter(
-    (r) =>
+    (r: Report) =>
       r.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       r.generatedBy.toLowerCase().includes(searchTerm.toLowerCase()) ||
       r.category.toLowerCase().includes(searchTerm.toLowerCase())

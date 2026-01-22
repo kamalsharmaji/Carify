@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ArrowRight, User, FileText, MapPin, Phone } from 'lucide-react';
 
@@ -8,11 +7,11 @@ const Register = () => {
   return (
     <div className="bg-[#F8F9FE] min-h-screen flex items-center justify-center p-8">
       <div className="w-full max-w-2xl bg-white p-16 rounded-[60px] shadow-2xl shadow-purple-100 border border-slate-50 space-y-12 animate-in fade-in zoom-in duration-1000">
-        <div className="text-center space-y-4">
+      
             <img src="/images/carifypdi_logo1.jpeg.png" className="h-12 mx-auto object-contain" alt="Logo" />
             <h2 className="text-4xl font-black text-slate-900">Become a Dealer</h2>
             <p className="text-slate-500 font-medium">Create your account to start bidding on premium vehicles</p>
-        </div>
+       
 
         <form className="space-y-8" onSubmit={(e) => { e.preventDefault(); navigate('/bidding/dashboard'); }}>
             <div className="grid md:grid-cols-2 gap-8">

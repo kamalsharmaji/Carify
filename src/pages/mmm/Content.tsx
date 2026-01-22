@@ -1,4 +1,4 @@
-import React from "react";
+ 
 import { FileText, Image, Video, Search, Plus } from "lucide-react";
 
 export default function Content() {

@@ -1,4 +1,3 @@
-import React from "react";
 import { ShoppingCart, Plus } from "lucide-react";
 
 export default function PurchaseOrders() {

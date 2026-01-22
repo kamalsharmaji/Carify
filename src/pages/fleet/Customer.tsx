@@ -7,7 +7,6 @@ import {
   LayoutGrid,
   Table as TableIcon,
   Search,
-  User,
   Mail,
   Phone,
   MapPin,
