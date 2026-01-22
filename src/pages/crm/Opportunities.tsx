@@ -1,4 +1,4 @@
-import React from "react";
+ 
 import { Briefcase, TrendingUp, DollarSign, Search } from "lucide-react";
 
 export default function Opportunities() {

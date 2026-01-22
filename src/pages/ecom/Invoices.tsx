@@ -1,4 +1,4 @@
-import React from "react";
+ 
 import { FileText, Search } from "lucide-react";
 
 export default function Invoices() {

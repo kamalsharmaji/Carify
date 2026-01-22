@@ -1,4 +1,4 @@
-import React from "react";
+ 
 import { Calendar, Clock, CheckCircle2, Search } from "lucide-react";
 
 export default function Activities() {

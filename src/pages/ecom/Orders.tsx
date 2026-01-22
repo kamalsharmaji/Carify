@@ -1,4 +1,4 @@
-import React from "react";
+ 
 import { ShoppingBag, Truck } from "lucide-react";
 
 export default function Orders() {

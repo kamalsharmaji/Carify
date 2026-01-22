@@ -1,4 +1,4 @@
-import React from "react";
+ 
 import { FileText, Plus, ShieldCheck } from "lucide-react";
 
 export default function VendorContracts() {

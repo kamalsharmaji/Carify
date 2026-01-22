@@ -1,4 +1,4 @@
-import React from "react";
+ 
 import { DollarSign, Clock } from "lucide-react";
 
 export default function VendorPayments() {

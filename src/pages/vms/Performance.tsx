@@ -1,4 +1,4 @@
-import React from "react";
+ 
 import { Star, BarChart } from "lucide-react";
 
 export default function VendorPerformance() {

@@ -1,4 +1,4 @@
-import React from "react";
+ 
 import { Users, Plus } from "lucide-react";
 
 export default function VendorDirectory() {

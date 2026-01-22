@@ -1,5 +1,4 @@
-import React from "react";
-import { Package, Plus } from "lucide-react";
+ import { Package, Plus } from "lucide-react";
 
 export default function Products() {
   return (

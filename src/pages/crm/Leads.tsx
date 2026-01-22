@@ -1,4 +1,4 @@
-import React from "react";
+ 
 import { Users, TrendingUp, UserPlus, Search } from "lucide-react";
 
 export default function Leads() {

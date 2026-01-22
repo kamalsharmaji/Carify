@@ -1,4 +1,4 @@
-import React from "react";
+ 
 import { Users, Building2, UserPlus, Search } from "lucide-react";
 
 export default function Customers() {

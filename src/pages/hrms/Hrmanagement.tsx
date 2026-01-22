@@ -18,7 +18,8 @@ import {
   Clock,
   X,
   TrendingUp,
-  ShieldCheck
+  ShieldCheck,
+  UserCheck
 } from "lucide-react";
 import toast from "react-hot-toast";
 
