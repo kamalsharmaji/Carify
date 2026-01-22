@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from "react";
 import {
   FileText,
   Plus,
@@ -9,16 +8,15 @@ import {
   ChevronRight,
   Trash2,
   Download,
-  Calendar,
-  Clock,
+  
   CheckCircle2,
   BarChart3,
   PieChart,
   Activity,
   X,
-  Settings,
+   
   Shield,
-  FileSearch,
+ 
   Zap
 } from "lucide-react";
 import toast from "react-hot-toast";

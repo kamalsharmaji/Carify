@@ -12,6 +12,7 @@ import {
   Clock,
   ChevronRight,
   MoreHorizontal,
+  X,
 } from "lucide-react";
 
 /* ================= TYPES ================= */

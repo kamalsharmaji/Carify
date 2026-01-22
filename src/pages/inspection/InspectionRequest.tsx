@@ -122,58 +122,72 @@ export default function InspectionRequest() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 animate-in fade-in duration-500 p-4 md:p-8">
-      <div className="max-w-[1600px] mx-auto space-y-10">
+    <div className="min-h-screen bg-[#F1F5F9] animate-in fade-in duration-500 p-6 md:p-12">
+      <div className="max-w-[1600px] mx-auto space-y-12">
         
-        {/* Header Section */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-8">
-          <div>
-            <h1 className="text-4xl font-black text-slate-900 tracking-tight">
-              Inspection <span style={{ color: "#dc2626" }}>Requests</span>
-            </h1>
-            <p className="text-slate-500 mt-2 font-medium flex items-center gap-2 text-sm">
-              <ShieldCheck size={16} className="text-slate-400" />
-              Vehicle Inspection › Request Processing Pipeline
-            </p>
+        {/* Cinematic Header */}
+        <div className="bg-white/60 backdrop-blur-2xl p-10 md:p-14 rounded-[40px] border border-white/50 shadow-2xl shadow-slate-200/50 flex flex-col lg:flex-row lg:items-center justify-between gap-12 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-brand/5 rounded-full blur-3xl -mr-48 -mt-48"></div>
+          
+          <div className="flex flex-col md:flex-row items-start md:items-center gap-10 relative z-10">
+            <div className="bg-slate-900 p-8 rounded-[32px] shadow-2xl rotate-3 hover:rotate-0 transition-all duration-500 group">
+              <ShieldCheck className="text-white w-12 h-12 group-hover:scale-110 transition-transform" />
+            </div>
+            <div>
+              <div className="flex items-center gap-4 mb-3">
+                <span className="bg-brand/10 text-brand text-[10px] font-black uppercase tracking-[0.3em] px-4 py-1.5 rounded-full">
+                  Inspection Engine
+                </span>
+                <span className="w-2 h-2 rounded-full bg-slate-300"></span>
+                <span className="text-slate-400 text-[10px] font-black uppercase tracking-[0.3em]">
+                  v2.0 Core
+                </span>
+              </div>
+              <h1 className="text-5xl md:text-6xl font-black text-slate-900 tracking-tight leading-none">
+                Inspection <span className="text-brand" style={{ color: "#dc2626" }}>Requests</span>
+              </h1>
+              <p className="text-slate-500 mt-6 font-bold flex items-center gap-3 text-sm uppercase tracking-widest opacity-70">
+                <div className="w-8 h-[2px] bg-slate-200"></div>
+                Request Processing Pipeline
+              </p>
+            </div>
           </div>
 
-          <div className="flex flex-wrap items-center gap-4">
+          <div className="flex flex-wrap items-center gap-6 relative z-10">
             <div className="relative group">
               <Search
-                className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-brand transition-colors"
-                size={18}
+                className="absolute left-6 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-brand transition-colors"
+                size={20}
               />
               <input
                 type="text"
                 placeholder="Search queue..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-12 pr-4 py-3.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-4 focus:ring-brand/10 focus:border-brand transition-all w-full md:w-64 shadow-sm font-medium"
+                className="pl-16 pr-8 py-6 bg-slate-50/50 border-none rounded-[24px] text-sm focus:outline-none focus:ring-4 focus:ring-brand/10 transition-all w-full md:w-80 font-bold shadow-inner"
               />
             </div>
 
-            <div className="flex border border-slate-200 rounded-xl bg-white p-1.5 shadow-sm">
+            <div className="flex bg-slate-100/50 p-2 rounded-[24px] backdrop-blur-md">
               <button
                 onClick={() => setView("table")}
-                className={`p-2.5 rounded-xl transition-all ${
+                className={`p-4 rounded-[18px] transition-all ${
                   view === "table"
-                    ? "bg-brand text-white shadow-lg shadow-brand/20"
-                    : "text-slate-400 hover:bg-slate-50"
+                    ? "bg-white text-slate-900 shadow-xl"
+                    : "text-slate-400 hover:text-slate-600"
                 }`}
-                style={{ backgroundColor: view === "table" ? "#dc2626" : undefined }}
               >
-                <TableIcon size={20} />
+                <TableIcon size={22} />
               </button>
               <button
                 onClick={() => setView("card")}
-                className={`p-2.5 rounded-xl transition-all ${
+                className={`p-4 rounded-[18px] transition-all ${
                   view === "card"
-                    ? "bg-brand text-white shadow-lg shadow-brand/20"
-                    : "text-slate-400 hover:bg-slate-50"
+                    ? "bg-white text-slate-900 shadow-xl"
+                    : "text-slate-400 hover:text-slate-600"
                 }`}
-                style={{ backgroundColor: view === "card" ? "#dc2626" : undefined }}
               >
-                <LayoutGrid size={20} />
+                <LayoutGrid size={22} />
               </button>
             </div>
 
@@ -182,33 +196,34 @@ export default function InspectionRequest() {
                 setEditRequest(null);
                 setShowForm(true);
               }}
-              className="flex items-center gap-2 text-white px-8 py-3.5 rounded-xl text-sm font-black transition-all shadow-xl active:scale-95 whitespace-nowrap"
-              style={{ backgroundColor: "#dc2626", boxShadow: `0 10px 25px -5px #dc262640` }}
+              className="group flex items-center gap-4 text-white px-10 py-6 rounded-[28px] text-sm font-black transition-all hover:scale-[1.02] active:scale-95 shadow-2xl shadow-brand/30 relative overflow-hidden"
+              style={{ backgroundColor: "#dc2626" }}
             >
-              <Plus size={18} strokeWidth={3} />
-              <span className="hidden sm:inline">Initialize Request</span>
+              <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+              <Plus size={20} strokeWidth={3} />
+              <span className="uppercase tracking-widest">Initialize Request</span>
             </button>
           </div>
         </div>
 
         {/* List View */}
         {view === "table" ? (
-          <div className="bg-white border border-slate-100 rounded-xl shadow-sm overflow-hidden transition-all hover:shadow-md">
-            <div className="overflow-x-auto custom-scrollbar">
-              <table className="w-full text-left">
-                <thead className="bg-slate-50/50">
-                  <tr>
+          <div className="bg-white/80 backdrop-blur-xl rounded-[40px] border border-white shadow-2xl shadow-slate-200/50 overflow-hidden transition-all">
+            <div className="overflow-x-auto">
+              <table className="w-full text-left border-collapse">
+                <thead>
+                  <tr className="border-b border-slate-50">
                     {[
-                      "REQUEST ID",
-                      "INSPECTOR ENTITY",
-                      "VEHICLE",
-                      "ASSIGNED TO",
-                      "STATUS",
-                      "ACTIONS",
+                      "Request ID",
+                      "Inspector Entity",
+                      "Vehicle",
+                      "Assigned To",
+                      "Status",
+                      "Actions",
                     ].map((h) => (
                       <th
                         key={h}
-                        className="px-10 py-6 text-[11px] font-black text-slate-400 uppercase tracking-[0.2em]"
+                        className="px-12 py-10 text-[11px] font-black text-slate-400 uppercase tracking-[0.2em]"
                       >
                         {h}
                       </th>
@@ -219,53 +234,55 @@ export default function InspectionRequest() {
                   {filteredRequests.map((r) => (
                     <tr
                       key={r.id}
-                      className="hover:bg-slate-50/50 transition-colors group"
+                      className="hover:bg-slate-50/30 transition-all group"
                     >
-                      <td className="px-10 py-6">
+                      <td className="px-12 py-10">
                         <span 
-                          className="font-black px-3 py-1 rounded-lg text-xs tracking-wider border"
+                          className="font-black px-5 py-2 rounded-2xl text-[10px] tracking-[0.1em] border uppercase"
                           style={{ color: "#dc2626", backgroundColor: `#dc262610`, borderColor: `#dc262620` }}
                         >
                           {r.requestId}
                         </span>
                       </td>
-                      <td className="px-10 py-6">
-                        <div className="flex items-center gap-4">
+                      <td className="px-12 py-10">
+                        <div className="flex items-center gap-6">
                           <div 
-                            className="h-10 w-10 rounded-xl flex items-center justify-center font-black text-xs border bg-slate-100 text-slate-500 group-hover:scale-110 transition-transform shadow-sm"
+                            className="h-16 w-16 rounded-[22px] bg-slate-900 flex items-center justify-center font-black text-white text-lg shadow-xl group-hover:rotate-6 transition-all duration-500"
                           >
                             {r.inspectorName.charAt(0)}
                           </div>
                           <div>
-                            <span className="font-black text-slate-900 text-base tracking-tight block">{r.inspectorName}</span>
-                            <span className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">{r.createdAt}</span>
+                            <span className="font-black text-slate-900 text-xl tracking-tight block mb-1">{r.inspectorName}</span>
+                            <span className="text-[10px] text-slate-400 font-black uppercase tracking-[0.2em]">{r.createdAt}</span>
                           </div>
                         </div>
                       </td>
-                      <td className="px-10 py-6">
-                        <div className="flex items-center gap-3">
-                          <ClipboardList size={18} className="text-slate-300" />
+                      <td className="px-12 py-10">
+                        <div className="flex items-center gap-4">
+                          <div className="p-3 bg-slate-50 rounded-xl">
+                            <ClipboardList size={20} className="text-slate-400" />
+                          </div>
                           <span className="text-sm text-slate-600 font-bold max-w-[200px] truncate">{r.vehicle}</span>
                         </div>
                       </td>
-                      <td className="px-10 py-6">
-                        <div className="flex items-center gap-2">
+                      <td className="px-12 py-10">
+                        <div className="flex items-center gap-3 bg-slate-50 w-fit px-5 py-2.5 rounded-2xl border border-slate-100">
                           <User size={14} className="text-slate-400" />
-                          <span className="text-sm font-black text-slate-700 uppercase tracking-tight italic">{r.assignStaff || "UNASSIGNED"}</span>
+                          <span className="text-[10px] font-black text-slate-700 uppercase tracking-widest">{r.assignStaff || "UNASSIGNED"}</span>
                         </div>
                       </td>
-                      <td className="px-10 py-6">
-                        <span className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest border ${getStatusBadge(r.status)}`}>
-                          {r.status === "Completed" ? <CheckCircle2 size={12} /> : r.status === "In Progress" ? <Clock size={12} /> : <AlertCircle size={12} />}
+                      <td className="px-12 py-10">
+                        <span className={`inline-flex items-center gap-3 px-6 py-2.5 rounded-[18px] text-[10px] font-black uppercase tracking-[0.15em] border ${getStatusBadge(r.status)}`}>
+                          <div className={`w-2 h-2 rounded-full ${r.status === "Completed" ? "bg-emerald-500" : r.status === "In Progress" ? "bg-amber-500" : "bg-rose-500"}`}></div>
                           {r.status}
                         </span>
                       </td>
-                      <td className="px-10 py-6">
-                        <div className="flex gap-2">
+                      <td className="px-12 py-10 text-right">
+                        <div className="flex gap-4">
                           <ActionBtn
                             color="blue"
                             onClick={() => setViewRequest(r)}
-                            icon={<Eye size={18} />}
+                            icon={<Eye size={20} />}
                           />
                           <ActionBtn
                             color="orange"
@@ -273,12 +290,12 @@ export default function InspectionRequest() {
                               setEditRequest(r);
                               setShowForm(true);
                             }}
-                            icon={<Pencil size={18} />}
+                            icon={<Pencil size={20} />}
                           />
                           <ActionBtn 
                             color="red" 
                             onClick={() => remove(r.id)} 
-                            icon={<Trash2 size={18} />}
+                            icon={<Trash2 size={20} />}
                           />
                         </div>
                       </td>
@@ -289,53 +306,55 @@ export default function InspectionRequest() {
             </div>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
             {filteredRequests.map((r) => (
               <div
                 key={r.id}
-                className="bg-white border border-slate-100 rounded-xl p-8 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 group relative overflow-hidden"
+                className="bg-white rounded-[40px] p-12 shadow-2xl shadow-slate-200/50 hover:shadow-brand/20 hover:-translate-y-3 transition-all duration-500 group relative overflow-hidden border border-white"
               >
                 <div 
-                  className="absolute top-0 right-0 w-24 h-24 rounded-bl-[80px] -mr-8 -mt-8 opacity-5 transition-all group-hover:scale-110"
-                  style={{ backgroundColor: "#dc2626" }}
+                  className="absolute -right-20 -top-20 w-64 h-64 bg-slate-50 rounded-full transition-all group-hover:scale-110"
                 ></div>
                 
-                <div className="flex justify-between items-start mb-8 relative z-10">
+                <div className="flex justify-between items-start mb-12 relative z-10">
                   <span 
-                    className="font-black px-3 py-1 rounded-lg text-[10px] tracking-wider border"
+                    className="font-black px-5 py-2 rounded-2xl text-[10px] tracking-widest border uppercase"
                     style={{ color: "#dc2626", backgroundColor: `#dc262610`, borderColor: `#dc262620` }}
                   >
                     {r.requestId}
                   </span>
-                  <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest border ${getStatusBadge(r.status)}`}>
+                  <span className={`inline-flex items-center gap-2 px-5 py-2 rounded-2xl text-[9px] font-black uppercase tracking-widest border ${getStatusBadge(r.status)}`}>
                     {r.status}
                   </span>
                 </div>
 
-                <div className="space-y-4 mb-8 relative z-10">
+                <div className="space-y-8 mb-12 relative z-10">
                   <div>
-                    <h3 className="font-black text-slate-900 group-hover:text-brand transition-colors line-clamp-2 text-lg tracking-tight leading-tight" style={{ '--tw-group-hover-text': "#dc2626" } as any}>
+                    <h3 className="font-black text-slate-900 group-hover:text-brand transition-colors text-2xl tracking-tight leading-tight mb-3">
                       {r.vehicle}
                     </h3>
-                    <p className="text-[10px] text-slate-400 font-black uppercase tracking-[0.2em] mt-2">{r.createdAt}</p>
+                    <div className="flex items-center gap-3">
+                      <div className="w-6 h-[2px] bg-brand/30"></div>
+                      <p className="text-[10px] text-slate-400 font-black uppercase tracking-[0.2em]">{r.createdAt}</p>
+                    </div>
                   </div>
 
-                  <div className="grid grid-cols-1 gap-3 pt-6 border-t border-slate-50">
+                  <div className="grid grid-cols-1 gap-6 pt-8 border-t border-slate-50">
                     <div className="flex items-center justify-between">
-                      <p className="text-[10px] font-black text-slate-300 uppercase tracking-widest">Inspector</p>
-                      <p className="text-xs font-bold text-slate-600">{r.inspectorName}</p>
+                      <p className="text-[10px] font-black text-slate-300 uppercase tracking-[0.2em]">Inspector</p>
+                      <p className="text-sm font-black text-slate-900">{r.inspectorName}</p>
                     </div>
                     <div className="flex items-center justify-between">
-                      <p className="text-[10px] font-black text-slate-300 uppercase tracking-widest">Assignee</p>
-                      <p className="text-xs font-black text-brand tracking-tight italic" style={{ color: "#dc2626" }}>{r.assignStaff || "None"}</p>
+                      <p className="text-[10px] font-black text-slate-300 uppercase tracking-[0.2em]">Assignee</p>
+                      <p className="text-sm font-black text-brand tracking-tight italic" style={{ color: "#dc2626" }}>{r.assignStaff || "UNASSIGNED"}</p>
                     </div>
                   </div>
                 </div>
 
-                <div className="flex gap-2 relative z-10">
+                <div className="flex gap-4 relative z-10">
                   <button
                     onClick={() => setViewRequest(r)}
-                    className="flex-1 py-4 rounded-2xl bg-slate-900 text-white text-[10px] font-black uppercase tracking-widest hover:opacity-90 transition-all active:scale-95 shadow-xl shadow-slate-200"
+                    className="flex-[2] py-5 rounded-[24px] bg-slate-900 text-white text-[10px] font-black uppercase tracking-[0.2em] hover:bg-slate-800 transition-all active:scale-95 shadow-xl shadow-slate-200"
                   >
                     Details
                   </button>
@@ -344,16 +363,15 @@ export default function InspectionRequest() {
                       setEditRequest(r);
                       setShowForm(true);
                     }}
-                    className="p-4 rounded-2xl bg-brand/10 text-brand hover:bg-brand hover:text-white transition-all border border-brand/10"
-                    style={{ '--tw-hover-bg': "#dc2626" } as any}
+                    className="flex-1 flex items-center justify-center rounded-[24px] bg-slate-50 text-slate-400 hover:text-brand hover:bg-brand/5 transition-all border border-slate-100 hover:border-brand/20"
                   >
-                    <Pencil size={18} />
+                    <Pencil size={20} />
                   </button>
                   <button
                     onClick={() => remove(r.id)}
-                    className="p-4 rounded-2xl bg-slate-50 text-slate-300 hover:text-rose-500 hover:bg-rose-50 transition-all border border-transparent hover:border-rose-100"
+                    className="flex-1 flex items-center justify-center rounded-[24px] bg-slate-50 text-slate-400 hover:text-rose-500 hover:bg-rose-50 transition-all border border-slate-100 hover:border-rose-200"
                   >
-                    <Trash2 size={18} />
+                    <Trash2 size={20} />
                   </button>
                 </div>
               </div>
@@ -365,34 +383,33 @@ export default function InspectionRequest() {
       {/* Details Modal */}
       {viewRequest && (
         <Modal onClose={() => setViewRequest(null)} title="Request Specification">
-          <div className="space-y-8">
-            <div className="p-8 bg-slate-50 rounded-xl border border-slate-100 flex items-center justify-between relative overflow-hidden group">
+          <div className="space-y-10">
+            <div className="p-10 bg-slate-900 rounded-[32px] flex items-center justify-between relative overflow-hidden group">
               <div 
-                className="absolute top-0 right-0 w-40 h-40 rounded-bl-[100px] -mr-8 -mt-8 opacity-10 transition-all group-hover:scale-110"
-                style={{ backgroundColor: "#dc2626" }}
+                className="absolute top-0 right-0 w-64 h-64 bg-brand/10 rounded-full blur-3xl -mr-32 -mt-32 transition-all group-hover:scale-110"
               ></div>
               
-              <div className="flex items-center gap-6 relative z-10">
+              <div className="flex items-center gap-8 relative z-10">
                 <div 
-                  className="h-16 w-16 rounded-xl flex items-center justify-center font-black text-lg border bg-white shadow-xl"
-                  style={{ color: "#dc2626", borderColor: `#dc262620` }}
+                  className="h-20 w-20 rounded-[24px] bg-white flex items-center justify-center text-brand shadow-2xl rotate-3"
+                  style={{ color: "#dc2626" }}
                 >
-                  <ShieldCheck size={32} />
+                  <ShieldCheck size={40} />
                 </div>
                 <div>
-                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-1">Workflow Status</p>
-                  <span className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest border ${getStatusBadge(viewRequest.status)}`}>
+                  <p className="text-[10px] font-black text-white/40 uppercase tracking-[0.3em] mb-2">Workflow Status</p>
+                  <span className={`inline-flex items-center gap-3 px-6 py-2.5 rounded-2xl text-[10px] font-black uppercase tracking-[0.2em] border relative z-10 bg-white/10 text-white border-white/20 backdrop-blur-md`}>
                     {viewRequest.status}
                   </span>
                 </div>
               </div>
               <div className="text-right relative z-10">
-                <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-1">Creation Node</p>
-                <p className="text-sm font-black text-slate-900">{viewRequest.createdAt}</p>
+                <p className="text-[10px] font-black text-white/40 uppercase tracking-[0.3em] mb-2">Creation Node</p>
+                <p className="text-xl font-black text-white">{viewRequest.createdAt}</p>
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <DetailBox label="Registry ID" value={viewRequest.requestId} brandColor={"#dc2626"} />
               <DetailBox label="Source Inspector" value={viewRequest.inspectorName} />
               <DetailBox label="Asset Entity" value={viewRequest.vehicle} colSpan={2} />

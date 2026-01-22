@@ -153,23 +153,23 @@ export default function Ecom() {
 
   return (
     <div 
-      className="min-h-screen bg-[#f8fafc] p-4 sm:p-6 lg:p-6 animate-in fade-in duration-700"
+      className="min-h-screen bg-[#F1F5F9] p-4 md:p-6 lg:p-10 animate-in fade-in duration-700"
     >
-      <div className="max-w-[1600px] mx-auto space-y-6">
+      <div className="max-w-[1600px] mx-auto space-y-10">
         
         {/* Header Section */}
-        <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-6">
-          <div className="relative flex flex-col lg:flex-row lg:items-center justify-between gap-6">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-emerald-600 rounded-xl flex items-center justify-center shadow-lg">
-                <ShoppingCart className="text-white w-6 h-6" />
+        <div className="relative overflow-hidden bg-white/70 backdrop-blur-2xl border border-white/50 rounded-[40px] p-8 md:p-10 shadow-2xl shadow-slate-200/50">
+          <div className="relative flex flex-col lg:flex-row lg:items-center justify-between gap-8">
+            <div className="flex items-center gap-6">
+              <div className="w-20 h-20 bg-emerald-600 rounded-[30px] flex items-center justify-center shadow-2xl shadow-emerald-900/20 rotate-3 hover:rotate-0 transition-transform duration-500">
+                <ShoppingCart className="text-white w-10 h-10" />
               </div>
               <div>
-                <h1 className="text-2xl font-black text-slate-900 tracking-tight">
+                <h1 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight">
                   Commerce <span className="text-emerald-500">Hub</span>
                 </h1>
-                <p className="text-sm text-slate-500 font-medium">
-                  Unified Storefront & Order Orchestration
+                <p className="text-slate-500 mt-2 font-semibold text-lg">
+                  ECOM › Unified Storefront & Order Orchestration
                 </p>
               </div>
             </div>
@@ -178,22 +178,22 @@ export default function Ecom() {
               <div className="relative group">
                 <Search
                   className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-emerald-600 transition-colors"
-                  size={18}
+                  size={20}
                 />
                 <input
                   type="text"
                   placeholder={`Search ${activeTab}...`}
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-11 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/10 focus:border-emerald-500 transition-all w-64 lg:w-80 font-bold placeholder:text-slate-400"
+                  className="pl-12 pr-6 py-4 bg-slate-50 border border-slate-200 rounded-2xl text-sm font-bold focus:outline-none focus:ring-4 focus:ring-emerald-500/10 focus:border-emerald-500 transition-all shadow-inner w-full md:w-80 placeholder:text-slate-400"
                 />
               </div>
 
               <button
                 onClick={() => setShowAddModal(true)}
-                className="flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white px-6 py-2.5 rounded-xl text-sm font-bold transition-all shadow-md active:scale-95"
+                className="flex items-center gap-3 bg-slate-900 hover:bg-slate-800 text-white px-8 py-4 rounded-2xl font-black text-sm transition-all active:scale-95 shadow-xl shadow-slate-900/20 group"
               >
-                <Plus size={18} />
+                <Plus size={20} className="group-hover:rotate-90 transition-transform" />
                 <span>{activeTab === "orders" ? "NEW ORDER" : "ADD PRODUCT"}</span>
               </button>
             </div>
@@ -201,31 +201,31 @@ export default function Ecom() {
         </div>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          <StatCard title="Total Revenue" value={`₹${(totalRevenue / 1000).toFixed(1)}K`} icon={<DollarSign size={24} />} trend="+15.2%" color="emerald" />
-          <StatCard title="Pending Orders" value={pendingOrders.toString()} icon={<Clock size={24} />} trend="Action Required" color="amber" />
-          <StatCard title="Total Sales" value={orders.length.toString()} icon={<TrendingUp size={24} />} trend="+8 this week" color="blue" />
-          <StatCard title="Active Customers" value={totalCustomers.toString()} icon={<Users size={24} />} trend="Highly Engaged" color="indigo" />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <StatCard label="Total Revenue" value={`₹${(totalRevenue / 1000).toFixed(1)}K`} icon={<DollarSign size={24} />} trend="+15.2%" color="emerald" />
+          <StatCard label="Pending Orders" value={pendingOrders.toString()} icon={<Clock size={24} />} trend="Action Required" color="amber" />
+          <StatCard label="Total Sales" value={orders.length.toString()} icon={<TrendingUp size={24} />} trend="+8 this week" color="blue" />
+          <StatCard label="Active Customers" value={totalCustomers.toString()} icon={<Users size={24} />} trend="Highly Engaged" color="indigo" />
         </div>
 
         {/* Tab Switcher */}
-        <div className="flex items-center gap-2 p-1 bg-white border border-slate-200 rounded-xl w-fit shadow-sm">
+        <div className="flex items-center gap-3 p-2 bg-white/50 backdrop-blur-md border border-white/50 rounded-2xl w-fit shadow-xl shadow-slate-200/40">
           <button
             onClick={() => { setActiveTab("orders"); setCurrentPage(1); }}
-            className={`px-6 py-2 rounded-lg text-sm font-bold transition-all ${
+            className={`px-8 py-3 rounded-xl text-sm font-black transition-all ${
               activeTab === "orders" 
-                ? "bg-emerald-600 text-white shadow-md" 
-                : "text-slate-400 hover:bg-emerald-50 hover:text-emerald-600"
+                ? "bg-emerald-600 text-white shadow-lg shadow-emerald-200 scale-105" 
+                : "text-slate-500 hover:bg-emerald-50 hover:text-emerald-600"
             }`}
           >
             Order Registry
           </button>
           <button
             onClick={() => { setActiveTab("products"); setCurrentPage(1); }}
-            className={`px-6 py-2 rounded-lg text-sm font-bold transition-all ${
+            className={`px-8 py-3 rounded-xl text-sm font-black transition-all ${
               activeTab === "products" 
-                ? "bg-emerald-600 text-white shadow-md" 
-                : "text-slate-400 hover:bg-emerald-50 hover:text-emerald-600"
+                ? "bg-emerald-600 text-white shadow-lg shadow-emerald-200 scale-105" 
+                : "text-slate-500 hover:bg-emerald-50 hover:text-emerald-600"
             }`}
           >
             Product Catalog
@@ -233,14 +233,14 @@ export default function Ecom() {
         </div>
 
         {/* Content Section */}
-        <div className="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden">
+        <div className="bg-white/70 backdrop-blur-xl border border-white/50 rounded-[40px] shadow-2xl shadow-slate-200/50 overflow-hidden">
           <div className="overflow-x-auto custom-scrollbar">
             {activeTab === "orders" ? (
               <table className="w-full text-left">
                 <thead>
-                  <tr className="bg-slate-50 border-b border-slate-100">
+                  <tr className="bg-slate-50/50 border-b border-slate-100">
                     {["Order ID", "Customer", "Date", "Total", "Status", "Payment", "Actions"].map((h) => (
-                      <th key={h} className="px-6 py-4 text-[11px] font-bold text-slate-500 uppercase tracking-wider">{h}</th>
+                      <th key={h} className="px-6 py-5 text-[11px] font-black text-slate-500 uppercase tracking-tighter">{h}</th>
                     ))}
                   </tr>
                 </thead>
@@ -249,25 +249,25 @@ export default function Ecom() {
                     const o = order as Order;
                     return (
                       <tr key={o.id} className="hover:bg-slate-50/50 transition-all group">
-                        <td className="px-6 py-4 font-bold text-emerald-600 text-sm">{o.id}</td>
-                        <td className="px-6 py-4">
-                          <div className="font-bold text-slate-900 text-sm">{o.customerName}</div>
-                          <div className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">{o.items} items</div>
+                        <td className="px-6 py-6 font-black text-emerald-600 text-sm">{o.id}</td>
+                        <td className="px-6 py-6">
+                          <div className="font-black text-slate-900 text-sm">{o.customerName}</div>
+                          <div className="text-[10px] text-slate-400 font-black uppercase tracking-widest">{o.items} items</div>
                         </td>
-                        <td className="px-6 py-4 text-sm font-medium text-slate-500">{o.date}</td>
-                        <td className="px-6 py-4 font-black text-slate-900 text-sm">₹{o.total.toLocaleString()}</td>
-                        <td className="px-6 py-4">
+                        <td className="px-6 py-6 text-sm font-bold text-slate-500">{o.date}</td>
+                        <td className="px-6 py-6 font-black text-slate-900 text-sm">₹{o.total.toLocaleString()}</td>
+                        <td className="px-6 py-6">
                           <StatusBadge status={o.status} />
                         </td>
-                        <td className="px-6 py-4">
-                          <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider border ${o.paymentStatus === 'Paid' ? 'bg-emerald-50 text-emerald-600 border-emerald-100' : 'bg-rose-50 text-rose-600 border-rose-100'}`}>
+                        <td className="px-6 py-6">
+                          <span className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest border ${o.paymentStatus === 'Paid' ? 'bg-emerald-50 text-emerald-600 border-emerald-100' : 'bg-rose-50 text-rose-600 border-rose-100'}`}>
                             {o.paymentStatus}
                           </span>
                         </td>
-                        <td className="px-6 py-4">
+                        <td className="px-6 py-6">
                           <div className="flex gap-2">
-                            <ActionBtn color="blue" onClick={() => { setSelectedOrder(o); setShowOrderModal(true); }} icon={<Eye size={16} />} />
-                            <ActionBtn color="red" onClick={() => handleDeleteOrder(o.id)} icon={<Trash2 size={16} />} />
+                            <ActionBtn color="blue" onClick={() => { setSelectedOrder(o); setShowOrderModal(true); }} icon={<Eye size={18} />} />
+                            <ActionBtn color="red" onClick={() => handleDeleteOrder(o.id)} icon={<Trash2 size={18} />} />
                           </div>
                         </td>
                       </tr>
@@ -278,9 +278,9 @@ export default function Ecom() {
             ) : (
               <table className="w-full text-left">
                 <thead>
-                  <tr className="bg-slate-50 border-b border-slate-100">
+                  <tr className="bg-slate-50/50 border-b border-slate-100">
                     {["Product", "Category", "Price", "Stock", "Sales", "Status", "Actions"].map((h) => (
-                      <th key={h} className="px-6 py-4 text-[11px] font-bold text-slate-500 uppercase tracking-wider">{h}</th>
+                      <th key={h} className="px-6 py-5 text-[11px] font-black text-slate-500 uppercase tracking-tighter">{h}</th>
                     ))}
                   </tr>
                 </thead>
@@ -289,39 +289,39 @@ export default function Ecom() {
                     const p = product as EcomProduct;
                     return (
                       <tr key={p.id} className="hover:bg-slate-50/50 transition-all group">
-                        <td className="px-6 py-4">
-                          <div className="flex items-center gap-3">
-                            <div className="h-10 w-10 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center border border-emerald-100 shadow-sm">
-                              <Package size={20} />
+                        <td className="px-6 py-6">
+                          <div className="flex items-center gap-4">
+                            <div className="h-12 w-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center border border-emerald-100 shadow-sm group-hover:rotate-6 transition-transform">
+                              <Package size={22} />
                             </div>
                             <div>
-                              <div className="font-bold text-slate-900 text-sm">{p.name}</div>
-                              <div className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">ID: {p.id}</div>
+                              <div className="font-black text-slate-900 text-sm">{p.name}</div>
+                              <div className="text-[10px] text-slate-400 font-black uppercase tracking-widest">ID: {p.id}</div>
                             </div>
                           </div>
                         </td>
-                        <td className="px-6 py-4">
-                          <span className="px-2 py-0.5 bg-slate-100 text-slate-600 rounded-lg text-[10px] font-bold uppercase tracking-wider border border-slate-200">{p.category}</span>
+                        <td className="px-6 py-6">
+                          <span className="px-3 py-1 bg-slate-100 text-slate-600 rounded-lg text-[10px] font-black uppercase tracking-widest border border-slate-200">{p.category}</span>
                         </td>
-                        <td className="px-6 py-4 font-bold text-slate-900 text-sm">₹{p.price.toLocaleString()}</td>
-                        <td className="px-6 py-4">
-                          <div className="flex flex-col gap-1">
-                            <span className={`text-[11px] font-bold ${p.stock === 0 ? 'text-rose-500' : 'text-slate-600'}`}>{p.stock} Units</span>
-                            <div className="w-24 h-1.5 bg-slate-100 rounded-full overflow-hidden">
+                        <td className="px-6 py-6 font-black text-slate-900 text-sm">₹{p.price.toLocaleString()}</td>
+                        <td className="px-6 py-6">
+                          <div className="flex flex-col gap-2">
+                            <span className={`text-[11px] font-black ${p.stock === 0 ? 'text-rose-500' : 'text-slate-600'}`}>{p.stock} Units</span>
+                            <div className="w-24 h-2 bg-slate-100 rounded-full overflow-hidden border border-slate-200/50">
                               <div className={`h-full rounded-full transition-all duration-1000 ${p.stock === 0 ? 'bg-rose-400' : 'bg-emerald-400'}`} style={{ width: `${Math.min(100, (p.stock / 50) * 100)}%` }}></div>
                             </div>
                           </div>
                         </td>
-                        <td className="px-6 py-4">
-                          <div className="font-bold text-slate-900 text-sm">{p.sales}</div>
+                        <td className="px-6 py-6">
+                          <div className="font-black text-slate-900 text-sm">{p.sales}</div>
                         </td>
-                        <td className="px-6 py-4">
+                        <td className="px-6 py-6">
                           <StatusBadge status={p.status as any} />
                         </td>
-                        <td className="px-6 py-4">
+                        <td className="px-6 py-6">
                           <div className="flex gap-2">
-                            <ActionBtn color="orange" onClick={() => {}} icon={<Pencil size={16} />} />
-                            <ActionBtn color="red" onClick={() => {}} icon={<Trash2 size={16} />} />
+                            <ActionBtn color="orange" onClick={() => {}} icon={<Pencil size={18} />} />
+                            <ActionBtn color="red" onClick={() => {}} icon={<Trash2 size={18} />} />
                           </div>
                         </td>
                       </tr>

@@ -116,94 +116,98 @@ export default function ComplianceRegulations() {
 
   return (
     <div 
-      className="min-h-screen bg-slate-50 animate-in fade-in duration-500"
-       
+      className="min-h-screen bg-[#F1F5F9] p-4 md:p-6 lg:p-10 animate-in fade-in duration-700"
     >
       <div className="max-w-[1600px] mx-auto space-y-10">
         
-        {/* Header Section */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-8">
-          <div>
-            <h1 className="text-4xl font-black text-slate-900 tracking-tight flex items-center gap-4">
-              <div 
-                className="w-3 h-12 rounded-full" 
-              
-              ></div>
-              Compliance <span  >Regulations</span>
-            </h1>
-            <p className="text-slate-500 mt-2 font-medium flex items-center gap-2 ml-7">
-              <ShieldCheck size={16} />
-              Vehicle Inspection › Regulatory Standards Hub
-            </p>
-          </div>
-
-          <div className="flex flex-wrap items-center gap-3">
-            <div className="relative group">
-              <Search
-                className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-brand transition-colors"
-                size={18}
-              />
-              <input
-                type="text"
-                placeholder="Search regulations..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-12 pr-4 py-3.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-4 focus:ring-brand/10 focus:border-brand transition-all w-full md:w-64 shadow-sm font-medium"
-               />
+        {/* Cinematic Header Section */}
+        <div className="bg-white/70 backdrop-blur-2xl border border-white/50 rounded-[40px] p-8 md:p-10 shadow-2xl shadow-slate-200/50">
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8">
+            <div className="flex items-center gap-6">
+              <div className="w-20 h-20 bg-slate-900 rounded-[30px] flex items-center justify-center shadow-2xl shadow-slate-900/20 rotate-3 hover:rotate-0 transition-transform duration-500">
+                <ShieldCheck className="text-white w-10 h-10" />
+              </div>
+              <div>
+                <div className="flex items-center gap-3">
+                  <h1 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight">
+                    Compliance <span className="text-brand">Regulations</span>
+                  </h1>
+                  <span className="px-4 py-1.5 bg-slate-900 text-white text-[10px] font-black uppercase tracking-[0.2em] rounded-full shadow-lg">
+                    STANDARDS v2.0
+                  </span>
+                </div>
+                <p className="text-slate-500 mt-2 font-semibold text-lg">
+                  Vehicle Inspection › Regulatory Standards Hub
+                </p>
+              </div>
             </div>
 
-            <div className="flex border border-slate-200 rounded-xl bg-white p-1.5 shadow-sm">
+            <div className="flex flex-wrap items-center gap-4">
+              <div className="relative group flex-1 md:flex-none">
+                <Search
+                  className="absolute left-6 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-brand transition-colors"
+                  size={20}
+                />
+                <input
+                  type="text"
+                  placeholder="Search regulations..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="pl-14 pr-6 py-4 bg-white/70 backdrop-blur-xl border border-white/50 rounded-2xl text-sm font-bold text-slate-900 focus:outline-none focus:ring-4 focus:ring-brand/10 focus:border-brand transition-all w-full md:w-64 shadow-xl shadow-slate-200/50"
+                />
+              </div>
+
+              <div className="flex bg-white/50 backdrop-blur-md p-1.5 rounded-2xl border border-white shadow-xl">
+                <button
+                  onClick={() => setView("table")}
+                  className={`p-3 rounded-xl transition-all ${
+                    view === "table"
+                      ? "bg-slate-900 text-white shadow-lg scale-105"
+                      : "text-slate-400 hover:text-slate-600"
+                  }`}
+                >
+                  <TableIcon size={20} />
+                </button>
+                <button
+                  onClick={() => setView("card")}
+                  className={`p-3 rounded-xl transition-all ${
+                    view === "card"
+                      ? "bg-slate-900 text-white shadow-lg scale-105"
+                      : "text-slate-400 hover:text-slate-600"
+                  }`}
+                >
+                  <LayoutGrid size={20} />
+                </button>
+              </div>
+
               <button
-                onClick={() => setView("table")}
-                className={`p-2.5 rounded-xl transition-all ${
-                  view === "table"
-                    ? "text-white shadow-lg"
-                    : "text-slate-400 hover:bg-slate-50"
-                }`}
-                
+                onClick={() => {
+                  setEditReg(null);
+                  setShowForm(true);
+                }}
+                className="flex items-center gap-3 bg-brand text-white px-8 py-4 rounded-2xl text-xs font-black uppercase tracking-widest hover:opacity-90 transition-all shadow-xl shadow-brand/20 active:scale-95 group"
               >
-                <TableIcon size={20} />
-              </button>
-              <button
-                onClick={() => setView("card")}
-                className={`p-2.5 rounded-xl transition-all ${
-                  view === "card"
-                    ? "text-white shadow-lg"
-                    : "text-slate-400 hover:bg-slate-50"
-                }`}
-                
-              >
-                <LayoutGrid size={20} />
+                <Plus size={18} className="group-hover:rotate-90 transition-transform" />
+                <span>Add Regulation</span>
               </button>
             </div>
-
-            <button
-              onClick={() => {
-                setEditReg(null);
-                setShowForm(true);
-              }}
-              className="flex items-center gap-2 text-white px-8 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-xl text-sm font-black transition-all shadow-xl active:scale-95 whitespace-nowrap"
-               >
-              <Plus size={18} strokeWidth={3} />
-              <span className="hidden sm:inline">Add Regulation</span>
-            </button>
           </div>
         </div>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-           <StatCard label="Total Regulations" value={regulations.length} color="red" icon={<FileText />} />
-           <StatCard label="Active Policies" value={regulations.filter(r => r.status === "Active").length} color="#10b981" icon={<ShieldCheck />} />
-           <StatCard label="Pending Updates" value={0} color="#f59e0b" icon={<AlertCircle />} />
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+           <StatCard label="Total Regulations" value={regulations.length} color="slate" icon={<FileText />} />
+           <StatCard label="Active Policies" value={regulations.filter(r => r.status === "Active").length} color="brand" icon={<ShieldCheck />} />
+           <StatCard label="Audit Readiness" value="98%" color="brand" icon={<AlertCircle />} />
         </div>
 
         {/* List View */}
         {view === "table" ? (
-          <div className="bg-white border border-slate-100 rounded-xl shadow-sm overflow-hidden transition-all hover:shadow-md">
+          <div className="bg-white/70 backdrop-blur-xl border border-white/50 rounded-[40px] shadow-2xl shadow-slate-200/50 overflow-hidden">
             <div className="overflow-x-auto custom-scrollbar">
-              <table className="w-full text-left border-collapse">
-                <thead className="bg-slate-50/50">
-                  <tr>
+              <table className="w-full text-left">
+                <thead>
+                  <tr className="border-b border-slate-100">
                     {[
                       "NO",
                       "REGULATION & SCOPE",
@@ -213,7 +217,7 @@ export default function ComplianceRegulations() {
                     ].map((h) => (
                       <th
                         key={h}
-                        className="px-10 py-6 text-[11px] font-black text-slate-400 uppercase tracking-[0.2em]"
+                        className="px-10 py-8 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]"
                       >
                         {h}
                       </th>
@@ -224,43 +228,43 @@ export default function ComplianceRegulations() {
                   {filteredRegs.map((r, idx) => (
                     <tr
                       key={r.id}
-                      className="hover:bg-slate-50/50 transition-colors group"
+                      className="hover:bg-white/80 transition-all group"
                     >
-                      <td className="px-10 py-8 font-black text-slate-300">
+                      <td className="px-10 py-8 font-black text-slate-300 text-base">
                         {String(idx + 1).padStart(2, '0')}
                       </td>
                       <td className="px-10 py-8">
                         <div className="flex items-center gap-5">
                           <div 
-                            className="h-14 w-14 rounded-xl flex items-center justify-center font-black text-xl border border-brand/10 group-hover:scale-110 transition-transform shadow-sm"
+                            className="h-14 w-14 rounded-2xl bg-slate-900 text-white flex items-center justify-center font-black text-xl shadow-xl group-hover:rotate-6 transition-transform"
                            >
                             <ShieldCheck size={24} />
                           </div>
                           <div className="max-w-md">
-                            <div className="font-black text-slate-900 text-lg leading-tight group-hover:text-brand transition-colors" >
+                            <div className="font-black text-slate-900 text-lg tracking-tight block group-hover:text-brand transition-colors" >
                               {r.name}
                             </div>
-                            <div className="text-xs text-slate-400 font-bold uppercase tracking-wider mt-1 line-clamp-1">{r.description}</div>
+                            <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest mt-1 line-clamp-1">{r.description}</div>
                           </div>
                         </div>
                       </td>
                       <td className="px-10 py-8">
-                        <div className="inline-flex items-center gap-2 px-4 py-2 bg-slate-100 rounded-xl text-[11px] font-black text-slate-600 uppercase tracking-widest border border-slate-200/50">
+                        <div className="inline-flex items-center gap-2 px-5 py-2 bg-slate-900 text-white rounded-xl text-[10px] font-black uppercase tracking-widest shadow-lg">
                            {r.effectiveDate}
                         </div>
                       </td>
                       <td className="px-10 py-8">
-                        <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest bg-emerald-50 text-emerald-600 border border-emerald-100">
+                        <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-[9px] font-black uppercase tracking-widest bg-emerald-50 text-emerald-600 border border-emerald-100">
                           <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></div>
                           {r.status || "Active"}
                         </span>
                       </td>
                       <td className="px-10 py-8">
-                        <div className="flex gap-2">
+                        <div className="flex gap-3">
                           <ActionBtn
                             color="blue"
                             onClick={() => setViewReg(r)}
-                            icon={<Eye size={18} />}
+                            icon={<Eye size={20} />}
                           />
                           <ActionBtn
                             color="orange"
@@ -268,12 +272,12 @@ export default function ComplianceRegulations() {
                               setEditReg(r);
                               setShowForm(true);
                             }}
-                            icon={<Pencil size={18} />}
+                            icon={<Pencil size={20} />}
                           />
                           <ActionBtn 
                             color="red" 
                             onClick={() => remove(r.id)} 
-                            icon={<Trash2 size={18} />}
+                            icon={<Trash2 size={20} />}
                           />
                         </div>
                       </td>
@@ -288,35 +292,27 @@ export default function ComplianceRegulations() {
             {filteredRegs.map((r) => (
               <div
                 key={r.id}
-                className="bg-white border border-slate-100 rounded-xl p-8 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 group relative overflow-hidden"
+                className="group bg-white/70 backdrop-blur-xl rounded-[40px] p-8 border border-white/50 shadow-2xl shadow-slate-200/50 hover:scale-[1.02] transition-all duration-500 relative overflow-hidden"
               >
-                <div 
-                  className="absolute top-0 right-0 w-32 h-32 rounded-bl-[100px] -mr-12 -mt-12 opacity-5 transition-all group-hover:scale-110"
-                  
-                ></div>
-                
-                <div className="flex justify-between items-start mb-8 relative z-10">
-                  <div 
-                    className="h-14 w-14 rounded-xl flex items-center justify-center shadow-lg transition-all group-hover:scale-110"
-                   >
-                    <FileText size={24} />
+                <div className="flex justify-between items-start mb-8">
+                  <div className="h-20 w-20 rounded-[30px] bg-slate-900 text-white flex items-center justify-center font-black text-2xl shadow-2xl shadow-slate-900/20 group-hover:rotate-12 transition-transform duration-500">
+                    <ShieldCheck size={32} />
                   </div>
-                  <span className="px-4 py-1.5 rounded-full text-[9px] font-black uppercase tracking-widest bg-emerald-50 text-emerald-600 border border-emerald-100">
+                  <span className="px-4 py-1.5 bg-emerald-50 text-emerald-600 rounded-xl text-[9px] font-black uppercase tracking-widest border border-emerald-100 shadow-sm">
                     Active
                   </span>
                 </div>
 
                 <div className="space-y-4 mb-8 relative z-10">
-                  <h3 className="font-black text-slate-900 group-hover:text-brand transition-colors text-xl leading-tight min-h-[56px] line-clamp-2"  >
+                  <h3 className="text-2xl font-black text-slate-900 group-hover:text-brand transition-colors tracking-tight line-clamp-2 min-h-[64px]">
                     {r.name}
                   </h3>
-                  <div className="flex items-center gap-2">
-                    <p className="text-[10px] text-slate-400 font-black uppercase tracking-[0.2em]">Effective: {r.effectiveDate}</p>
-                  </div>
+                  <div className="w-12 h-1.5 bg-brand rounded-full"></div>
+                  <p className="text-[10px] text-slate-400 font-black uppercase tracking-[0.2em]">Effective: {r.effectiveDate}</p>
                 </div>
 
-                <div className="p-6 bg-slate-50 rounded-xl mb-8 group-hover:bg-white group-hover:shadow-inner transition-all border border-transparent group-hover:border-slate-100">
-                   <p className="text-[12px] text-slate-600 line-clamp-3 leading-relaxed font-medium italic">
+                <div className="p-6 bg-slate-50/50 rounded-2xl mb-8 group-hover:bg-white group-hover:shadow-inner transition-all border border-slate-100/50">
+                   <p className="text-sm text-slate-600 line-clamp-3 leading-relaxed font-semibold italic">
                      "{r.description}"
                    </p>
                 </div>
@@ -324,7 +320,7 @@ export default function ComplianceRegulations() {
                 <div className="flex gap-3 relative z-10">
                   <button
                     onClick={() => setViewReg(r)}
-                    className="flex-1 py-4 rounded-xl bg-slate-900 text-white text-[10px] font-black uppercase tracking-widest hover:opacity-90 transition-all active:scale-95 shadow-xl shadow-slate-200 flex items-center justify-center gap-2"
+                    className="flex-1 py-4 rounded-2xl bg-slate-900 text-white font-black text-[10px] uppercase tracking-[0.2em] transition-all hover:bg-slate-800 hover:shadow-xl hover:shadow-slate-900/20 active:scale-95 flex items-center justify-center gap-2"
                   >
                     View Details
                     <ArrowUpRight size={14} />
@@ -334,8 +330,7 @@ export default function ComplianceRegulations() {
                       setEditReg(r);
                       setShowForm(true);
                     }}
-                    className="p-4 rounded-xl bg-brand/10 text-brand hover:bg-brand hover:text-white transition-all border border-brand/10"
-                   
+                    className="p-4 rounded-2xl bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 hover:border-slate-300 transition-all active:scale-95"
                   >
                     <Pencil size={20} />
                   </button>

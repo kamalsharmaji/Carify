@@ -14,7 +14,8 @@ import {
   Navigation,
   Activity,
   MapPin,
-  Clock
+  Clock,
+  X
 } from "lucide-react";
 
 /* ================= TYPES ================= */

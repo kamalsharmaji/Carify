@@ -97,83 +97,91 @@ export default function InspectionReminder() {
 
   return (
     <div 
-      className="min-h-screen bg-slate-50 animate-in fade-in duration-500 p-4 md:p-8"
+      className="min-h-screen bg-[#F1F5F9] p-4 md:p-6 lg:p-10 animate-in fade-in duration-700"
     >
       <div className="max-w-[1600px] mx-auto space-y-10">
         
-        {/* Header Section */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-8">
-          <div>
-            <h1 className="text-4xl font-black text-slate-900 tracking-tight">
-              Smart <span style={{ color: "#dc2626" }}>Reminders</span>
-            </h1>
-            <p className="text-slate-500 mt-2 font-medium flex items-center gap-2 text-sm">
-              <Bell size={16} className="text-slate-400" />
-              Vehicle Inspection › Alert Notifications
-            </p>
-          </div>
-
-          <div className="flex flex-wrap items-center gap-4">
-            <div className="relative group">
-              <Search
-                className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-brand transition-colors"
-                size={18}
-              />
-              <input
-                type="text"
-                placeholder="Search alerts..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-12 pr-4 py-3.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-4 focus:ring-brand/10 focus:border-brand transition-all w-full md:w-64 shadow-sm font-medium"
-              />
+        {/* Cinematic Header Section */}
+        <div className="bg-white/70 backdrop-blur-2xl border border-white/50 rounded-[40px] p-8 md:p-10 shadow-2xl shadow-slate-200/50">
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8">
+            <div className="flex items-center gap-6">
+              <div className="w-20 h-20 bg-slate-900 rounded-[30px] flex items-center justify-center shadow-2xl shadow-slate-900/20 rotate-3 hover:rotate-0 transition-transform duration-500">
+                <Bell className="text-white w-10 h-10" />
+              </div>
+              <div>
+                <div className="flex items-center gap-3">
+                  <h1 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight">
+                    Smart <span className="text-brand">Reminders</span>
+                  </h1>
+                  <span className="px-4 py-1.5 bg-slate-900 text-white text-[10px] font-black uppercase tracking-[0.2em] rounded-full shadow-lg">
+                    ALERTS v2.0
+                  </span>
+                </div>
+                <p className="text-slate-500 mt-2 font-semibold text-lg">
+                  Vehicle Inspection › Alert Notifications
+                </p>
+              </div>
             </div>
 
-            <div className="flex border border-slate-200 rounded-xl bg-white p-1.5 shadow-sm">
+            <div className="flex flex-wrap items-center gap-4">
+              <div className="relative group flex-1 md:flex-none">
+                <Search
+                  className="absolute left-6 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-brand transition-colors"
+                  size={20}
+                />
+                <input
+                  type="text"
+                  placeholder="Search alerts..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="pl-14 pr-6 py-4 bg-white/70 backdrop-blur-xl border border-white/50 rounded-2xl text-sm font-bold text-slate-900 focus:outline-none focus:ring-4 focus:ring-brand/10 focus:border-brand transition-all w-full md:w-64 shadow-xl shadow-slate-200/50"
+                />
+              </div>
+
+              <div className="flex bg-white/50 backdrop-blur-md p-1.5 rounded-2xl border border-white shadow-xl">
+                <button
+                  onClick={() => setView("table")}
+                  className={`p-3 rounded-xl transition-all ${
+                    view === "table"
+                      ? "bg-slate-900 text-white shadow-lg scale-105"
+                      : "text-slate-400 hover:text-slate-600"
+                  }`}
+                >
+                  <TableIcon size={20} />
+                </button>
+                <button
+                  onClick={() => setView("card")}
+                  className={`p-3 rounded-xl transition-all ${
+                    view === "card"
+                      ? "bg-slate-900 text-white shadow-lg scale-105"
+                      : "text-slate-400 hover:text-slate-600"
+                  }`}
+                >
+                  <LayoutGrid size={20} />
+                </button>
+              </div>
+
               <button
-                onClick={() => setView("table")}
-                className={`p-2.5 rounded-xl transition-all ${
-                  view === "table"
-                    ? "bg-brand text-white shadow-lg shadow-brand/20"
-                    : "text-slate-400 hover:bg-slate-50"
-                }`}
-                style={{ backgroundColor: view === "table" ? "#dc2626" : undefined }}
+                onClick={() => {
+                  setEditReminder(null);
+                  setShowForm(true);
+                }}
+                className="flex items-center gap-3 bg-brand text-white px-8 py-4 rounded-2xl text-xs font-black uppercase tracking-widest hover:opacity-90 transition-all shadow-xl shadow-brand/20 active:scale-95 group"
               >
-                <TableIcon size={20} />
-              </button>
-              <button
-                onClick={() => setView("card")}
-                className={`p-2.5 rounded-xl transition-all ${
-                  view === "card"
-                    ? "bg-brand text-white shadow-lg shadow-brand/20"
-                    : "text-slate-400 hover:bg-slate-50"
-                }`}
-                style={{ backgroundColor: view === "card" ? "#dc2626" : undefined }}
-              >
-                <LayoutGrid size={20} />
+                <Plus size={18} className="group-hover:rotate-90 transition-transform" />
+                <span>Set Alert</span>
               </button>
             </div>
-
-            <button
-              onClick={() => {
-                setEditReminder(null);
-                setShowForm(true);
-              }}
-              className="flex items-center gap-2 text-white px-8 py-3.5 rounded-xl text-sm font-black transition-all shadow-xl active:scale-95 whitespace-nowrap"
-              style={{ backgroundColor: "#dc2626", boxShadow: `0 10px 25px -5px #dc262640` }}
-            >
-              <Plus size={18} strokeWidth={3} />
-              <span className="hidden sm:inline">Set Alert</span>
-            </button>
           </div>
         </div>
 
-        {/* List View */}
+        {/* Dynamic List View */}
         {view === "table" ? (
-          <div className="bg-white border border-slate-100 rounded-xl shadow-sm overflow-hidden transition-all hover:shadow-md">
+          <div className="bg-white/70 backdrop-blur-xl border border-white/50 rounded-[40px] shadow-2xl shadow-slate-200/50 overflow-hidden">
             <div className="overflow-x-auto custom-scrollbar">
               <table className="w-full text-left">
-                <thead className="bg-slate-50/50">
-                  <tr>
+                <thead>
+                  <tr className="border-b border-slate-100">
                     {[
                       "NO",
                       "VEHICLE DESIGNATION",
@@ -183,7 +191,7 @@ export default function InspectionReminder() {
                     ].map((h) => (
                       <th
                         key={h}
-                        className="px-10 py-6 text-[11px] font-black text-slate-400 uppercase tracking-[0.2em]"
+                        className="px-10 py-8 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]"
                       >
                         {h}
                       </th>
@@ -194,40 +202,42 @@ export default function InspectionReminder() {
                   {filteredReminders.map((r, idx) => (
                     <tr
                       key={r.id}
-                      className="hover:bg-slate-50/50 transition-colors group"
+                      className="hover:bg-white/80 transition-all group"
                     >
-                      <td className="px-10 py-6 font-black text-slate-300">
+                      <td className="px-10 py-8 font-black text-slate-300 text-base">
                         {String(idx + 1).padStart(2, '0')}
                       </td>
-                      <td className="px-10 py-6">
-                        <div className="flex items-center gap-4">
+                      <td className="px-10 py-8">
+                        <div className="flex items-center gap-5">
                           <div 
-                            className="h-12 w-12 rounded-xl flex items-center justify-center font-black text-lg border group-hover:scale-110 transition-transform shadow-sm"
-                            style={{ backgroundColor: `#dc262610`, color: "#dc2626", borderColor: `#dc262620` }}
-                          >
-                            <Bell size={22} />
+                            className="h-14 w-14 rounded-2xl bg-slate-900 text-white flex items-center justify-center font-black text-xl shadow-xl group-hover:rotate-6 transition-transform"
+                           >
+                            <Bell size={24} />
                           </div>
-                          <span className="font-black text-slate-900 text-base tracking-tight">{r.vehicle}</span>
+                          <div>
+                            <span className="font-black text-slate-900 text-lg tracking-tight block">{r.vehicle}</span>
+                            <span className="text-[10px] font-black text-brand uppercase tracking-widest">Alert ID: {r.id}</span>
+                          </div>
                         </div>
                       </td>
-                      <td className="px-10 py-6">
-                        <div className="flex items-center gap-2 text-slate-500 font-black text-[11px] uppercase tracking-widest bg-slate-100/50 px-4 py-2 rounded-xl border border-slate-200/50 w-fit">
-                          <Calendar size={14} className="text-slate-400" />
+                      <td className="px-10 py-8">
+                        <div className="flex items-center gap-3 text-white font-black text-[10px] uppercase tracking-widest bg-slate-900 px-5 py-2 rounded-xl shadow-lg w-fit">
+                          <Calendar size={14} className="text-white" />
                           {r.reminderDate}
                         </div>
                       </td>
-                      <td className="px-10 py-6">
-                        <div className="flex items-center gap-3 text-sm text-slate-500 font-medium max-w-md truncate italic leading-relaxed">
-                          <MessageSquare size={16} className="text-slate-300 shrink-0" />
+                      <td className="px-10 py-8">
+                        <div className="flex items-center gap-4 text-sm text-slate-500 font-semibold max-w-md italic leading-relaxed">
+                          <MessageSquare size={18} className="text-slate-300 shrink-0" />
                           {r.message}
                         </div>
                       </td>
-                      <td className="px-10 py-6">
-                        <div className="flex gap-2">
+                      <td className="px-10 py-8">
+                        <div className="flex gap-3">
                           <ActionBtn
                             color="blue"
                             onClick={() => setViewReminder(r)}
-                            icon={<Eye size={18} />}
+                            icon={<Eye size={20} />}
                           />
                           <ActionBtn
                             color="orange"
@@ -235,12 +245,12 @@ export default function InspectionReminder() {
                               setEditReminder(r);
                               setShowForm(true);
                             }}
-                            icon={<Pencil size={18} />}
+                            icon={<Pencil size={20} />}
                           />
                           <ActionBtn 
                             color="red" 
                             onClick={() => remove(r.id)} 
-                            icon={<Trash2 size={18} />}
+                            icon={<Trash2 size={20} />}
                           />
                         </div>
                       </td>
@@ -255,46 +265,38 @@ export default function InspectionReminder() {
             {filteredReminders.map((r) => (
               <div
                 key={r.id}
-                className="bg-white border border-slate-100 rounded-xl p-8 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 group relative overflow-hidden"
+                className="group bg-white/70 backdrop-blur-xl rounded-[40px] p-8 border border-white/50 shadow-2xl shadow-slate-200/50 hover:scale-[1.02] transition-all duration-500 relative overflow-hidden"
               >
-                <div 
-                  className="absolute top-0 right-0 w-24 h-24 rounded-bl-[80px] -mr-8 -mt-8 opacity-5 transition-all group-hover:scale-110"
-                  style={{ backgroundColor: "#dc2626" }}
-                ></div>
-                
-                <div className="flex justify-between items-start mb-8 relative z-10">
-                  <div 
-                    className="h-14 w-14 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform shadow-sm border"
-                    style={{ backgroundColor: `#dc262610`, color: "#dc2626", borderColor: `#dc262620` }}
-                  >
-                    <Bell size={24} />
+                <div className="flex justify-between items-start mb-8">
+                  <div className="h-20 w-20 rounded-[30px] bg-slate-900 text-white flex items-center justify-center font-black text-2xl shadow-2xl shadow-slate-900/20 group-hover:rotate-12 transition-transform duration-500">
+                    <Bell size={32} />
                   </div>
                   <div className="text-right">
                     <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1">Due Date</p>
-                    <p className="text-sm font-black text-slate-900 bg-slate-50 px-3 py-1 rounded-lg border border-slate-100">{r.reminderDate}</p>
+                    <p className="text-xs font-black text-white bg-slate-900 px-4 py-1.5 rounded-xl shadow-lg">{r.reminderDate}</p>
                   </div>
                 </div>
 
                 <div className="space-y-4 mb-8 relative z-10">
                   <div>
-                    <p className="text-[10px] font-black text-slate-300 uppercase tracking-widest mb-1">Target Asset</p>
-                    <h3 className="font-black text-slate-900 group-hover:text-brand transition-colors line-clamp-1 text-lg tracking-tight" style={{ '--tw-group-hover-text': "#dc2626" } as any}>
+                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Target Asset</p>
+                    <h3 className="text-2xl font-black text-slate-900 group-hover:text-brand transition-colors tracking-tight line-clamp-1">
                       {r.vehicle}
                     </h3>
                   </div>
-                  <div className="p-5 bg-slate-50 rounded-xl border border-transparent group-hover:border-slate-100 transition-all">
-                    <p className="text-[10px] text-slate-400 font-black uppercase tracking-widest mb-2 flex items-center gap-2">
-                      <MessageSquare size={12} />
+                  <div className="p-6 bg-slate-50/50 rounded-2xl border border-slate-100/50 group-hover:bg-white group-hover:shadow-inner transition-all">
+                    <p className="text-[10px] text-slate-400 font-black uppercase tracking-widest mb-3 flex items-center gap-2">
+                      <MessageSquare size={14} className="text-brand" />
                       Alert Context
                     </p>
-                    <p className="text-xs text-slate-600 font-medium line-clamp-3 italic leading-relaxed">"{r.message}"</p>
+                    <p className="text-sm text-slate-600 font-semibold line-clamp-3 italic leading-relaxed">"{r.message}"</p>
                   </div>
                 </div>
 
-                <div className="flex gap-2 relative z-10">
+                <div className="flex gap-3 relative z-10">
                   <button
                     onClick={() => setViewReminder(r)}
-                    className="flex-1 py-4 rounded-xl bg-slate-900 text-white text-[10px] font-black uppercase tracking-widest hover:opacity-90 transition-all active:scale-95 shadow-xl shadow-slate-200"
+                    className="flex-1 py-4 rounded-2xl bg-slate-900 text-white font-black text-[10px] uppercase tracking-[0.2em] transition-all hover:bg-slate-800 hover:shadow-xl hover:shadow-slate-900/20 active:scale-95 shadow-xl"
                   >
                     View Alert
                   </button>
@@ -303,16 +305,15 @@ export default function InspectionReminder() {
                       setEditReminder(r);
                       setShowForm(true);
                     }}
-                    className="p-4 rounded-xl bg-brand/10 text-brand hover:bg-brand hover:text-white transition-all border border-brand/10"
-                    style={{ '--tw-hover-bg': "#dc2626" } as any}
+                    className="p-4 rounded-2xl bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 hover:border-slate-300 transition-all active:scale-95 shadow-sm"
                   >
-                    <Pencil size={18} />
+                    <Pencil size={20} />
                   </button>
                   <button
                     onClick={() => remove(r.id)}
-                    className="p-4 rounded-xl bg-slate-50 text-slate-300 hover:text-rose-500 hover:bg-rose-50 transition-all border border-transparent hover:border-rose-100"
+                    className="p-4 rounded-2xl bg-white border border-slate-200 text-slate-400 hover:text-brand hover:bg-brand/5 hover:border-brand/10 transition-all active:scale-95 shadow-sm"
                   >
-                    <Trash2 size={18} />
+                    <Trash2 size={20} />
                   </button>
                 </div>
               </div>

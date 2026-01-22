@@ -201,7 +201,7 @@ export default function CRM() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           <StatCard title="Pipeline Value" value={`₹${(totalPipeline / 1000000).toFixed(1)}M`} icon={<Briefcase size={24} />} trend="Active leads" color="slate" />
           <StatCard title="Won Deals" value={`₹${(wonValue / 1000000).toFixed(1)}M`} icon={<TrendingUp size={24} />} trend="Lifetime revenue" color="emerald" />
-          <StatCard title="Conversion Rate" value="24.8%" icon={<Target size={24} />} trend="+2.4% vs LY" color="indigo" />
+          <StatCard title="Conversion Rate" value="24.8%" icon={<Target size={24} />} trend="+2.4% vs LY" color="emerald" />
           <StatCard title="Total Leads" value={leads.length.toString()} icon={<Users size={24} />} trend="Across all sources" color="blue" />
         </div>
 
@@ -361,19 +361,21 @@ export default function CRM() {
 
 /* ================= HELPER COMPONENTS ================= */
 
-function StatCard({ title, value, icon, trend, color }: { title: string; value: string; icon: React.ReactNode; trend: string; color: "blue" | "emerald" | "purple" | "slate" }) {
+function StatCard({ title, value, icon, trend, color }: { title: string; value: string; icon: React.ReactNode; trend: string; color: "blue" | "emerald" | "purple" | "slate" | "indigo" }) {
   const colorMap = {
     blue: "bg-blue-50 text-blue-600 shadow-blue-100",
     emerald: "bg-emerald-50 text-emerald-600 shadow-emerald-100",
     purple: "bg-purple-50 text-purple-600 shadow-purple-100",
-    slate: "bg-slate-50 text-slate-600 shadow-slate-100"
+    slate: "bg-slate-50 text-slate-600 shadow-slate-100",
+    indigo: "bg-indigo-50 text-indigo-600 shadow-indigo-100"
   };
 
   const iconBgMap = {
     blue: "bg-blue-600",
     emerald: "bg-emerald-600",
     purple: "bg-purple-600",
-    slate: "bg-slate-900"
+    slate: "bg-slate-900",
+    indigo: "bg-indigo-600"
   };
 
   return (

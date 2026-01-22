@@ -556,7 +556,7 @@ function BookingForm({ booking, onClose, onSave }: any) {
   );
 }
 
-function FormGroup({ label, value, onChange, type = "text", placeholder }: any) {
+function FormGroup({ label, value, onChange, type = "text", placeholder }: { label: string; value: string; onChange: (v: string) => void; type?: string; placeholder?: string }) {
   return (
     <div className="space-y-2">
       <label className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] ml-2">{label}</label>

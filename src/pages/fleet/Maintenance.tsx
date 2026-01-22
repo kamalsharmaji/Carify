@@ -14,7 +14,6 @@ import {
   Calendar,
   Clock,
   Shield,
-  ShieldCheck,
   X,
 } from "lucide-react";
 

@@ -15,12 +15,9 @@ import {
   ChevronRight,
   Building2,
   X,
-  CreditCard,
-  Briefcase,
   Users,
   ShieldCheck,
-  Zap,
-  MoreHorizontal
+  Zap
 } from "lucide-react";
 import toast from "react-hot-toast";
 

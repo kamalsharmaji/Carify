@@ -412,12 +412,12 @@ export default function VMS() {
 interface StatCardProps {
   title: string;
   value: string;
-  icon: ReactNode;
+  icon: React.ReactNode;
   trend: string;
-  color: string;
+  color: "emerald" | "blue" | "amber" | "slate";
 }
 
-function StatCard({ title, value, icon, trend, color }: { title: string; value: string; icon: React.ReactNode; trend: string; color: "emerald" | "blue" | "amber" | "slate" }) {
+function StatCard({ title, value, icon, trend, color }: StatCardProps) {
   const colorMap = {
     emerald: "bg-emerald-50 text-emerald-600 shadow-emerald-100",
     blue: "bg-blue-50 text-blue-600 shadow-blue-100",
@@ -451,6 +451,12 @@ function StatCard({ title, value, icon, trend, color }: { title: string; value: 
       </div>
     </div>
   );
+}
+
+interface ComplianceCardProps {
+  icon: React.ReactNode;
+  label: string;
+  status: string;
 }
 
 function StatusBadge({ status }: { status: VendorStatus }) {

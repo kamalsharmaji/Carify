@@ -424,12 +424,12 @@ export default function MMM() {
 interface StatCardProps {
   title: string;
   value: string;
-  icon: ReactNode;
+  icon: React.ReactNode;
   trend: string;
-  color: string;
+  color: "blue" | "emerald" | "rose" | "slate";
 }
 
-function StatCard({ title, value, icon, trend, color }: { title: string; value: string; icon: React.ReactNode; trend: string; color: "blue" | "emerald" | "rose" | "slate" }) {
+function StatCard({ title, value, icon, trend, color }: StatCardProps) {
   const colorMap = {
     blue: "bg-blue-50 text-blue-600 border-blue-100",
     emerald: "bg-emerald-50 text-emerald-600 border-emerald-100",

@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import React, { type ReactNode } from "react";
 import {
   Users,
   UserPlus,
@@ -12,20 +12,24 @@ import {
   PieChart,
   Target,
   CreditCard,
-  UserCheck
+  UserCheck,
+  ArrowUpRight,
+  ArrowDownRight
 } from "lucide-react";
+
+/* ================= TYPES ================= */
+
+interface StatCardProps {
+  title: string;
+  value: string;
+  icon: React.ReactNode;
+  trend: string;
+  color: "blue" | "emerald" | "amber" | "slate";
+}
 
 /* ================= MAIN COMPONENT ================= */
 
 export default function HRMS() {
-  // Mock data for the dashboard
-  const stats = [
-    { label: "Total Workforce", value: "124", icon: <Users size={24} />, color: "bg-blue-500", trend: "+4 this month" },
-    { label: "Present Today", value: "118", icon: <UserCheck size={24} />, color: "bg-emerald-500", trend: "95% Attendance" },
-    { label: "Open Positions", value: "12", icon: <Briefcase size={24} />, color: "bg-amber-500", trend: "5 urgent" },
-    { label: "Monthly Payroll", value: "₹45.2L", icon: <CreditCard size={24} />, color: "bg-brand", trend: "Due in 4 days" },
-  ];
-
   const recentActivities = [
     { id: 1, user: "Amit Sharma", action: "joined as Fleet Manager", time: "2 hours ago", type: "hire" },
     { id: 2, user: "Neha Verma", action: "approved leave for Vikram", time: "4 hours ago", type: "approval" },

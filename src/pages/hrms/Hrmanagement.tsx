@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import {
   Users,
   UserPlus,
-  Briefcase,
   Search,
   LayoutGrid,
   Table as TableIcon,

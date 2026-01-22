@@ -118,83 +118,91 @@ export default function InspectionHistory() {
 
   return (
     <div 
-      className="min-h-screen bg-slate-50 animate-in fade-in duration-500"
-       
+      className="min-h-screen bg-[#F1F5F9] p-4 md:p-6 lg:p-10 animate-in fade-in duration-700"
     >
       <div className="max-w-[1600px] mx-auto space-y-10">
         
-        {/* Header Section */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-8">
-          <div>
-            <h1 className="text-4xl font-black text-slate-900 tracking-tight">
-              Inspection <span  >History</span>
-            </h1>
-            <p className="text-slate-500 mt-2 font-medium flex items-center gap-2">
-              <History size={16} />
-              Vehicle Inspection › Past Audit Logs
-            </p>
-          </div>
-
-          <div className="flex flex-wrap items-center gap-3">
-            <div className="relative group">
-              <Search
-                className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-brand transition-colors"
-                size={18}
-              />
-              <input
-                type="text"
-                placeholder="Search history..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-12 pr-4 py-3.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-4 focus:ring-brand/10 focus:border-brand transition-all w-full md:w-64 shadow-sm font-medium"
-              />
+        {/* Cinematic Header Section */}
+        <div className="bg-white/70 backdrop-blur-2xl border border-white/50 rounded-[40px] p-8 md:p-10 shadow-2xl shadow-slate-200/50">
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8">
+            <div className="flex items-center gap-6">
+              <div className="w-20 h-20 bg-slate-900 rounded-[30px] flex items-center justify-center shadow-2xl shadow-slate-900/20 rotate-3 hover:rotate-0 transition-transform duration-500">
+                <History className="text-white w-10 h-10" />
+              </div>
+              <div>
+                <div className="flex items-center gap-3">
+                  <h1 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight">
+                    Inspection <span className="text-brand">History</span>
+                  </h1>
+                  <span className="px-4 py-1.5 bg-slate-900 text-white text-[10px] font-black uppercase tracking-[0.2em] rounded-full shadow-lg">
+                    LOGS v4.0
+                  </span>
+                </div>
+                <p className="text-slate-500 mt-2 font-semibold text-lg">
+                  Vehicle Inspection › Past Audit Logs
+                </p>
+              </div>
             </div>
 
-            <div className="flex border border-slate-200 rounded-xl bg-white p-1.5 shadow-sm">
+            <div className="flex flex-wrap items-center gap-4">
+              <div className="relative group flex-1 md:flex-none">
+                <Search
+                  className="absolute left-6 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-brand transition-colors"
+                  size={20}
+                />
+                <input
+                  type="text"
+                  placeholder="Search audit logs..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="pl-14 pr-6 py-4 bg-white/70 backdrop-blur-xl border border-white/50 rounded-2xl text-sm font-bold text-slate-900 focus:outline-none focus:ring-4 focus:ring-brand/10 focus:border-brand transition-all w-full md:w-64 shadow-xl shadow-slate-200/50"
+                />
+              </div>
+
+              <div className="flex bg-white/50 backdrop-blur-md p-1.5 rounded-2xl border border-white shadow-xl">
+                <button
+                  onClick={() => setView("table")}
+                  className={`p-3 rounded-xl transition-all ${
+                    view === "table"
+                      ? "bg-slate-900 text-white shadow-lg scale-105"
+                      : "text-slate-400 hover:text-slate-600"
+                  }`}
+                >
+                  <TableIcon size={20} />
+                </button>
+                <button
+                  onClick={() => setView("card")}
+                  className={`p-3 rounded-xl transition-all ${
+                    view === "card"
+                      ? "bg-slate-900 text-white shadow-lg scale-105"
+                      : "text-slate-400 hover:text-slate-600"
+                  }`}
+                >
+                  <LayoutGrid size={20} />
+                </button>
+              </div>
+
               <button
-                onClick={() => setView("table")}
-                className={`p-2.5 rounded-xl transition-all ${
-                  view === "table"
-                    ? "bg-brand text-white shadow-lg shadow-brand/20"
-                    : "text-slate-400 hover:bg-slate-50"
-                }`}
-                
+                onClick={() => {
+                  setEditItem(null);
+                  setShowForm(true);
+                }}
+                className="flex items-center gap-3 bg-brand text-white px-8 py-4 rounded-2xl text-xs font-black uppercase tracking-widest hover:opacity-90 transition-all shadow-xl shadow-brand/20 active:scale-95 group"
               >
-                <TableIcon size={20} />
-              </button>
-              <button
-                onClick={() => setView("card")}
-                className={`p-2.5 rounded-xl transition-all ${
-                  view === "card"
-                    ? "bg-brand text-white shadow-lg shadow-brand/20"
-                    : "text-slate-400 hover:bg-slate-50"
-                }`}
-                
-              >
-                <LayoutGrid size={20} />
+                <Plus size={18} className="group-hover:rotate-90 transition-transform" />
+                <span>New Record</span>
               </button>
             </div>
-
-            <button
-              onClick={() => {
-                setEditItem(null);
-                setShowForm(true);
-              }}
-              className="flex items-center gap-2 text-white px-8 py-3.5 rounded-xl text-sm font-black transition-all shadow-xl active:scale-95 whitespace-nowrap"
-             >
-              <Plus size={18} strokeWidth={3} />
-              <span className="hidden sm:inline">New Record</span>
-            </button>
           </div>
         </div>
 
-        {/* List View */}
+        {/* Content Section */}
         {view === "table" ? (
-          <div className="bg-white border border-slate-100 rounded-xl shadow-sm overflow-hidden transition-all hover:shadow-md">
-            <div className="overflow-x-auto custom-scrollbar">
-              <table className="w-full text-left">
-                <thead className="bg-slate-50/50">
-                  <tr>
+          <div className="bg-white/70 backdrop-blur-xl border border-white/50 rounded-[40px] shadow-2xl shadow-slate-200/50 overflow-hidden">
+            <div className="overflow-x-auto">
+              <table className="w-full text-left border-collapse">
+                <thead>
+                  <tr className="border-b border-slate-100">
                     {[
                       "NO",
                       "VEHICLE & INSPECTOR",
@@ -205,7 +213,7 @@ export default function InspectionHistory() {
                     ].map((h) => (
                       <th
                         key={h}
-                        className="px-10 py-6 text-[11px] font-black text-slate-400 uppercase tracking-[0.2em]"
+                        className="px-10 py-6 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]"
                       >
                         {h}
                       </th>
@@ -216,26 +224,24 @@ export default function InspectionHistory() {
                   {filteredHistory.map((h, idx) => (
                     <tr
                       key={h.id}
-                      className="hover:bg-slate-50/50 transition-colors group"
+                      className="hover:bg-white/80 transition-all group"
                     >
                       <td className="px-10 py-6 font-black text-slate-300">
                         {String(idx + 1).padStart(2, '0')}
                       </td>
                       <td className="px-10 py-6">
                         <div className="flex items-center gap-4">
-                          <div 
-                            className="h-12 w-12 rounded-xl flex items-center justify-center font-black text-lg border border-brand/10 group-hover:scale-110 transition-transform shadow-sm"
-                           >
-                            <ClipboardList size={22} />
+                          <div className="h-12 w-12 rounded-2xl bg-slate-900 text-white flex items-center justify-center font-black text-sm shadow-xl group-hover:rotate-6 transition-transform">
+                            {h.vehicle.charAt(0)}
                           </div>
                           <div>
-                            <div className="font-black text-slate-900 text-base">{h.vehicle}</div>
-                            <div className="text-xs text-slate-400 font-bold uppercase tracking-wider mt-0.5">Inspector: {h.inspector || "N/A"}</div>
+                            <div className="font-black text-slate-900 text-sm tracking-tight">{h.vehicle}</div>
+                            <div className="text-[10px] text-slate-400 font-black uppercase tracking-widest mt-0.5">Inspector: {h.inspector || "N/A"}</div>
                           </div>
                         </div>
                       </td>
                       <td className="px-10 py-6">
-                        <span className="text-sm font-bold text-slate-600 bg-slate-100 px-3 py-1.5 rounded-lg border border-slate-200/50">
+                        <span className="px-4 py-1.5 bg-slate-100/50 text-slate-600 rounded-xl text-[9px] font-black uppercase tracking-widest border border-slate-200/50">
                           {h.inspectionName}
                         </span>
                       </td>
@@ -243,7 +249,7 @@ export default function InspectionHistory() {
                         {h.inspectionDate}
                       </td>
                       <td className="px-10 py-6">
-                        <span className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest border ${
+                        <span className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-xl text-[9px] font-black uppercase tracking-widest border ${
                           h.result === "Passed" 
                             ? "bg-emerald-50 text-emerald-600 border-emerald-100" 
                             : "bg-rose-50 text-rose-600 border-rose-100"
@@ -253,7 +259,7 @@ export default function InspectionHistory() {
                         </span>
                       </td>
                       <td className="px-10 py-6">
-                        <div className="flex gap-2">
+                        <div className="flex gap-3">
                           <ActionBtn
                             color="blue"
                             onClick={() => setViewItem(h)}
@@ -285,66 +291,57 @@ export default function InspectionHistory() {
             {filteredHistory.map((h) => (
               <div
                 key={h.id}
-                className="bg-white border border-slate-100 rounded-xl p-8 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 group relative overflow-hidden"
+                className="group bg-white/70 backdrop-blur-xl rounded-[40px] p-8 border border-white/50 shadow-2xl shadow-slate-200/50 hover:scale-[1.02] transition-all duration-500 relative overflow-hidden"
               >
-                <div 
-                  className="absolute top-0 right-0 w-24 h-24 rounded-bl-[80px] -mr-8 -mt-8 opacity-5 transition-all group-hover:scale-110"
-                 ></div>
-                
                 <div className="flex justify-between items-start mb-8 relative z-10">
-                  <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest border ${
+                  <span className={`inline-flex items-center gap-1.5 px-4 py-1.5 rounded-xl text-[9px] font-black uppercase tracking-widest border ${
                     h.result === "Passed" 
                       ? "bg-emerald-50 text-emerald-600 border-emerald-100" 
                       : "bg-rose-50 text-rose-600 border-rose-100"
                   }`}>
                     {h.result}
                   </span>
-                  <History size={20} className="text-slate-200 group-hover:text-brand transition-colors"   />
+                  <div className="h-12 w-12 rounded-2xl bg-slate-900 text-white flex items-center justify-center font-black text-sm shadow-xl group-hover:rotate-12 transition-transform">
+                    {h.vehicle.charAt(0)}
+                  </div>
                 </div>
 
-                <div className="space-y-4 mb-8 relative z-10">
-                  <h3 className="font-black text-slate-900 group-hover:text-brand transition-colors line-clamp-1 text-lg"  >
+                <div className="mb-8 relative z-10">
+                  <h3 className="text-xl font-black text-slate-900 group-hover:text-brand transition-colors tracking-tight line-clamp-1">
                     {h.vehicle}
                   </h3>
-                  <div className="flex items-center gap-2">
-                    <div className="h-6 w-6 rounded-full bg-slate-100 flex items-center justify-center text-[10px] font-black text-slate-400">
-                      {h.inspector?.charAt(0) || "U"}
-                    </div>
-                    <p className="text-xs font-bold text-slate-500">{h.inspectionName}</p>
+                  <div className="flex items-center gap-2 text-[10px] text-slate-400 font-black mt-2 uppercase tracking-[0.2em]">
+                    <ClipboardList size={14} className="text-brand" />
+                    {h.inspectionName}
                   </div>
-                  <p className="text-[10px] text-slate-400 font-black uppercase tracking-[0.2em]">{h.inspectionDate}</p>
                 </div>
 
-                <div className="p-5 bg-slate-50 rounded-xl mb-8 group-hover:bg-white group-hover:shadow-inner transition-all border border-transparent group-hover:border-slate-100">
-                   <p className="text-[10px] text-slate-400 font-black uppercase tracking-widest mb-2 flex items-center gap-2">
-                     <MessageSquare size={12} />
-                     Inspector Remarks
-                   </p>
-                   <p className="text-[12px] text-slate-600 line-clamp-2 italic leading-relaxed font-medium">"{h.details}"</p>
+                <div className="space-y-4 py-6 border-y border-slate-100/50">
+                  <div className="flex justify-between items-center">
+                    <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Inspector</span>
+                    <span className="text-slate-900 font-black text-xs tracking-tight uppercase">{h.inspector}</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Audit Date</span>
+                    <span className="text-slate-900 font-black text-xs tracking-tight uppercase">{h.inspectionDate}</span>
+                  </div>
                 </div>
 
-                <div className="flex gap-2 relative z-10">
+                <div className="flex gap-3 mt-8">
                   <button
                     onClick={() => setViewItem(h)}
-                    className="flex-1 py-3.5 rounded-xl bg-slate-900 text-white text-[10px] font-black uppercase tracking-widest hover:opacity-90 transition-all active:scale-95 shadow-xl shadow-slate-200"
+                    className="flex-1 py-4 rounded-2xl bg-slate-900 text-white font-black text-[10px] uppercase tracking-[0.2em] transition-all hover:bg-slate-800 hover:shadow-xl hover:shadow-slate-900/20 active:scale-95"
                   >
-                    View Details
+                    View Record
                   </button>
                   <button
                     onClick={() => {
                       setEditItem(h);
                       setShowForm(true);
                     }}
-                    className="p-3.5 rounded-xl bg-brand/10 text-brand hover:bg-brand hover:text-white transition-all border border-brand/10"
-                 
+                    className="p-4 rounded-2xl bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 hover:border-slate-300 transition-all active:scale-95"
                   >
-                    <Pencil size={18} />
-                  </button>
-                  <button
-                    onClick={() => remove(h.id)}
-                    className="p-3.5 rounded-xl bg-slate-50 text-slate-300 hover:text-rose-500 hover:bg-rose-50 transition-all border border-transparent hover:border-rose-100"
-                  >
-                    <Trash2 size={18} />
+                    <Pencil size={20} />
                   </button>
                 </div>
               </div>
@@ -354,79 +351,82 @@ export default function InspectionHistory() {
       </div>
 
       {viewItem && (
-        <Modal onClose={() => setViewItem(null)} title="Inspection Record Details">
-          <div className="space-y-8">
-            <div className={`p-8 rounded-xl border flex items-center justify-between relative overflow-hidden group ${
-              viewItem.result === "Passed" ? "bg-emerald-50 border-emerald-100" : "bg-rose-50 border-rose-100"
-            }`}>
-              <div 
-                className="absolute top-0 right-0 w-32 h-32 rounded-bl-full -mr-8 -mt-8 opacity-10"
-                style={{ backgroundColor: viewItem.result === "Passed" ? "#10b981" : "#f43f5e" }}
-              ></div>
-              
-              <div className="flex items-center gap-5 relative z-10">
-                <div className={`h-16 w-16 rounded-xl flex items-center justify-center shadow-2xl text-white ${
-                  viewItem.result === "Passed" ? "bg-emerald-500 shadow-emerald-500/30" : "bg-rose-500 shadow-rose-500/30"
-                }`}>
-                  {viewItem.result === "Passed" ? <CheckCircle size={32} /> : <XCircle size={32} />}
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xl animate-in fade-in duration-300">
+          <div className="bg-white/90 backdrop-blur-2xl rounded-[40px] w-full max-w-2xl shadow-3xl overflow-hidden border border-white/50 animate-in zoom-in duration-500">
+            <div className="p-10 border-b border-slate-100 flex items-center justify-between bg-slate-50/30">
+              <div className="flex items-center gap-6">
+                <div className="w-16 h-16 bg-slate-900 rounded-[24px] flex items-center justify-center shadow-2xl rotate-3">
+                  <ClipboardList className="text-white w-8 h-8" />
                 </div>
                 <div>
-                  <p className={`text-[10px] font-black uppercase tracking-[0.2em] mb-1 ${
-                    viewItem.result === "Passed" ? "text-emerald-400" : "text-rose-400"
-                  }`}>Inspection Status</p>
-                  <p className={`text-3xl font-black ${
-                    viewItem.result === "Passed" ? "text-emerald-600" : "text-rose-600"
-                  }`}>{viewItem.result}</p>
+                  <h3 className="text-3xl font-black text-slate-900 tracking-tight">Audit Insight</h3>
+                  <p className="text-brand text-[10px] font-black uppercase tracking-[0.2em] mt-1.5">Inspection Intelligence Profile</p>
                 </div>
               </div>
-              <div className="text-right relative z-10">
-                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Audit Date</p>
-                <p className="text-base font-black text-slate-700">{viewItem.inspectionDate}</p>
-              </div>
+              <button onClick={() => setViewItem(null)} className="h-12 w-12 flex items-center justify-center rounded-2xl hover:bg-white hover:shadow-xl transition-all text-slate-400 hover:text-slate-900">
+                <X size={24} />
+              </button>
             </div>
-
-            <div className="grid grid-cols-1 gap-6">
-              <div className="p-8 bg-white border border-slate-100 rounded-xl shadow-sm">
-                 <div className="flex items-center gap-3 mb-6">
-                    <div className="w-1.5 h-6 bg-brand rounded-full"  ></div>
-                    <h4 className="text-xl font-black text-slate-900 tracking-tight">Technical Profile</h4>
-                 </div>
-                 
-                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div>
-                      <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1.5">Assigned Vehicle</p>
-                      <p className="text-lg font-black text-slate-900">{viewItem.vehicle}</p>
-                    </div>
-                    <div>
-                      <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1.5">Inspector ID</p>
-                      <p className="text-lg font-black text-slate-900">{viewItem.inspector || "David Wilson"}</p>
-                    </div>
-                    <div className="md:col-span-2">
-                      <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1.5">Inspection Protocol</p>
-                      <p className="text-lg font-black text-slate-900">{viewItem.inspectionName}</p>
-                    </div>
-                 </div>
+            
+            <div className="p-10 space-y-8">
+              <div className={`p-8 rounded-[32px] border flex items-center justify-between relative overflow-hidden group ${
+                viewItem.result === "Passed" ? "bg-emerald-500/10 border-emerald-500/20" : "bg-rose-500/10 border-rose-500/20"
+              }`}>
+                <div className="flex items-center gap-6">
+                  <div className={`h-16 w-16 rounded-2xl flex items-center justify-center shadow-2xl text-white ${
+                    viewItem.result === "Passed" ? "bg-emerald-500 shadow-emerald-500/30" : "bg-rose-500 shadow-rose-500/30"
+                  }`}>
+                    {viewItem.result === "Passed" ? <CheckCircle size={32} /> : <XCircle size={32} />}
+                  </div>
+                  <div>
+                    <p className={`text-[10px] font-black uppercase tracking-[0.2em] mb-1 ${
+                      viewItem.result === "Passed" ? "text-emerald-500" : "text-rose-500"
+                    }`}>Evaluation Result</p>
+                    <p className={`text-3xl font-black tracking-tight ${
+                      viewItem.result === "Passed" ? "text-emerald-700" : "text-rose-700"
+                    }`}>{viewItem.result}</p>
+                  </div>
+                </div>
+                <div className="text-right">
+                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Audit Date</p>
+                  <p className="text-xl font-black text-slate-900">{viewItem.inspectionDate}</p>
+                </div>
               </div>
 
-              <div className="p-8 border border-slate-100 rounded-xl bg-slate-50/50">
-                <p className="text-[10px] uppercase font-black text-slate-400 tracking-[0.2em] mb-4 flex items-center gap-2">
-                  <MessageSquare size={14} />
-                  Detailed Assessment
+              <div className="grid grid-cols-2 gap-6">
+                <div className="p-6 bg-slate-50/50 border border-slate-100 rounded-[24px]">
+                  <p className="text-[10px] uppercase font-black text-slate-400 tracking-[0.2em] mb-2">Technical Subject</p>
+                  <p className="text-xl font-black text-slate-900 tracking-tight">{viewItem.vehicle}</p>
+                </div>
+                <div className="p-6 bg-slate-50/50 border border-slate-100 rounded-[24px]">
+                  <p className="text-[10px] uppercase font-black text-slate-400 tracking-[0.2em] mb-2">Protocol Lead</p>
+                  <p className="text-xl font-black text-slate-900 tracking-tight">{viewItem.inspector}</p>
+                </div>
+                <div className="col-span-2 p-6 bg-slate-50/50 border border-slate-100 rounded-[24px]">
+                  <p className="text-[10px] uppercase font-black text-slate-400 tracking-[0.2em] mb-2">Inspection Procedure</p>
+                  <p className="text-xl font-black text-slate-900 tracking-tight">{viewItem.inspectionName}</p>
+                </div>
+              </div>
+
+              <div className="p-8 bg-slate-900 rounded-[32px] shadow-2xl shadow-slate-900/20">
+                <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-4 flex items-center gap-2">
+                  <MessageSquare size={14} className="text-brand" />
+                  Detailed Assessment Findings
                 </p>
-                <p className="text-base font-medium text-slate-600 leading-relaxed italic border-l-4 border-brand/20 pl-6 py-2"  >
+                <p className="text-white text-lg font-medium leading-relaxed italic opacity-90">
                   "{viewItem.details}"
                 </p>
               </div>
+
+              <button 
+                onClick={() => setViewItem(null)} 
+                className="w-full py-5 bg-slate-900 text-white rounded-[24px] font-black text-[12px] uppercase tracking-[0.3em] hover:bg-slate-800 transition-all shadow-xl shadow-slate-900/20 active:scale-[0.98]"
+              >
+                Close Audit Profile
+              </button>
             </div>
-            
-            <button
-              onClick={() => setViewItem(null)}
-              className="w-full py-5 bg-slate-900 text-white rounded-xl font-black text-xs uppercase tracking-[0.2em] hover:bg-slate-800 transition-all shadow-xl active:scale-95"
-            >
-              Close Record
-            </button>
           </div>
-        </Modal>
+        </div>
       )}
 
       {showForm && (
@@ -453,14 +453,14 @@ function ActionBtn({
   color: "blue" | "orange" | "red";
 }) {
   const styles = {
-    blue: "text-blue-500 hover:bg-blue-50 border-transparent hover:border-blue-100",
-    orange: "text-orange-500 hover:bg-orange-50 border-transparent hover:border-orange-100",
-    red: "text-red-500 hover:bg-red-50 border-transparent hover:border-red-100",
+    blue: "text-blue-500 bg-blue-50/50 border-blue-100 hover:bg-blue-100 hover:text-blue-600",
+    orange: "text-orange-500 bg-orange-50/50 border-orange-100 hover:bg-orange-100 hover:text-orange-600",
+    red: "text-rose-500 bg-rose-50/50 border-rose-100 hover:bg-rose-100 hover:text-rose-600",
   };
   return (
     <button
       onClick={onClick}
-      className={`p-2.5 rounded-xl transition-all border group ${styles[color]}`}
+      className={`p-3 rounded-xl transition-all active:scale-90 border shadow-sm ${styles[color]}`}
     >
       {icon}
     </button>

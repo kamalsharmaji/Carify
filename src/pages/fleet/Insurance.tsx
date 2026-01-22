@@ -8,8 +8,7 @@ import {
   Table as TableIcon,
   Search,
   ShieldCheck,
-  Calendar,
-  DollarSign,
+  IndianRupee,
   Briefcase,
   Navigation,
   FileText,
@@ -143,7 +142,7 @@ export default function Insurance() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
             {[
               { label: "Active Protocols", value: stats.active, icon: ShieldCheck, color: "blue" },
-              { label: "Premium Volume", value: `₹${stats.totalPremium.toLocaleString()}`, icon: DollarSign, color: "emerald" },
+              { label: "Premium Volume", value: `₹${stats.totalPremium.toLocaleString()}`, icon: IndianRupee, color: "emerald" },
               { label: "Renewal Alerts", value: stats.expiring, icon: AlertTriangle, color: "orange" },
             ].map((stat, i) => (
               <div key={i} className="bg-slate-50 border border-slate-100 p-4 rounded-lg flex items-center gap-4">
@@ -307,7 +306,7 @@ export default function Insurance() {
                 <DetailCard label="Asset Identity" value={viewRecord.vehicleNo} icon={Navigation} color="blue" />
                 <DetailCard label="Policy Number" value={viewRecord.policyNo} icon={FileText} color="indigo" />
                 <DetailCard label="Provider" value={viewRecord.provider} icon={Briefcase} color="emerald" />
-                <DetailCard label="Annual Premium" value={`₹${parseFloat(viewRecord.premium).toLocaleString()}`} icon={DollarSign} color="orange" />
+                <DetailCard label="Annual Premium" value={`₹${parseFloat(viewRecord.premium).toLocaleString()}`} icon={IndianRupee} color="orange" />
                 <DetailCard label="Protection Class" value={viewRecord.coverage} icon={ShieldCheck} color="blue" />
                 <DetailCard label="Expiry Horizon" value={viewRecord.expiryDate} icon={Clock} color="red" />
               </div>
