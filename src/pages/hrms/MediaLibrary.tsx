@@ -48,7 +48,7 @@ export default function MediaLibrary() {
   );
 
   return (
-    <div className="min-h-screen bg-slate-50/50 p-3 md:p-6 animate-in fade-in duration-500">
+    <div className="min-h-screen bg-slate-50 p-3 md:p-6 animate-in fade-in duration-500">
       <div className="space-y-8">
         
         {/* Header Section */}
@@ -75,12 +75,12 @@ export default function MediaLibrary() {
                 placeholder="Search assets..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-12 pr-4 py-3 bg-white border border-slate-200 rounded-2xl text-sm focus:outline-none focus:ring-4 focus:ring-red-400/10 focus:border-red-400 transition-all w-full md:w-72 shadow-sm font-medium"
+                className="pl-12 pr-4 py-3 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-4 focus:ring-red-400/10 focus:border-red-400 transition-all w-full md:w-72 shadow-sm font-medium"
               />
             </div>
 
             <button
-              className="flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white px-6 py-3 rounded-2xl text-sm font-bold transition-all shadow-xl active:scale-95"
+              className="flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white px-6 py-3 rounded-xl text-sm font-bold transition-all shadow-xl active:scale-95"
             >
               <Plus size={18} />
               <span className="hidden sm:inline">Add Media</span>
@@ -90,7 +90,7 @@ export default function MediaLibrary() {
 
         {/* Filters and View Toggle */}
         <div className="flex flex-wrap items-center justify-between gap-4">
-          <div className="flex items-center gap-2 bg-white p-1 rounded-2xl border border-slate-200 shadow-sm overflow-x-auto">
+          <div className="flex items-center gap-2 bg-white p-1 rounded-xl border border-slate-200 shadow-sm overflow-x-auto">
             {["All", "Images", "Videos", "Audio", "Documents"].map((tab) => (
               <button key={tab} className={`px-6 py-2 rounded-xl text-xs font-black uppercase transition-all whitespace-nowrap ${tab === 'All' ? 'bg-red-400 text-white shadow-lg shadow-red-200' : 'text-slate-400 hover:bg-slate-50'}`}>
                 {tab}
@@ -112,7 +112,7 @@ export default function MediaLibrary() {
         {viewMode === "grid" ? (
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
             {filtered.map((item) => (
-              <div key={item.id} className="bg-white border border-slate-200 rounded-[24px] overflow-hidden shadow-sm hover:shadow-xl transition-all group relative">
+              <div key={item.id} className="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all group relative">
                 <div className="aspect-square bg-slate-100 flex items-center justify-center relative overflow-hidden">
                   <MediaPlaceholder type={item.type} />
                   <div className="absolute inset-0 bg-red-400/80 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-3">
@@ -127,7 +127,7 @@ export default function MediaLibrary() {
             ))}
           </div>
         ) : (
-          <div className="bg-white border border-slate-200 rounded-[32px] shadow-sm overflow-hidden">
+          <div className="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden">
              <table className="w-full text-left">
                 <thead className="bg-slate-50/50 border-b border-slate-100">
                   <tr>

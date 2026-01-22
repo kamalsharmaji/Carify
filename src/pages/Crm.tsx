@@ -125,131 +125,133 @@ export default function CRM() {
   const wonValue = leads.filter(l => l.status === "Closed Won").reduce((acc, curr) => acc + curr.value, 0);
 
   return (
-    <div 
-      className="min-h-screen bg-[#f8f9fa] animate-in fade-in duration-500 p-4 md:p-8"
-    >
-      <div className="max-w-[1600px] mx-auto space-y-8">
+    <div className="min-h-screen bg-[#f8fafc] p-4 sm:p-6 lg:p-6 animate-in fade-in duration-700">
+      <div className="max-w-[1600px] mx-auto space-y-6">
         
         {/* Header Section */}
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-          <div>
-            <h1 className="text-3xl md:text-4xl font-black text-slate-900 flex items-center gap-3 tracking-tight">
-              <span className="w-2.5 h-10 brand rounded-full"></span>
-              Deal Pipeline
-            </h1>
-            <p className="text-slate-500 mt-1 font-medium flex items-center gap-2">
-              <Target size={16} />
-              CRM › Lead & Customer Management
-            </p>
-          </div>
-
-          <div className="flex flex-wrap items-center gap-3">
-            <div className="relative group">
-              <Search
-                className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-brand transition-colors"
-                size={18}
-              />
-              <input
-                type="text"
-                placeholder="Search leads..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-12 pr-4 py-3 bg-white border border-slate-200 rounded-2xl text-sm focus:outline-none focus:ring-4 focus:ring-brand/10 focus:border-brand transition-all w-64 shadow-sm font-medium"
-              />
+        <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-6">
+          <div className="relative flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 bg-slate-900 rounded-xl flex items-center justify-center shadow-lg">
+                <Target className="text-white w-6 h-6" />
+              </div>
+              <div>
+                <h1 className="text-2xl font-black text-slate-900 tracking-tight">
+                  Deal <span className="text-indigo-600">Pipeline</span>
+                </h1>
+                <p className="text-sm text-slate-500 font-medium">
+                  Advanced Lead Management & Conversion Engine
+                </p>
+              </div>
             </div>
 
-            <div className="flex border border-slate-200 rounded-2xl bg-white p-1.5 shadow-sm">
+            <div className="flex flex-wrap items-center gap-4">
+              <div className="relative group">
+                <Search
+                  className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-slate-900 transition-colors"
+                  size={18}
+                />
+                <input
+                  type="text"
+                  placeholder="Search leads..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="pl-11 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-slate-900/5 focus:border-slate-900 transition-all w-64 lg:w-80 font-bold placeholder:text-slate-400"
+                />
+              </div>
+
+              <div className="flex border border-slate-200 rounded-xl bg-white p-1 shadow-sm">
+                <button
+                  onClick={() => setViewMode("table")}
+                  className={`p-2 rounded-lg transition-all ${
+                    viewMode === "table"
+                      ? "bg-slate-900 text-white shadow-md"
+                      : "text-slate-400 hover:bg-slate-50 hover:text-slate-600"
+                  }`}
+                >
+                  <TableIcon size={20} />
+                </button>
+                <button
+                  onClick={() => setViewMode("card")}
+                  className={`p-2 rounded-lg transition-all ${
+                    viewMode === "card"
+                      ? "bg-slate-900 text-white shadow-md"
+                      : "text-slate-400 hover:bg-slate-50 hover:text-slate-600"
+                  }`}
+                >
+                  <LayoutGrid size={20} />
+                </button>
+              </div>
+
               <button
-                onClick={() => setViewMode("table")}
-                className={`p-2 rounded-xl transition-all ${
-                  viewMode === "table"
-                    ? "bg-brand text-white shadow-lg shadow-brand/20"
-                    : "text-slate-400 hover:bg-slate-50"
-                }`}
+                onClick={() => {
+                  setSelectedLead(null);
+                  setShowForm(true);
+                }}
+                className="flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white px-6 py-2.5 rounded-xl text-sm font-bold transition-all shadow-md active:scale-95"
               >
-                <TableIcon size={20} />
-              </button>
-              <button
-                onClick={() => setViewMode("card")}
-                className={`p-2 rounded-xl transition-all ${
-                  viewMode === "card"
-                    ? "bg-brand text-white shadow-lg shadow-brand/20"
-                    : "text-slate-400 hover:bg-slate-50"
-                }`}
-              >
-                <LayoutGrid size={20} />
+                <UserPlus size={18} />
+                <span>CAPTURE LEAD</span>
               </button>
             </div>
-
-            <button
-              onClick={() => {
-                setSelectedLead(null);
-                setShowForm(true);
-              }}
-              className="flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white px-6 py-3 rounded-2xl text-sm font-bold transition-all shadow-xl active:scale-95 whitespace-nowrap"
-            >
-              <UserPlus size={18} />
-              <span className="hidden sm:inline">Add Lead</span>
-              <span className="sm:hidden">Add</span>
-            </button>
           </div>
         </div>
 
         {/* Stats Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          <StatCard title="Pipeline Value" value={`₹${(totalPipeline / 1000000).toFixed(1)}M`} icon={<Briefcase size={24} />} trend="Active leads" color="bg-indigo-500" />
-          <StatCard title="Won Deals" value={`₹${(wonValue / 1000000).toFixed(1)}M`} icon={<TrendingUp size={24} />} trend="Lifetime revenue" color="bg-emerald-500" />
-          <StatCard title="Conversion Rate" value="24.8%" icon={<Target size={24} />} trend="+2.4% vs LY" color="bg-blue-500" />
-          <StatCard title="Total Leads" value={leads.length.toString()} icon={<Users size={24} />} trend="Across all sources" color="bg-slate-700" />
+          <StatCard title="Pipeline Value" value={`₹${(totalPipeline / 1000000).toFixed(1)}M`} icon={<Briefcase size={24} />} trend="Active leads" color="slate" />
+          <StatCard title="Won Deals" value={`₹${(wonValue / 1000000).toFixed(1)}M`} icon={<TrendingUp size={24} />} trend="Lifetime revenue" color="emerald" />
+          <StatCard title="Conversion Rate" value="24.8%" icon={<Target size={24} />} trend="+2.4% vs LY" color="indigo" />
+          <StatCard title="Total Leads" value={leads.length.toString()} icon={<Users size={24} />} trend="Across all sources" color="blue" />
         </div>
 
         {/* Content Section */}
-        {viewMode === "table" ? (
-          <div className="bg-white border border-slate-200 rounded-[32px] shadow-sm overflow-hidden transition-all">
+        <div className="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden">
+          {viewMode === "table" ? (
             <div className="overflow-x-auto custom-scrollbar">
               <table className="w-full text-left">
-                <thead className="bg-slate-50/50 border-b border-slate-100">
-                  <tr>
+                <thead>
+                  <tr className="bg-slate-50 border-b border-slate-100">
                     {["Lead & Company", "Status", "Source", "Deal Value", "Last Contact", "Actions"].map((h) => (
-                      <th key={h} className="px-8 py-5 text-[11px] font-black text-slate-400 uppercase tracking-widest">
+                      <th key={h} className="px-6 py-4 text-[11px] font-bold text-slate-500 uppercase tracking-wider">
                         {h}
                       </th>
                     ))}
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-50">
+                <tbody className="divide-y divide-slate-100">
                   {paginated.map((lead) => (
-                    <tr key={lead.id} className="hover:bg-slate-50/50 transition-colors group">
-                      <td className="px-8 py-5">
-                        <div className="flex items-center gap-4">
-                          <div className="h-12 w-12 rounded-2xl bg-brand/10 text-brand flex items-center justify-center font-black text-lg border border-brand/20 group-hover:scale-110 transition-transform shadow-sm">
+                    <tr key={lead.id} className="hover:bg-slate-50/50 transition-all group">
+                      <td className="px-6 py-4">
+                        <div className="flex items-center gap-3">
+                          <div className="h-10 w-10 rounded-lg bg-slate-100 text-slate-500 flex items-center justify-center font-bold text-sm border border-slate-200">
                             {lead.name.charAt(0)}
                           </div>
                           <div>
-                            <div className="font-bold text-slate-900 text-base">{lead.name}</div>
-                            <div className="text-xs text-slate-400 font-medium">{lead.company}</div>
+                            <div className="font-bold text-slate-900 text-sm">{lead.name}</div>
+                            <div className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">{lead.company}</div>
                           </div>
                         </div>
                       </td>
-                      <td className="px-8 py-5">
+                      <td className="px-6 py-4">
                         <StatusBadge status={lead.status} />
                       </td>
-                      <td className="px-8 py-5">
-                        <span className="px-3 py-1 bg-slate-100 text-slate-600 rounded-full text-[10px] font-black uppercase tracking-wider">
+                      <td className="px-6 py-4">
+                        <span className="px-2 py-0.5 bg-slate-100 text-slate-500 rounded-full text-[10px] font-bold uppercase tracking-wider border border-slate-200">
                           {lead.source}
                         </span>
                       </td>
-                      <td className="px-8 py-5 font-black text-slate-900 text-sm">
+                      <td className="px-6 py-4 font-bold text-slate-900 text-sm">
                         ₹{lead.value.toLocaleString()}
                       </td>
-                      <td className="px-8 py-5 text-slate-500 font-bold text-sm">
+                      <td className="px-6 py-4 text-slate-500 font-medium text-sm">
                         {lead.lastContact}
                       </td>
-                      <td className="px-8 py-5">
+                      <td className="px-6 py-4">
                         <div className="flex gap-2">
-                          <ActionBtn color="blue" onClick={() => setViewDetails(lead)} icon={<Eye size={18} />} />
-                          <ActionBtn color="orange" onClick={() => { setSelectedLead(lead); setShowForm(true); }} icon={<Pencil size={18} />} />
-                          <ActionBtn color="red" onClick={() => handleDelete(lead.id)} icon={<Trash2 size={18} />} />
+                          <ActionBtn color="blue" onClick={() => setViewDetails(lead)} icon={<Eye size={16} />} />
+                          <ActionBtn color="orange" onClick={() => { setSelectedLead(lead); setShowForm(true); }} icon={<Pencil size={16} />} />
+                          <ActionBtn color="red" onClick={() => handleDelete(lead.id)} icon={<Trash2 size={16} />} />
                         </div>
                       </td>
                     </tr>
@@ -257,70 +259,68 @@ export default function CRM() {
                 </tbody>
               </table>
             </div>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {paginated.map((lead) => (
-              <div key={lead.id} className="bg-white border border-slate-200 rounded-[24px] p-8 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all group relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-brand/5 rounded-bl-[120px] -mr-10 -mt-10 transition-all group-hover:scale-125"></div>
-                
-                <div className="flex justify-between items-start mb-8 relative z-10">
-                  <div className="h-16 w-16 rounded-[24px] bg-brand text-white flex items-center justify-center font-black text-2xl shadow-xl shadow-brand/30 group-hover:rotate-6 transition-transform">
-                    {lead.name.charAt(0)}
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 p-6">
+              {paginated.map((lead) => (
+                <div key={lead.id} className="bg-white rounded-xl p-6 border border-slate-100 shadow-sm hover:shadow-md transition-all group">
+                  <div className="flex justify-between items-start mb-4">
+                    <div className="h-12 w-12 rounded-xl bg-indigo-600 text-white flex items-center justify-center font-bold text-xl shadow-md">
+                      {lead.name.charAt(0)}
+                    </div>
+                    <StatusBadge status={lead.status} />
                   </div>
-                  <StatusBadge status={lead.status} />
-                </div>
 
-                <div className="mb-8">
-                  <h3 className="font-black text-xl text-slate-900 line-clamp-1">{lead.name}</h3>
-                  <p className="text-sm text-brand font-black mt-1 uppercase tracking-wider">{lead.company}</p>
-                </div>
+                  <div className="mb-4">
+                    <h3 className="font-bold text-lg text-slate-900 line-clamp-1">{lead.name}</h3>
+                    <p className="text-[10px] text-indigo-600 font-bold uppercase tracking-wider">{lead.company}</p>
+                  </div>
 
-                <div className="space-y-4 pt-6 border-t border-slate-100">
-                  <div className="flex items-center gap-3 text-slate-500 text-sm font-medium">
-                    <Mail size={16} className="text-slate-400" />
-                    <span className="truncate">{lead.email}</span>
+                  <div className="space-y-3 pt-4 border-t border-slate-50">
+                    <div className="flex items-center gap-2 text-slate-500 text-xs font-medium">
+                      <Mail size={14} className="text-slate-400" />
+                      <span className="truncate">{lead.email}</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-slate-500 text-xs font-medium">
+                      <Globe size={14} className="text-slate-400" />
+                      {lead.source}
+                    </div>
+                    <div className="flex items-center gap-2 text-slate-900 text-base font-black">
+                      <DollarSign size={16} className="text-emerald-500" />
+                      ₹{lead.value.toLocaleString()}
+                    </div>
                   </div>
-                  <div className="flex items-center gap-3 text-slate-500 text-sm font-medium">
-                    <Globe size={16} className="text-slate-400" />
-                    {lead.source}
-                  </div>
-                  <div className="flex items-center gap-3 text-slate-900 text-base font-black">
-                    <DollarSign size={18} className="text-emerald-500" />
-                    ₹{lead.value.toLocaleString()}
-                  </div>
-                </div>
 
-                <div className="flex gap-3 mt-8 pt-6 border-t border-slate-100">
-                  <button onClick={() => setViewDetails(lead)} className="flex-1 py-3.5 rounded-2xl bg-slate-50 text-slate-600 hover:bg-slate-100 text-xs font-black uppercase transition-colors">History</button>
-                  <button onClick={() => { setSelectedLead(lead); setShowForm(true); }} className="p-3.5 rounded-2xl bg-brand/5 text-brand hover:bg-brand hover:text-white transition-all shadow-sm"><Pencil size={18} /></button>
+                  <div className="flex gap-2 mt-6 pt-4 border-t border-slate-50">
+                    <button onClick={() => setViewDetails(lead)} className="flex-1 py-2 rounded-lg bg-slate-50 text-slate-600 hover:bg-slate-100 text-[10px] font-bold uppercase tracking-wider transition-colors">History</button>
+                    <button onClick={() => { setSelectedLead(lead); setShowForm(true); }} className="p-2 rounded-lg bg-indigo-50 text-indigo-600 hover:bg-indigo-600 hover:text-white transition-all"><Pencil size={16} /></button>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        )}
+              ))}
+            </div>
+          )}
+        </div>
 
         {/* Pagination */}
         {totalPages > 1 && (
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-6 pt-6">
-            <p className="text-sm font-bold text-slate-400">
-              Showing <span className="text-slate-900 font-black">{(currentPage - 1) * ITEMS_PER_PAGE + 1}-{Math.min(currentPage * ITEMS_PER_PAGE, filtered.length)}</span> of <span className="text-slate-900 font-black">{filtered.length}</span> Business Leads
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4">
+            <p className="text-xs font-bold text-slate-500 uppercase tracking-wider">
+              Showing <span className="text-slate-900">{(currentPage - 1) * ITEMS_PER_PAGE + 1}-{Math.min(currentPage * ITEMS_PER_PAGE, filtered.length)}</span> of <span className="text-slate-900">{filtered.length}</span> Leads
             </p>
-            <div className="flex items-center gap-3 bg-white border border-slate-200 p-2 rounded-[24px] shadow-sm">
+            <div className="flex items-center gap-2 bg-white border border-slate-200 p-1.5 rounded-xl shadow-sm">
               <button
                 onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
                 disabled={currentPage === 1}
-                className="p-2.5 rounded-xl hover:bg-slate-50 disabled:opacity-20 transition-all text-slate-600"
+                className="p-2 rounded-lg hover:bg-slate-50 disabled:opacity-20 transition-all text-slate-600"
               >
-                <ChevronLeft size={24} />
+                <ChevronLeft size={20} />
               </button>
               <div className="flex items-center gap-1">
                 {Array.from({ length: totalPages }).map((_, i) => (
                   <button
                     key={i}
                     onClick={() => setCurrentPage(i + 1)}
-                    className={`h-10 w-10 rounded-xl text-xs font-black transition-all ${
-                      currentPage === i + 1 ? 'bg-brand text-white shadow-lg shadow-brand/30 scale-110' : 'text-slate-400 hover:bg-slate-50'
+                    className={`h-9 w-9 rounded-lg text-xs font-bold transition-all ${
+                      currentPage === i + 1 ? 'bg-slate-900 text-white shadow-md' : 'text-slate-400 hover:bg-slate-50'
                     }`}
                   >
                     {i + 1}
@@ -330,9 +330,9 @@ export default function CRM() {
               <button
                 onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
                 disabled={currentPage === totalPages}
-                className="p-2.5 rounded-xl hover:bg-slate-50 disabled:opacity-20 transition-all text-slate-600"
+                className="p-2 rounded-lg hover:bg-slate-50 disabled:opacity-20 transition-all text-slate-600"
               >
-                <ChevronRight size={24} />
+                <ChevronRight size={20} />
               </button>
             </div>
           </div>
@@ -361,22 +361,36 @@ export default function CRM() {
 
 /* ================= HELPER COMPONENTS ================= */
 
-function StatCard({ title, value, icon, trend, color }: { title: string; value: string; icon: React.ReactNode; trend: string; color: string }) {
+function StatCard({ title, value, icon, trend, color }: { title: string; value: string; icon: React.ReactNode; trend: string; color: "blue" | "emerald" | "purple" | "slate" }) {
+  const colorMap = {
+    blue: "bg-blue-50 text-blue-600 shadow-blue-100",
+    emerald: "bg-emerald-50 text-emerald-600 shadow-emerald-100",
+    purple: "bg-purple-50 text-purple-600 shadow-purple-100",
+    slate: "bg-slate-50 text-slate-600 shadow-slate-100"
+  };
+
+  const iconBgMap = {
+    blue: "bg-blue-600",
+    emerald: "bg-emerald-600",
+    purple: "bg-purple-600",
+    slate: "bg-slate-900"
+  };
+
   return (
-    <div className="bg-white p-6 rounded-[24px] border border-slate-200 shadow-sm relative overflow-hidden group">
-      <div className={`absolute top-0 right-0 w-24 h-24 ${color} opacity-[0.03] rounded-bl-[100px] -mr-8 -mt-8 transition-all group-hover:scale-150`}></div>
-      <div className="flex justify-between items-start mb-4 relative z-10">
-        <div className={`p-3 rounded-2xl ${color} text-white shadow-lg`}>
+    <div className="bg-white rounded-xl p-6 border border-slate-100 shadow-sm hover:shadow-md transition-all group overflow-hidden relative">
+      <div className={`absolute top-0 right-0 w-16 h-16 ${iconBgMap[color]} opacity-[0.03] rounded-bl-full -mr-4 -mt-4 transition-all group-hover:scale-150`}></div>
+      <div className="flex items-center justify-between mb-4 relative z-10">
+        <div className={`w-10 h-10 rounded-lg flex items-center justify-center transition-transform group-hover:scale-110 duration-300 ${colorMap[color]}`}>
           {icon}
+        </div>
+        <div className="flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 bg-emerald-50 text-emerald-600 rounded-md">
+          <TrendingUp size={12} />
+          {trend}
         </div>
       </div>
       <div className="relative z-10">
-        <h3 className="text-slate-400 text-[10px] font-black uppercase tracking-widest mb-1">{title}</h3>
-        <p className="text-3xl font-black text-slate-900 tracking-tight">{value}</p>
-        <p className="text-[10px] font-bold text-slate-400 mt-2 flex items-center gap-1">
-          <TrendingUp size={12} className="text-emerald-500" />
-          {trend}
-        </p>
+        <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">{title}</p>
+        <h3 className="text-2xl font-black text-slate-900 tracking-tight">{value}</h3>
       </div>
     </div>
   );
@@ -389,12 +403,12 @@ function StatusBadge({ status }: { status: LeadStatus }) {
     "Qualified": "bg-emerald-50 text-emerald-600 border-emerald-100",
     "Proposal": "bg-amber-50 text-amber-600 border-amber-100",
     "Negotiation": "bg-orange-50 text-orange-600 border-orange-100",
-    "Closed Won": "bg-emerald-100 text-emerald-800 border-emerald-200",
-    "Closed Lost": "bg-rose-50 text-rose-600 border-rose-100"
+    "Closed Won": "bg-emerald-600 text-white border-transparent",
+    "Closed Lost": "bg-slate-100 text-slate-500 border-slate-200"
   };
 
   return (
-    <span className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider border ${styles[status]}`}>
+    <span className={`px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-[0.1em] border shadow-sm ${styles[status]}`}>
       {status}
     </span>
   );
@@ -402,15 +416,15 @@ function StatusBadge({ status }: { status: LeadStatus }) {
 
 function ActionBtn({ color, onClick, icon }: { color: "blue" | "orange" | "red"; onClick: () => void; icon: React.ReactNode }) {
   const styles = {
-    blue: "text-blue-500 hover:bg-blue-50 border-blue-100",
-    orange: "text-orange-500 hover:bg-orange-50 border-orange-100",
-    red: "text-rose-500 hover:bg-rose-50 border-rose-100"
+    blue: "text-blue-600 bg-blue-50 hover:bg-blue-600 hover:text-white border-blue-100",
+    orange: "text-orange-600 bg-orange-50 hover:bg-orange-600 hover:text-white border-orange-100",
+    red: "text-rose-600 bg-rose-50 hover:bg-rose-600 hover:text-white border-rose-100"
   };
 
   return (
     <button
       onClick={onClick}
-      className={`p-2 rounded-xl border transition-all hover:scale-110 active:scale-90 ${styles[color]}`}
+      className={`p-2.5 rounded-xl border transition-all hover:scale-110 active:scale-95 shadow-sm ${styles[color]}`}
     >
       {icon}
     </button>

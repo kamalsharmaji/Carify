@@ -118,7 +118,7 @@ export default function InspectionHistory() {
 
   return (
     <div 
-      className="min-h-screen bg-[#f8f9fa] animate-in fade-in duration-500"
+      className="min-h-screen bg-slate-50 animate-in fade-in duration-500"
        
     >
       <div className="max-w-[1600px] mx-auto space-y-10">
@@ -146,11 +146,11 @@ export default function InspectionHistory() {
                 placeholder="Search history..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-12 pr-4 py-3.5 bg-white border border-slate-200 rounded-[20px] text-sm focus:outline-none focus:ring-4 focus:ring-brand/10 focus:border-brand transition-all w-full md:w-64 shadow-sm font-medium"
+                className="pl-12 pr-4 py-3.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-4 focus:ring-brand/10 focus:border-brand transition-all w-full md:w-64 shadow-sm font-medium"
               />
             </div>
 
-            <div className="flex border border-slate-200 rounded-[20px] bg-white p-1.5 shadow-sm">
+            <div className="flex border border-slate-200 rounded-xl bg-white p-1.5 shadow-sm">
               <button
                 onClick={() => setView("table")}
                 className={`p-2.5 rounded-xl transition-all ${
@@ -180,7 +180,7 @@ export default function InspectionHistory() {
                 setEditItem(null);
                 setShowForm(true);
               }}
-              className="flex items-center gap-2 text-white px-8 py-3.5 rounded-[20px] text-sm font-black transition-all shadow-xl active:scale-95 whitespace-nowrap"
+              className="flex items-center gap-2 text-white px-8 py-3.5 rounded-xl text-sm font-black transition-all shadow-xl active:scale-95 whitespace-nowrap"
              >
               <Plus size={18} strokeWidth={3} />
               <span className="hidden sm:inline">New Record</span>
@@ -190,7 +190,7 @@ export default function InspectionHistory() {
 
         {/* List View */}
         {view === "table" ? (
-          <div className="bg-white border border-slate-100 rounded-[32px] shadow-sm overflow-hidden transition-all hover:shadow-md">
+          <div className="bg-white border border-slate-100 rounded-xl shadow-sm overflow-hidden transition-all hover:shadow-md">
             <div className="overflow-x-auto custom-scrollbar">
               <table className="w-full text-left">
                 <thead className="bg-slate-50/50">
@@ -224,7 +224,7 @@ export default function InspectionHistory() {
                       <td className="px-10 py-6">
                         <div className="flex items-center gap-4">
                           <div 
-                            className="h-12 w-12 rounded-2xl flex items-center justify-center font-black text-lg border border-brand/10 group-hover:scale-110 transition-transform shadow-sm"
+                            className="h-12 w-12 rounded-xl flex items-center justify-center font-black text-lg border border-brand/10 group-hover:scale-110 transition-transform shadow-sm"
                            >
                             <ClipboardList size={22} />
                           </div>
@@ -285,7 +285,7 @@ export default function InspectionHistory() {
             {filteredHistory.map((h) => (
               <div
                 key={h.id}
-                className="bg-white border border-slate-100 rounded-[32px] p-8 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 group relative overflow-hidden"
+                className="bg-white border border-slate-100 rounded-xl p-8 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 group relative overflow-hidden"
               >
                 <div 
                   className="absolute top-0 right-0 w-24 h-24 rounded-bl-[80px] -mr-8 -mt-8 opacity-5 transition-all group-hover:scale-110"
@@ -315,7 +315,7 @@ export default function InspectionHistory() {
                   <p className="text-[10px] text-slate-400 font-black uppercase tracking-[0.2em]">{h.inspectionDate}</p>
                 </div>
 
-                <div className="p-5 bg-slate-50 rounded-[24px] mb-8 group-hover:bg-white group-hover:shadow-inner transition-all border border-transparent group-hover:border-slate-100">
+                <div className="p-5 bg-slate-50 rounded-xl mb-8 group-hover:bg-white group-hover:shadow-inner transition-all border border-transparent group-hover:border-slate-100">
                    <p className="text-[10px] text-slate-400 font-black uppercase tracking-widest mb-2 flex items-center gap-2">
                      <MessageSquare size={12} />
                      Inspector Remarks
@@ -326,7 +326,7 @@ export default function InspectionHistory() {
                 <div className="flex gap-2 relative z-10">
                   <button
                     onClick={() => setViewItem(h)}
-                    className="flex-1 py-3.5 rounded-2xl bg-slate-900 text-white text-[10px] font-black uppercase tracking-widest hover:opacity-90 transition-all active:scale-95 shadow-xl shadow-slate-200"
+                    className="flex-1 py-3.5 rounded-xl bg-slate-900 text-white text-[10px] font-black uppercase tracking-widest hover:opacity-90 transition-all active:scale-95 shadow-xl shadow-slate-200"
                   >
                     View Details
                   </button>
@@ -335,14 +335,14 @@ export default function InspectionHistory() {
                       setEditItem(h);
                       setShowForm(true);
                     }}
-                    className="p-3.5 rounded-2xl bg-brand/10 text-brand hover:bg-brand hover:text-white transition-all border border-brand/10"
+                    className="p-3.5 rounded-xl bg-brand/10 text-brand hover:bg-brand hover:text-white transition-all border border-brand/10"
                  
                   >
                     <Pencil size={18} />
                   </button>
                   <button
                     onClick={() => remove(h.id)}
-                    className="p-3.5 rounded-2xl bg-slate-50 text-slate-300 hover:text-rose-500 hover:bg-rose-50 transition-all border border-transparent hover:border-rose-100"
+                    className="p-3.5 rounded-xl bg-slate-50 text-slate-300 hover:text-rose-500 hover:bg-rose-50 transition-all border border-transparent hover:border-rose-100"
                   >
                     <Trash2 size={18} />
                   </button>
@@ -356,7 +356,7 @@ export default function InspectionHistory() {
       {viewItem && (
         <Modal onClose={() => setViewItem(null)} title="Inspection Record Details">
           <div className="space-y-8">
-            <div className={`p-8 rounded-[32px] border flex items-center justify-between relative overflow-hidden group ${
+            <div className={`p-8 rounded-xl border flex items-center justify-between relative overflow-hidden group ${
               viewItem.result === "Passed" ? "bg-emerald-50 border-emerald-100" : "bg-rose-50 border-rose-100"
             }`}>
               <div 
@@ -365,7 +365,7 @@ export default function InspectionHistory() {
               ></div>
               
               <div className="flex items-center gap-5 relative z-10">
-                <div className={`h-16 w-16 rounded-[24px] flex items-center justify-center shadow-2xl text-white ${
+                <div className={`h-16 w-16 rounded-xl flex items-center justify-center shadow-2xl text-white ${
                   viewItem.result === "Passed" ? "bg-emerald-500 shadow-emerald-500/30" : "bg-rose-500 shadow-rose-500/30"
                 }`}>
                   {viewItem.result === "Passed" ? <CheckCircle size={32} /> : <XCircle size={32} />}
@@ -386,7 +386,7 @@ export default function InspectionHistory() {
             </div>
 
             <div className="grid grid-cols-1 gap-6">
-              <div className="p-8 bg-white border border-slate-100 rounded-[32px] shadow-sm">
+              <div className="p-8 bg-white border border-slate-100 rounded-xl shadow-sm">
                  <div className="flex items-center gap-3 mb-6">
                     <div className="w-1.5 h-6 bg-brand rounded-full"  ></div>
                     <h4 className="text-xl font-black text-slate-900 tracking-tight">Technical Profile</h4>
@@ -408,7 +408,7 @@ export default function InspectionHistory() {
                  </div>
               </div>
 
-              <div className="p-8 border border-slate-100 rounded-[32px] bg-slate-50/50">
+              <div className="p-8 border border-slate-100 rounded-xl bg-slate-50/50">
                 <p className="text-[10px] uppercase font-black text-slate-400 tracking-[0.2em] mb-4 flex items-center gap-2">
                   <MessageSquare size={14} />
                   Detailed Assessment
@@ -421,7 +421,7 @@ export default function InspectionHistory() {
             
             <button
               onClick={() => setViewItem(null)}
-              className="w-full py-5 bg-slate-900 text-white rounded-[24px] font-black text-xs uppercase tracking-[0.2em] hover:bg-slate-800 transition-all shadow-xl active:scale-95"
+              className="w-full py-5 bg-slate-900 text-white rounded-xl font-black text-xs uppercase tracking-[0.2em] hover:bg-slate-800 transition-all shadow-xl active:scale-95"
             >
               Close Record
             </button>
@@ -487,7 +487,7 @@ function Modal({
           <h3 className="text-2xl font-black text-white relative z-10 tracking-tight">{title}</h3>
           <button
             onClick={onClose}
-            className="p-3 bg-white/10 hover:bg-white/20 rounded-2xl transition-all text-white relative z-10 active:scale-90 border border-white/10"
+            className="p-3 bg-white/10 hover:bg-white/20 rounded-xl transition-all text-white relative z-10 active:scale-90 border border-white/10"
           >
             <X size={20} strokeWidth={3} />
           </button>
@@ -539,7 +539,7 @@ function HistoryForm({
               placeholder="e.g. Toyota Camry (ABC-123)"
               value={formData.vehicle}
               onChange={(e) => setFormData({ ...formData, vehicle: e.target.value })}
-              className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-4 focus:ring-brand/10 focus:border-brand transition-all font-bold text-slate-900"
+              className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-xl focus:outline-none focus:ring-4 focus:ring-brand/10 focus:border-brand transition-all font-bold text-slate-900"
             />
           </div>
           <div className="space-y-2">
@@ -550,7 +550,7 @@ function HistoryForm({
               placeholder="e.g. John Doe"
               value={formData.inspector}
               onChange={(e) => setFormData({ ...formData, inspector: e.target.value })}
-              className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-4 focus:ring-brand/10 focus:border-brand transition-all font-bold text-slate-900"
+              className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-xl focus:outline-none focus:ring-4 focus:ring-brand/10 focus:border-brand transition-all font-bold text-slate-900"
             />
           </div>
           <div className="space-y-2">
@@ -559,7 +559,7 @@ function HistoryForm({
               required
               value={formData.inspectionName}
               onChange={(e) => setFormData({ ...formData, inspectionName: e.target.value })}
-              className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-4 focus:ring-brand/10 focus:border-brand transition-all font-bold text-slate-900 appearance-none"
+              className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-xl focus:outline-none focus:ring-4 focus:ring-brand/10 focus:border-brand transition-all font-bold text-slate-900 appearance-none"
             >
               <option value="">Select Type</option>
               <option value="Post-accident Inspection">Post-accident</option>
@@ -575,7 +575,7 @@ function HistoryForm({
               type="date"
               value={formData.inspectionDate}
               onChange={(e) => setFormData({ ...formData, inspectionDate: e.target.value })}
-              className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-4 focus:ring-brand/10 focus:border-brand transition-all font-bold text-slate-900"
+              className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-xl focus:outline-none focus:ring-4 focus:ring-brand/10 focus:border-brand transition-all font-bold text-slate-900"
             />
           </div>
           <div className="space-y-2 md:col-span-2">
@@ -586,7 +586,7 @@ function HistoryForm({
                   key={res}
                   type="button"
                   onClick={() => setFormData({ ...formData, result: res as any })}
-                  className={`flex-1 py-4 rounded-2xl font-black text-sm transition-all border-2 ${
+                  className={`flex-1 py-4 rounded-xl font-black text-sm transition-all border-2 ${
                     formData.result === res
                       ? res === "Passed" 
                         ? "bg-emerald-50 border-emerald-500 text-emerald-600" 
@@ -607,7 +607,7 @@ function HistoryForm({
               placeholder="Enter detailed observations..."
               value={formData.details}
               onChange={(e) => setFormData({ ...formData, details: e.target.value })}
-              className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-4 focus:ring-brand/10 focus:border-brand transition-all font-bold text-slate-900 resize-none"
+              className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-xl focus:outline-none focus:ring-4 focus:ring-brand/10 focus:border-brand transition-all font-bold text-slate-900 resize-none"
             />
           </div>
         </div>
@@ -616,13 +616,13 @@ function HistoryForm({
           <button
             type="button"
             onClick={onClose}
-            className="flex-1 py-4 bg-slate-100 text-slate-600 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-slate-200 transition-all"
+            className="flex-1 py-4 bg-slate-100 text-slate-600 rounded-xl font-black text-xs uppercase tracking-widest hover:bg-slate-200 transition-all"
           >
             Cancel
           </button>
           <button
             type="submit"
-            className="flex-1 py-4 text-white rounded-2xl font-black text-xs uppercase tracking-widest transition-all shadow-xl active:scale-95"
+            className="flex-1 py-4 text-white rounded-xl font-black text-xs uppercase tracking-widest transition-all shadow-xl active:scale-95"
            >
             {editData ? "Update Record" : "Save Record"}
           </button>

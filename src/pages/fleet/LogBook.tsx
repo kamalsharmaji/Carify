@@ -7,9 +7,16 @@ import {
   LayoutGrid,
   Table as TableIcon,
   Search,
-  MoreVertical,
+  BookOpen,
+  Navigation,
+  Activity,
+  Clock,
+  User,
+  Milestone,
+  X
 } from "lucide-react";
 
+/* ================= TYPES ================= */
 interface LogEntry {
   id: number;
   vehicleNo: string;
@@ -22,14 +29,16 @@ interface LogEntry {
   status: string;
 }
 
-const STORAGE_KEY = "fleet_logbook";
+/* ================= LOCAL STORAGE KEY ================= */
+const STORAGE_KEY = "fleet_logbook_v2";
 
+/* ================= DEFAULT DATA ================= */
 const seedData: LogEntry[] = [
   {
     id: 1,
     vehicleNo: "DL09AB1234",
     driver: "Amit Kumar",
-    date: "15-01-2025",
+    date: "2025-01-15",
     startKm: "45200",
     endKm: "45520",
     totalKm: "320",
@@ -38,6 +47,7 @@ const seedData: LogEntry[] = [
   },
 ];
 
+/* ================= MAIN COMPONENT ================= */
 export default function LogBook() {
   const [logs, setLogs] = useState<LogEntry[]>(() => {
     try {
@@ -63,7 +73,7 @@ export default function LogBook() {
   }, [logs]);
 
   const remove = (id: number) => {
-    if (window.confirm("Delete this log entry?")) {
+    if (window.confirm("Delete this log intelligence entry?")) {
       setLogs((prev) => prev.filter((l) => l.id !== id));
     }
   };
@@ -84,92 +94,88 @@ export default function LogBook() {
       l.driver.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  const totalKm = logs.reduce((acc, curr) => acc + parseFloat(curr.totalKm || "0"), 0);
+
   return (
-    <div className="min-h-screen bg-slate-50/50 p-3 md:p-6">
-      <div className="space-y-6">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-          <div>
-            <h1 className="text-3xl font-extrabold text-slate-900 flex items-center gap-2">
-              <span className="w-2 h-8 bg-red-400 rounded-full"></span>
-              Vehicle Log Book
-            </h1>
-            <p className="text-slate-500 mt-1 font-medium">
-              Fleet Management › Log Book Entries
-            </p>
-          </div>
-
-          <div className="flex items-center gap-3">
-            <div className="relative group">
-              <Search
-                className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-red-400 transition-colors"
-                size={18}
-              />
-              <input
-                type="text"
-                placeholder="Search logs..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10 pr-4 py-2 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-red-400/20 focus:border-red-400 transition-all w-full md:w-64"
-              />
+    <div className="min-h-screen bg-slate-50 p-4 lg:p-8">
+      <div className="max-w-[1600px] mx-auto space-y-8">
+        
+        {/* Standard Header Section */}
+        <header className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 bg-slate-900 rounded-lg flex items-center justify-center shadow-lg shadow-slate-900/10">
+                <BookOpen className="text-white w-6 h-6" />
+              </div>
+              <div>
+                <h1 className="text-2xl font-bold text-slate-900">LogBook Intelligence</h1>
+                <p className="text-slate-500 text-sm flex items-center gap-2">
+                  <Navigation className="w-4 h-4 text-blue-500" />
+                  Fleet Management › Operational Logs
+                </p>
+              </div>
             </div>
 
-            <div className="flex border border-slate-200 rounded-xl bg-white p-1">
+            <div className="flex flex-wrap items-center gap-4">
+              <div className="flex bg-slate-100 p-1 rounded-lg">
+                <button onClick={() => setView("table")} className={`p-2 rounded-md transition-all ${view === "table" ? "bg-white text-blue-600 shadow-sm" : "text-slate-400 hover:text-slate-600"}`}>
+                  <TableIcon size={18} />
+                </button>
+                <button onClick={() => setView("card")} className={`p-2 rounded-md transition-all ${view === "card" ? "bg-white text-blue-600 shadow-sm" : "text-slate-400 hover:text-slate-600"}`}>
+                  <LayoutGrid size={18} />
+                </button>
+              </div>
+
               <button
-                onClick={() => setView("table")}
-                className={`p-2 rounded-lg transition-all ${
-                  view === "table"
-                    ? "bg-red-400 text-white shadow-sm"
-                    : "text-slate-500 hover:bg-slate-50"
-                }`}
+                onClick={() => { setEditLog(null); setShowForm(true); }}
+                className="flex items-center gap-2 bg-slate-900 hover:bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold transition-all active:scale-95"
               >
-                <TableIcon size={18} />
-              </button>
-              <button
-                onClick={() => setView("card")}
-                className={`p-2 rounded-lg transition-all ${
-                  view === "card"
-                    ? "bg-red-400 text-white shadow-sm"
-                    : "text-slate-500 hover:bg-slate-50"
-                }`}
-              >
-                <LayoutGrid size={18} />
+                <Plus size={18} />
+                <span>Create Entry</span>
               </button>
             </div>
-
-            <button
-              onClick={() => {
-                setEditLog(null);
-                setShowForm(true);
-              }}
-              className="flex items-center gap-2 bg-red-400 hover:bg-red-500 text-white px-5 py-2.5 rounded-xl text-sm font-bold transition-all shadow-lg shadow-red-400/20 active:scale-95"
-            >
-              <Plus size={18} strokeWidth={3} />
-              <span className="hidden sm:inline">Add Entry</span>
-            </button>
           </div>
+
+          {/* Stats Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
+            {[
+              { label: "Total Missions", value: logs.length, icon: Activity, color: "blue" },
+              { label: "Cumulative Distance", value: `${totalKm.toLocaleString()} km`, icon: Milestone, color: "emerald" },
+              { label: "Active Deployments", value: logs.filter(l => l.status === "In Progress").length, icon: Clock, color: "orange" },
+            ].map((stat, i) => (
+              <div key={i} className="bg-slate-50 border border-slate-100 p-4 rounded-lg flex items-center gap-4">
+                <div className={`w-10 h-10 rounded-lg ${stat.color === 'blue' ? 'bg-blue-500/10' : stat.color === 'emerald' ? 'bg-emerald-500/10' : 'bg-orange-500/10'} flex items-center justify-center`}>
+                  <stat.icon className={`${stat.color === 'blue' ? 'text-blue-600' : stat.color === 'emerald' ? 'text-emerald-600' : 'text-orange-600'} w-5 h-5`} />
+                </div>
+                <div>
+                  <p className="text-slate-500 text-[10px] font-bold uppercase tracking-wider">{stat.label}</p>
+                  <p className="text-xl font-bold text-slate-900 leading-none mt-1">{stat.value}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </header>
+
+        {/* Search Bar */}
+        <div className="relative w-full md:w-80 group">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
+          <input
+            type="text"
+            placeholder="Search by asset or personnel..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="w-full pl-10 pr-4 py-2 bg-white border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/10 focus:border-blue-500 transition-all shadow-sm"
+          />
         </div>
 
         {view === "table" && (
-          <div className="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden transition-all">
-            <div className="overflow-x-auto custom-scrollbar">
-              <table className="w-full text-sm text-left">
-                <thead className="bg-slate-50 border-b border-slate-100">
-                  <tr>
-                    {[
-                      "VEHICLE",
-                      "DRIVER",
-                      "DATE",
-                      "START KM",
-                      "END KM",
-                      "TOTAL KM",
-                      "PURPOSE",
-                      "STATUS",
-                      "ACTIONS",
-                    ].map((h) => (
-                      <th
-                        key={h}
-                        className="px-6 py-4 text-[11px] font-bold text-slate-500 uppercase tracking-wider"
-                      >
+          <div className="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden">
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm text-left border-collapse">
+                <thead>
+                  <tr className="border-b border-slate-100 bg-slate-50/50">
+                    {["Asset ID", "Personnel", "Date", "Distance (KM)", "Purpose", "Status", "Actions"].map((h) => (
+                      <th key={h} className="px-6 py-4 text-xs font-semibold text-slate-500 uppercase tracking-wider">
                         {h}
                       </th>
                     ))}
@@ -177,58 +183,39 @@ export default function LogBook() {
                 </thead>
                 <tbody className="divide-y divide-slate-50">
                   {filteredLogs.map((l) => (
-                    <tr
-                      key={l.id}
-                      className="hover:bg-slate-50/80 transition-colors group"
-                    >
+                    <tr key={l.id} className="hover:bg-slate-50 transition-colors">
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-3">
-                          <div className="h-10 w-10 rounded-xl bg-red-50 text-red-500 flex items-center justify-center font-bold text-sm border border-red-100 uppercase group-hover:scale-110 transition-transform">
+                          <div className="h-10 w-10 rounded-lg bg-slate-900 text-white flex items-center justify-center font-bold text-xs">
                             {l.vehicleNo.charAt(0)}
                           </div>
-                          <span className="font-bold text-slate-900">
-                            {l.vehicleNo}
-                          </span>
+                          <div className="font-semibold text-slate-900">{l.vehicleNo}</div>
                         </div>
                       </td>
-                      <td className="px-6 py-4 font-medium text-slate-600">
-                        {l.driver}
-                      </td>
-                      <td className="px-6 py-4 font-medium text-slate-600">
-                        {l.date}
-                      </td>
-                      <td className="px-6 py-4 font-mono text-slate-600">
-                        {l.startKm}
-                      </td>
-                      <td className="px-6 py-4 font-mono text-slate-600">
-                        {l.endKm}
-                      </td>
-                      <td className="px-6 py-4 font-bold text-slate-900">
-                        {l.totalKm} km
-                      </td>
-                      <td className="px-6 py-4 text-slate-600">
-                        {l.purpose}
-                      </td>
                       <td className="px-6 py-4">
-                        <span className="px-2.5 py-1 bg-red-50 text-red-600 rounded-full text-[10px] font-bold uppercase tracking-wide">
+                        <div className="flex items-center gap-2 text-slate-700 font-medium">
+                          <User size={14} className="text-blue-500" />
+                          {l.driver}
+                        </div>
+                      </td>
+                      <td className="px-6 py-4 text-slate-500 font-medium">{l.date}</td>
+                      <td className="px-6 py-4 font-bold text-slate-900">{l.totalKm} km</td>
+                      <td className="px-6 py-4 text-slate-500 text-sm truncate max-w-xs">{l.purpose}</td>
+                      <td className="px-6 py-4">
+                        <span className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider border ${
+                          l.status === "Completed"
+                            ? "bg-emerald-50 text-emerald-600 border-emerald-100"
+                            : "bg-blue-50 text-blue-600 border-blue-100"
+                        }`}>
                           {l.status}
                         </span>
                       </td>
                       <td className="px-6 py-4">
-                        <div className="flex gap-1.5">
-                          <ActionBtn
-                            color="blue"
-                            onClick={() => setViewLog(l)}
-                          >
+                        <div className="flex gap-2">
+                          <ActionBtn color="blue" onClick={() => setViewLog(l)}>
                             <Eye size={16} />
                           </ActionBtn>
-                          <ActionBtn
-                            color="orange"
-                            onClick={() => {
-                              setEditLog(l);
-                              setShowForm(true);
-                            }}
-                          >
+                          <ActionBtn color="orange" onClick={() => { setEditLog(l); setShowForm(true); }}>
                             <Pencil size={16} />
                           </ActionBtn>
                           <ActionBtn color="red" onClick={() => remove(l.id)}>
@@ -241,72 +228,54 @@ export default function LogBook() {
                 </tbody>
               </table>
             </div>
-            {filteredLogs.length === 0 && (
-              <div className="py-20 text-center">
-                <div className="inline-flex h-16 w-16 items-center justify-center rounded-full bg-slate-100 text-slate-400 mb-4">
-                  <Search size={32} />
-                </div>
-                <p className="text-slate-500 font-medium">No log entries found</p>
-              </div>
-            )}
           </div>
         )}
 
         {view === "card" && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
             {filteredLogs.map((l) => (
-              <div
-                key={l.id}
-                className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm hover:shadow-md transition-all group relative overflow-hidden"
-              >
-                <div className="absolute top-0 right-0 p-3 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <button className="text-slate-400 hover:text-slate-600">
-                    <MoreVertical size={18} />
-                  </button>
-                </div>
-
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-red-400 to-red-500 text-white flex items-center justify-center font-bold text-xl shadow-lg shadow-red-400/20">
+              <div key={l.id} className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-all">
+                <div className="flex items-center justify-between mb-6">
+                  <div className="h-12 w-12 rounded-lg bg-slate-900 text-white flex items-center justify-center font-bold text-lg">
                     {l.vehicleNo.charAt(0)}
                   </div>
-                  <div>
-                    <h3 className="font-bold text-slate-900 group-hover:text-red-600 transition-colors">
-                      {l.vehicleNo}
-                    </h3>
-                    <p className="text-xs text-slate-500 font-medium">
-                      {l.driver}
-                    </p>
+                  <span className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider border ${
+                    l.status === "Completed"
+                      ? "bg-emerald-50 text-emerald-600 border-emerald-100"
+                      : "bg-blue-50 text-blue-600 border-blue-100"
+                  }`}>
+                    {l.status}
+                  </span>
+                </div>
+
+                <div className="mb-6">
+                  <h3 className="text-lg font-bold text-slate-900">{l.vehicleNo}</h3>
+                  <div className="flex items-center gap-2 text-slate-500 text-sm mt-1">
+                    <User size={14} className="text-blue-500" />
+                    {l.driver}
                   </div>
                 </div>
 
-                <div className="space-y-3 pt-4 border-t border-slate-50">
+                <div className="grid grid-cols-2 gap-4 pt-4 border-t border-slate-50">
+                  <CardRow label="Distance" value={`${l.totalKm} km`} isHighlight />
                   <CardRow label="Date" value={l.date} />
-                  <CardRow label="Total KM" value={`${l.totalKm} km`} />
-                  <CardRow label="Purpose" value={l.purpose} />
-                  <CardRow label="Status" value={l.status} isBadge />
+                  <CardRow label="Start" value={`${l.startKm} km`} />
+                  <CardRow label="End" value={`${l.endKm} km`} />
+                </div>
+
+                <div className="mt-4 p-3 bg-slate-50 rounded-lg border border-slate-100 text-slate-500 text-xs italic">
+                  "{l.purpose}"
                 </div>
 
                 <div className="flex gap-2 mt-6">
-                  <button
-                    onClick={() => setViewLog(l)}
-                    className="flex-1 py-2 rounded-xl bg-slate-50 text-slate-600 hover:bg-slate-100 text-xs font-bold transition-colors"
-                  >
-                    View
+                  <button onClick={() => setViewLog(l)} className="flex-1 py-2 rounded-lg bg-slate-900 text-white font-semibold text-sm transition-all hover:bg-slate-800 active:scale-95">
+                    Analyze Entry
                   </button>
-                  <button
-                    onClick={() => {
-                      setEditLog(l);
-                      setShowForm(true);
-                    }}
-                    className="flex-1 py-2 rounded-xl bg-red-50 text-red-600 hover:bg-red-100 text-xs font-bold transition-colors"
-                  >
-                    Edit
+                  <button onClick={() => { setEditLog(l); setShowForm(true); }} className="p-2 rounded-lg bg-slate-50 text-slate-600 hover:bg-slate-100 transition-all border border-slate-200">
+                    <Pencil size={18} />
                   </button>
-                  <button
-                    onClick={() => remove(l.id)}
-                    className="p-2 rounded-xl text-slate-400 hover:text-red-500 hover:bg-red-50 transition-colors"
-                  >
-                    <Trash2 size={16} />
+                  <button onClick={() => remove(l.id)} className="p-2 rounded-lg bg-slate-50 text-slate-400 hover:bg-red-50 hover:text-red-600 transition-all border border-slate-200">
+                    <Trash2 size={18} />
                   </button>
                 </div>
               </div>
@@ -315,44 +284,56 @@ export default function LogBook() {
         )}
       </div>
 
+      {/* Detail Modal */}
       {viewLog && (
-        <Modal onClose={() => setViewLog(null)} title="Log Entry Details">
-          <div className="space-y-4">
-            <div className="flex items-center gap-4 p-4 bg-slate-50 rounded-2xl mb-6">
-              <div className="h-16 w-16 rounded-2xl bg-red-400 text-white flex items-center justify-center text-2xl font-black shadow-lg shadow-red-400/20">
-                {viewLog.vehicleNo.charAt(0)}
+        <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-2xl w-full max-w-xl shadow-2xl overflow-hidden">
+            <div className="p-8">
+              <div className="flex items-center justify-between mb-8">
+                <div className="flex items-center gap-4">
+                  <div className="w-14 h-14 bg-slate-900 rounded-xl flex items-center justify-center shadow-lg">
+                    <BookOpen className="text-white w-7 h-7" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-slate-900">Log Intelligence</h3>
+                    <p className="text-slate-500 text-xs font-bold uppercase tracking-wider">Operational Registry</p>
+                  </div>
+                </div>
+                <button onClick={() => setViewLog(null)} className="h-10 w-10 flex items-center justify-center rounded-full hover:bg-slate-100 transition-colors text-slate-400">
+                  <X className="w-5 h-5" />
+                </button>
               </div>
-              <div>
-                <h2 className="text-xl font-bold text-slate-900">
-                  {viewLog.vehicleNo}
-                </h2>
-                <p className="text-sm text-slate-500">{viewLog.driver}</p>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <DetailCard label="Asset ID" value={viewLog.vehicleNo} icon={Navigation} color="blue" />
+                <DetailCard label="Personnel" value={viewLog.driver} icon={User} color="indigo" />
+                <DetailCard label="Mission Date" value={viewLog.date} icon={Clock} color="emerald" />
+                <DetailCard label="Total Distance" value={`${viewLog.totalKm} km`} icon={Milestone} color="orange" />
+                <DetailCard label="Start Milestone" value={`${viewLog.startKm} km`} icon={Activity} color="blue" />
+                <DetailCard label="End Milestone" value={`${viewLog.endKm} km`} icon={Activity} color="indigo" />
+              </div>
+
+              <div className="mt-6 p-4 bg-slate-50 rounded-xl border border-slate-100 italic text-slate-500 text-sm">
+                "{viewLog.purpose}"
               </div>
             </div>
-
-            <div className="grid grid-cols-2 gap-4">
-              {Object.entries(viewLog).map(([k, v]) =>
-                k !== "id" && k !== "vehicleNo" && k !== "driver" ? (
-                  <div key={k} className="p-3 border border-slate-100 rounded-xl">
-                    <p className="text-[10px] uppercase font-black text-slate-400 tracking-widest mb-1">
-                      {k.replace(/([A-Z])/g, " $1")}
-                    </p>
-                    <p className="text-sm font-bold text-slate-700">{v}</p>
-                  </div>
-                ) : null
-              )}
+            <div className="px-8 py-4 bg-slate-50 flex justify-end">
+              <button 
+                onClick={() => setViewLog(null)}
+                className="px-6 py-2 bg-white border border-slate-200 rounded-lg text-sm font-bold text-slate-600 hover:bg-slate-50 transition-all"
+              >
+                Close Registry
+              </button>
             </div>
           </div>
-        </Modal>
+        </div>
       )}
 
+      {/* Form Modal */}
       {showForm && (
-        <LogForm
+        <FormModal
           editData={editLog}
-          onClose={() => {
-            setShowForm(false);
-            setEditLog(null);
-          }}
+          onClose={() => { setShowForm(false); setEditLog(null); }}
           onSave={saveLog}
         />
       )}
@@ -360,227 +341,121 @@ export default function LogBook() {
   );
 }
 
-function ActionBtn({
-  children,
-  onClick,
-  color,
-}: {
-  children: React.ReactNode;
-  onClick: () => void;
-  color: "blue" | "orange" | "red";
-}) {
-  const styles = {
-    blue: "text-blue-500 hover:bg-blue-50 hover:text-blue-600",
-    orange: "text-orange-500 hover:bg-orange-50 hover:text-orange-600",
-    red: "text-red-500 hover:bg-red-50 hover:text-red-600",
-  };
+/* ================= SUB-COMPONENTS ================= */
 
+function ActionBtn({ children, color, onClick }: { children: React.ReactNode; color: 'blue' | 'orange' | 'red'; onClick: () => void }) {
+  const colors = {
+    blue: "text-blue-600 hover:bg-blue-50 border-blue-50",
+    orange: "text-orange-600 hover:bg-orange-50 border-orange-50",
+    red: "text-red-600 hover:bg-red-50 border-red-50"
+  };
   return (
-    <button
-      onClick={onClick}
-      className={`p-2 rounded-lg transition-all active:scale-90 ${styles[color]}`}
-    >
+    <button onClick={onClick} className={`p-2 rounded-lg border transition-all ${colors[color]}`}>
       {children}
     </button>
   );
 }
 
-function CardRow({
-  label,
-  value,
-  isBadge,
-}: {
-  label: string;
-  value: string;
-  isBadge?: boolean;
-}) {
+function CardRow({ label, value, isHighlight }: { label: string; value: string; isHighlight?: boolean }) {
   return (
-    <div className="flex justify-between items-center text-sm">
-      <span className="text-slate-400 font-medium">{label}</span>
-      {isBadge ? (
-        <span className="px-2 py-0.5 bg-slate-100 text-slate-600 rounded-md text-[10px] font-black uppercase">
-          {value}
-        </span>
-      ) : (
-        <span className="text-slate-700 font-bold">{value}</span>
-      )}
+    <div className="space-y-1">
+      <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">{label}</p>
+      <p className={`text-sm font-semibold ${isHighlight ? "text-emerald-600" : "text-slate-900"}`}>{value}</p>
     </div>
   );
 }
 
-function Modal({
-  children,
-  onClose,
-  title,
-}: {
-  children: React.ReactNode;
-  onClose: () => void;
-  title: string;
-}) {
+function DetailCard({ label, value, icon: Icon, color }: { label: string; value: string; icon: any; color: string }) {
   return (
-    <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-in">
-      <div className="bg-white rounded-3xl w-full max-w-md shadow-2xl overflow-hidden">
-        <div className="p-6 border-b border-slate-50 flex justify-between items-center bg-slate-50/50">
-          <h3 className="font-black text-slate-800 uppercase tracking-tight">
-            {title}
-          </h3>
-          <button
-            onClick={onClose}
-            className="h-8 w-8 flex items-center justify-center rounded-full hover:bg-slate-200 transition-colors text-slate-500"
-          >
-            ✕
-          </button>
+    <div className="p-4 bg-slate-50 border border-slate-100 rounded-xl">
+      <div className={`w-8 h-8 rounded-lg mb-3 flex items-center justify-center ${
+        color === 'blue' ? 'bg-blue-50 text-blue-600' :
+        color === 'indigo' ? 'bg-indigo-50 text-indigo-600' :
+        color === 'emerald' ? 'bg-emerald-50 text-emerald-600' :
+        'bg-orange-50 text-orange-600'
+      }`}>
+        <Icon size={16} />
+      </div>
+      <p className="text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">{label}</p>
+      <p className="text-sm font-bold text-slate-900">{value}</p>
+    </div>
+  );
+}
+
+function FormModal({ editData, onClose, onSave }: { editData: LogEntry | null; onClose: () => void; onSave: (data: LogEntry) => void }) {
+  const [form, setForm] = useState<LogEntry>(editData || { id: 0, vehicleNo: "", driver: "", date: "", startKm: "", endKm: "", totalKm: "", purpose: "", status: "Completed" });
+
+  useEffect(() => {
+    const start = parseFloat(form.startKm) || 0;
+    const end = parseFloat(form.endKm) || 0;
+    if (end >= start) {
+      setForm(prev => ({ ...prev, totalKm: (end - start).toString() }));
+    }
+  }, [form.startKm, form.endKm]);
+
+  return (
+    <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+      <div className="bg-white rounded-2xl w-full max-w-xl shadow-2xl overflow-hidden">
+        <div className="p-8">
+          <div className="flex justify-between items-center mb-8">
+            <h3 className="text-xl font-bold text-slate-900">{editData ? "Update" : "Create"} Entry</h3>
+            <button onClick={onClose} className="text-slate-400 hover:text-slate-900 transition-colors">
+              <X className="w-5 h-5" />
+            </button>
+          </div>
+          
+          <div className="space-y-4">
+            <div className="grid grid-cols-2 gap-4">
+              <FormInput label="Asset ID" value={form.vehicleNo} onChange={(v) => setForm({ ...form, vehicleNo: v })} placeholder="e.g. DL09AB1234" />
+              <FormInput label="Personnel" value={form.driver} onChange={(v) => setForm({ ...form, driver: v })} placeholder="Driver Name" />
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <FormInput label="Mission Date" value={form.date} onChange={(v) => setForm({ ...form, date: v })} type="date" />
+              <div className="space-y-1">
+                <label className="text-xs font-bold text-slate-500 uppercase tracking-wider ml-1">Status</label>
+                <select
+                  value={form.status}
+                  onChange={(e) => setForm({ ...form, status: e.target.value })}
+                  className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2 text-sm font-medium focus:ring-2 focus:ring-blue-500/20 outline-none"
+                >
+                  <option value="Completed">Completed</option>
+                  <option value="In Progress">In Progress</option>
+                  <option value="On Hold">On Hold</option>
+                </select>
+              </div>
+            </div>
+            <div className="grid grid-cols-3 gap-4">
+              <FormInput label="Start KM" value={form.startKm} onChange={(v) => setForm({ ...form, startKm: v })} placeholder="0" />
+              <FormInput label="End KM" value={form.endKm} onChange={(v) => setForm({ ...form, endKm: v })} placeholder="0" />
+              <FormInput label="Total KM" value={form.totalKm} onChange={() => {}} placeholder="0" disabled />
+            </div>
+            <FormInput label="Purpose / Mission" value={form.purpose} onChange={(v) => setForm({ ...form, purpose: v })} placeholder="Reason for travel..." />
+            
+            <div className="pt-6 flex gap-3">
+              <button onClick={onClose} className="flex-1 px-4 py-2 rounded-lg border border-slate-200 text-slate-600 font-bold hover:bg-slate-50 transition-all">Cancel</button>
+              <button onClick={() => onSave(form)} className="flex-1 px-4 py-2 rounded-lg bg-slate-900 hover:bg-blue-600 text-white font-bold transition-all shadow-lg shadow-slate-900/10">
+                {editData ? "Update Entry" : "Establish Entry"}
+              </button>
+            </div>
+          </div>
         </div>
-        <div className="p-6">{children}</div>
       </div>
     </div>
   );
 }
 
-function LogForm({
-  editData,
-  onClose,
-  onSave,
-}: {
-  editData: LogEntry | null;
-  onClose: () => void;
-  onSave: (l: LogEntry) => void;
-}) {
-  const [form, setForm] = useState<LogEntry>(
-    editData || {
-      id: 0,
-      vehicleNo: "",
-      driver: "",
-      date: "",
-      startKm: "",
-      endKm: "",
-      totalKm: "",
-      purpose: "",
-      status: "Completed",
-    }
-  );
-
-  const [errors, setErrors] = useState<Record<string, string>>({});
-
-  const validate = () => {
-    const newErrors: Record<string, string> = {};
-    if (!form.vehicleNo.trim()) newErrors.vehicleNo = "Required";
-    if (!form.driver.trim()) newErrors.driver = "Required";
-    if (!form.date.trim()) newErrors.date = "Required";
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleSave = () => {
-    if (validate()) {
-      const totalKm = (
-        parseInt(form.endKm || "0") - parseInt(form.startKm || "0")
-      ).toString();
-      onSave({ ...form, totalKm });
-    }
-  };
-
+function FormInput({ label, value, onChange, placeholder, type = "text", disabled = false }: { label: string; value: string; onChange: (v: string) => void; placeholder?: string; type?: string; disabled?: boolean }) {
   return (
-    <Modal onClose={onClose} title={editData ? "Edit Log Entry" : "Add Log Entry"}>
-      <div className="space-y-4">
-        <div className="grid grid-cols-2 gap-4">
-          <FormInput
-            label="Vehicle No"
-            value={form.vehicleNo}
-            onChange={(v) => setForm({ ...form, vehicleNo: v })}
-            error={errors.vehicleNo}
-            placeholder="DL09AB1234"
-          />
-          <FormInput
-            label="Driver Name"
-            value={form.driver}
-            onChange={(v) => setForm({ ...form, driver: v })}
-            error={errors.driver}
-            placeholder="John Doe"
-          />
-        </div>
-
-        <FormInput
-          label="Date"
-          value={form.date}
-          onChange={(v) => setForm({ ...form, date: v })}
-          error={errors.date}
-          placeholder="DD-MM-YYYY"
-          fullWidth
-        />
-
-        <div className="grid grid-cols-2 gap-4">
-          <FormInput
-            label="Start KM"
-            value={form.startKm}
-            onChange={(v) => setForm({ ...form, startKm: v })}
-            placeholder="45200"
-          />
-          <FormInput
-            label="End KM"
-            value={form.endKm}
-            onChange={(v) => setForm({ ...form, endKm: v })}
-            placeholder="45520"
-          />
-        </div>
-
-        <FormInput
-          label="Purpose"
-          value={form.purpose}
-          onChange={(v) => setForm({ ...form, purpose: v })}
-          placeholder="e.g. Client Visit"
-          fullWidth
-        />
-
-        <div className="pt-6 flex gap-3">
-          <button
-            onClick={onClose}
-            className="flex-1 px-6 py-3 rounded-2xl border border-slate-200 text-slate-600 font-bold hover:bg-slate-50 transition-colors"
-          >
-            Cancel
-          </button>
-          <button
-            onClick={handleSave}
-            className="flex-1 px-6 py-3 rounded-2xl bg-red-400 hover:bg-red-500 text-white font-bold transition-all shadow-lg shadow-red-400/20 active:scale-95"
-          >
-            {editData ? "Update Entry" : "Create Entry"}
-          </button>
-        </div>
-      </div>
-    </Modal>
-  );
-}
-
-function FormInput({
-  label,
-  value,
-  onChange,
-  error,
-  placeholder,
-  fullWidth,
-}: {
-  label: string;
-  value: string;
-  onChange: (v: string) => void;
-  error?: string;
-  placeholder?: string;
-  fullWidth?: boolean;
-}) {
-  return (
-    <div className={`space-y-1.5 ${fullWidth ? "col-span-2" : ""}`}>
-      <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider ml-1">
-        {label} {error && <span className="text-red-400">*</span>}
-      </label>
+    <div className="space-y-1">
+      <label className="text-xs font-bold text-slate-500 uppercase tracking-wider ml-1">{label}</label>
       <input
-        type="text"
+        type={type}
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className={`w-full bg-slate-50 border rounded-xl px-4 py-2 text-sm focus:ring-2 focus:ring-red-400/20 focus:border-red-400 outline-none transition-all ${
-          error ? "border-red-300" : "border-slate-200"
-        }`}
+        disabled={disabled}
+        className={`w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2 text-sm font-medium focus:ring-2 focus:ring-blue-500/20 outline-none ${disabled ? 'opacity-60 cursor-not-allowed' : ''}`}
       />
-      {error && <p className="text-[10px] text-red-500 font-medium ml-1">{error}</p>}
     </div>
   );
 }

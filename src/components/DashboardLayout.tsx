@@ -11,11 +11,11 @@ export default function DashboardLayout() {
   const toggleCollapse = () => setIsSidebarCollapsed(!isSidebarCollapsed);
 
   return (
-    <div className="flex bg-[#e2e8f0] h-screen relative overflow-hidden gap-[2px]">
+    <div className="flex bg-[#f8fafc] h-screen relative overflow-hidden">
       {/* Mobile Sidebar Overlay */}
       {isSidebarOpen && (
         <div 
-          className="fixed inset-0 bg-black/50 z-40 lg:hidden backdrop-blur-sm transition-all"
+          className="fixed inset-0 bg-black/40 z-40 lg:hidden backdrop-blur-sm transition-all"
           onClick={toggleSidebar}
         />
       )}
@@ -33,17 +33,10 @@ export default function DashboardLayout() {
         />
       </div>
 
-      <div 
-        className="flex-1 flex flex-col min-w-0 transition-all duration-300 gap-[2px]"
-      >
+      <div className="flex-1 flex flex-col min-w-0 transition-all duration-300">
         <Navbar onMenuClick={toggleSidebar} />
-        <main 
-          className="flex-1 overflow-y-auto bg-[#f8f9fa] transition-all duration-300"
-          style={{ padding: 'var(--main-padding)' }}
-        >
-          <div className="w-full transition-all duration-300">
-            <Outlet />
-          </div>
+        <main className="flex-1 overflow-y-auto p-1 md:p-3 custom-scrollbar scroll-smooth">
+          <Outlet />
         </main>
       </div>
     </div>

@@ -50,7 +50,7 @@ export default function Document() {
   );
 
   return (
-    <div className="min-h-screen bg-slate-50/50 p-3 md:p-6 animate-in fade-in duration-500">
+    <div className="min-h-screen bg-slate-50 p-3 md:p-6 animate-in fade-in duration-500">
       <div className="space-y-8">
         
         {/* Header Section */}
@@ -77,12 +77,12 @@ export default function Document() {
                 placeholder="Search documents..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-12 pr-4 py-3 bg-white border border-slate-200 rounded-2xl text-sm focus:outline-none focus:ring-4 focus:ring-red-400/10 focus:border-red-400 transition-all w-full md:w-72 shadow-sm font-medium"
+                className="pl-12 pr-4 py-3 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-4 focus:ring-red-400/10 focus:border-red-400 transition-all w-full md:w-72 shadow-sm font-medium"
               />
             </div>
 
             <button
-              className="flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white px-6 py-3 rounded-2xl text-sm font-bold transition-all shadow-xl active:scale-95"
+              className="flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white px-6 py-3 rounded-xl text-sm font-bold transition-all shadow-xl active:scale-95"
             >
               <Upload size={18} />
               <span className="hidden sm:inline">Upload File</span>
@@ -93,7 +93,7 @@ export default function Document() {
         {/* Categories / Quick Access */}
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
           {["Personnel", "Finance", "Legal", "Operations", "Marketing", "Policies"].map((cat) => (
-            <button key={cat} className="bg-white border border-slate-200 p-4 rounded-2xl hover:border-red-400 hover:bg-red-50/30 transition-all group flex flex-col items-center gap-2">
+            <button key={cat} className="bg-white border border-slate-200 p-4 rounded-xl hover:border-red-400 hover:bg-red-50/30 transition-all group flex flex-col items-center gap-2">
               <Folder className="text-slate-400 group-hover:text-red-400 transition-colors" size={24} />
               <span className="text-[10px] font-black text-slate-600 uppercase tracking-widest">{cat}</span>
             </button>
@@ -118,7 +118,7 @@ export default function Document() {
 
         {/* Document Content */}
         {viewMode === "list" ? (
-          <div className="bg-white border border-slate-200 rounded-[32px] shadow-sm overflow-hidden">
+          <div className="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full text-left">
                 <thead className="bg-slate-50/50 border-b border-slate-100">
@@ -162,7 +162,7 @@ export default function Document() {
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {filtered.map((doc) => (
-              <div key={doc.id} className="bg-white border border-slate-200 rounded-[24px] p-6 shadow-sm hover:shadow-xl transition-all group relative">
+              <div key={doc.id} className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm hover:shadow-xl transition-all group relative">
                 <div className="flex justify-between items-start mb-4">
                   <FileIcon type={doc.type} size={40} />
                   <button className="text-slate-400 hover:text-red-400 transition-colors"><MoreVertical size={18} /></button>

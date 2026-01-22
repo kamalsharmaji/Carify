@@ -24,14 +24,14 @@ describe("Login Page", () => {
         <Login />
       </BrowserRouter>
     );
-    expect(screen.getByText(/Sign In/i)).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /Sign In/i })).toBeInTheDocument();
     expect(screen.getByPlaceholderText(/name@company.com/i)).toBeInTheDocument();
-    expect(screen.getByPlaceholderText(/••••••••••••/i)).toBeInTheDocument();
+    expect(screen.getByPlaceholderText(/••••••••/i)).toBeInTheDocument();
   });
 
   test("successful login with registered user redirects to dashboard", async () => {
     // Setup a registered user in local storage
-    const users = [{ email: "test@example.com", password: "password123", name: "Test User" }];
+    const users = [{ email: "test@example.com", password: "password123", name: "Test User", isVerified: true }];
     localStorage.setItem("registeredUsers", JSON.stringify(users));
 
     render(
@@ -43,25 +43,94 @@ describe("Login Page", () => {
     fireEvent.change(screen.getByPlaceholderText(/name@company.com/i), {
       target: { value: "test@example.com" },
     });
-    fireEvent.change(screen.getByPlaceholderText(/••••••••••••/i), {
+    fireEvent.change(screen.getByPlaceholderText(/••••••••/i), {
       target: { value: "password123" },
     });
 
-    fireEvent.click(screen.getByText(/Authorize Login/i));
+    fireEvent.click(screen.getByText(/Sign In to Dashboard/i));
 
     await waitFor(() => {
       expect(localStorage.getItem("accessToken")).toContain("demo-token");
     }, { timeout: 2000 });
   });
 
-  test("navigates to register page when 'Register Account' is clicked", () => {
+  test("successful login with admin credentials", async () => {
+    render(
+      <BrowserRouter>
+        <Login />
+      </BrowserRouter>
+    );
+
+    fireEvent.change(screen.getByPlaceholderText(/name@company.com/i), {
+      target: { value: "admin@carify.com" },
+    });
+    fireEvent.change(screen.getByPlaceholderText(/••••••••/i), {
+      target: { value: "admin123" },
+    });
+
+    fireEvent.click(screen.getByText(/Sign In to Dashboard/i));
+
+    await waitFor(() => {
+      expect(localStorage.getItem("accessToken")).toContain("demo-token");
+    }, { timeout: 2000 });
+  });
+
+  test("failed login with incorrect password", async () => {
+    const users = [{ email: "test@example.com", password: "password123", name: "Test User", isVerified: true }];
+    localStorage.setItem("registeredUsers", JSON.stringify(users));
+
+    render(
+      <BrowserRouter>
+        <Login />
+      </BrowserRouter>
+    );
+
+    fireEvent.change(screen.getByPlaceholderText(/name@company.com/i), {
+      target: { value: "test@example.com" },
+    });
+    fireEvent.change(screen.getByPlaceholderText(/••••••••/i), {
+      target: { value: "wrongpassword" },
+    });
+
+    fireEvent.click(screen.getByText(/Sign In to Dashboard/i));
+
+    await waitFor(() => {
+      expect(localStorage.getItem("accessToken")).toBeNull();
+    }, { timeout: 2000 });
+  });
+
+  test("failed login with unverified user", async () => {
+    const users = [{ email: "test@example.com", password: "password123", name: "Test User", isVerified: false }];
+    localStorage.setItem("registeredUsers", JSON.stringify(users));
+
+    render(
+      <BrowserRouter>
+        <Login />
+      </BrowserRouter>
+    );
+
+    fireEvent.change(screen.getByPlaceholderText(/name@company.com/i), {
+      target: { value: "test@example.com" },
+    });
+    fireEvent.change(screen.getByPlaceholderText(/••••••••/i), {
+      target: { value: "password123" },
+    });
+
+    fireEvent.click(screen.getByText(/Sign In to Dashboard/i));
+
+    await waitFor(() => {
+      expect(localStorage.getItem("accessToken")).toBeNull();
+    }, { timeout: 2000 });
+  });
+
+  test("navigates to register page when 'Create an account' is clicked", () => {
     render(
       <BrowserRouter>
         <Login />
       </BrowserRouter>
     );
     
-    const registerBtn = screen.getByText(/Register Account/i);
+    const registerBtn = screen.getByText(/Create an account/i);
     fireEvent.click(registerBtn);
     
     expect(window.location.pathname).toBe("/register");

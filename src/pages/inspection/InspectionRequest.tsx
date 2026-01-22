@@ -122,7 +122,7 @@ export default function InspectionRequest() {
   };
 
   return (
-    <div className="min-h-screen bg-[#f8f9fa] animate-in fade-in duration-500 p-4 md:p-8">
+    <div className="min-h-screen bg-slate-50 animate-in fade-in duration-500 p-4 md:p-8">
       <div className="max-w-[1600px] mx-auto space-y-10">
         
         {/* Header Section */}
@@ -148,11 +148,11 @@ export default function InspectionRequest() {
                 placeholder="Search queue..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-12 pr-4 py-3.5 bg-white border border-slate-200 rounded-[20px] text-sm focus:outline-none focus:ring-4 focus:ring-brand/10 focus:border-brand transition-all w-full md:w-64 shadow-sm font-medium"
+                className="pl-12 pr-4 py-3.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-4 focus:ring-brand/10 focus:border-brand transition-all w-full md:w-64 shadow-sm font-medium"
               />
             </div>
 
-            <div className="flex border border-slate-200 rounded-[20px] bg-white p-1.5 shadow-sm">
+            <div className="flex border border-slate-200 rounded-xl bg-white p-1.5 shadow-sm">
               <button
                 onClick={() => setView("table")}
                 className={`p-2.5 rounded-xl transition-all ${
@@ -182,7 +182,7 @@ export default function InspectionRequest() {
                 setEditRequest(null);
                 setShowForm(true);
               }}
-              className="flex items-center gap-2 text-white px-8 py-3.5 rounded-[20px] text-sm font-black transition-all shadow-xl active:scale-95 whitespace-nowrap"
+              className="flex items-center gap-2 text-white px-8 py-3.5 rounded-xl text-sm font-black transition-all shadow-xl active:scale-95 whitespace-nowrap"
               style={{ backgroundColor: "#dc2626", boxShadow: `0 10px 25px -5px #dc262640` }}
             >
               <Plus size={18} strokeWidth={3} />
@@ -193,7 +193,7 @@ export default function InspectionRequest() {
 
         {/* List View */}
         {view === "table" ? (
-          <div className="bg-white border border-slate-100 rounded-[32px] shadow-sm overflow-hidden transition-all hover:shadow-md">
+          <div className="bg-white border border-slate-100 rounded-xl shadow-sm overflow-hidden transition-all hover:shadow-md">
             <div className="overflow-x-auto custom-scrollbar">
               <table className="w-full text-left">
                 <thead className="bg-slate-50/50">
@@ -293,7 +293,7 @@ export default function InspectionRequest() {
             {filteredRequests.map((r) => (
               <div
                 key={r.id}
-                className="bg-white border border-slate-100 rounded-[32px] p-8 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 group relative overflow-hidden"
+                className="bg-white border border-slate-100 rounded-xl p-8 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 group relative overflow-hidden"
               >
                 <div 
                   className="absolute top-0 right-0 w-24 h-24 rounded-bl-[80px] -mr-8 -mt-8 opacity-5 transition-all group-hover:scale-110"
@@ -366,7 +366,7 @@ export default function InspectionRequest() {
       {viewRequest && (
         <Modal onClose={() => setViewRequest(null)} title="Request Specification">
           <div className="space-y-8">
-            <div className="p-8 bg-slate-50 rounded-[32px] border border-slate-100 flex items-center justify-between relative overflow-hidden group">
+            <div className="p-8 bg-slate-50 rounded-xl border border-slate-100 flex items-center justify-between relative overflow-hidden group">
               <div 
                 className="absolute top-0 right-0 w-40 h-40 rounded-bl-[100px] -mr-8 -mt-8 opacity-10 transition-all group-hover:scale-110"
                 style={{ backgroundColor: "#dc2626" }}
@@ -374,7 +374,7 @@ export default function InspectionRequest() {
               
               <div className="flex items-center gap-6 relative z-10">
                 <div 
-                  className="h-16 w-16 rounded-[20px] flex items-center justify-center font-black text-lg border bg-white shadow-xl"
+                  className="h-16 w-16 rounded-xl flex items-center justify-center font-black text-lg border bg-white shadow-xl"
                   style={{ color: "#dc2626", borderColor: `#dc262620` }}
                 >
                   <ShieldCheck size={32} />
@@ -401,7 +401,7 @@ export default function InspectionRequest() {
 
             <button
               onClick={() => setViewRequest(null)}
-              className="w-full py-5 bg-slate-900 text-white rounded-[24px] font-black uppercase tracking-widest hover:opacity-90 transition-all shadow-2xl shadow-slate-200 active:scale-[0.98]"
+              className="w-full py-5 bg-slate-900 text-white rounded-xl font-black uppercase tracking-widest hover:opacity-90 transition-all shadow-2xl shadow-slate-200 active:scale-[0.98]"
             >
               Close Record
             </button>
@@ -428,7 +428,7 @@ export default function InspectionRequest() {
 
 function DetailBox({ label, value, colSpan = 1, brandColor }: { label: string; value: string; colSpan?: number; brandColor?: string }) {
   return (
-    <div className={`p-6 border border-slate-100 rounded-[24px] bg-white shadow-sm transition-all hover:shadow-md ${colSpan === 2 ? 'md:col-span-2' : ''}`}>
+    <div className={`p-6 border border-slate-100 rounded-xl bg-white shadow-sm transition-all hover:shadow-md ${colSpan === 2 ? 'md:col-span-2' : ''}`}>
       <p className="text-[10px] font-black text-slate-300 uppercase tracking-[0.2em] mb-2">{label}</p>
       <p className="text-sm font-black text-slate-900 tracking-tight" style={{ color: brandColor }}>{value}</p>
     </div>
@@ -470,7 +470,7 @@ function Modal({
 }) {
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/80 backdrop-blur-xl animate-in fade-in duration-300">
-      <div className="bg-white rounded-[40px] w-full max-w-2xl overflow-hidden shadow-2xl animate-in zoom-in-95 duration-300 border border-white/20">
+      <div className="bg-white rounded-xl w-full max-w-2xl overflow-hidden shadow-2xl animate-in zoom-in-95 duration-300 border border-white/20">
         <div className="px-10 py-8 bg-slate-900 flex justify-between items-center relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-1.5 bg-brand" style={{ backgroundColor: "#dc2626" }}></div>
           <div 
@@ -517,7 +517,7 @@ function RequestForm({
 
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/80 backdrop-blur-xl animate-in fade-in duration-300">
-      <div className="bg-white rounded-[40px] w-full max-w-2xl overflow-hidden shadow-2xl animate-in zoom-in-95 duration-300 border border-white/20">
+      <div className="bg-white rounded-xl w-full max-w-2xl overflow-hidden shadow-2xl animate-in zoom-in-95 duration-300 border border-white/20">
         <div className="px-12 py-10 bg-slate-900 flex justify-between items-center relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-1.5 bg-brand" style={{ backgroundColor: "#dc2626" }}></div>
           <div 
@@ -579,7 +579,7 @@ function RequestForm({
               <select
                 value={formData.status}
                 onChange={(e) => setFormData({ ...formData, status: e.target.value as any })}
-                className="w-full px-6 py-5 bg-slate-50 border border-slate-200 rounded-[24px] focus:outline-none focus:ring-4 focus:ring-brand/10 focus:border-brand transition-all text-slate-900 font-bold shadow-inner appearance-none"
+                className="w-full px-6 py-5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-4 focus:ring-brand/10 focus:border-brand transition-all text-slate-900 font-bold shadow-inner appearance-none"
               >
                 <option value="Pending">Pending</option>
                 <option value="In Progress">In Progress</option>
@@ -591,13 +591,13 @@ function RequestForm({
             <button
               type="button"
               onClick={onClose}
-              className="flex-1 py-5 rounded-[24px] border-2 border-slate-100 text-slate-400 font-black uppercase tracking-widest hover:bg-slate-50 hover:border-slate-200 transition-all active:scale-[0.98]"
+              className="flex-1 py-5 rounded-xl border-2 border-slate-100 text-slate-400 font-black uppercase tracking-widest hover:bg-slate-50 hover:border-slate-200 transition-all active:scale-[0.98]"
             >
               Abort
             </button>
             <button
               type="submit"
-              className="flex-1 py-5 rounded-[24px] text-white font-black uppercase tracking-widest hover:opacity-90 shadow-2xl transition-all active:scale-[0.98]"
+              className="flex-1 py-5 rounded-xl text-white font-black uppercase tracking-widest hover:opacity-90 shadow-2xl transition-all active:scale-[0.98]"
               style={{ backgroundColor: "#dc2626", boxShadow: `0 20px 30px -10px #dc262640` }}
             >
               {editData ? "Sync Changes" : "Commit Request"}
@@ -635,7 +635,7 @@ function FormInput({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className="w-full px-6 py-5 bg-slate-50 border border-slate-200 rounded-[24px] focus:outline-none focus:ring-4 focus:ring-brand/10 focus:border-brand transition-all text-slate-900 font-bold shadow-inner"
+        className="w-full px-6 py-5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-4 focus:ring-brand/10 focus:border-brand transition-all text-slate-900 font-bold shadow-inner"
       />
     </div>
   );

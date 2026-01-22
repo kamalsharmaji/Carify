@@ -2,6 +2,7 @@ import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { BrowserRouter } from "react-router-dom";
 import { vi } from "vitest";
+import toast from "react-hot-toast";
 import Register from "./Register";
 
 // Mock react-hot-toast
@@ -24,9 +25,9 @@ describe("Register Page", () => {
         <Register />
       </BrowserRouter>
     );
-    expect(screen.getByPlaceholderText(/John Doe/i)).toBeInTheDocument();
-    expect(screen.getByPlaceholderText(/john@company.com/i)).toBeInTheDocument();
-    expect(screen.getByPlaceholderText(/9876543210/i)).toBeInTheDocument();
+    expect(screen.getByPlaceholderText(/Enter Your Name.../i)).toBeInTheDocument();
+    expect(screen.getByPlaceholderText(/Enter Your Email.../i)).toBeInTheDocument();
+    expect(screen.getByPlaceholderText(/\+1 \(555\) 000-0000/i)).toBeInTheDocument();
   });
 
   test("validates step 1 and moves to step 2", async () => {
@@ -36,13 +37,13 @@ describe("Register Page", () => {
       </BrowserRouter>
     );
 
-    fireEvent.change(screen.getByPlaceholderText(/John Doe/i), {
+    fireEvent.change(screen.getByPlaceholderText(/Enter Your Name.../i), {
       target: { value: "Jane Doe" },
     });
-    fireEvent.change(screen.getByPlaceholderText(/john@company.com/i), {
+    fireEvent.change(screen.getByPlaceholderText(/Enter Your Email.../i), {
       target: { value: "jane@example.com" },
     });
-    fireEvent.change(screen.getByPlaceholderText(/9876543210/i), {
+    fireEvent.change(screen.getByPlaceholderText(/\+1 \(555\) 000-0000/i), {
       target: { value: "1234567890" },
     });
 
@@ -61,14 +62,14 @@ describe("Register Page", () => {
     );
 
     // Step 1
-    fireEvent.change(screen.getByPlaceholderText(/John Doe/i), { target: { value: "Jane Doe" } });
-    fireEvent.change(screen.getByPlaceholderText(/john@company.com/i), { target: { value: "jane@example.com" } });
-    fireEvent.change(screen.getByPlaceholderText(/9876543210/i), { target: { value: "1234567890" } });
+    fireEvent.change(screen.getByPlaceholderText(/Enter Your Name.../i), { target: { value: "Jane Doe" } });
+    fireEvent.change(screen.getByPlaceholderText(/Enter Your Email.../i), { target: { value: "jane@example.com" } });
+    fireEvent.change(screen.getByPlaceholderText(/\+1 \(555\) 000-0000/i), { target: { value: "1234567890" } });
     fireEvent.click(screen.getByText(/Send Verification/i));
 
     // Step 2
-    await waitFor(() => screen.getByText(/I've Clicked the Link/i));
-    fireEvent.click(screen.getByText(/I've Clicked the Link/i));
+    await waitFor(() => screen.getByText(/Verify Email Now/i));
+    fireEvent.click(screen.getByText(/Verify Email Now/i));
 
     // Step 3
     await waitFor(() => {
@@ -87,5 +88,42 @@ describe("Register Page", () => {
     fireEvent.click(signInBtn);
     
     expect(window.location.pathname).toBe("/login");
+  });
+
+  test("shows error if user already exists", async () => {
+    const existingUsers = [{ email: "jane@example.com", name: "Jane" }];
+    localStorage.setItem("registeredUsers", JSON.stringify(existingUsers));
+
+    render(
+      <BrowserRouter>
+        <Register />
+      </BrowserRouter>
+    );
+
+    // Step 1
+    fireEvent.change(screen.getByPlaceholderText(/Enter Your Name.../i), { target: { value: "Jane Doe" } });
+    fireEvent.change(screen.getByPlaceholderText(/Enter Your Email.../i), { target: { value: "jane@example.com" } });
+    fireEvent.change(screen.getByPlaceholderText(/\+1 \(555\) 000-0000/i), { target: { value: "1234567890" } });
+    fireEvent.click(screen.getByText(/Send Verification/i));
+
+    // Step 2
+    await waitFor(() => screen.getByText(/Verify Email Now/i));
+    fireEvent.click(screen.getByText(/Verify Email Now/i));
+
+    // Step 3
+    await waitFor(() => screen.getByText(/Set Password/i));
+    fireEvent.change(screen.getByPlaceholderText(/••••••••/i), { target: { value: "password123" } });
+    fireEvent.click(screen.getByText(/Complete Registration/i));
+
+    // Should stay on Register page and show error
+    await waitFor(() => {
+      expect(toast.error).toHaveBeenCalledWith(
+        expect.stringContaining("User with this email already exists"),
+        expect.any(Object)
+      );
+    }, { timeout: 2000 });
+
+    const users = JSON.parse(localStorage.getItem("registeredUsers") || "[]");
+    expect(users.length).toBe(1); // Still only 1 user
   });
 });

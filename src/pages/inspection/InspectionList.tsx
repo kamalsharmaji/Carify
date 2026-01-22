@@ -95,7 +95,7 @@ export default function InspectionList() {
 
   return (
     <div 
-      className="min-h-screen bg-[#f8f9fa] animate-in fade-in duration-500"
+      className="min-h-screen bg-slate-50 animate-in fade-in duration-500"
      >
       <div className="max-w-[1600px] mx-auto space-y-10">
         
@@ -122,11 +122,11 @@ export default function InspectionList() {
                 placeholder="Search master list..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-12 pr-4 py-3.5 bg-white border border-slate-200 rounded-[20px] text-sm focus:outline-none focus:ring-4 focus:ring-brand/10 focus:border-brand transition-all w-full md:w-64 shadow-sm font-medium"
+                className="pl-12 pr-4 py-3.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-4 focus:ring-brand/10 focus:border-brand transition-all w-full md:w-64 shadow-sm font-medium"
               />
             </div>
 
-            <div className="flex border border-slate-200 rounded-[20px] bg-white p-1.5 shadow-sm">
+            <div className="flex border border-slate-200 rounded-xl bg-white p-1.5 shadow-sm">
               <button
                 onClick={() => setView("table")}
                 className={`p-2.5 rounded-xl transition-all ${
@@ -156,7 +156,7 @@ export default function InspectionList() {
                 setEditType(null);
                 setShowForm(true);
               }}
-              className="flex items-center gap-2 text-white px-8 py-3.5 rounded-[20px] text-sm font-black transition-all shadow-xl active:scale-95 whitespace-nowrap"
+              className="flex items-center gap-2 text-white px-8 py-3.5 rounded-xl text-sm font-black transition-all shadow-xl active:scale-95 whitespace-nowrap"
              >
               <Plus size={18} strokeWidth={3} />
               <span className="hidden sm:inline">Add Category</span>
@@ -166,7 +166,7 @@ export default function InspectionList() {
 
         {/* Dynamic List View */}
         {view === "table" ? (
-          <div className="bg-white border border-slate-100 rounded-[32px] shadow-sm overflow-hidden transition-all hover:shadow-md">
+          <div className="bg-white border border-slate-100 rounded-xl shadow-sm overflow-hidden transition-all hover:shadow-md">
             <div className="overflow-x-auto custom-scrollbar">
               <table className="w-full text-left">
                 <thead className="bg-slate-50/50">
@@ -199,7 +199,7 @@ export default function InspectionList() {
                       <td className="px-10 py-6">
                         <div className="flex items-center gap-4">
                           <div 
-                            className="h-12 w-12 rounded-2xl flex items-center justify-center font-black text-lg border group-hover:scale-110 transition-transform shadow-sm"
+                            className="h-12 w-12 rounded-xl flex items-center justify-center font-black text-lg border group-hover:scale-110 transition-transform shadow-sm"
                            >
                             <ClipboardList size={22} />
                           </div>
@@ -249,14 +249,14 @@ export default function InspectionList() {
             {filteredTypes.map((t) => (
               <div
                 key={t.id}
-                className="bg-white border border-slate-100 rounded-[32px] p-8 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 group relative overflow-hidden"
+                className="bg-white border border-slate-100 rounded-xl p-8 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 group relative overflow-hidden"
               >
                 <div 
                   className="absolute top-0 right-0 w-24 h-24 rounded-bl-[80px] -mr-8 -mt-8 opacity-5 transition-all group-hover:scale-110"
                  ></div>
                 
                 <div 
-                  className="h-16 w-16 rounded-[24px] flex items-center justify-center mb-8 group-hover:scale-110 transition-transform relative z-10 shadow-sm border"
+                  className="h-16 w-16 rounded-xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform relative z-10 shadow-sm border"
                  >
                   <ClipboardList size={30} />
                 </div>
@@ -278,7 +278,7 @@ export default function InspectionList() {
                 <div className="flex gap-2 mt-auto relative z-10">
                   <button
                     onClick={() => setViewType(t)}
-                    className="flex-1 py-4 rounded-2xl bg-slate-900 text-white text-[10px] font-black uppercase tracking-widest hover:opacity-90 transition-all active:scale-95 shadow-xl shadow-slate-200"
+                    className="flex-1 py-4 rounded-xl bg-slate-900 text-white text-[10px] font-black uppercase tracking-widest hover:opacity-90 transition-all active:scale-95 shadow-xl shadow-slate-200"
                   >
                     Category Details
                   </button>
@@ -287,14 +287,14 @@ export default function InspectionList() {
                       setEditType(t);
                       setShowForm(true);
                     }}
-                    className="p-4 rounded-2xl bg-brand/10 text-brand hover:bg-brand hover:text-white transition-all border border-brand/10"
+                    className="p-4 rounded-xl bg-brand/10 text-brand hover:bg-brand hover:text-white transition-all border border-brand/10"
                     
                   >
                     <Pencil size={18} />
                   </button>
                   <button
                     onClick={() => remove(t.id)}
-                    className="p-4 rounded-2xl bg-slate-50 text-slate-300 hover:text-rose-500 hover:bg-rose-50 transition-all border border-transparent hover:border-rose-100"
+                    className="p-4 rounded-xl bg-slate-50 text-slate-300 hover:text-rose-500 hover:bg-rose-50 transition-all border border-transparent hover:border-rose-100"
                   >
                     <Trash2 size={18} />
                   </button>
@@ -309,14 +309,14 @@ export default function InspectionList() {
       {viewType && (
         <Modal onClose={() => setViewType(null)} title="Inspection Category Details">
           <div className="space-y-8">
-            <div className="relative p-8 bg-slate-50 rounded-[32px] border border-slate-100 overflow-hidden group">
+            <div className="relative p-8 bg-slate-50 rounded-xl border border-slate-100 overflow-hidden group">
               <div 
                 className="absolute top-0 right-0 w-40 h-40 rounded-bl-[100px] -mr-8 -mt-8 opacity-10 transition-transform group-hover:scale-110"
                ></div>
               
               <div className="flex items-center gap-6 relative z-10">
                 <div 
-                  className="h-20 w-20 rounded-[28px] flex items-center justify-center border shadow-2xl"
+                  className="h-20 w-20 rounded-xl flex items-center justify-center border shadow-2xl"
                  >
                   <ClipboardList size={40} />
                 </div>
@@ -334,7 +334,7 @@ export default function InspectionList() {
               </div>
             </div>
 
-            <div className="p-8 border border-slate-100 rounded-[32px] bg-white shadow-inner relative">
+            <div className="p-8 border border-slate-100 rounded-xl bg-white shadow-inner relative">
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-1.5 h-6 bg-brand rounded-full"  ></div>
                 <p className="text-[11px] uppercase font-black text-slate-400 tracking-[0.2em]">Compliance Description</p>
@@ -349,7 +349,7 @@ export default function InspectionList() {
 
             <button
               onClick={() => setViewType(null)}
-              className="w-full py-5 bg-slate-900 text-white rounded-[24px] font-black uppercase tracking-widest hover:opacity-90 transition-all shadow-2xl shadow-slate-200 active:scale-[0.98]"
+              className="w-full py-5 bg-slate-900 text-white rounded-xl font-black uppercase tracking-widest hover:opacity-90 transition-all shadow-2xl shadow-slate-200 active:scale-[0.98]"
             >
               Close Master Record
             </button>
@@ -419,7 +419,7 @@ function Modal({
           <h3 className="text-2xl font-black text-white relative z-10 tracking-tight uppercase tracking-[0.05em]">{title}</h3>
           <button
             onClick={onClose}
-            className="p-3 bg-white/10 hover:bg-white/20 rounded-2xl transition-all text-white relative z-10 active:scale-90"
+            className="p-3 bg-white/10 hover:bg-white/20 rounded-xl transition-all text-white relative z-10 active:scale-90"
           >
             <X size={24} strokeWidth={3} />
           </button>
@@ -467,7 +467,7 @@ function TypeForm({
           </div>
           <button
             onClick={onClose}
-            className="p-4 bg-white/10 hover:bg-white/20 rounded-2xl transition-all text-white relative z-10 active:scale-90"
+            className="p-4 bg-white/10 hover:bg-white/20 rounded-xl transition-all text-white relative z-10 active:scale-90"
           >
             <X size={28} strokeWidth={3} />
           </button>
@@ -501,7 +501,7 @@ function TypeForm({
                 value={formData.notes}
                 onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
                 placeholder="Detail the procedural scope and compliance requirements..."
-                className="w-full px-6 py-5 bg-slate-50 border border-slate-200 rounded-[24px] focus:outline-none focus:ring-4 focus:ring-brand/10 focus:border-brand transition-all text-slate-700 font-medium min-h-[160px] resize-none shadow-inner"
+                className="w-full px-6 py-5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-4 focus:ring-brand/10 focus:border-brand transition-all text-slate-700 font-medium min-h-[160px] resize-none shadow-inner"
               />
             </div>
           </div>
@@ -509,13 +509,13 @@ function TypeForm({
             <button
               type="button"
               onClick={onClose}
-              className="flex-1 py-5 rounded-[24px] border-2 border-slate-100 text-slate-400 font-black uppercase tracking-widest hover:bg-slate-50 hover:border-slate-200 transition-all active:scale-[0.98]"
+              className="flex-1 py-5 rounded-xl border-2 border-slate-100 text-slate-400 font-black uppercase tracking-widest hover:bg-slate-50 hover:border-slate-200 transition-all active:scale-[0.98]"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="flex-1 py-5 rounded-[24px] text-white font-black uppercase tracking-widest hover:opacity-90 shadow-2xl transition-all active:scale-[0.98]"
+              className="flex-1 py-5 rounded-xl text-white font-black uppercase tracking-widest hover:opacity-90 shadow-2xl transition-all active:scale-[0.98]"
              >
               {editData ? "Update Category" : "Finalize Category"}
             </button>
@@ -550,7 +550,7 @@ function FormInput({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className="w-full px-6 py-5 bg-slate-50 border border-slate-200 rounded-[24px] focus:outline-none focus:ring-4 focus:ring-brand/10 focus:border-brand transition-all text-slate-900 font-bold shadow-inner"
+        className="w-full px-6 py-5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-4 focus:ring-brand/10 focus:border-brand transition-all text-slate-900 font-bold shadow-inner"
       />
     </div>
   );

@@ -1,343 +1,378 @@
-import { ShoppingCart, Package, DollarSign, TrendingUp, CreditCard, ShoppingBag, Truck, Users, Star, ArrowDownRight, Clock, ChevronRight, Filter, Download } from "lucide-react";
- 
-interface QuickStatCardProps {
-  label: string;
-  value: string;
-  icon: React.ReactNode;
-  trend: string;
-  color: string;
-}
-
-interface TrendRowProps {
-  label: string;
-  value: string;
-  trend: string;
-}
-
-const DASHBOARD_DATA = {
-  stats: {
-    totalSales: "₹1,24,500",
-    ordersToday: 24,
-    revenueGrowth: "+12.5%",
-    avgOrderValue: "₹5,180",
-    activeCart: 42,
-    conversionRate: "3.8%"
-  },
-  topProducts: [
-    { id: 1, name: "Premium Brake Pads", sales: 45, price: "₹2,400", stock: "High", growth: "+15%" },
-    { id: 2, name: "LED Headlight Kit", sales: 32, price: "₹5,800", stock: "Medium", growth: "+8%" },
-    { id: 3, name: "Synthetic Oil 5L", sales: 28, price: "₹3,500", stock: "Low", growth: "-2%" },
-    { id: 4, name: "Tire Pressure Sensor", sales: 15, price: "₹1,200", stock: "Out", growth: "+4%" }
-  ],
-  recentOrders: [
-    { id: "#ORD-9921", customer: "Rahul V.", items: 3, total: "₹4,200", status: "Shipped", time: "12 mins ago" },
-    { id: "#ORD-9920", customer: "Sonia M.", items: 1, total: "₹1,850", status: "Processing", time: "45 mins ago" },
-    { id: "#ORD-9919", customer: "Amit K.", items: 5, total: "₹12,400", status: "Delivered", time: "2 hours ago" },
-    { id: "#ORD-9918", customer: "Priya S.", items: 2, total: "₹2,100", status: "Shipped", time: "Yesterday" }
-  ],
-  reviews: [
-    { user: "Rajesh K.", rating: 5, comment: "Excellent quality parts, fast delivery!", time: "1h ago" },
-    { user: "Sneha W.", rating: 4, comment: "Good service, but packaging could be better.", time: "4h ago" }
-  ]
-};
+import React, { useState, useEffect } from "react";
+import { 
+  Package, 
+  DollarSign, 
+  CreditCard, 
+  ShoppingBag, 
+  Truck, 
+  ArrowUpRight, 
+  ArrowDownRight, 
+  Filter, 
+  Download,
+  Target,
+  ArrowRight
+} from "lucide-react";
 
 export default function EcomDashboard() {
-  
+  const [greeting, setGreeting] = useState("");
+  const [userRole, setUserRole] = useState("");
+
+  useEffect(() => {
+    const updateGreeting = () => {
+      const hour = new Date().getHours();
+      if (hour >= 5 && hour < 12) setGreeting("Good Morning");
+      else if (hour >= 12 && hour < 17) setGreeting("Good Afternoon");
+      else if (hour >= 17 && hour < 21) setGreeting("Good Evening");
+      else setGreeting("Good Night");
+    };
+
+    const fetchUserRole = () => {
+      const userData = localStorage.getItem("user");
+      if (userData) {
+        const user = JSON.parse(userData);
+        const role = user.role ? user.role.split('_').map((word: string) => 
+          word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+        ).join(' ') : "Ecom Manager";
+        setUserRole(role);
+      } else {
+        setUserRole("Ecom Manager");
+      }
+    };
+
+    updateGreeting();
+    fetchUserRole();
+  }, []);
+
+  const activeShoppers = [
+    { name: "Rahul V.", location: "Mumbai", avatar: "👨‍💻" },
+    { name: "Sonia M.", location: "Delhi", avatar: "👩‍💼" },
+    { name: "Amit K.", location: "Bangalore", avatar: "👨" },
+    { name: "Priya S.", location: "Chennai", avatar: "👩" },
+    { name: "Vikram R.", location: "Pune", avatar: "👨‍🔧" },
+    { name: "Anjali D.", location: "Hyderabad", avatar: "👧" },
+    { name: "Rajesh K.", location: "Kolkata", avatar: "👴" },
+    { name: "Sneha W.", location: "Ahmedabad", avatar: "👩‍🏫" },
+    { name: "Deepak P.", location: "Surat", avatar: "👱" },
+    { name: "Kavita G.", location: "Jaipur", avatar: "👱‍♀️" },
+    { name: "Arjun S.", location: "Lucknow", avatar: "👳" },
+  ];
+
+  const stats = [
+    { label: "Daily Revenue", value: "₹1.24L", trend: "+12.5% vs yesterday", icon: DollarSign, color: "blue" },
+    { label: "Orders Today", value: "24", trend: "92% of daily target", icon: ShoppingBag, color: "slate" },
+    { label: "Avg Order Value", value: "₹5,180", trend: "+₹240 increase", icon: CreditCard, color: "blue" },
+    { label: "Conversion Rate", value: "3.8%", trend: "+0.5% improvement", icon: Target, color: "slate" },
+  ];
 
   return (
-    <div 
-      className="space-y-8 pb-20 animate-in fade-in duration-700"
-    >
-      {/* Header Section */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-10">
-        <div>
-          <h1 className="text-4xl font-black text-slate-900 tracking-tight">
-            Store <span className="text-brand">Analytics</span>
-          </h1>
-          <p className="text-slate-500 font-medium mt-1">Real-time performance and sales overview for 2026.</p>
+    <div className="space-y-6 pb-10 animate-in fade-in duration-700 bg-[#f8fafc]">
+      
+      {/* Greeting Section */}
+      <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-6">
+        <h2 className="text-2xl font-black text-slate-900 flex items-center gap-2">
+          {greeting}, {userRole}! 👋
+        </h2>
+        <p className="text-sm text-slate-500 font-medium mt-1">
+          Here's what's happening in your store today.
+        </p>
+      </div>
+
+      {/* Today's Active Shoppers */}
+      <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-6">
+        <div className="flex items-center justify-between mb-6">
+          <h3 className="text-sm font-bold text-slate-900 pb-2 border-b-2 border-emerald-500 inline-block">Live Store Traffic</h3>
+          <div className="flex items-center gap-2">
+            <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
+            <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">142 Users Online</span>
+          </div>
         </div>
-        <div className="flex items-center gap-4">
-          <button className="flex items-center gap-2 px-5 py-3 bg-white border border-slate-200 rounded-2xl text-sm font-bold text-slate-600 hover:bg-slate-50 transition-all shadow-sm">
-            <Filter size={18} />
-            Filters
-          </button>
-          <button className="flex items-center gap-2 px-6 py-3 bg-slate-900 text-white rounded-2xl text-sm font-black hover:bg-slate-800 transition-all shadow-xl shadow-slate-200 active:scale-95">
-            <Download size={18} />
-            Report
-          </button>
+        <div className="flex gap-8 overflow-x-auto pb-2 scrollbar-hide">
+          {activeShoppers.map((shopper, i) => (
+            <div key={i} className="flex flex-col items-center gap-2 min-w-[80px]">
+              <div className="w-12 h-12 rounded-full bg-emerald-50 flex items-center justify-center text-2xl shadow-sm border border-slate-100 group cursor-pointer hover:border-emerald-300 transition-all">
+                {shopper.avatar}
+              </div>
+              <div className="text-center">
+                <p className="text-[10px] font-bold text-slate-900 whitespace-nowrap">{shopper.name}</p>
+                <p className="text-[9px] font-medium text-slate-400 whitespace-nowrap">{shopper.location}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-        {/* Hero Banner */}
-        <div className="lg:col-span-8 bg-[#0f172a] rounded-[32px] p-12 text-white relative overflow-hidden min-h-[320px] flex flex-col justify-center shadow-2xl shadow-slate-200 group">
-          <div className="absolute inset-0 bg-gradient-to-br from-[#0f172a] via-[#0f172a] to-brand/20 opacity-90 group-hover:opacity-100 transition-opacity"></div>
-          <div className="relative z-10 max-w-xl">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-brand/20 text-brand rounded-full text-[10px] font-black uppercase tracking-widest mb-6 border border-brand/20">
-              <span className="w-1.5 h-1.5 bg-brand rounded-full animate-pulse"></span>
-              Live Store Traffic
+      {/* Main Stats Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+        {stats.map((stat, i) => (
+          <div key={i} className="bg-white p-5 rounded-xl border border-slate-100 shadow-sm flex flex-col justify-between group hover:shadow-md transition-all">
+            <div className="flex justify-between items-start mb-4">
+              <div>
+                <p className="text-xs font-semibold text-slate-500 mb-1">{stat.label}</p>
+                <h4 className="text-2xl font-bold text-slate-900">{stat.value}</h4>
+              </div>
+              <div className={`p-2 rounded-lg transition-transform group-hover:scale-110 ${stat.color === 'blue' ? 'bg-emerald-600 text-white' : 'bg-slate-700 text-white'}`}>
+                <stat.icon size={18} />
+              </div>
             </div>
-            <h2 className="text-4xl md:text-5xl font-black mb-6 tracking-tight leading-[1.1]">Optimization <br/><span className="text-brand text-opacity-90">Opportunities.</span></h2>
-            <p className="text-slate-400 text-lg leading-relaxed font-medium mb-10">
-              Your digital storefront is seeing a <span className="text-emerald-400 font-black">15% increase</span> in mobile traffic. We recommend enabling one-tap checkout for guest users.
-            </p>
+            <div className="flex items-center gap-1">
+               <span className={`text-[10px] font-bold ${stat.trend.includes('+') ? 'text-emerald-500' : stat.trend.includes('-') ? 'text-rose-500' : 'text-slate-400'}`}>
+                 {stat.trend}
+               </span>
+               {stat.trend.includes('+') ? <ArrowUpRight size={12} className="text-emerald-500" /> : <ArrowDownRight size={12} className="text-rose-500" />}
+            </div>
+          </div>
+        ))}
+        {/* Inventory Alert */}
+        <div className="bg-white p-5 rounded-xl border-l-4 border-rose-500 border-t border-r border-b border-slate-100 shadow-sm">
+          <div className="flex items-start gap-3">
+            <div className="text-rose-500 mt-1">
+              <Package size={20} strokeWidth={3} />
+            </div>
+            <div>
+              <h4 className="text-xs font-black text-slate-900 mb-1">Stock Alert</h4>
+              <p className="text-[10px] text-slate-500 font-medium leading-relaxed">4 high-demand products are below safety stock level.</p>
+              <button className="text-[10px] font-black text-rose-600 hover:underline mt-2">Restock Now</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* Revenue Performance Section */}
+        <div className="lg:col-span-2 bg-white rounded-xl shadow-sm border border-slate-100 p-6">
+          <div className="flex items-center justify-between mb-8">
+            <div>
+               <h3 className="text-lg font-bold text-slate-900">Revenue Stream</h3>
+               <p className="text-[11px] text-slate-400 font-bold uppercase tracking-wider">Gross sales performance analysis</p>
+            </div>
             <div className="flex items-center gap-4">
-              <button className="bg-brand hover:opacity-90 text-white px-8 py-4 rounded-2xl text-sm font-black transition-all shadow-xl shadow-brand/20 active:scale-95">
-                Execute Audit
+              <div className="flex bg-slate-50 p-1 rounded-lg border border-slate-100">
+                <button className="px-3 py-1 text-[10px] font-black text-emerald-600 bg-white rounded shadow-sm border border-slate-200">24H</button>
+                <button className="px-3 py-1 text-[10px] font-bold text-slate-400">7D</button>
+                <button className="px-3 py-1 text-[10px] font-bold text-slate-400">30D</button>
+              </div>
+              <button className="p-1.5 hover:bg-slate-50 rounded-lg transition-colors border border-slate-100">
+                <Download size={18} className="text-slate-400" />
               </button>
-              <button className="px-8 py-4 bg-white/5 hover:bg-white/10 text-white text-sm font-black rounded-2xl transition-all border border-white/10 backdrop-blur-md">
-                View Trends
-              </button>
             </div>
           </div>
-          <div className="absolute right-[-40px] top-1/2 -translate-y-1/2 opacity-10 group-hover:opacity-20 transition-all duration-700 pointer-events-none scale-110 group-hover:scale-125 rotate-12 group-hover:rotate-0">
-            <ShoppingCart size={320} className="text-white" />
-          </div>
-        </div>
-
-        {/* Quick Stats Sidebar */}
-        <div className="lg:col-span-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-6">
-          <QuickStatCard 
-            label="Weekly Revenue" 
-            value={DASHBOARD_DATA.stats.totalSales} 
-            icon={<DollarSign size={24} />} 
-            trend="+12.5%" 
-            color="bg-emerald-500" 
-          />
-          <QuickStatCard 
-            label="Daily Orders" 
-            value={DASHBOARD_DATA.stats.ordersToday.toString()} 
-            icon={<ShoppingBag size={24} />} 
-            trend="Target: 40" 
-            color="bg-amber-500" 
-          />
-          <QuickStatCard 
-            label="Avg Order Value" 
-            value={DASHBOARD_DATA.stats.avgOrderValue} 
-            icon={<CreditCard size={24} />} 
-            trend="+₹240" 
-            color="bg-indigo-500" 
-          />
-        </div>
-      </div>
-
-      <div className="grid grid-cols-1 xl:grid-cols-12 gap-8">
-        {/* Products & Orders Table Area */}
-        <div className="xl:col-span-8 space-y-8">
-          {/* Best Selling Products */}
-          <div className="bg-white border border-slate-100 rounded-[32px] shadow-sm overflow-hidden transition-all hover:shadow-md">
-            <div className="p-8 flex items-center justify-between border-b border-slate-50 bg-slate-50/30">
-              <div className="flex items-center gap-4">
-                <div className="h-12 w-12 rounded-2xl bg-brand/10 text-brand flex items-center justify-center border border-brand/20">
-                  <Package size={24} />
+          
+          <div className="h-64 flex items-end justify-between gap-4 px-4">
+            {[45, 67, 34, 89, 45, 67, 23, 56, 78, 45, 67, 89, 45, 67, 34, 56, 78, 90, 45, 67, 89, 34, 56, 78].map((val, i) => (
+              <div key={i} className="flex-1 flex flex-col items-center gap-2 group cursor-pointer">
+                <div className="relative w-full flex items-end justify-center h-full">
+                  <div 
+                    className={`w-full max-w-[8px] rounded-t-full transition-all duration-700 ease-out group-hover:max-w-[12px] ${val > 70 ? 'bg-emerald-500' : 'bg-slate-200'}`}
+                    style={{ height: `${val}%` }}
+                  >
+                    <div className="absolute -top-6 left-1/2 -translate-x-1/2 text-[8px] font-black text-slate-600 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                      ₹{val}k
+                    </div>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="text-2xl font-black text-slate-900 tracking-tight">Top Performance</h3>
-                  <p className="text-sm text-slate-500 font-medium">Best selling items and inventory status</p>
-                </div>
+                <span className="text-[7px] font-bold text-slate-400">{i}:00</span>
               </div>
-              <button className="text-[10px] font-black text-slate-400 uppercase tracking-widest hover:text-brand transition-colors">Manage Inventory</button>
-            </div>
-            <div className="p-0 overflow-x-auto">
-              <table className="w-full text-left">
-                <thead className="bg-slate-50/50">
-                  <tr>
-                    {["Product", "Price", "Units", "Stock", "Growth"].map((h) => (
-                      <th key={h} className="px-8 py-5 text-[11px] font-black text-slate-400 uppercase tracking-[0.15em] border-b border-slate-100">{h}</th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-slate-50">
-                  {DASHBOARD_DATA.topProducts.map((product) => (
-                    <tr key={product.id} className="hover:bg-slate-50/80 transition-all group">
-                      <td className="px-8 py-6">
-                        <div className="flex items-center gap-3">
-                          <div className="h-10 w-10 rounded-xl bg-slate-100 flex items-center justify-center text-slate-400 font-black group-hover:bg-brand group-hover:text-white transition-all">
-                            {product.name[0]}
-                          </div>
-                          <span className="text-sm font-black text-slate-900">{product.name}</span>
-                        </div>
-                      </td>
-                      <td className="px-8 py-6 font-black text-slate-600 text-sm">{product.price}</td>
-                      <td className="px-8 py-6 font-bold text-slate-500 text-sm">{product.sales} <span className="text-[10px] uppercase font-medium">pcs</span></td>
-                      <td className="px-8 py-6">
-                        <span className={`px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-wider border ${
-                          product.stock === 'High' ? 'bg-emerald-50 text-emerald-600 border-emerald-100' : 
-                          product.stock === 'Medium' ? 'bg-blue-50 text-blue-600 border-blue-100' : 
-                          'bg-rose-50 text-rose-600 border-rose-100'
-                        }`}>
-                          {product.stock}
-                        </span>
-                      </td>
-                      <td className="px-8 py-6">
-                         <div className="flex items-center gap-2">
-                           <TrendingUp size={14} className={product.growth.startsWith('+') ? 'text-emerald-500' : 'text-rose-500'} />
-                           <span className={`text-xs font-black ${product.growth.startsWith('+') ? 'text-emerald-500' : 'text-rose-500'}`}>{product.growth}</span>
-                         </div>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+            ))}
           </div>
 
-          {/* Recent Orders */}
-          <div className="bg-white border border-slate-100 rounded-[32px] shadow-sm overflow-hidden transition-all hover:shadow-md">
-            <div className="p-8 border-b border-slate-50 flex items-center justify-between">
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center border border-indigo-100">
-                  <Truck size={24} />
-                </div>
-                <div>
-                  <h3 className="text-2xl font-black text-slate-900 tracking-tight">Fulfillment Queue</h3>
-                  <p className="text-sm text-slate-500 font-medium">Monitor real-time order processing</p>
-                </div>
-              </div>
-              <button className="text-[10px] font-black text-brand uppercase tracking-widest hover:underline">Track All Orders</button>
+          <div className="mt-8 pt-6 border-t border-slate-50 flex items-center justify-between">
+            <div className="flex gap-8">
+               <div className="text-center">
+                 <p className="text-[10px] font-bold text-slate-400 uppercase mb-1">Sales Volume</p>
+                 <p className="text-lg font-black text-slate-900">1,245 <span className="text-[10px] text-emerald-500">+12%</span></p>
+               </div>
+               <div className="text-center">
+                 <p className="text-[10px] font-bold text-slate-400 uppercase mb-1">Net Revenue</p>
+                 <p className="text-lg font-black text-slate-900">₹4.2M <span className="text-[10px] text-emerald-500">+18%</span></p>
+               </div>
             </div>
-            <div className="p-0 overflow-x-auto">
-              <table className="w-full text-left">
-                <thead className="bg-slate-50/50">
-                  <tr>
-                    {["Order ID", "Customer", "Items", "Total", "Status", "Time"].map(h => (
-                      <th key={h} className="px-8 py-5 text-[11px] font-black text-slate-400 uppercase tracking-[0.15em] border-b border-slate-100">{h}</th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-slate-50">
-                  {DASHBOARD_DATA.recentOrders.map((order, idx) => (
-                    <tr key={idx} className="hover:bg-slate-50/80 transition-all group cursor-pointer">
-                      <td className="px-8 py-6 text-sm font-black text-slate-900 group-hover:text-brand transition-colors">{order.id}</td>
-                      <td className="px-8 py-6 text-sm font-bold text-slate-600">{order.customer}</td>
-                      <td className="px-8 py-6 text-xs font-bold text-slate-400 uppercase">{order.items} Items</td>
-                      <td className="px-8 py-6 text-sm font-black text-slate-900">{order.total}</td>
-                      <td className="px-8 py-6">
-                        <span className={`px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-wider border ${
-                          order.status === 'Delivered' ? 'bg-emerald-50 text-emerald-600 border-emerald-100' :
-                          order.status === 'Shipped' ? 'bg-indigo-50 text-indigo-600 border-indigo-100' :
-                          'bg-amber-50 text-amber-600 border-amber-100'
-                        }`}>
-                          {order.status}
-                        </span>
-                      </td>
-                      <td className="px-8 py-6 text-xs font-bold text-slate-400 italic">{order.time}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-
-        {/* Analytics & Reviews Sidebar */}
-        <div className="xl:col-span-4 space-y-8">
-          {/* Market Trends Panel */}
-          <div className="bg-white border border-slate-100 rounded-[32px] p-10 shadow-sm transition-all hover:shadow-lg">
-            <div className="flex items-center gap-4 mb-10">
-              <div className="h-12 w-12 rounded-2xl bg-brand/10 text-brand flex items-center justify-center border border-brand/20">
-                <TrendingUp size={24} />
-              </div>
-              <h3 className="text-2xl font-black text-slate-900 tracking-tight">Market Pulse</h3>
-            </div>
-            
-            <div className="space-y-6">
-              <TrendRow label="Return Customer Rate" value="24%" trend="+4%" />
-              <TrendRow label="Conversion Rate" value="3.2%" trend="+0.5%" />
-              <TrendRow label="Cart Abandonment" value="42%" trend="-2%" />
-              <TrendRow label="Mobile Traffic" value="68%" trend="+12%" />
-              <TrendRow label="Order Cancellation" value="1.8%" trend="-0.4%" />
-            </div>
-            
-            <button className="w-full mt-10 py-4 bg-slate-900 text-white rounded-2xl font-black text-sm hover:bg-slate-800 transition-all shadow-xl active:scale-95">
-              Deep Dive Analytics
+            <button className="flex items-center gap-2 text-[10px] font-black text-emerald-600 uppercase tracking-widest hover:gap-3 transition-all">
+               Full Sales Report <ArrowRight size={14} />
             </button>
           </div>
+        </div>
 
-          {/* Customer Feedback */}
-          <div className="bg-slate-900 rounded-[32px] p-10 text-white relative overflow-hidden shadow-2xl shadow-slate-300">
-             <div className="absolute top-0 right-0 w-32 h-32 bg-brand opacity-10 rounded-bl-full -mr-12 -mt-12"></div>
-             <div className="absolute left-0 bottom-0 w-full h-1 bg-brand"></div>
-             
-             <h3 className="text-2xl font-black mb-8 tracking-tight flex items-center gap-3">
-               <Star className="text-brand" size={24} fill="currentColor" />
-               Recent Reviews
-             </h3>
-             <div className="space-y-6 relative z-10">
-               {DASHBOARD_DATA.reviews.map((rev, i) => (
-                 <div key={i} className="p-5 bg-white/5 rounded-2xl border border-white/10 hover:bg-white/10 transition-all cursor-pointer group">
-                   <div className="flex justify-between items-start mb-2">
-                     <h4 className="text-sm font-black text-white group-hover:text-brand transition-colors">{rev.user}</h4>
-                     <div className="flex text-amber-400">
-                        {[...Array(5)].map((_, idx) => (
-                          <Star key={idx} size={10} fill={idx < rev.rating ? "currentColor" : "none"} />
-                        ))}
-                     </div>
-                   </div>
-                   <p className="text-xs text-slate-400 font-medium leading-relaxed italic mb-3">"{rev.comment}"</p>
-                   <div className="flex items-center gap-2 text-[10px] font-black text-slate-500 uppercase tracking-widest">
-                     <Clock size={12} />
-                     {rev.time}
-                   </div>
-                 </div>
-               ))}
-             </div>
-             <button className="w-full mt-10 py-4 bg-brand hover:opacity-90 rounded-2xl font-black text-sm transition-all shadow-xl shadow-brand/20 active:scale-95">
-               Manage All Feedback
-             </button>
+        {/* Store Health Sidebar */}
+        <div className="space-y-6">
+          {/* Cart Abandonment */}
+          <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-6">
+            <h3 className="text-sm font-bold text-slate-900 mb-6">Cart Recovery</h3>
+            <div className="flex items-center justify-center py-4">
+              <div className="relative w-32 h-32 flex items-center justify-center">
+                <svg className="w-full h-full transform -rotate-90">
+                  <circle
+                    cx="64"
+                    cy="64"
+                    r="58"
+                    stroke="currentColor"
+                    strokeWidth="10"
+                    fill="transparent"
+                    className="text-slate-100"
+                  />
+                  <circle
+                    cx="64"
+                    cy="64"
+                    r="58"
+                    stroke="currentColor"
+                    strokeWidth="10"
+                    fill="transparent"
+                    strokeDasharray={2 * Math.PI * 58}
+                    strokeDashoffset={2 * Math.PI * 58 * (1 - 0.42)}
+                    className="text-emerald-500"
+                  />
+                </svg>
+                <div className="absolute flex flex-col items-center">
+                  <span className="text-2xl font-black text-slate-900">42%</span>
+                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Rate</span>
+                </div>
+              </div>
+            </div>
+            <div className="mt-4 p-3 bg-slate-50 rounded-lg flex items-center justify-between">
+               <span className="text-[10px] font-bold text-slate-500 uppercase">Recovered Today</span>
+               <span className="text-sm font-black text-emerald-600">₹12,450</span>
+            </div>
           </div>
 
-          {/* Promotion Banner */}
-          <div className="bg-white border border-slate-100 rounded-[32px] p-8 shadow-sm flex items-center justify-between group cursor-pointer hover:border-brand/20 transition-all relative overflow-hidden">
-             <div className="absolute top-0 right-0 w-24 h-24 bg-brand opacity-5 rounded-bl-full -mr-8 -mt-8 group-hover:scale-110 transition-transform"></div>
-             <div className="flex items-center gap-5 relative z-10">
-               <div className="h-14 w-14 rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center border border-rose-100 group-hover:bg-brand group-hover:text-white transition-all">
-                 <Users size={28} />
-               </div>
-               <div>
-                 <h4 className="font-black text-slate-900 tracking-tight text-lg">Loyalty Program</h4>
-                 <p className="text-sm text-slate-500 font-medium">1.2k members active</p>
-               </div>
-             </div>
-             <div className="h-12 w-12 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 group-hover:text-brand transition-all relative z-10">
-               <ChevronRight size={24} />
-             </div>
+          {/* Logistics Status */}
+          <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-6">
+            <h3 className="text-sm font-bold text-slate-900 mb-6 flex items-center justify-between">
+              Logistics Pulse
+              <Truck size={16} className="text-slate-400" />
+            </h3>
+            <div className="space-y-4">
+              {[
+                { label: "Out for Delivery", count: 12, status: "Normal", color: "bg-blue-50 text-blue-600" },
+                { label: "Processing", count: 8, status: "High", color: "bg-amber-50 text-amber-600" },
+                { label: "Delayed", count: 2, status: "Critical", color: "bg-rose-50 text-rose-600" },
+              ].map((item, i) => (
+                <div key={i} className="flex items-center justify-between group cursor-pointer">
+                  <div className="flex items-center gap-3">
+                    <div className={`w-8 h-8 ${item.color} rounded-lg flex items-center justify-center transition-transform group-hover:scale-110`}>
+                      <Package size={16} />
+                    </div>
+                    <div>
+                      <p className="text-[11px] font-bold text-slate-900">{item.label}</p>
+                      <p className="text-[9px] font-medium text-slate-400 uppercase tracking-wider">{item.status}</p>
+                    </div>
+                  </div>
+                  <span className="text-xs font-black text-slate-900">{item.count}</span>
+                </div>
+              ))}
+            </div>
+            <button className="w-full mt-6 py-2.5 bg-slate-900 text-white rounded-lg text-[10px] font-black uppercase tracking-widest hover:bg-slate-800 transition-all shadow-md">
+              Shipment Manifest
+            </button>
           </div>
         </div>
       </div>
-    </div>
-  );
-}
 
-function QuickStatCard({ label, value, icon, trend, color }: QuickStatCardProps) {
-  const isPositive = trend.startsWith('+');
-  return (
-    <div className="bg-white border border-slate-100 p-10 rounded-[32px] shadow-sm relative overflow-hidden group flex flex-col items-center justify-center text-center transition-all hover:shadow-xl hover:-translate-y-1">
-      <div className={`w-16 h-16 ${color.replace('bg-', 'bg-opacity-10 ').replace('500', '50')} ${color.replace('bg-', 'text-')} rounded-2xl flex items-center justify-center mb-6 border border-current border-opacity-10 group-hover:scale-110 transition-transform`}>
-        {icon}
-      </div>
-      <p className="text-[13px] font-bold text-slate-400 uppercase tracking-[0.1em] mb-1">{label}</p>
-      <h3 className="text-4xl font-black text-slate-900 tracking-tighter">{value}</h3>
-      <div className={`mt-5 flex items-center gap-1.5 px-3 py-1.5 rounded-xl ${isPositive ? 'bg-emerald-50 text-emerald-600' : 'bg-rose-50 text-rose-600'} text-[10px] font-black uppercase tracking-widest border border-current border-opacity-10`}>
-        {isPositive ? <TrendingUp size={12} /> : <ArrowDownRight size={12} />}
-        {trend}
-      </div>
-    </div>
-  );
-}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Fulfillment Queue */}
+        <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-6 overflow-hidden">
+          <div className="flex items-center justify-between mb-6">
+            <h3 className="text-sm font-bold text-slate-900">Fulfillment Queue</h3>
+            <div className="flex gap-2">
+              <button className="p-1.5 hover:bg-slate-50 rounded-lg transition-colors border border-slate-100">
+                <Filter size={14} className="text-slate-400" />
+              </button>
+            </div>
+          </div>
+          <div className="overflow-x-auto">
+            <table className="w-full text-left">
+              <thead>
+                <tr className="border-b border-slate-100">
+                  <th className="pb-4 text-[10px] font-black text-slate-400 uppercase tracking-widest">Order ID</th>
+                  <th className="pb-4 text-[10px] font-black text-slate-400 uppercase tracking-widest">Customer</th>
+                  <th className="pb-4 text-[10px] font-black text-slate-400 uppercase tracking-widest">Status</th>
+                  <th className="pb-4 text-[10px] font-black text-slate-400 uppercase tracking-widest">Total</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-50">
+                {[
+                  { id: "#ORD-9921", customer: "Rahul V.", status: "Shipped", total: "₹4,200", color: "blue" },
+                  { id: "#ORD-9920", customer: "Sonia M.", status: "Processing", total: "₹1,850", color: "amber" },
+                  { id: "#ORD-9919", customer: "Amit K.", status: "Delivered", total: "₹12,400", color: "emerald" },
+                  { id: "#ORD-9918", customer: "Priya S.", status: "Shipped", total: "₹2,100", color: "blue" },
+                ].map((order, i) => (
+                  <tr key={i} className="hover:bg-slate-50/50 transition-colors group cursor-pointer">
+                    <td className="py-4">
+                      <span className="text-[11px] font-black text-slate-900 group-hover:text-emerald-600 transition-colors">{order.id}</span>
+                    </td>
+                    <td className="py-4 text-[11px] font-bold text-slate-700">{order.customer}</td>
+                    <td className="py-4">
+                      <span className={`px-2 py-0.5 rounded-full text-[8px] font-black uppercase tracking-widest border border-slate-100 ${
+                        order.status === 'Delivered' ? 'bg-emerald-50 text-emerald-600' :
+                        order.status === 'Shipped' ? 'bg-blue-50 text-blue-600' :
+                        'bg-amber-50 text-amber-600'
+                      }`}>
+                        {order.status}
+                      </span>
+                    </td>
+                    <td className="py-4 text-[11px] font-black text-slate-900">{order.total}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
 
-function TrendRow({ label, value, trend }: TrendRowProps) {
-  const isPositive = trend.startsWith('+');
-  return (
-    <div className="flex items-center justify-between border-b border-slate-100 pb-5 last:border-0 last:pb-0 group">
-      <div>
-        <p className="text-xs font-bold text-slate-400 group-hover:text-slate-600 transition-colors uppercase tracking-widest">{label}</p>
-        <p className="text-2xl font-black text-slate-900 tracking-tight">{value}</p>
+        {/* Top Products */}
+        <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-6 overflow-hidden">
+          <div className="flex items-center justify-between mb-6">
+            <h3 className="text-sm font-bold text-slate-900">Top Products</h3>
+            <button className="text-[10px] font-black text-slate-400 uppercase tracking-widest hover:text-slate-900 transition-colors">Inventory</button>
+          </div>
+          <div className="space-y-4">
+            {[
+              { name: "Premium Brake Pads", sales: 45, stock: "High", price: "₹2,400", color: "emerald" },
+              { name: "LED Headlight Kit", sales: 32, stock: "Medium", price: "₹5,800", color: "blue" },
+              { name: "Synthetic Oil 5L", sales: 28, stock: "Low", price: "₹3,500", color: "rose" },
+              { name: "Tire Pressure Sensor", sales: 15, stock: "Out", price: "₹1,200", color: "slate" },
+            ].map((product, i) => (
+              <div key={i} className="p-3 border border-slate-50 rounded-xl hover:border-emerald-200 transition-all group cursor-pointer flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-slate-100 rounded-lg flex items-center justify-center text-[10px] group-hover:bg-emerald-600 group-hover:text-white transition-all">📦</div>
+                  <div>
+                    <p className="text-[11px] font-bold text-slate-900">{product.name}</p>
+                    <p className="text-[9px] font-medium text-slate-400 uppercase tracking-widest">{product.sales} Sales • {product.stock} Stock</p>
+                  </div>
+                </div>
+                <div className="text-right">
+                  <p className="text-[11px] font-black text-slate-900">{product.price}</p>
+                  <div className={`text-[8px] font-black uppercase ${product.stock === 'Low' ? 'text-rose-500' : 'text-emerald-500'}`}>
+                    {product.stock === 'Low' ? 'Alert' : 'Stable'}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
-      <div className={`px-4 py-2 rounded-2xl text-[11px] font-black uppercase tracking-wider border transition-all ${
-        isPositive ? 'bg-emerald-50 text-emerald-600 border-emerald-100 group-hover:bg-emerald-500 group-hover:text-white' : 'bg-rose-50 text-rose-600 border-rose-100 group-hover:bg-rose-500 group-hover:text-white'
-      }`}>
-        {trend}
+
+      {/* E-commerce Strategy Banner */}
+      <div className="bg-[#064e3b] rounded-xl p-8 text-white relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-80 h-80 bg-emerald-400/10 rounded-full blur-[100px] pointer-events-none"></div>
+        <div className="relative z-10 flex flex-col md:flex-row justify-between items-center gap-8">
+           <div className="max-w-md">
+              <div className="flex items-center gap-2 mb-4">
+                 <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
+                 <span className="text-[10px] font-black uppercase tracking-[0.3em] text-emerald-300">Market Intelligence</span>
+              </div>
+              <h2 className="text-3xl font-black mb-4 tracking-tighter">Growth <span className="text-emerald-400">Accelerator</span></h2>
+              <p className="text-slate-400 text-sm font-medium leading-relaxed">
+                Cart abandonment is down 12% following the UI update. AI recommends a "Flash Sale" on brake systems to clear excess Q1 inventory.
+              </p>
+           </div>
+           <div className="flex gap-4">
+              <div className="p-6 bg-white/5 border border-white/10 rounded-2xl backdrop-blur-sm text-center min-w-[140px]">
+                 <p className="text-[10px] font-bold text-slate-400 uppercase mb-2">Cart Recovery</p>
+                 <p className="text-3xl font-black text-emerald-400">₹45k</p>
+              </div>
+              <button className="px-8 py-3 bg-white text-emerald-900 rounded-xl text-xs font-black uppercase tracking-widest hover:bg-emerald-50 transition-all shadow-xl active:scale-95">
+                Launch Promotion
+              </button>
+           </div>
+        </div>
       </div>
     </div>
   );

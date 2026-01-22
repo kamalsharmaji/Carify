@@ -132,141 +132,127 @@ export default function IMS() {
 
   return (
     <div 
-      className="min-h-screen bg-[#f8f9fa] animate-in fade-in duration-500 p-4 md:p-8"
+      className="min-h-screen bg-[#f8fafc] p-4 sm:p-6 lg:p-6 animate-in fade-in duration-700"
     >
-      <div className="max-w-[1600px] mx-auto space-y-8">
+      <div className="max-w-[1600px] mx-auto space-y-6">
         
         {/* Header Section */}
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-          <div>
-            <h1 className="text-3xl md:text-4xl font-black text-slate-900 flex items-center gap-3 tracking-tight">
-              <span className="w-2.5 h-10 brand rounded-full"></span>
-              Inventory Repository
-            </h1>
-            <p className="text-slate-500 mt-1 font-medium flex items-center gap-2">
-              <Warehouse size={16} />
-              IMS › Stock Control & Warehouse Management
-            </p>
-          </div>
-
-          <div className="flex flex-wrap items-center gap-3">
-            <div className="relative group">
-              <Search
-                className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-brand transition-colors"
-                size={18}
-              />
-              <input
-                type="text"
-                placeholder="Search inventory..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-12 pr-4 py-3 bg-white border border-slate-200 rounded-2xl text-sm focus:outline-none focus:ring-4 focus:ring-brand/10 focus:border-brand transition-all w-64 shadow-sm font-medium"
-              />
+        <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-6">
+          <div className="relative flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 bg-indigo-600 rounded-xl flex items-center justify-center shadow-lg">
+                <Warehouse className="text-white w-6 h-6" />
+              </div>
+              <div>
+                <h1 className="text-2xl font-black text-slate-900 tracking-tight">
+                  Inventory <span className="text-indigo-500">Core</span>
+                </h1>
+                <p className="text-sm text-slate-500 font-medium">
+                  Precision Stock Control & Global Warehouse Sync
+                </p>
+              </div>
             </div>
 
-            <div className="flex border border-slate-200 rounded-2xl bg-white p-1.5 shadow-sm">
+            <div className="flex flex-wrap items-center gap-4">
+              <div className="relative group">
+                <Search
+                  className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-indigo-600 transition-colors"
+                  size={18}
+                />
+                <input
+                  type="text"
+                  placeholder="Scan repository..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="pl-11 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/10 focus:border-indigo-500 transition-all w-64 lg:w-80 font-bold placeholder:text-indigo-300"
+                />
+              </div>
+
+              <div className="flex border border-slate-200 rounded-xl bg-white p-1 shadow-sm">
+                <button
+                  onClick={() => setViewMode("table")}
+                  className={`p-2 rounded-lg transition-all ${viewMode === "table" ? "bg-slate-900 text-white shadow-md" : "text-slate-400 hover:bg-slate-50"}`}
+                >
+                  <TableIcon size={20} />
+                </button>
+                <button
+                  onClick={() => setViewMode("card")}
+                  className={`p-2 rounded-lg transition-all ${viewMode === "card" ? "bg-slate-900 text-white shadow-md" : "text-slate-400 hover:bg-slate-50"}`}
+                >
+                  <LayoutGrid size={20} />
+                </button>
+              </div>
+
               <button
-                onClick={() => setViewMode("table")}
-                className={`p-2 rounded-xl transition-all ${
-                  viewMode === "table"
-                    ? "bg-brand text-white shadow-lg shadow-brand/20"
-                    : "text-slate-400 hover:bg-slate-50"
-                }`}
+                onClick={() => { setSelectedItem(null); setShowForm(true); }}
+                className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2.5 rounded-xl text-sm font-bold transition-all shadow-md active:scale-95"
               >
-                <TableIcon size={20} />
-              </button>
-              <button
-                onClick={() => setViewMode("card")}
-                className={`p-2 rounded-xl transition-all ${
-                  viewMode === "card"
-                    ? "bg-brand text-white shadow-lg shadow-brand/20"
-                    : "text-slate-400 hover:bg-slate-50"
-                }`}
-              >
-                <LayoutGrid size={20} />
+                <Plus size={18} />
+                <span>NEW ENTRY</span>
               </button>
             </div>
-
-            <button
-              onClick={() => {
-                setSelectedItem(null);
-                setShowForm(true);
-              }}
-              className="flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white px-6 py-3 rounded-2xl text-sm font-bold transition-all shadow-xl active:scale-95 whitespace-nowrap"
-            >
-              <Plus size={18} />
-              <span className="hidden sm:inline">New Item</span>
-              <span className="sm:hidden">New</span>
-            </button>
           </div>
         </div>
 
         {/* Stats Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          <StatCard title="Total SKU Count" value={items.length.toString()} icon={<Boxes size={24} />} trend="Active items" color="bg-blue-500" />
-          <StatCard title="Inventory Value" value={`₹${(totalValue / 1000).toFixed(1)}K`} icon={<DollarSign size={24} />} trend="Current valuation" color="bg-emerald-500" />
-          <StatCard title="Low Stock Alerts" value={lowStockCount.toString()} icon={<AlertTriangle size={24} />} trend="Action required" color="bg-rose-500" />
-          <StatCard title="Monthly Turnover" value="+12.5%" icon={<TrendingUp size={24} />} trend="Vs last month" color="bg-indigo-500" />
+          <StatCard title="Global SKU Count" value={items.length.toString()} icon={<Boxes size={24} />} trend="+4.2%" color="indigo" />
+          <StatCard title="Valuation Matrix" value={`₹${(totalValue / 1000).toFixed(1)}K`} icon={<DollarSign size={24} />} trend="Optimal" color="emerald" />
+          <StatCard title="Anomalous Stock" value={lowStockCount.toString()} icon={<AlertTriangle size={24} />} trend="Critical" color="rose" />
+          <StatCard title="Asset Velocity" value="+12.5%" icon={<TrendingUp size={24} />} trend="High Efficiency" color="blue" />
         </div>
 
         {/* Content Section */}
-        {viewMode === "table" ? (
-          <div className="bg-white border border-slate-200 rounded-[24px] shadow-sm overflow-hidden transition-all">
+        <div className="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden">
+          {viewMode === "table" ? (
             <div className="overflow-x-auto custom-scrollbar">
               <table className="w-full text-left">
-                <thead className="bg-slate-50/50 border-b border-slate-100">
-                  <tr>
-                    {["Item Details", "Category", "Stock Level", "Unit Price", "Value", "Actions"].map((h) => (
-                      <th key={h} className="px-8 py-5 text-[11px] font-black text-slate-400 uppercase tracking-widest">
-                        {h}
-                      </th>
+                <thead>
+                  <tr className="bg-slate-50 border-b border-slate-100">
+                    {["Entity Details", "Classification", "Quantification", "Unit Value", "Total Valuation", "Actions"].map((h) => (
+                      <th key={h} className="px-6 py-4 text-[11px] font-bold text-slate-500 uppercase tracking-wider">{h}</th>
                     ))}
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-50">
+                <tbody className="divide-y divide-slate-100">
                   {paginated.map((item) => (
-                    <tr key={item.id} className="hover:bg-slate-50/50 transition-colors group">
-                      <td className="px-8 py-5">
-                        <div className="flex items-center gap-4">
-                          <div className="h-12 w-12 rounded-2xl bg-brand/10 text-brand flex items-center justify-center font-black text-lg border border-brand/20 group-hover:scale-110 transition-transform shadow-sm">
+                    <tr key={item.id} className="hover:bg-slate-50/50 transition-all group">
+                      <td className="px-6 py-4">
+                        <div className="flex items-center gap-3">
+                          <div className="h-10 w-10 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center border border-indigo-100 shadow-sm">
                             <Package size={20} />
                           </div>
                           <div>
-                            <div className="font-bold text-slate-900 text-base">{item.name}</div>
-                            <div className="text-xs text-slate-400 font-black uppercase tracking-tighter">SKU: {item.sku}</div>
+                            <div className="font-bold text-slate-900 text-sm tracking-tight">{item.name}</div>
+                            <div className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">{item.sku}</div>
                           </div>
                         </div>
                       </td>
-                      <td className="px-8 py-5">
-                        <span className="px-3 py-1 bg-slate-100 text-slate-600 rounded-full text-[10px] font-black uppercase tracking-wider">
-                          {item.category}
-                        </span>
+                      <td className="px-6 py-4">
+                        <span className="px-2 py-0.5 bg-slate-100 text-slate-600 rounded-lg text-[10px] font-bold uppercase tracking-wider border border-slate-200">{item.category}</span>
                       </td>
-                      <td className="px-8 py-5">
+                      <td className="px-6 py-4">
                         <div className="flex flex-col gap-1">
                           <div className="flex items-center gap-2">
-                            <span className="font-bold text-slate-700">{item.quantity} {item.unit}</span>
+                            <span className="text-sm font-bold text-slate-900">{item.quantity}</span>
+                            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">{item.unit}</span>
                             <StatusBadge status={item.status} />
                           </div>
                           <div className="w-24 h-1.5 bg-slate-100 rounded-full overflow-hidden">
                             <div 
-                              className={`h-full rounded-full ${item.status === 'In Stock' ? 'bg-emerald-400' : item.status === 'Low Stock' ? 'bg-amber-400' : 'bg-rose-400'}`}
+                              className={`h-full rounded-full transition-all duration-1000 ${item.status === 'In Stock' ? 'bg-emerald-500' : item.status === 'Low Stock' ? 'bg-amber-500' : 'bg-rose-500'}`}
                               style={{ width: `${Math.min(100, (item.quantity / (item.minThreshold * 5)) * 100)}%` }}
                             ></div>
                           </div>
                         </div>
                       </td>
-                      <td className="px-8 py-5 font-bold text-slate-600 text-sm">
-                        ₹{item.price.toLocaleString()}
-                      </td>
-                      <td className="px-8 py-5 font-black text-slate-900 text-sm">
-                        ₹{(item.price * item.quantity).toLocaleString()}
-                      </td>
-                      <td className="px-8 py-5">
+                      <td className="px-6 py-4 font-bold text-slate-900 text-sm">₹{item.price.toLocaleString()}</td>
+                      <td className="px-6 py-4 font-bold text-indigo-600 text-sm">₹{(item.price * item.quantity).toLocaleString()}</td>
+                      <td className="px-6 py-4">
                         <div className="flex gap-2">
-                          <ActionBtn color="blue" onClick={() => setViewDetails(item)} icon={<Eye size={18} />} />
-                          <ActionBtn color="orange" onClick={() => { setSelectedItem(item); setShowForm(true); }} icon={<Pencil size={18} />} />
-                          <ActionBtn color="red" onClick={() => handleDelete(item.id)} icon={<Trash2 size={18} />} />
+                          <ActionBtn color="blue" onClick={() => setViewDetails(item)} icon={<Eye size={16} />} />
+                          <ActionBtn color="orange" onClick={() => { setSelectedItem(item); setShowForm(true); }} icon={<Pencil size={16} />} />
+                          <ActionBtn color="red" onClick={() => handleDelete(item.id)} icon={<Trash2 size={16} />} />
                         </div>
                       </td>
                     </tr>
@@ -274,110 +260,98 @@ export default function IMS() {
                 </tbody>
               </table>
             </div>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {paginated.map((item) => (
-              <div key={item.id} className="bg-white border border-slate-200 rounded-[24px] p-8 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all group relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-brand/5 rounded-bl-[120px] -mr-10 -mt-10 transition-all group-hover:scale-125"></div>
-                
-                <div className="flex justify-between items-start mb-8 relative z-10">
-                  <div className="h-16 w-16 rounded-[24px] bg-brand text-white flex items-center justify-center font-black text-2xl shadow-xl shadow-brand/30 group-hover:rotate-6 transition-transform">
-                    <Package size={28} />
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 p-6">
+              {paginated.map((item) => (
+                <div key={item.id} className="bg-white border border-slate-100 rounded-xl p-6 shadow-sm hover:shadow-md transition-all group">
+                  <div className="flex justify-between items-start mb-6">
+                    <div className="h-12 w-12 rounded-xl bg-indigo-600 text-white flex items-center justify-center font-bold text-xl shadow-md">
+                      <Package size={24} />
+                    </div>
+                    <StatusBadge status={item.status} />
                   </div>
-                  <StatusBadge status={item.status} />
-                </div>
 
-                <div className="mb-8">
-                  <h3 className="font-black text-xl text-slate-900 line-clamp-1">{item.name}</h3>
-                  <p className="text-sm text-brand font-black mt-1 uppercase tracking-wider">{item.sku}</p>
-                </div>
+                  <div className="mb-6">
+                    <h3 className="font-bold text-lg text-slate-900 tracking-tight line-clamp-1">{item.name}</h3>
+                    <p className="text-[10px] text-slate-400 font-bold mt-1 uppercase tracking-wider">{item.sku}</p>
+                  </div>
 
-                <div className="space-y-4 pt-6 border-t border-slate-100">
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="text-slate-400 font-medium">Quantity</span>
-                    <span className="font-black text-slate-700">{item.quantity} {item.unit}</span>
+                  <div className="space-y-3 py-4 border-y border-slate-50">
+                    <div className="flex items-center justify-between">
+                      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Inventory</span>
+                      <span className="font-bold text-slate-700 text-sm">{item.quantity} {item.unit}</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Valuation</span>
+                      <span className="font-bold text-slate-700 text-sm">₹{item.price}</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Location</span>
+                      <span className="font-bold text-indigo-600 text-sm">{item.location}</span>
+                    </div>
                   </div>
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="text-slate-400 font-medium">Unit Price</span>
-                    <span className="font-black text-slate-700">₹{item.price}</span>
-                  </div>
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="text-slate-400 font-medium">Location</span>
-                    <span className="font-bold text-slate-700">{item.location}</span>
-                  </div>
-                </div>
 
-                <div className="flex gap-3 mt-8 pt-6 border-t border-slate-100">
-                  <button onClick={() => setViewDetails(item)} className="flex-1 py-3.5 rounded-2xl bg-slate-50 text-slate-600 hover:bg-slate-100 text-xs font-black uppercase transition-colors">Details</button>
-                  <button onClick={() => { setSelectedItem(item); setShowForm(true); }} className="p-3.5 rounded-2xl bg-brand/5 text-brand hover:bg-brand hover:text-white transition-all shadow-sm"><Pencil size={18} /></button>
+                  <div className="flex gap-2 mt-6">
+                    <button onClick={() => setViewDetails(item)} className="flex-1 py-2 rounded-lg bg-slate-50 text-slate-600 hover:bg-slate-100 text-[10px] font-bold uppercase tracking-wider transition-all">Analysis</button>
+                    <button onClick={() => { setSelectedItem(item); setShowForm(true); }} className="p-2 rounded-lg bg-slate-900 text-white hover:bg-indigo-600 transition-all shadow-md active:scale-90"><Pencil size={16} /></button>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        )}
+              ))}
+            </div>
+          )}
+        </div>
 
         {/* Pagination */}
         {totalPages > 1 && (
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-6 pt-6">
-            <p className="text-sm font-bold text-slate-400">
-              Showing <span className="text-slate-900 font-black">{(currentPage - 1) * ITEMS_PER_PAGE + 1}-{Math.min(currentPage * ITEMS_PER_PAGE, filtered.length)}</span> of <span className="text-slate-900 font-black">{filtered.length}</span> SKU Items
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4">
+            <p className="text-xs font-bold text-slate-500 uppercase tracking-wider">
+              Showing <span className="text-slate-900 font-black">{(currentPage - 1) * ITEMS_PER_PAGE + 1}-{Math.min(currentPage * ITEMS_PER_PAGE, filtered.length)}</span> of <span className="text-slate-900 font-black">{filtered.length}</span> Records
             </p>
-            <div className="flex items-center gap-3 bg-white border border-slate-200 p-2 rounded-[24px] shadow-sm">
+            <div className="flex items-center gap-2 bg-white border border-slate-200 p-1.5 rounded-xl shadow-sm">
               <button
                 onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
                 disabled={currentPage === 1}
-                className="p-2.5 rounded-xl hover:bg-slate-50 disabled:opacity-20 transition-all text-slate-600"
+                className="p-2 rounded-lg hover:bg-slate-50 disabled:opacity-20 transition-all text-slate-600"
               >
-                <ChevronLeft size={24} />
+                <ChevronLeft size={20} />
               </button>
               <div className="flex items-center gap-1">
-                {Array.from({ length: totalPages }).map((_, i) => (
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
                   <button
-                    key={i}
-                    onClick={() => setCurrentPage(i + 1)}
-                    className={`h-10 w-10 rounded-xl text-xs font-black transition-all ${
-                      currentPage === i + 1 ? 'bg-brand text-white shadow-lg shadow-brand/20 scale-110' : 'text-slate-400 hover:bg-slate-50'
-                    }`}
+                    key={p}
+                    onClick={() => setCurrentPage(p)}
+                    className={`h-9 w-9 rounded-lg text-xs font-bold transition-all ${currentPage === p ? 'bg-slate-900 text-white shadow-md' : 'text-slate-400 hover:bg-slate-50'}`}
                   >
-                    {i + 1}
+                    {p}
                   </button>
                 ))}
               </div>
               <button
                 onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
                 disabled={currentPage === totalPages}
-                className="p-2.5 rounded-xl hover:bg-slate-50 disabled:opacity-20 transition-all text-slate-600"
+                className="p-2 rounded-lg hover:bg-slate-50 disabled:opacity-20 transition-all text-slate-600"
               >
-                <ChevronRight size={24} />
+                <ChevronRight size={20} />
               </button>
             </div>
           </div>
         )}
       </div>
 
-      {/* Form Modal */}
+      {/* Modals */}
       {showForm && (
-        <InventoryForm
-          editData={selectedItem}
-          onClose={() => {
-            setShowForm(false);
-            setSelectedItem(null);
-          }}
-          onSave={handleSave}
+        <InventoryFormModal 
+          editData={selectedItem} 
+          onClose={() => { setShowForm(false); setSelectedItem(null); }} 
+          onSave={handleSave} 
         />
       )}
 
-      {/* Details View Modal */}
       {viewDetails && (
         <ItemDetailsModal 
           item={viewDetails} 
           onClose={() => setViewDetails(null)} 
-          onEdit={(item) => {
-            setViewDetails(null);
-            setSelectedItem(item);
-            setShowForm(true);
-          }}
+          onEdit={(item) => { setViewDetails(null); setSelectedItem(item); setShowForm(true); }} 
         />
       )}
     </div>
@@ -386,60 +360,76 @@ export default function IMS() {
 
 /* ================= HELPER COMPONENTS ================= */
 
-function StatCard({ title, value, icon, trend, color }: { title: string; value: string; icon: React.ReactNode; trend: string; color: string }) {
+interface StatCardProps {
+  title: string;
+  value: string;
+  icon: React.ReactNode;
+  trend: string;
+  color: "indigo" | "emerald" | "rose" | "blue";
+}
+
+function StatCard({ title, value, icon, trend, color }: StatCardProps) {
+  const colorMap = {
+    indigo: "from-indigo-500/20 to-indigo-600/5 text-indigo-600 shadow-indigo-200/50",
+    emerald: "from-emerald-500/20 to-emerald-600/5 text-emerald-600 shadow-emerald-200/50",
+    rose: "from-rose-500/20 to-rose-600/5 text-rose-600 shadow-rose-200/50",
+    blue: "from-blue-500/20 to-blue-600/5 text-blue-600 shadow-blue-200/50"
+  };
+
   return (
-    <div className="bg-white p-6 rounded-[24px] border border-slate-200 shadow-sm relative overflow-hidden group">
-      <div className={`absolute top-0 right-0 w-24 h-24 ${color} opacity-[0.03] rounded-bl-[100px] -mr-8 -mt-8 transition-all group-hover:scale-150`}></div>
-      <div className="flex justify-between items-start mb-4 relative z-10">
-        <div className={`p-3 rounded-2xl ${color} text-white shadow-lg`}>
+    <div className="group relative bg-white/70 backdrop-blur-xl border border-white/50 p-8 rounded-[40px] shadow-2xl hover:shadow-indigo-200/50 transition-all duration-500 hover:-translate-y-2 overflow-hidden">
+      <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${colorMap[color]} blur-3xl -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-700`}></div>
+      <div className="relative flex items-center gap-6">
+        <div className={`w-16 h-16 rounded-[24px] bg-gradient-to-br ${colorMap[color]} flex items-center justify-center shadow-xl`}>
           {icon}
         </div>
-      </div>
-      <div className="relative z-10">
-        <h3 className="text-slate-400 text-[10px] font-black uppercase tracking-widest mb-1">{title}</h3>
-        <p className="text-3xl font-black text-slate-900 tracking-tight">{value}</p>
-        <p className="text-[10px] font-bold text-slate-400 mt-2 flex items-center gap-1">
-          <TrendingUp size={12} className="text-emerald-500" />
-          {trend}
-        </p>
+        <div>
+          <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-1">{title}</p>
+          <div className="flex items-baseline gap-3">
+            <h3 className="text-3xl font-black text-slate-900 tracking-tight">{value}</h3>
+            <span className={`text-[10px] font-black px-2 py-0.5 rounded-full ${color === 'rose' ? 'bg-rose-50 text-rose-500' : 'bg-emerald-50 text-emerald-500'}`}>{trend}</span>
+          </div>
+        </div>
       </div>
     </div>
   );
 }
 
 function StatusBadge({ status }: { status: ItemStatus }) {
-  const styles = {
-    "In Stock": "bg-emerald-50 text-emerald-600 border-emerald-100",
-    "Low Stock": "bg-amber-50 text-amber-600 border-amber-100",
-    "Out of Stock": "bg-rose-50 text-rose-600 border-rose-100",
-    "Discontinued": "bg-slate-100 text-slate-500 border-slate-200"
+  const configs: Record<ItemStatus, string> = {
+    "In Stock": "bg-emerald-50 text-emerald-600 border-emerald-100 shadow-emerald-100",
+    "Low Stock": "bg-amber-50 text-amber-600 border-amber-100 shadow-amber-100",
+    "Out of Stock": "bg-rose-50 text-rose-600 border-rose-100 shadow-rose-100",
+    "Discontinued": "bg-slate-50 text-slate-600 border-slate-100 shadow-slate-100",
   };
 
   return (
-    <span className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-tighter border ${styles[status]}`}>
+    <span className={`px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest border shadow-sm ${configs[status]}`}>
       {status}
     </span>
   );
 }
 
-function ActionBtn({ color, onClick, icon }: { color: "blue" | "orange" | "red"; onClick: () => void; icon: React.ReactNode }) {
-  const styles = {
-    blue: "text-blue-500 hover:bg-blue-50 border-blue-100",
-    orange: "text-orange-500 hover:bg-orange-50 border-orange-100",
-    red: "text-rose-500 hover:bg-rose-50 border-rose-100"
+function ActionBtn({ icon, onClick, color }: { icon: React.ReactNode; onClick: () => void; color: "blue" | "red" | "orange" }) {
+  const colors = {
+    blue: "bg-blue-50 text-blue-600 hover:bg-blue-600 hover:text-white shadow-blue-200",
+    red: "bg-rose-50 text-rose-600 hover:bg-rose-600 hover:text-white shadow-rose-200",
+    orange: "bg-amber-50 text-amber-600 hover:bg-amber-600 hover:text-white shadow-amber-200"
   };
 
   return (
     <button
       onClick={onClick}
-      className={`p-2 rounded-xl border transition-all hover:scale-110 active:scale-90 ${styles[color]}`}
+      className={`p-3 rounded-2xl transition-all duration-300 shadow-lg hover:-translate-y-1 active:scale-90 ${colors[color]}`}
     >
       {icon}
     </button>
   );
 }
 
-function InventoryForm({ editData, onClose, onSave }: { editData: InventoryItem | null; onClose: () => void; onSave: (item: InventoryItem) => void }) {
+/* ================= MODALS ================= */
+
+function InventoryFormModal({ editData, onClose, onSave }: { editData: InventoryItem | null; onClose: () => void; onSave: (data: InventoryItem) => void }) {
   const [formData, setFormData] = useState<InventoryItem>(
     editData || {
       id: 0,
@@ -451,129 +441,57 @@ function InventoryForm({ editData, onClose, onSave }: { editData: InventoryItem 
       price: 0,
       location: LOCATIONS[0],
       status: "In Stock",
-      lastUpdated: "",
-      minThreshold: 5
+      lastUpdated: new Date().toISOString().split('T')[0],
+      minThreshold: 10
     }
   );
 
-  const [errors, setErrors] = useState<Record<string, string>>({});
-
-  const validate = () => {
-    const newErrors: Record<string, string> = {};
-    if (!formData.name) newErrors.name = "Item name is required";
-    if (!formData.sku) newErrors.sku = "SKU is required";
-    if (formData.quantity < 0) newErrors.quantity = "Invalid quantity";
-    if (formData.price <= 0) newErrors.price = "Invalid price";
-    
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (validate()) onSave(formData);
-  };
-
   return (
-    <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-md flex items-center justify-center z-[100] p-4 animate-in fade-in duration-300">
-      <div className="bg-white rounded-[24px] w-full max-w-2xl shadow-2xl overflow-hidden border border-white/20 scale-in-center">
-        <div className="bg-slate-900 p-8 flex justify-between items-center relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-brand/10 rounded-full -mr-32 -mt-32"></div>
-          <div className="relative z-10">
-            <h2 className="text-2xl font-black text-white uppercase tracking-tight">
-              {editData ? "Refine Item" : "New Inventory Item"}
-            </h2>
-            <p className="text-slate-400 text-sm font-medium mt-1">Populate stock details below</p>
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+      <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-xl animate-in fade-in duration-500" onClick={onClose}></div>
+      <div className="relative bg-white/95 backdrop-blur-2xl border border-white rounded-[40px] shadow-2xl w-full max-w-xl overflow-hidden animate-in zoom-in duration-500">
+        <div className="p-10 border-b border-indigo-100/50 flex justify-between items-center bg-indigo-50/30">
+          <div>
+            <h2 className="text-3xl font-black text-slate-900 tracking-tight">{editData ? "Update" : "New"} <span className="text-indigo-600">Entry</span></h2>
+            <p className="text-xs font-black text-slate-400 uppercase tracking-[0.3em] mt-2">Inventory Ledger Synapse</p>
           </div>
-          <button onClick={onClose} className="relative z-10 h-12 w-12 rounded-2xl bg-white/10 text-white flex items-center justify-center hover:bg-brand transition-colors">
+          <button onClick={onClose} className="p-4 rounded-2xl bg-white hover:bg-rose-50 text-slate-400 hover:text-rose-500 transition-all shadow-xl active:scale-90">
             <X size={24} />
           </button>
         </div>
-
-        <form onSubmit={handleSubmit} className="p-8 space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <FormInput 
-              label="Item Name" 
-              value={formData.name} 
-              onChange={(v) => setFormData({...formData, name: v})} 
-              placeholder="e.g. Engine Oil 5W-40"
-              error={errors.name}
-            />
-            <FormInput 
-              label="SKU Identifier" 
-              value={formData.sku} 
-              onChange={(v) => setFormData({...formData, sku: v})} 
-              placeholder="e.g. EN-OIL-01"
-              error={errors.sku}
-            />
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <form onSubmit={(e) => { e.preventDefault(); onSave(formData); }} className="p-10 space-y-8">
+          <div className="grid grid-cols-2 gap-6">
+            <FormInput label="Item Nomenclature" value={formData.name} onChange={(v) => setFormData({...formData, name: v})} placeholder="e.g. Brake Pads" required className="col-span-2" />
+            <FormInput label="SKU Identifier" value={formData.sku} onChange={(v) => setFormData({...formData, sku: v})} placeholder="e.g. BK-F-001" required />
             <div className="space-y-2">
-              <label className="text-[11px] font-black text-slate-400 uppercase tracking-widest ml-1">Category</label>
+              <label className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] ml-2">Classification</label>
               <select 
                 value={formData.category} 
                 onChange={(e) => setFormData({...formData, category: e.target.value})}
-                className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-5 py-3.5 text-sm font-bold focus:ring-4 focus:ring-brand/10 focus:border-brand outline-none transition-all"
+                className="w-full px-6 py-5 bg-indigo-50/50 border border-indigo-100 rounded-[22px] text-sm font-bold focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-600 outline-none transition-all appearance-none cursor-pointer"
               >
                 {CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
               </select>
             </div>
+            <FormInput label="Asset Quantity" type="number" value={formData.quantity.toString()} onChange={(v) => setFormData({...formData, quantity: parseInt(v) || 0})} required />
+            <FormInput label="Measurement Unit" value={formData.unit} onChange={(v) => setFormData({...formData, unit: v})} placeholder="Pieces, Sets, etc." required />
+            <FormInput label="Unit Valuation (₹)" type="number" value={formData.price.toString()} onChange={(v) => setFormData({...formData, price: parseFloat(v) || 0})} required />
             <div className="space-y-2">
-              <label className="text-[11px] font-black text-slate-400 uppercase tracking-widest ml-1">Storage Location</label>
+              <label className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] ml-2">Warehouse Location</label>
               <select 
                 value={formData.location} 
                 onChange={(e) => setFormData({...formData, location: e.target.value})}
-                className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-5 py-3.5 text-sm font-bold focus:ring-4 focus:ring-brand/10 focus:border-brand outline-none transition-all"
+                className="w-full px-6 py-5 bg-indigo-50/50 border border-indigo-100 rounded-[22px] text-sm font-bold focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-600 outline-none transition-all appearance-none cursor-pointer"
               >
                 {LOCATIONS.map(l => <option key={l} value={l}>{l}</option>)}
               </select>
             </div>
-            <FormInput 
-              label="Unit (e.g. Pcs, Ltrs)" 
-              value={formData.unit} 
-              onChange={(v) => setFormData({...formData, unit: v})} 
-              placeholder="Pieces"
-            />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <FormInput 
-              label="Stock Quantity" 
-              type="number"
-              value={formData.quantity.toString()} 
-              onChange={(v) => setFormData({...formData, quantity: parseInt(v) || 0})} 
-              error={errors.quantity}
-            />
-            <FormInput 
-              label="Min Threshold" 
-              type="number"
-              value={formData.minThreshold.toString()} 
-              onChange={(v) => setFormData({...formData, minThreshold: parseInt(v) || 0})} 
-            />
-            <FormInput 
-              label="Unit Price (₹)" 
-              type="number"
-              value={formData.price.toString()} 
-              onChange={(v) => setFormData({...formData, price: parseFloat(v) || 0})} 
-              error={errors.price}
-            />
-          </div>
-
-          <div className="pt-6 flex gap-4">
-            <button 
-              type="button" 
-              onClick={onClose} 
-              className="flex-1 px-8 py-4 rounded-2xl border-2 border-slate-100 text-slate-500 font-black uppercase tracking-widest hover:bg-slate-50 transition-all"
-            >
-              Discard
-            </button>
-            <button 
-              type="submit" 
-              className="flex-1 px-8 py-4 rounded-2xl bg-brand hover:bg-brand text-white font-black uppercase tracking-widest shadow-xl shadow-brand/20 transition-all active:scale-95"
-            >
-              {editData ? "Update Item" : "Acknowledge Item"}
-            </button>
+          <div className="flex gap-6 pt-4">
+            <button type="button" onClick={onClose} className="flex-1 py-5 rounded-[22px] border-2 border-slate-100 text-slate-400 font-black uppercase tracking-widest hover:bg-slate-50 transition-all">Discard</button>
+            <button type="submit" className="flex-1 py-5 rounded-[22px] bg-slate-900 text-white font-black uppercase tracking-widest hover:bg-indigo-600 transition-all shadow-2xl shadow-slate-900/20 active:scale-95">Commit Entry</button>
           </div>
         </form>
       </div>
@@ -581,69 +499,54 @@ function InventoryForm({ editData, onClose, onSave }: { editData: InventoryItem 
   );
 }
 
-function FormInput({ label, value, onChange, placeholder, error, type = "text" }: { label: string; value: string; onChange: (v: string) => void; placeholder?: string; error?: string; type?: string }) {
-  return (
-    <div className="space-y-2">
-      <label className="text-[11px] font-black text-slate-400 uppercase tracking-widest ml-1">{label}</label>
-      <input 
-        type={type}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        placeholder={placeholder}
-        className={`w-full bg-slate-50 border ${error ? 'border-rose-300 ring-4 ring-rose-400/10' : 'border-slate-200'} rounded-2xl px-5 py-3.5 text-sm font-bold focus:ring-4 focus:ring-brand/10 focus:border-brand outline-none transition-all`}
-      />
-      {error && <p className="text-[10px] text-rose-500 font-black uppercase ml-1">{error}</p>}
-    </div>
-  );
-}
-
 function ItemDetailsModal({ item, onClose, onEdit }: { item: InventoryItem; onClose: () => void; onEdit: (item: InventoryItem) => void }) {
   return (
-    <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-md flex items-center justify-center z-[100] p-4 animate-in fade-in duration-300">
-      <div className="bg-white rounded-[24px] w-full max-w-lg shadow-2xl overflow-hidden border border-white/20">
-        <div className="p-8 bg-gradient-to-br from-slate-50 to-white relative">
-          <button onClick={onClose} className="absolute top-6 right-6 h-10 w-10 rounded-xl bg-slate-100 text-slate-400 flex items-center justify-center hover:bg-rose-50 hover:text-rose-500 transition-all">
-            <X size={20} />
-          </button>
-          
-          <div className="flex flex-col items-center text-center">
-            <div className="h-24 w-24 rounded-[24px] bg-brand text-white flex items-center justify-center shadow-2xl shadow-brand/30 mb-6">
-              <Package size={48} />
-            </div>
-            <h2 className="text-3xl font-black text-slate-900 tracking-tight">{item.name}</h2>
-            <p className="text-brand font-black uppercase tracking-widest text-sm mt-1">{item.sku}</p>
-            <div className="mt-4">
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+      <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-xl animate-in fade-in duration-500" onClick={onClose}></div>
+      <div className="relative bg-white/90 backdrop-blur-2xl border border-white rounded-[40px] shadow-2xl w-full max-w-2xl overflow-hidden animate-in zoom-in duration-500">
+        <div className="p-10 border-b border-indigo-100/50 flex justify-between items-center bg-indigo-50/30">
+          <div>
+            <div className="flex items-center gap-4 mb-2">
+              <h2 className="text-3xl font-black text-slate-900 tracking-tight">Entity <span className="text-indigo-600">Analysis</span></h2>
               <StatusBadge status={item.status} />
             </div>
+            <p className="text-xs font-black text-slate-400 uppercase tracking-[0.3em]">{item.sku}</p>
+          </div>
+          <button onClick={onClose} className="p-4 rounded-2xl bg-white hover:bg-rose-50 text-slate-400 hover:text-rose-500 transition-all shadow-xl shadow-slate-200/50 active:scale-90">
+            <X size={24} />
+          </button>
+        </div>
+        
+        <div className="p-10 space-y-10">
+          <div className="flex flex-col items-center text-center">
+            <div className="h-24 w-24 rounded-[30px] bg-indigo-600 text-white flex items-center justify-center shadow-2xl shadow-indigo-600/30 mb-6 rotate-3">
+              <Package size={48} />
+            </div>
+            <h2 className="text-4xl font-black text-slate-900 tracking-tight">{item.name}</h2>
+            <p className="text-sm font-bold text-slate-400 uppercase tracking-[0.3em] mt-2">Verified Global Asset</p>
           </div>
 
-          <div className="grid grid-cols-2 gap-4 mt-10">
-            <DetailBox label="Category" value={item.category} />
-            <DetailBox label="Location" value={item.location} />
-            <DetailBox label="Quantity" value={`${item.quantity} ${item.unit}`} />
-            <DetailBox label="Min Stock" value={`${item.minThreshold} ${item.unit}`} />
-            <DetailBox label="Unit Price" value={`₹${item.price}`} />
-            <DetailBox label="Last Updated" value={item.lastUpdated} />
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+            <DetailBox label="Classification" value={item.category} icon={<Boxes size={16} />} />
+            <DetailBox label="Deployment" value={item.location} icon={<Warehouse size={16} />} />
+            <DetailBox label="Quantification" value={`${item.quantity} ${item.unit}`} icon={<Package size={16} />} />
+            <DetailBox label="Valuation" value={`₹${item.price}`} icon={<DollarSign size={16} />} />
+            <DetailBox label="Total Equity" value={`₹${(item.price * item.quantity).toLocaleString()}`} icon={<TrendingUp size={16} />} />
+            <DetailBox label="Last Sync" value={item.lastUpdated} icon={<Clock size={16} />} />
           </div>
 
-          <div className="mt-10 pt-8 border-t border-slate-100 flex gap-4">
+          <div className="flex gap-6">
             <button 
               onClick={() => onEdit(item)}
-              className="flex-1 py-4 rounded-2xl bg-slate-900 text-white font-black uppercase tracking-widest hover:bg-slate-800 transition-all flex items-center justify-center gap-2 shadow-xl shadow-slate-900/20"
+              className="flex-1 py-6 rounded-[24px] bg-slate-900 text-white font-black uppercase tracking-widest hover:bg-indigo-600 transition-all flex items-center justify-center gap-3 shadow-2xl shadow-slate-900/20 active:scale-95"
             >
-              <Pencil size={18} /> Edit Item
+              <Pencil size={20} /> Modify Core
             </button>
             <button 
-              onClick={() => {
-                const restockQty = prompt("Enter restock quantity:", "10");
-                if (restockQty && !isNaN(parseInt(restockQty))) {
-                  // This is a simplified action for the UI
-                  toast.success(`Restock order for ${restockQty} units initiated`);
-                }
-              }}
-              className="px-6 py-4 rounded-2xl bg-brand text-white hover:bg-brand/90 transition-all shadow-xl shadow-brand/20"
+              onClick={() => toast.success("Restock protocol initiated")}
+              className="px-8 py-6 rounded-[24px] bg-indigo-600 text-white hover:bg-indigo-700 transition-all shadow-2xl shadow-indigo-600/30 active:scale-95"
             >
-              <ArrowDownToLine size={20} />
+              <ArrowDownToLine size={24} />
             </button>
           </div>
         </div>
@@ -652,11 +555,28 @@ function ItemDetailsModal({ item, onClose, onEdit }: { item: InventoryItem; onCl
   );
 }
 
-function DetailBox({ label, value }: { label: string; value: string }) {
+function DetailBox({ label, value, icon }: { label: string; value: string; icon: React.ReactNode }) {
   return (
-    <div className="bg-slate-50/50 border border-slate-100 p-4 rounded-2xl">
-      <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">{label}</p>
-      <p className="text-sm font-bold text-slate-700">{value}</p>
+    <div className="bg-indigo-50/50 border border-indigo-100 p-5 rounded-[24px] group hover:bg-white hover:shadow-xl transition-all duration-300">
+      <div className="flex items-center gap-2 mb-2">
+        <span className="text-indigo-600">{icon}</span>
+        <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{label}</p>
+      </div>
+      <p className="text-sm font-black text-slate-900 truncate">{value}</p>
     </div>
   );
 }
+
+function FormInput({ label, onChange, className = "", ...props }: { label: string; onChange: (v: string) => void; className?: string } & Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'>) {
+  return (
+    <div className={`space-y-2 ${className}`}>
+      <label className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] ml-2">{label}</label>
+      <input 
+        {...props} 
+        onChange={(e) => onChange(e.target.value)}
+        className="w-full px-6 py-5 bg-indigo-50/50 border border-indigo-100 rounded-[22px] text-sm font-bold focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-600 outline-none transition-all placeholder:text-indigo-200" 
+      />
+    </div>
+  );
+}
+

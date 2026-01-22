@@ -49,7 +49,7 @@ export default function LeaveManagement() {
   );
 
   return (
-    <div className="min-h-screen bg-slate-50/50 p-3 md:p-6 animate-in fade-in duration-500">
+    <div className="min-h-screen bg-slate-50 p-3 md:p-6 animate-in fade-in duration-500">
       <div className="space-y-8">
         
         {/* Header Section */}
@@ -76,12 +76,12 @@ export default function LeaveManagement() {
                 placeholder="Search requests..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-12 pr-4 py-3 bg-white border border-slate-200 rounded-2xl text-sm focus:outline-none focus:ring-4 focus:ring-red-400/10 focus:border-red-400 transition-all w-full md:w-72 shadow-sm font-medium"
+                className="pl-12 pr-4 py-3 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-4 focus:ring-red-400/10 focus:border-red-400 transition-all w-full md:w-72 shadow-sm font-medium"
               />
             </div>
 
             <button
-              className="flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white px-6 py-3 rounded-2xl text-sm font-bold transition-all shadow-xl active:scale-95"
+              className="flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white px-6 py-3 rounded-xl text-sm font-bold transition-all shadow-xl active:scale-95"
             >
               <Plus size={18} />
               <span className="hidden sm:inline">Apply Leave</span>
@@ -98,7 +98,7 @@ export default function LeaveManagement() {
         </div>
 
         {/* Leave Requests Table */}
-        <div className="bg-white border border-slate-200 rounded-[32px] shadow-sm overflow-hidden transition-all">
+        <div className="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden transition-all">
           <div className="overflow-x-auto">
             <table className="w-full text-left">
               <thead className="bg-slate-50/50 border-b border-slate-100">
@@ -163,10 +163,10 @@ export default function LeaveManagement() {
 
 function StatCard({ title, value, icon, trend, color }: any) {
   return (
-    <div className="bg-white border border-slate-200 p-8 rounded-[32px] shadow-sm relative overflow-hidden group">
-      <div className={`absolute top-0 right-0 w-24 h-24 ${color} opacity-[0.03] rounded-bl-[100px] -mr-8 -mt-8 transition-all group-hover:scale-110`}></div>
+    <div className="bg-white border border-slate-200 p-8 rounded-xl shadow-sm relative overflow-hidden group">
+      <div className={`absolute top-0 right-0 w-24 h-24 ${color} opacity-[0.03] rounded-bl-3xl -mr-8 -mt-8 transition-all group-hover:scale-110`}></div>
       <div className="flex items-center gap-6 relative z-10">
-        <div className={`h-16 w-16 rounded-[24px] ${color} text-white flex items-center justify-center shadow-lg shadow-current/20`}>
+        <div className={`h-16 w-16 rounded-xl ${color} text-white flex items-center justify-center shadow-lg shadow-current/20`}>
           {icon}
         </div>
         <div>

@@ -44,7 +44,7 @@ export default function Currencies() {
   );
 
   return (
-    <div className="min-h-screen bg-slate-50/50 p-3 md:p-6 animate-in fade-in duration-500">
+    <div className="min-h-screen bg-slate-50 p-3 md:p-6 animate-in fade-in duration-500">
       <div className="space-y-8">
         
         {/* Header Section */}
@@ -71,15 +71,15 @@ export default function Currencies() {
                 placeholder="Search currencies..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-12 pr-4 py-3 bg-white border border-slate-200 rounded-2xl text-sm focus:outline-none focus:ring-4 focus:ring-red-400/10 focus:border-red-400 transition-all w-full md:w-72 shadow-sm font-medium"
+                className="pl-12 pr-4 py-3 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-4 focus:ring-red-400/10 focus:border-red-400 transition-all w-full md:w-72 shadow-sm font-medium"
               />
             </div>
-             <button className="flex items-center gap-2 bg-white border border-slate-200 px-6 py-3 rounded-2xl text-sm font-bold transition-all shadow-sm hover:bg-slate-50">
+             <button className="flex items-center gap-2 bg-white border border-slate-200 px-6 py-3 rounded-xl text-sm font-bold transition-all shadow-sm hover:bg-slate-50">
                 <RefreshCcw size={18} className="text-slate-500" />
                 Update Rates
              </button>
              <button
-              className="flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white px-6 py-3 rounded-2xl text-sm font-bold transition-all shadow-xl active:scale-95"
+              className="flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white px-6 py-3 rounded-xl text-sm font-bold transition-all shadow-xl active:scale-95"
             >
               <Plus size={18} />
               <span className="hidden sm:inline">Add Currency</span>
@@ -90,7 +90,7 @@ export default function Currencies() {
         {/* Currency Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {filtered.map((curr) => (
-            <div key={curr.id} className="bg-white border border-slate-200 rounded-[32px] p-8 shadow-sm hover:shadow-xl transition-all group relative overflow-hidden">
+            <div key={curr.id} className="bg-white border border-slate-200 rounded-xl p-8 shadow-sm hover:shadow-xl transition-all group relative overflow-hidden">
                <div className="flex justify-between items-start mb-6">
                   <div className="h-14 w-14 rounded-2xl bg-slate-900 text-white flex items-center justify-center font-black text-xl shadow-xl shadow-slate-900/20 group-hover:rotate-6 transition-transform">
                      {curr.code.substring(0, 2)}
@@ -120,8 +120,8 @@ export default function Currencies() {
         </div>
 
         {/* Global Market Insight */}
-        <div className="bg-slate-900 rounded-[40px] p-10 text-white relative overflow-hidden">
-           <div className="absolute right-0 top-0 w-96 h-96 bg-red-400/10 rounded-bl-[200px] -mr-20 -mt-20"></div>
+        <div className="bg-slate-900 rounded-xl p-10 text-white relative overflow-hidden">
+           <div className="absolute right-0 top-0 w-96 h-96 bg-red-400/10 rounded-bl-[120px] -mr-20 -mt-20"></div>
            <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-10">
               <div className="flex-1 space-y-4">
                  <h3 className="text-3xl font-black tracking-tight flex items-center gap-3">

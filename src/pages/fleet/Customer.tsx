@@ -16,7 +16,11 @@ import {
   Building2,
   X,
   CreditCard,
-  Briefcase
+  Briefcase,
+  Users,
+  ShieldCheck,
+  Zap,
+  MoreHorizontal
 } from "lucide-react";
 import toast from "react-hot-toast";
 
@@ -147,57 +151,49 @@ export default function Customer() {
   const paginated = filtered.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
 
   return (
-    <div className="min-h-screen bg-slate-50/50 p-3 md:p-6 animate-in fade-in duration-500">
-      <div className="space-y-8">
-        
-        {/* Header Section */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-          <div>
-            <h1 className="text-4xl font-black text-slate-900 flex items-center gap-3 tracking-tight">
-              <span className="w-2.5 h-10 bg-red-400 rounded-full"></span>
-              Customer Directory
+    <div className="min-h-screen bg-slate-50 p-4 lg:p-8 font-sans text-slate-900">
+      {/* --- Standardized Header --- */}
+      <header className="mb-8 p-6 rounded-xl bg-white border border-slate-200 shadow-sm overflow-hidden">
+        <div className="relative flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+          <div className="space-y-1">
+            <h1 className="text-3xl font-bold text-slate-900 tracking-tight">
+              Client <span className="text-indigo-600">Directory</span>
             </h1>
-            <p className="text-slate-500 mt-2 font-medium flex items-center gap-2">
-              <User size={16} />
-              Fleet Management › Client Relations
-            </p>
+            <nav className="flex items-center gap-2 text-sm font-medium text-slate-500">
+              <span className="hover:text-indigo-600 transition-colors cursor-pointer">Fleet Management</span>
+              <ChevronRight size={14} />
+              <span className="text-slate-600">Client Relations</span>
+            </nav>
           </div>
 
-          <div className="flex flex-wrap items-center gap-3">
-            <div className="relative group flex-1 md:flex-none">
-              <Search
-                className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-red-400 transition-colors"
-                size={18}
-              />
+          <div className="flex flex-wrap items-center gap-4">
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
               <input
                 type="text"
                 placeholder="Search clients..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-12 pr-4 py-3 bg-white border border-slate-200 rounded-2xl text-sm focus:outline-none focus:ring-4 focus:ring-red-400/10 focus:border-red-400 transition-all w-full md:w-72 shadow-sm font-medium"
+                className="pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all w-full lg:w-64"
               />
             </div>
 
-            <div className="flex border border-slate-200 rounded-2xl bg-white p-1.5 shadow-sm">
+            <div className="flex p-1 bg-slate-100 border border-slate-200 rounded-lg">
               <button
                 onClick={() => setViewMode("table")}
-                className={`p-2 rounded-xl transition-all ${
-                  viewMode === "table"
-                    ? "bg-red-400 text-white shadow-lg shadow-red-400/20"
-                    : "text-slate-400 hover:bg-slate-50"
+                className={`p-2 rounded-md transition-all ${
+                  viewMode === "table" ? "bg-white text-indigo-600 shadow-sm" : "text-slate-500 hover:text-slate-700"
                 }`}
               >
-                <TableIcon size={20} />
+                <TableIcon size={18} data-testid="table-icon" />
               </button>
               <button
                 onClick={() => setViewMode("card")}
-                className={`p-2 rounded-xl transition-all ${
-                  viewMode === "card"
-                    ? "bg-red-400 text-white shadow-lg shadow-red-400/20"
-                    : "text-slate-400 hover:bg-slate-50"
+                className={`p-2 rounded-md transition-all ${
+                  viewMode === "card" ? "bg-white text-indigo-600 shadow-sm" : "text-slate-500 hover:text-slate-700"
                 }`}
               >
-                <LayoutGrid size={20} />
+                <LayoutGrid size={18} data-testid="layout-grid-icon" />
               </button>
             </div>
 
@@ -206,78 +202,95 @@ export default function Customer() {
                 setSelectedCustomer(null);
                 setShowForm(true);
               }}
-              className="flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white px-6 py-3 rounded-2xl text-sm font-bold transition-all shadow-xl active:scale-95"
+              className="flex items-center gap-2 bg-indigo-600 text-white px-5 py-2.5 rounded-lg text-sm font-semibold hover:bg-indigo-700 transition-all active:scale-95"
             >
               <Plus size={18} />
-              <span className="hidden sm:inline">Add Client</span>
+              <span>Register Client</span>
             </button>
           </div>
         </div>
+      </header>
 
-        {/* Stats Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          <StatCard title="Total Clients" value={customers.length.toString()} icon={<User size={24} />} color="bg-blue-500" />
-          <StatCard title="Corporate" value={customers.filter(c => c.type === "Corporate").length.toString()} icon={<Building2 size={24} />} color="bg-indigo-500" />
-          <StatCard title="VIP Accounts" value={customers.filter(c => c.type === "VIP").length.toString()} icon={<CreditCard size={24} />} color="bg-emerald-500" />
-          <StatCard title="Total Revenue" value="₹12.4L" icon={<Briefcase size={24} />} color="bg-rose-500" />
-        </div>
+      {/* --- Stats Grid --- */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <StatCard icon={<Users className="text-indigo-600" />} label="Total Registered" value={customers.length} />
+        <StatCard icon={<Building2 className="text-indigo-600" />} label="Corporate Assets" value={customers.filter(c => c.type === "Corporate").length} />
+        <StatCard icon={<ShieldCheck className="text-indigo-600" />} label="VIP Accounts" value={customers.filter(c => c.type === "VIP").length} />
+        <StatCard icon={<Zap className="text-indigo-600" />} label="Gross Engagement" value="₹12.4L" />
+      </div>
 
-        {/* Content Section */}
+      {/* --- Main Content Area --- */}
+      <main className="transition-all duration-300">
         {viewMode === "table" ? (
-          <div className="bg-white border border-slate-200 rounded-[32px] shadow-sm overflow-hidden transition-all">
-            <div className="overflow-x-auto custom-scrollbar">
-              <table className="w-full text-left">
-                <thead className="bg-slate-50/50 border-b border-slate-100">
-                  <tr>
-                    {["Client Info", "Category", "Contact", "Address", "Engagement", "Actions"].map((h) => (
-                      <th key={h} className="px-8 py-5 text-[11px] font-black text-slate-400 uppercase tracking-widest">
+          <div className="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden">
+            <div className="overflow-x-auto">
+              <table className="w-full text-left border-collapse">
+                <thead>
+                  <tr className="border-b border-slate-100 bg-slate-50">
+                    {[
+                      "Client Profile",
+                      "Classification",
+                      "Contact Vector",
+                      "Geographical Hub",
+                      "Engagement",
+                      "Operations",
+                    ].map((h) => (
+                      <th key={h} className="px-6 py-4 text-xs font-semibold text-slate-500 uppercase tracking-wider">
                         {h}
                       </th>
                     ))}
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-50">
+                <tbody className="divide-y divide-slate-100">
                   {paginated.map((c) => (
-                    <tr key={c.id} className="hover:bg-slate-50/50 transition-colors group">
-                      <td className="px-8 py-5">
-                        <div className="flex items-center gap-4">
-                          <div className="h-12 w-12 rounded-2xl bg-gradient-to-br from-red-50 to-red-100 text-red-600 flex items-center justify-center font-black text-lg border border-red-200 group-hover:scale-110 transition-transform shadow-sm">
+                    <tr key={c.id} className="hover:bg-slate-50 transition-all">
+                      <td className="px-6 py-4">
+                        <div className="flex items-center gap-3">
+                          <div className="h-10 w-10 rounded-lg bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold text-base">
                             {c.name.charAt(0)}
                           </div>
                           <div>
-                            <div className="font-bold text-slate-900 text-base">{c.name}</div>
-                            <div className="text-xs text-slate-400 font-medium">{c.company || "Individual"}</div>
+                            <div className="font-semibold text-slate-900">
+                              {c.name}
+                            </div>
+                            <div className="text-xs text-slate-500">
+                              {c.company || "Individual Account"}
+                            </div>
                           </div>
                         </div>
                       </td>
-                      <td className="px-8 py-5">
+                      <td className="px-6 py-4">
                         <StatusBadge type={c.type} />
                       </td>
-                      <td className="px-8 py-5">
-                        <div className="space-y-1">
-                          <div className="text-xs font-bold text-slate-700 flex items-center gap-2">
-                            <Mail size={12} className="text-slate-300" />
+                      <td className="px-6 py-4">
+                        <div className="space-y-0.5">
+                          <div className="flex items-center gap-2 text-xs font-medium text-slate-600">
+                            <Mail size={12} className="text-slate-400" />
                             {c.email}
                           </div>
-                          <div className="text-xs font-bold text-slate-400 flex items-center gap-2">
-                            <Phone size={12} className="text-slate-300" />
+                          <div className="flex items-center gap-2 text-xs font-medium text-slate-400">
+                            <Phone size={12} className="text-slate-400" />
                             {c.mobile}
                           </div>
                         </div>
                       </td>
-                      <td className="px-8 py-5">
+                      <td className="px-6 py-4">
                         <div className="max-w-[200px]">
-                          <div className="text-sm font-bold text-slate-600 truncate">{c.address}</div>
+                          <div className="text-sm font-medium text-slate-700 truncate">{c.address.split(',').pop()}</div>
+                          <div className="text-xs text-slate-400 truncate">{c.address}</div>
                         </div>
                       </td>
-                      <td className="px-8 py-5 text-slate-500 font-black text-xs">
-                        {c.totalBookings} BOOKINGS
+                      <td className="px-6 py-4">
+                        <div className="flex flex-col">
+                          <span className="text-sm font-semibold text-indigo-600">{c.totalBookings}</span>
+                          <span className="text-[10px] font-medium text-slate-400 uppercase">Successful Tasks</span>
+                        </div>
                       </td>
-                      <td className="px-8 py-5">
-                        <div className="flex gap-2">
-                          <ActionBtn color="blue" onClick={() => setViewDetails(c)} icon={<Eye size={18} />} />
-                          <ActionBtn color="orange" onClick={() => { setSelectedCustomer(c); setShowForm(true); }} icon={<Pencil size={18} />} />
-                          <ActionBtn color="red" onClick={() => handleDelete(c.id)} icon={<Trash2 size={18} />} />
+                      <td className="px-6 py-4">
+                        <div className="flex items-center gap-2">
+                          <ActionBtn color="blue" onClick={() => setViewDetails(c)} icon={<Eye size={16} />} />
+                          <ActionBtn color="indigo" onClick={() => { setSelectedCustomer(c); setShowForm(true); }} icon={<Pencil size={16} />} />
+                          <ActionBtn color="red" onClick={() => handleDelete(c.id)} icon={<Trash2 size={16} />} />
                         </div>
                       </td>
                     </tr>
@@ -285,66 +298,67 @@ export default function Customer() {
                 </tbody>
               </table>
             </div>
+            {filtered.length === 0 && <EmptyState />}
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {paginated.map((c) => (
-              <div key={c.id} className="bg-white border border-slate-200 rounded-[32px] p-8 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all group relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-red-400/5 rounded-bl-[120px] -mr-10 -mt-10 transition-all group-hover:scale-125"></div>
-                
-                <div className="flex justify-between items-start mb-8 relative z-10">
-                  <div className="h-16 w-16 rounded-[24px] bg-gradient-to-br from-red-400 to-red-600 text-white flex items-center justify-center font-black text-2xl shadow-xl shadow-red-400/30">
+              <div key={c.id} className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-all overflow-hidden group">
+                <div className="flex justify-between items-start mb-6">
+                  <div className="h-12 w-12 rounded-lg bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold text-xl">
                     {c.name.charAt(0)}
                   </div>
                   <StatusBadge type={c.type} />
                 </div>
 
-                <div className="mb-8">
-                  <h3 className="font-black text-xl text-slate-900 line-clamp-1">{c.name}</h3>
-                  <p className="text-sm text-red-500 font-black mt-1 uppercase tracking-wider">{c.company || "Individual Client"}</p>
+                <div className="mb-6">
+                  <h3 className="font-bold text-lg text-slate-900 group-hover:text-indigo-600 transition-colors truncate">{c.name}</h3>
+                  <p className="text-xs text-slate-500 font-medium mt-0.5">{c.company || "Individual Client"}</p>
                 </div>
 
-                <div className="space-y-4 pt-6 border-t border-slate-100">
-                  <div className="flex items-center gap-3 text-slate-500 text-sm font-medium">
-                    <Mail size={16} className="text-slate-400" />
+                <div className="space-y-3 pt-4 border-t border-slate-100 mb-6">
+                  <div className="flex items-center gap-2 text-slate-600 text-xs">
+                    <Mail size={14} className="text-slate-400" />
                     <span className="truncate">{c.email}</span>
                   </div>
-                  <div className="flex items-center gap-3 text-slate-500 text-sm font-medium">
-                    <MapPin size={16} className="text-slate-400" />
-                    <span className="truncate">{c.address}</span>
+                  <div className="flex items-center gap-2 text-slate-600 text-xs">
+                    <MapPin size={14} className="text-slate-400" />
+                    <span className="truncate">{c.address.split(',').pop()}</span>
                   </div>
                 </div>
 
-                <div className="flex gap-3 mt-8 pt-6 border-t border-slate-100">
-                  <button onClick={() => setViewDetails(c)} className="flex-1 py-3.5 rounded-2xl bg-slate-50 text-slate-600 hover:bg-slate-100 text-xs font-black uppercase transition-colors">History</button>
-                  <button onClick={() => { setSelectedCustomer(c); setShowForm(true); }} className="p-3.5 rounded-2xl bg-red-50 text-red-500 hover:bg-red-500 hover:text-white transition-all shadow-sm"><Pencil size={18} /></button>
+                <div className="flex gap-2">
+                  <button onClick={() => setViewDetails(c)} className="flex-1 py-2 rounded-lg bg-slate-50 text-slate-600 hover:bg-slate-100 text-xs font-semibold transition-all border border-slate-200">History</button>
+                  <button onClick={() => { setSelectedCustomer(c); setShowForm(true); }} className="p-2 rounded-lg bg-indigo-50 text-indigo-600 hover:bg-indigo-100 transition-all border border-indigo-100">
+                    <Pencil size={16} />
+                  </button>
                 </div>
               </div>
             ))}
           </div>
         )}
 
-        {/* Pagination */}
+        {/* --- Pagination --- */}
         {totalPages > 1 && (
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-6 pt-6">
-            <p className="text-sm font-bold text-slate-400">
-              Showing <span className="text-slate-900 font-black">{(currentPage - 1) * ITEMS_PER_PAGE + 1}-{Math.min(currentPage * ITEMS_PER_PAGE, filtered.length)}</span> of <span className="text-slate-900 font-black">{filtered.length}</span> Clients
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-6 pt-10">
+            <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">
+              Directory Index <span className="text-slate-900 font-black">{(currentPage - 1) * ITEMS_PER_PAGE + 1} - {Math.min(currentPage * ITEMS_PER_PAGE, filtered.length)}</span> OF <span className="text-slate-900 font-black">{filtered.length}</span> Clients
             </p>
-            <div className="flex items-center gap-3 bg-white border border-slate-200 p-2 rounded-[24px] shadow-sm">
+            <div className="flex items-center gap-2 bg-white/50 backdrop-blur-md border border-slate-200 p-2 rounded-[2rem] shadow-xl shadow-slate-200/50">
               <button
                 onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
                 disabled={currentPage === 1}
-                className="p-2.5 rounded-xl hover:bg-slate-50 disabled:opacity-20 transition-all text-slate-600"
+                className="p-3 rounded-2xl hover:bg-white hover:shadow-lg disabled:opacity-20 transition-all text-slate-600 active:scale-90"
               >
-                <ChevronLeft size={24} />
+                <ChevronLeft size={20} strokeWidth={3} />
               </button>
               <div className="flex items-center gap-1">
                 {Array.from({ length: totalPages }).map((_, i) => (
                   <button
                     key={i}
                     onClick={() => setCurrentPage(i + 1)}
-                    className={`h-10 w-10 rounded-xl text-xs font-black transition-all ${
-                      currentPage === i + 1 ? 'bg-red-400 text-white shadow-lg shadow-red-400/30 scale-110' : 'text-slate-400 hover:bg-slate-50'
+                    className={`h-10 w-10 rounded-2xl text-[10px] font-black transition-all duration-300 ${
+                      currentPage === i + 1 ? 'bg-indigo-600 text-white shadow-xl shadow-indigo-300 scale-110' : 'text-slate-400 hover:bg-white'
                     }`}
                   >
                     {i + 1}
@@ -354,50 +368,44 @@ export default function Customer() {
               <button
                 onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
                 disabled={currentPage === totalPages}
-                className="p-2.5 rounded-xl hover:bg-slate-50 disabled:opacity-20 transition-all text-slate-600"
+                className="p-3 rounded-2xl hover:bg-white hover:shadow-lg disabled:opacity-20 transition-all text-slate-600 active:scale-90"
               >
-                <ChevronRight size={24} />
+                <ChevronRight size={20} strokeWidth={3} />
               </button>
             </div>
           </div>
         )}
+      </main>
 
-        {/* Form Modal */}
-        {showForm && (
-          <CustomerForm
-            customer={selectedCustomer}
-            onClose={() => setShowForm(false)}
-            onSave={handleSave}
-          />
-        )}
+      {/* --- Modals --- */}
+      {showForm && (
+        <CustomerForm
+          customer={selectedCustomer}
+          onClose={() => setShowForm(false)}
+          onSave={handleSave}
+        />
+      )}
 
-        {/* Details View */}
-        {viewDetails && (
-          <CustomerDetails
-            customer={viewDetails}
-            onClose={() => setViewDetails(null)}
-          />
-        )}
-      </div>
+      {viewDetails && (
+        <CustomerDetails
+          customer={viewDetails}
+          onClose={() => setViewDetails(null)}
+        />
+      )}
     </div>
   );
 }
 
 /* ================= SUB-COMPONENTS ================= */
 
-function StatCard({ title, value, icon, color }: { title: string, value: string, icon: React.ReactNode, color: string }) {
+function StatCard({ icon, label, value }: any) {
   return (
-    <div className="bg-white p-8 rounded-[32px] border border-slate-200 shadow-sm relative overflow-hidden group">
-      <div className={`absolute top-0 right-0 w-24 h-24 ${color} opacity-5 rounded-bl-[80px] -mr-8 -mt-8`}></div>
-      <div className="flex items-center gap-5">
-        <div className={`p-4 rounded-2xl ${color} bg-opacity-10 text-white flex items-center justify-center`}>
-          <div className={`${color.replace('bg-', 'text-')}`}>
-            {icon}
-          </div>
-        </div>
+    <div className="p-6 bg-white border border-slate-200 rounded-xl shadow-sm hover:shadow-md transition-all">
+      <div className="flex items-center gap-4">
+        <div className="p-3 bg-indigo-50 rounded-lg text-indigo-600">{icon}</div>
         <div>
-          <p className="text-[10px] text-slate-400 font-black uppercase tracking-widest">{title}</p>
-          <p className="text-3xl font-black text-slate-900 mt-1">{value}</p>
+          <p className="text-xs font-medium text-slate-500 uppercase tracking-wider mb-0.5">{label}</p>
+          <h3 className="text-2xl font-bold text-slate-900">{value}</h3>
         </div>
       </div>
     </div>
@@ -413,28 +421,40 @@ function StatusBadge({ type }: { type: CustomerType }) {
   };
 
   return (
-    <span className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[10px] font-black uppercase tracking-wider border ${styles[type]}`}>
+    <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-semibold uppercase tracking-wider border ${styles[type]}`}>
       {type}
     </span>
   );
 }
 
-function ActionBtn({ color, onClick, icon }: { color: 'blue' | 'orange' | 'red', onClick: () => void, icon: React.ReactNode }) {
-  const styles = {
-    blue: "text-blue-500 hover:bg-blue-50",
-    orange: "text-orange-500 hover:bg-orange-50",
-    red: "text-red-500 hover:bg-red-50"
+function ActionBtn({ color, onClick, icon }: any) {
+  const styles: any = {
+    blue: "text-blue-600 hover:bg-blue-50 border-blue-100",
+    indigo: "text-indigo-600 hover:bg-indigo-50 border-indigo-100",
+    red: "text-red-600 hover:bg-red-50 border-red-100"
   };
   return (
-    <button onClick={onClick} className={`p-3 rounded-xl transition-all active:scale-90 ${styles[color]}`}>
+    <button onClick={onClick} className={`p-2 rounded-lg border transition-all active:scale-90 ${styles[color]}`}>
       {icon}
     </button>
   );
 }
 
+function EmptyState() {
+  return (
+    <div className="py-20 text-center">
+      <div className="inline-flex h-16 w-16 items-center justify-center rounded-xl bg-slate-50 text-slate-300 mb-4 border border-slate-100">
+        <Users size={32} />
+      </div>
+      <h3 className="text-lg font-bold text-slate-900 mb-1">No Clients Found</h3>
+      <p className="text-slate-500 text-sm max-w-xs mx-auto">Try adjusting your search or filters.</p>
+    </div>
+  );
+}
+
 /* ---------- CUSTOMER FORM MODAL ---------- */
 
-function CustomerForm({ customer, onClose, onSave }: { customer: Customer | null, onClose: () => void, onSave: (c: Customer) => void }) {
+function CustomerForm({ customer, onClose, onSave }: any) {
   const [formData, setFormData] = useState<Customer>(customer || {
     id: 0,
     type: "Individual",
@@ -447,35 +467,32 @@ function CustomerForm({ customer, onClose, onSave }: { customer: Customer | null
   });
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/80 backdrop-blur-md animate-in fade-in duration-300">
-      <div className="bg-white rounded-[40px] shadow-2xl w-full max-w-2xl max-h-[95vh] overflow-hidden flex flex-col border border-white/20">
-        <div className="p-10 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
-          <div>
-            <h2 className="text-3xl font-black text-slate-900 tracking-tight">{customer ? "Edit Profile" : "Register Client"}</h2>
-            <p className="text-slate-500 text-sm font-bold mt-1 italic">Customer relationship management</p>
-          </div>
-          <button onClick={onClose} className="p-4 bg-white border border-slate-200 rounded-[20px] text-slate-400 hover:text-red-500 hover:border-red-100 transition-all shadow-sm">
-            <X size={24} />
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm transition-all">
+      <div className="bg-white rounded-xl shadow-xl w-full max-w-2xl max-h-[95vh] overflow-hidden flex flex-col border border-slate-200">
+        <div className="px-6 py-4 border-b border-slate-100 flex justify-between items-center bg-slate-50">
+          <h2 className="text-xl font-bold text-slate-900">{customer ? "Edit Client Profile" : "Register New Client"}</h2>
+          <button onClick={onClose} className="p-2 text-slate-400 hover:text-slate-600 transition-all">
+            <X size={20} />
           </button>
         </div>
 
-        <div className="p-10 overflow-y-auto flex-1 custom-scrollbar">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="space-y-2">
-              <label className="text-[11px] font-black text-slate-400 uppercase tracking-widest ml-1">Full Name</label>
+        <div className="p-6 overflow-y-auto flex-1">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="space-y-1.5">
+              <label className="text-xs font-semibold text-slate-600 ml-1">Legal Identity</label>
               <input
                 type="text"
-                placeholder="Client name"
-                className="w-full px-6 py-4 bg-slate-50 border-none rounded-[20px] text-slate-900 font-bold placeholder:text-slate-300 focus:ring-4 focus:ring-red-400/10 transition-all"
+                placeholder="Full Name"
+                className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all outline-none"
                 value={formData.name}
                 onChange={e => setFormData({ ...formData, name: e.target.value })}
               />
             </div>
 
-            <div className="space-y-2">
-              <label className="text-[11px] font-black text-slate-400 uppercase tracking-widest ml-1">Account Type</label>
+            <div className="space-y-1.5">
+              <label className="text-xs font-semibold text-slate-600 ml-1">Classification</label>
               <select
-                className="w-full px-6 py-4 bg-slate-50 border-none rounded-[20px] text-slate-900 font-bold focus:ring-4 focus:ring-red-400/10 transition-all appearance-none cursor-pointer"
+                className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all outline-none cursor-pointer"
                 value={formData.type}
                 onChange={e => setFormData({ ...formData, type: e.target.value as CustomerType })}
               >
@@ -486,44 +503,44 @@ function CustomerForm({ customer, onClose, onSave }: { customer: Customer | null
               </select>
             </div>
 
-            <div className="space-y-2">
-              <label className="text-[11px] font-black text-slate-400 uppercase tracking-widest ml-1">Email Address</label>
+            <div className="space-y-1.5">
+              <label className="text-xs font-semibold text-slate-600 ml-1">Email Address</label>
               <input
                 type="email"
-                placeholder="client@example.com"
-                className="w-full px-6 py-4 bg-slate-50 border-none rounded-[20px] text-slate-900 font-bold placeholder:text-slate-300 focus:ring-4 focus:ring-red-400/10 transition-all"
+                placeholder="email@example.com"
+                className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all outline-none"
                 value={formData.email}
                 onChange={e => setFormData({ ...formData, email: e.target.value })}
               />
             </div>
 
-            <div className="space-y-2">
-              <label className="text-[11px] font-black text-slate-400 uppercase tracking-widest ml-1">Mobile Number</label>
+            <div className="space-y-1.5">
+              <label className="text-xs font-semibold text-slate-600 ml-1">Mobile Number</label>
               <input
                 type="text"
                 placeholder="+91 00000 00000"
-                className="w-full px-6 py-4 bg-slate-50 border-none rounded-[20px] text-slate-900 font-bold placeholder:text-slate-300 focus:ring-4 focus:ring-red-400/10 transition-all"
+                className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all outline-none"
                 value={formData.mobile}
                 onChange={e => setFormData({ ...formData, mobile: e.target.value })}
               />
             </div>
 
-            <div className="space-y-2 md:col-span-2">
-              <label className="text-[11px] font-black text-slate-400 uppercase tracking-widest ml-1">Company (Optional)</label>
+            <div className="md:col-span-2 space-y-1.5">
+              <label className="text-xs font-semibold text-slate-600 ml-1">Organization (Optional)</label>
               <input
                 type="text"
-                placeholder="Organization name if corporate"
-                className="w-full px-6 py-4 bg-slate-50 border-none rounded-[20px] text-slate-900 font-bold placeholder:text-slate-300 focus:ring-4 focus:ring-red-400/10 transition-all"
+                placeholder="Enterprise name"
+                className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all outline-none"
                 value={formData.company}
                 onChange={e => setFormData({ ...formData, company: e.target.value })}
               />
             </div>
 
-            <div className="space-y-2 md:col-span-2">
-              <label className="text-[11px] font-black text-slate-400 uppercase tracking-widest ml-1">Mailing Address</label>
+            <div className="md:col-span-2 space-y-1.5">
+              <label className="text-xs font-semibold text-slate-600 ml-1">Geographical Base</label>
               <textarea
-                placeholder="Complete address for billing"
-                className="w-full px-6 py-4 bg-slate-50 border-none rounded-[20px] text-slate-900 font-bold placeholder:text-slate-300 focus:ring-4 focus:ring-red-400/10 transition-all min-h-[100px]"
+                placeholder="Operational address..."
+                className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all outline-none min-h-[100px] resize-none"
                 value={formData.address}
                 onChange={e => setFormData({ ...formData, address: e.target.value })}
               />
@@ -531,14 +548,14 @@ function CustomerForm({ customer, onClose, onSave }: { customer: Customer | null
           </div>
         </div>
 
-        <div className="p-10 border-t border-slate-100 flex gap-4 bg-slate-50/50">
-          <button onClick={onClose} className="flex-1 px-8 py-5 rounded-[20px] border border-slate-200 text-slate-600 font-black uppercase tracking-widest hover:bg-white transition-all">
-            Discard
+        <div className="px-6 py-4 border-t border-slate-100 flex gap-3 bg-slate-50">
+          <button onClick={onClose} className="flex-1 px-4 py-2.5 rounded-lg border border-slate-200 text-slate-600 text-sm font-semibold hover:bg-white transition-all">
+            Cancel
           </button>
           <button
             onClick={() => onSave(formData)}
             disabled={!formData.name || !formData.email}
-            className="flex-[2] px-8 py-5 rounded-[20px] bg-red-400 text-white font-black uppercase tracking-widest hover:bg-red-500 disabled:opacity-50 disabled:cursor-not-allowed shadow-xl shadow-red-400/20 transition-all"
+            className="flex-[2] px-4 py-2.5 rounded-lg bg-indigo-600 text-white text-sm font-semibold hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-sm"
           >
             {customer ? "Update Profile" : "Register Client"}
           </button>
@@ -552,50 +569,52 @@ function CustomerForm({ customer, onClose, onSave }: { customer: Customer | null
 
 function CustomerDetails({ customer, onClose }: { customer: Customer, onClose: () => void }) {
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/90 backdrop-blur-xl animate-in fade-in duration-300">
-      <div className="bg-white rounded-[48px] shadow-2xl w-full max-w-xl overflow-hidden relative border border-white/20">
-        <div className="h-40 bg-gradient-to-br from-red-400 to-red-600"></div>
-        <button onClick={onClose} className="absolute top-8 right-8 p-3 bg-white/20 backdrop-blur-md rounded-2xl text-white hover:bg-white/40 transition-all">
-          <X size={24} />
-        </button>
-
-        <div className="px-10 pb-12 -mt-20">
-          <div className="flex flex-col items-center text-center">
-            <div className="h-40 w-40 rounded-[48px] bg-white p-3 shadow-2xl mb-6">
-              <div className="w-full h-full rounded-[36px] bg-red-50 flex items-center justify-center text-red-500 text-5xl font-black shadow-inner">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm transition-all">
+      <div className="bg-white rounded-xl shadow-xl w-full max-w-xl overflow-hidden relative border border-slate-200">
+        <div className="h-32 bg-indigo-600 relative">
+          <div className="absolute -bottom-12 inset-x-0 flex justify-center">
+            <div className="h-24 w-24 rounded-xl bg-white p-2 shadow-lg border border-slate-100">
+              <div className="w-full h-full rounded-lg bg-indigo-50 flex items-center justify-center text-indigo-600 text-3xl font-bold">
                 {customer.name.charAt(0)}
               </div>
             </div>
-            <h2 className="text-4xl font-black text-slate-900 tracking-tight">{customer.name}</h2>
-            <div className="mt-3">
-              <StatusBadge type={customer.type} />
-            </div>
+          </div>
+        </div>
+        
+        <button onClick={onClose} className="absolute top-4 right-4 p-2 bg-white/20 hover:bg-white/30 rounded-lg text-white transition-all">
+          <X size={20} />
+        </button>
+
+        <div className="px-8 pb-8 mt-16">
+          <div className="flex flex-col items-center text-center">
+            <h2 className="text-2xl font-bold text-slate-900 mb-2">{customer.name}</h2>
+            <StatusBadge type={customer.type} />
           </div>
 
-          <div className="mt-12 space-y-8">
+          <div className="mt-8 space-y-6">
             <div className="grid grid-cols-2 gap-4">
-              <DetailBox icon={<Mail size={18} />} label="Email Address" value={customer.email} />
-              <DetailBox icon={<Phone size={18} />} label="Contact Number" value={customer.mobile} />
-              <DetailBox icon={<Building2 size={18} />} label="Organization" value={customer.company || "Personal Account"} />
-              <DetailBox icon={<MapPin size={18} />} label="City/Region" value={customer.address.split(',').pop() || "Not Set"} />
+              <DetailBox icon={<Mail size={16} />} label="Email Address" value={customer.email} />
+              <DetailBox icon={<Phone size={16} />} label="Mobile Number" value={customer.mobile} />
+              <DetailBox icon={<Building2 size={16} />} label="Organization" value={customer.company || "Personal Account"} />
+              <DetailBox icon={<MapPin size={16} />} label="Location" value={customer.address.split(',').pop() || "Not Set"} />
             </div>
 
-            <div className="bg-slate-50 rounded-[32px] p-8 border border-slate-100">
+            <div className="bg-slate-50 rounded-xl p-6 border border-slate-100">
               <div className="flex items-center justify-between mb-4">
-                <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Lifetime Value</span>
-                <span className="text-red-500 font-black text-xs">Tier 1 Client</span>
+                <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Engagement Metrics</span>
+                <span className="text-[10px] font-bold text-indigo-600 uppercase bg-indigo-50 px-2 py-0.5 rounded border border-indigo-100">Active Client</span>
               </div>
-              <div className="flex items-end gap-3">
-                <div className="text-4xl font-black text-slate-900">{customer.totalBookings}</div>
-                <div className="text-sm font-bold text-slate-400 pb-1.5 uppercase tracking-tighter">Total Successful Bookings</div>
+              <div className="flex items-end gap-2">
+                <div className="text-3xl font-bold text-slate-900">{customer.totalBookings}</div>
+                <div className="text-xs font-medium text-slate-400 pb-1 uppercase tracking-wider">Total Bookings</div>
               </div>
             </div>
 
             <button
               onClick={onClose}
-              className="w-full py-6 rounded-[24px] bg-slate-900 text-white font-black uppercase tracking-widest hover:bg-slate-800 transition-all shadow-2xl active:scale-[0.98]"
+              className="w-full py-3 rounded-lg bg-slate-900 text-white text-sm font-semibold hover:bg-slate-800 transition-all shadow-sm"
             >
-              Back to Directory
+              Close Record
             </button>
           </div>
         </div>
@@ -606,11 +625,11 @@ function CustomerDetails({ customer, onClose }: { customer: Customer, onClose: (
 
 function DetailBox({ icon, label, value }: { icon: React.ReactNode, label: string, value: string }) {
   return (
-    <div className="p-4 bg-slate-50 rounded-[20px] flex items-start gap-3 border border-slate-100 overflow-hidden">
-      <div className="text-red-400 mt-1 flex-shrink-0">{icon}</div>
+    <div className="p-4 bg-slate-50 rounded-lg flex items-start gap-3 border border-slate-100 transition-colors">
+      <div className="text-indigo-600 mt-0.5">{icon}</div>
       <div className="overflow-hidden">
-        <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest">{label}</p>
-        <p className="text-sm font-black text-slate-700 truncate">{value}</p>
+        <p className="text-[10px] font-semibold text-slate-500 uppercase tracking-wider mb-0.5">{label}</p>
+        <p className="text-sm font-semibold text-slate-900 truncate">{value}</p>
       </div>
     </div>
   );

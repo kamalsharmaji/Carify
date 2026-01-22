@@ -82,10 +82,7 @@ export default function UserList() {
     if (window.confirm("Are you sure you want to delete this user?")) {
       const updated = users.filter((u) => u.id !== id);
       setUsers(updated);
-      toast.success("User deleted successfully", {
-        icon: '🗑️',
-        style: { borderRadius: '12px', background: '#333', color: '#fff' }
-      });
+      toast.success("User deleted successfully");
     }
   };
 
@@ -114,118 +111,106 @@ export default function UserList() {
   const paginated = filtered.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
 
   return (
-    <div className="min-h-screen bg-[#f8f9fa] animate-in fade-in duration-500 p-4 md:p-8">
-      <div className="max-w-[1600px] mx-auto space-y-6">
+    <div className="min-h-screen bg-slate-50 p-4 md:p-6 lg:p-8 animate-in fade-in duration-700">
+      <div className="max-w-7xl mx-auto space-y-8">
         
-        {/* Header Section */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-          <div>
-            <h1 className="text-3xl md:text-4xl font-black text-slate-900 flex items-center gap-3 tracking-tight">
-              <span className="w-2.5 h-10 bg-brand rounded-full"></span>
-              User Management
-            </h1>
-            <p className="text-slate-500 mt-1 font-medium flex items-center gap-2">
-              <UserIcon size={16} />
-              System Administration › Staff & Permissions
-            </p>
+        {/* Standard Header Section */}
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div className="flex items-center gap-4">
+            <div className="w-12 h-12 bg-slate-900 rounded-xl flex items-center justify-center shadow-lg shadow-slate-900/10">
+              <UserIcon className="text-white w-6 h-6" />
+            </div>
+            <div>
+              <h1 className="text-2xl font-bold text-slate-900">
+                User Management
+              </h1>
+              <p className="text-slate-500 mt-1 font-medium">
+                Manage system access and workforce permissions
+              </p>
+            </div>
           </div>
 
-          <div className="flex flex-wrap items-center gap-3">
-            <div className="relative group flex-1 md:flex-none">
-              <Search
-                className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-brand transition-colors"
-                size={18}
-              />
+          <div className="flex items-center gap-3">
+            <div className="relative group">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-slate-900 transition-colors" size={18} />
               <input
                 type="text"
                 placeholder="Search staff..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-12 pr-4 py-3 bg-white border border-slate-200 rounded-2xl text-sm focus:outline-none focus:ring-4 focus:ring-brand/10 focus:border-brand transition-all w-full md:w-64 shadow-sm font-medium"
+                className="pl-10 pr-4 py-2 bg-white border border-slate-200 rounded-lg text-sm font-medium focus:outline-none focus:ring-2 focus:ring-slate-900/5 focus:border-slate-900 transition-all shadow-sm w-full md:w-64"
               />
             </div>
 
-            <div className="flex border border-slate-200 rounded-2xl bg-white p-1.5 shadow-sm">
-              <button
-                onClick={() => setViewMode("table")}
-                className={`p-2 rounded-xl transition-all ${
-                  viewMode === "table"
-                    ? "bg-brand text-white shadow-lg shadow-brand/20"
-                    : "text-slate-400 hover:bg-slate-50"
-                }`}
+            <div className="flex bg-slate-200/50 p-1 rounded-lg border border-slate-200">
+              <button 
+                onClick={() => setViewMode("table")} 
+                className={`p-2 rounded-md transition-all ${viewMode === "table" ? "bg-white text-slate-900 shadow-sm" : "text-slate-400 hover:text-slate-600"}`}
               >
-                <TableIcon size={20} />
+                <TableIcon size={18} />
               </button>
-              <button
-                onClick={() => setViewMode("card")}
-                className={`p-2 rounded-xl transition-all ${
-                  viewMode === "card"
-                    ? "bg-brand text-white shadow-lg shadow-brand/20"
-                    : "text-slate-400 hover:bg-slate-50"
-                }`}
+              <button 
+                onClick={() => setViewMode("card")} 
+                className={`p-2 rounded-md transition-all ${viewMode === "card" ? "bg-white text-slate-900 shadow-sm" : "text-slate-400 hover:text-slate-600"}`}
               >
-                <LayoutGrid size={20} />
+                <LayoutGrid size={18} />
               </button>
             </div>
 
             <button
-              onClick={() => {
-                setSelectedUser(null);
-                setShowForm(true);
-              }}
-              className="flex items-center gap-2 bg-brand hover:opacity-90 text-white px-6 py-3 rounded-2xl text-sm font-bold transition-all shadow-xl shadow-brand/20 active:scale-95 whitespace-nowrap"
+              onClick={() => { setSelectedUser(null); setShowForm(true); }}
+              className="flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white px-4 py-2 rounded-lg font-semibold transition-all active:scale-95 whitespace-nowrap"
             >
-              <Plus size={18} strokeWidth={3} />
-              <span className="hidden sm:inline">Add User</span>
-              <span className="sm:hidden">Add</span>
+              <Plus size={18} />
+              <span>Add Personnel</span>
             </button>
           </div>
         </div>
 
         {/* Content Section */}
         {viewMode === "table" ? (
-          <div className="bg-white border border-slate-100 rounded-[24px] shadow-sm overflow-hidden transition-all">
-            <div className="overflow-x-auto custom-scrollbar">
-              <table className="w-full text-sm text-left">
-                <thead className="bg-slate-50 border-b border-slate-100">
-                  <tr>
-                    {["User Info", "Role", "Status", "Created At", "Actions"].map((h) => (
-                      <th key={h} className="px-6 py-4 text-[11px] font-bold text-slate-400 uppercase tracking-wider">
+          <div className="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden">
+            <div className="overflow-x-auto">
+              <table className="w-full text-left text-sm border-collapse">
+                <thead>
+                  <tr className="bg-slate-50 border-b border-slate-200">
+                    {["User Specification", "Access Role", "Security Status", "Created On", "Actions"].map((h) => (
+                      <th key={h} className="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">
                         {h}
                       </th>
                     ))}
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-50">
+                <tbody className="divide-y divide-slate-100">
                   {paginated.map((user) => (
                     <tr key={user.id} className="hover:bg-slate-50/50 transition-colors group">
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-3">
-                          <div className="h-10 w-10 rounded-xl bg-brand/10 text-brand flex items-center justify-center font-bold text-sm uppercase group-hover:scale-110 transition-transform">
+                          <div className="h-10 w-10 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center font-bold text-xs border border-slate-200 group-hover:bg-slate-900 group-hover:text-white transition-colors">
                             {user.name.charAt(0)}
                           </div>
                           <div>
-                            <div className="font-bold text-slate-900">{user.name}</div>
-                            <div className="text-xs text-slate-400 font-medium">{user.email}</div>
+                            <div className="font-semibold text-slate-900">{user.name}</div>
+                            <div className="text-xs text-slate-500">{user.email}</div>
                           </div>
                         </div>
                       </td>
                       <td className="px-6 py-4">
-                        <span className="px-3 py-1 bg-brand/5 text-brand rounded-full text-[10px] font-bold uppercase tracking-wide border border-brand/10">
+                        <span className="px-2.5 py-1 bg-slate-100 text-slate-600 rounded-lg text-[10px] font-bold uppercase tracking-wider border border-slate-200">
                           {user.role}
                         </span>
                       </td>
                       <td className="px-6 py-4">
                         <StatusBadge status={user.status} />
                       </td>
-                      <td className="px-6 py-4 text-slate-500 font-medium italic">
+                      <td className="px-6 py-4 font-medium text-slate-600">
                         {user.createdAt}
                       </td>
                       <td className="px-6 py-4">
-                        <div className="flex gap-2">
+                        <div className="flex gap-1">
                           <ActionBtn color="blue" onClick={() => setViewDetails(user)} icon={<Eye size={16} />} />
                           <ActionBtn color="orange" onClick={() => { setSelectedUser(user); setShowForm(true); }} icon={<Pencil size={16} />} />
-                          <ActionBtn color="brand" onClick={() => handleDelete(user.id)} icon={<Trash2 size={16} />} />
+                          <ActionBtn color="red" onClick={() => handleDelete(user.id)} icon={<Trash2 size={16} />} />
                         </div>
                       </td>
                     </tr>
@@ -237,39 +222,36 @@ export default function UserList() {
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {paginated.map((user) => (
-              <div key={user.id} className="bg-white border border-slate-100 rounded-[24px] p-6 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all group relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-24 h-24 bg-brand/5 rounded-bl-[100px] -mr-8 -mt-8 transition-all group-hover:scale-110"></div>
-                
-                <div className="flex justify-between items-start mb-6 relative z-10">
-                  <div className="h-14 w-14 rounded-2xl bg-brand text-white flex items-center justify-center font-black text-xl shadow-lg shadow-brand/20">
+              <div key={user.id} className="group bg-white border border-slate-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300">
+                <div className="flex justify-between items-start mb-6">
+                  <div className="h-14 w-14 rounded-xl bg-slate-50 text-slate-900 flex items-center justify-center font-bold text-2xl border border-slate-200 group-hover:bg-slate-900 group-hover:text-white transition-colors">
                     {user.name.charAt(0)}
                   </div>
                   <StatusBadge status={user.status} />
                 </div>
 
                 <div className="mb-6">
-                  <h3 className="font-black text-lg text-slate-900 line-clamp-1">{user.name}</h3>
-                  <p className="text-sm text-slate-400 font-medium flex items-center gap-1.5 mt-1">
-                    <Mail size={14} className="text-slate-300" />
+                  <h3 className="text-lg font-bold text-slate-900 line-clamp-1">{user.name}</h3>
+                  <div className="flex items-center gap-2 text-slate-500 mt-1 font-medium text-sm">
+                    <Mail size={14} className="text-slate-400" />
                     {user.email}
-                  </p>
+                  </div>
                 </div>
 
-                <div className="space-y-3 pt-4 border-t border-slate-50">
-                  <div className="flex justify-between items-center text-xs">
-                    <span className="text-slate-400 font-bold uppercase tracking-tighter">Designation</span>
-                    <span className="px-3 py-1 bg-brand/5 text-brand rounded-full font-black text-[10px] border border-brand/10">{user.role}</span>
-                  </div>
-                  <div className="flex justify-between items-center text-xs">
-                    <span className="text-slate-400 font-bold uppercase tracking-tighter">Joined On</span>
-                    <span className="text-slate-700 font-black">{user.createdAt}</span>
+                <div className="grid grid-cols-1 gap-4 py-4 border-y border-slate-50">
+                  <div className="flex justify-between items-center">
+                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Access Role</span>
+                    <span className="px-2 py-0.5 bg-slate-100 text-slate-600 rounded-md font-bold text-[10px] uppercase tracking-wider">{user.role}</span>
                   </div>
                 </div>
 
                 <div className="flex gap-2 mt-6">
-                  <button onClick={() => setViewDetails(user)} className="flex-1 py-2.5 rounded-xl bg-slate-50 text-slate-600 hover:bg-slate-100 text-xs font-bold transition-colors">Details</button>
-                  <button onClick={() => { setSelectedUser(user); setShowForm(true); }} className="p-2.5 rounded-xl bg-brand/10 text-brand hover:bg-brand hover:text-white transition-all"><Pencil size={16} /></button>
-                  <button onClick={() => handleDelete(user.id)} className="p-2.5 rounded-xl text-slate-300 hover:text-brand hover:bg-brand/10 transition-all"><Trash2 size={16} /></button>
+                  <button onClick={() => setViewDetails(user)} className="flex-1 py-2 rounded-lg bg-slate-100 text-slate-900 font-bold text-sm transition-all hover:bg-slate-200 active:scale-95">
+                    Details
+                  </button>
+                  <button onClick={() => { setSelectedUser(user); setShowForm(true); }} className="p-2 rounded-lg bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 transition-all active:scale-95">
+                    <Pencil size={18} />
+                  </button>
                 </div>
               </div>
             ))}
@@ -282,21 +264,21 @@ export default function UserList() {
             <p className="text-sm font-medium text-slate-500">
               Showing <span className="text-slate-900 font-bold">{(currentPage - 1) * ITEMS_PER_PAGE + 1}</span> to <span className="text-slate-900 font-bold">{Math.min(currentPage * ITEMS_PER_PAGE, filtered.length)}</span> of <span className="text-slate-900 font-bold">{filtered.length}</span> personnel
             </p>
-            <div className="flex items-center gap-2 bg-white border border-slate-200 p-1.5 rounded-2xl shadow-sm">
+            <div className="flex items-center gap-1 bg-white border border-slate-200 p-1 rounded-lg shadow-sm">
               <button
                 onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
                 disabled={currentPage === 1}
-                className="p-2 rounded-xl hover:bg-slate-50 disabled:opacity-30 transition-all"
+                className="p-1.5 rounded-md hover:bg-slate-50 disabled:opacity-30 transition-all text-slate-600"
               >
-                <ChevronLeft size={20} />
+                <ChevronLeft size={18} />
               </button>
-              <div className="flex items-center px-2">
+              <div className="flex items-center px-1">
                 {Array.from({ length: totalPages }).map((_, i) => (
                   <button
                     key={i}
                     onClick={() => setCurrentPage(i + 1)}
-                    className={`h-8 w-8 rounded-lg text-xs font-bold transition-all ${
-                      currentPage === i + 1 ? 'bg-brand text-white shadow-lg shadow-brand/20' : 'text-slate-400 hover:bg-slate-50'
+                    className={`h-8 w-8 rounded-md text-xs font-bold transition-all ${
+                      currentPage === i + 1 ? 'bg-slate-900 text-white shadow-sm' : 'text-slate-400 hover:bg-slate-50'
                     }`}
                   >
                     {i + 1}
@@ -306,9 +288,9 @@ export default function UserList() {
               <button
                 onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
                 disabled={currentPage === totalPages}
-                className="p-2 rounded-xl hover:bg-slate-50 disabled:opacity-30 transition-all"
+                className="p-1.5 rounded-md hover:bg-slate-50 disabled:opacity-30 transition-all text-slate-600"
               >
-                <ChevronRight size={20} />
+                <ChevronRight size={18} />
               </button>
             </div>
           </div>
@@ -344,9 +326,9 @@ function StatusBadge({ status }: { status: UserStatus }) {
   };
 
   return (
-    <span className={`inline-flex items-center px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider border ${styles[status]}`}>
+    <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider border ${styles[status]}`}>
       <span className={`w-1.5 h-1.5 rounded-full mr-2 ${
-        status === 'Active' ? 'bg-emerald-500 animate-pulse' : 
+        status === 'Active' ? 'bg-emerald-500' : 
         status === 'Suspended' ? 'bg-amber-500' : 'bg-slate-400'
       }`}></span>
       {status}
@@ -354,14 +336,14 @@ function StatusBadge({ status }: { status: UserStatus }) {
   );
 }
 
-function ActionBtn({ color, onClick, icon }: { color: 'blue' | 'orange' | 'brand', onClick: () => void, icon: React.ReactNode }) {
+function ActionBtn({ color, onClick, icon }: { color: 'blue' | 'orange' | 'red', onClick: () => void, icon: React.ReactNode }) {
   const styles = {
-    blue: "text-blue-500 hover:bg-blue-50 border-blue-100",
-    orange: "text-orange-500 hover:bg-orange-50 border-orange-100",
-    brand: "text-brand hover:bg-brand/10 border-brand/10"
+    blue: "text-blue-600 hover:bg-blue-50 border-transparent hover:border-blue-100",
+    orange: "text-orange-600 hover:bg-orange-50 border-transparent hover:border-orange-100",
+    red: "text-red-600 hover:bg-red-50 border-transparent hover:border-red-100"
   };
   return (
-    <button onClick={onClick} className={`p-2 rounded-xl transition-all active:scale-90 border border-transparent ${styles[color]}`}>
+    <button onClick={onClick} className={`p-2 rounded-lg transition-all active:scale-95 border ${styles[color]}`}>
       {icon}
     </button>
   );
@@ -380,101 +362,102 @@ function UserForm({ user, onClose, onSave }: { user: User | null, onClose: () =>
   });
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm animate-in fade-in duration-300">
-      <div className="bg-white rounded-[32px] w-full max-w-lg shadow-2xl overflow-hidden animate-in zoom-in-95 duration-300 border border-slate-100">
-        <div className="bg-slate-900 p-8 text-white relative">
-          <div className="absolute top-0 right-0 w-32 h-32 bg-brand/20 rounded-bl-full -mr-16 -mt-16 blur-2xl"></div>
-          <button onClick={onClose} className="absolute top-6 right-6 text-slate-400 hover:text-white transition-colors">
-            <X size={24} />
-          </button>
-          <div className="h-14 w-14 rounded-2xl bg-brand flex items-center justify-center mb-4 shadow-lg shadow-brand/20">
-            <UserIcon size={28} className="text-white" />
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm">
+      <div className="bg-white rounded-xl w-full max-w-md shadow-xl overflow-hidden border border-slate-200 animate-in zoom-in-95 duration-200">
+        <div className="p-6 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 bg-slate-900 rounded-lg flex items-center justify-center">
+              <Plus className="text-white w-5 h-5" />
+            </div>
+            <h3 className="text-xl font-bold text-slate-900">{user ? "Edit Personnel" : "Add Personnel"}</h3>
           </div>
-          <h2 className="text-2xl font-black tracking-tight">{user ? "Edit Personnel" : "Onboard Staff"}</h2>
-          <p className="text-slate-400 text-sm font-medium mt-1">Fill in the professional details below.</p>
+          <button onClick={onClose} className="p-2 hover:bg-slate-100 rounded-lg transition-colors text-slate-400">
+            <X size={20} />
+          </button>
         </div>
 
-        <form onSubmit={(e) => { e.preventDefault(); onSave(formData); }} className="p-8 space-y-6">
-          <div className="grid grid-cols-2 gap-6">
-            <div className="col-span-2 space-y-1.5">
-              <label className="text-[11px] font-black text-slate-400 uppercase tracking-widest ml-1">Full Identity</label>
-              <div className="relative">
-                <UserIcon className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-300" size={18} />
-                <input
-                  required
-                  value={formData.name}
-                  onChange={e => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full bg-slate-50 border border-slate-200 rounded-2xl pl-12 pr-4 py-3 text-sm focus:ring-4 focus:ring-brand/10 focus:border-brand outline-none transition-all font-medium"
-                  placeholder="e.g. Alexander Pierce"
-                />
-              </div>
-            </div>
+        <form onSubmit={(e) => { e.preventDefault(); onSave(formData); }} className="p-6 space-y-4">
+          <div className="space-y-1.5">
+            <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Full Name</label>
+            <input
+              required
+              type="text"
+              value={formData.name}
+              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+              className="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-900/5 focus:border-slate-900 transition-all font-medium text-slate-900"
+              placeholder="John Doe"
+            />
+          </div>
 
-            <div className="col-span-2 space-y-1.5">
-              <label className="text-[11px] font-black text-slate-400 uppercase tracking-widest ml-1">Email Address</label>
-              <div className="relative">
-                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-300" size={18} />
-                <input
-                  required
-                  type="email"
-                  value={formData.email}
-                  onChange={e => setFormData({ ...formData, email: e.target.value })}
-                  className="w-full bg-slate-50 border border-slate-200 rounded-2xl pl-12 pr-4 py-3 text-sm focus:ring-4 focus:ring-brand/10 focus:border-brand outline-none transition-all font-medium"
-                  placeholder="alexander@company.com"
-                />
-              </div>
+          <div className="space-y-1.5">
+            <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Email Address</label>
+            <input
+              required
+              type="email"
+              value={formData.email}
+              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+              className="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-900/5 focus:border-slate-900 transition-all font-medium text-slate-900"
+              placeholder="john@carify.com"
+            />
+          </div>
+
+          <div className="grid grid-cols-2 gap-4">
+            <div className="space-y-1.5">
+              <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Access Role</label>
+              <select
+                value={formData.role}
+                onChange={(e) => setFormData({ ...formData, role: e.target.value as UserRole })}
+                className="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-900/5 focus:border-slate-900 transition-all font-medium text-slate-900 appearance-none"
+              >
+                <option value="Admin">Admin</option>
+                <option value="HR">HR</option>
+                <option value="Manager">Manager</option>
+                <option value="Employee">Employee</option>
+              </select>
             </div>
 
             <div className="space-y-1.5">
-              <label className="text-[11px] font-black text-slate-400 uppercase tracking-widest ml-1">Designation</label>
-              <div className="relative">
-                <Shield className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-300" size={18} />
-                <select
-                  value={formData.role}
-                  onChange={e => setFormData({ ...formData, role: e.target.value as UserRole })}
-                  className="w-full bg-slate-50 border border-slate-200 rounded-2xl pl-12 pr-4 py-3 text-sm focus:ring-4 focus:ring-brand/10 focus:border-brand outline-none transition-all font-bold text-slate-700 appearance-none"
-                >
-                  <option value="Admin">Admin</option>
-                  <option value="HR">HR</option>
-                  <option value="Manager">Manager</option>
-                  <option value="Employee">Employee</option>
-                </select>
-              </div>
-            </div>
-
-            <div className="space-y-1.5">
-              <label className="text-[11px] font-black text-slate-400 uppercase tracking-widest ml-1">Work Status</label>
+              <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Account Status</label>
               <select
                 value={formData.status}
-                onChange={e => setFormData({ ...formData, status: e.target.value as UserStatus })}
-                className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 text-sm focus:ring-4 focus:ring-brand/10 focus:border-brand outline-none transition-all font-bold text-slate-700"
+                onChange={(e) => setFormData({ ...formData, status: e.target.value as UserStatus })}
+                className="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-900/5 focus:border-slate-900 transition-all font-medium text-slate-900 appearance-none"
               >
                 <option value="Active">Active</option>
                 <option value="Inactive">Inactive</option>
                 <option value="Suspended">Suspended</option>
               </select>
             </div>
-            
-            {!user && (
-              <div className="col-span-2 space-y-1.5">
-                <label className="text-[11px] font-black text-slate-400 uppercase tracking-widest ml-1">Secure Password</label>
-                <div className="relative">
-                  <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-300" size={18} />
-                  <input
-                    required
-                    type="password"
-                    className="w-full bg-slate-50 border border-slate-200 rounded-2xl pl-12 pr-4 py-3 text-sm focus:ring-4 focus:ring-brand/10 focus:border-brand outline-none transition-all font-medium"
-                    placeholder="••••••••"
-                  />
-                </div>
-              </div>
-            )}
           </div>
 
-          <div className="pt-6 flex gap-4">
-            <button type="button" onClick={onClose} className="flex-1 px-6 py-4 rounded-2xl border border-slate-200 text-slate-600 font-bold hover:bg-slate-50 transition-all active:scale-95">Cancel</button>
-            <button type="submit" className="flex-[2] bg-brand hover:opacity-90 text-white px-10 py-4 rounded-2xl font-black transition-all shadow-lg shadow-brand/20 active:scale-95">
-              {user ? "Save Changes" : "Onboard User"}
+          {!user && (
+            <div className="space-y-1.5">
+              <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Temporary Password</label>
+              <div className="relative">
+                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={16} />
+                <input
+                  required
+                  type="password"
+                  className="w-full pl-10 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-900/5 focus:border-slate-900 transition-all font-medium text-slate-900"
+                  placeholder="••••••••"
+                />
+              </div>
+            </div>
+          )}
+
+          <div className="flex gap-3 pt-4">
+            <button
+              type="button"
+              onClick={onClose}
+              className="flex-1 px-4 py-2 border border-slate-200 text-slate-600 rounded-lg font-bold hover:bg-slate-50 transition-all active:scale-95"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              className="flex-1 px-4 py-2 bg-slate-900 text-white rounded-lg font-bold hover:bg-slate-800 transition-all shadow-lg active:scale-95"
+            >
+              {user ? "Update User" : "Create Account"}
             </button>
           </div>
         </form>
@@ -483,57 +466,61 @@ function UserForm({ user, onClose, onSave }: { user: User | null, onClose: () =>
   );
 }
 
-/* ---------- DETAILS MODAL ---------- */
+/* ---------- USER DETAILS MODAL ---------- */
 
 function UserDetails({ user, onClose }: { user: User, onClose: () => void }) {
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm animate-in fade-in duration-300">
-      <div className="bg-white rounded-[40px] w-full max-w-md shadow-2xl overflow-hidden animate-in zoom-in-95 duration-300 border border-slate-100">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm">
+      <div className="bg-white rounded-xl w-full max-w-md shadow-xl overflow-hidden border border-slate-200 animate-in zoom-in-95 duration-200">
         <div className="relative h-32 bg-slate-900">
-          <div className="absolute inset-0 bg-brand/20 blur-3xl rounded-full scale-150"></div>
-          <button onClick={onClose} className="absolute top-6 right-6 h-10 w-10 bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-2xl flex items-center justify-center text-white transition-all">
+          <button onClick={onClose} className="absolute top-4 right-4 p-2 bg-white/10 hover:bg-white/20 rounded-lg transition-colors text-white">
             <X size={20} />
           </button>
         </div>
         
-        <div className="px-8 pb-10">
-          <div className="relative -mt-16 mb-6">
-            <div className="h-32 w-32 rounded-[40px] bg-white p-2 shadow-2xl mx-auto border border-slate-50">
-              <div className="h-full w-full rounded-[32px] bg-brand/10 text-brand flex items-center justify-center font-black text-4xl border border-brand/20 uppercase">
+        <div className="px-6 pb-6">
+          <div className="relative -mt-12 mb-6">
+            <div className="h-24 w-24 rounded-2xl bg-white p-1 shadow-xl mx-auto border border-slate-50">
+              <div className="w-full h-full bg-slate-100 rounded-xl flex items-center justify-center text-slate-400 text-4xl font-bold">
                 {user.name.charAt(0)}
               </div>
             </div>
           </div>
 
-          <div className="text-center space-y-1 mb-8">
-            <h2 className="text-2xl font-black text-slate-900 tracking-tight">{user.name}</h2>
-            <p className="text-slate-400 font-bold text-sm">{user.email}</p>
-            <div className="pt-3">
+          <div className="text-center mb-8">
+            <h3 className="text-2xl font-bold text-slate-900">{user.name}</h3>
+            <p className="text-slate-500 font-medium">{user.email}</p>
+            <div className="mt-4 flex justify-center">
               <StatusBadge status={user.status} />
             </div>
           </div>
 
           <div className="grid grid-cols-2 gap-4">
-            <div className="p-4 bg-slate-50 rounded-[24px] border border-slate-100">
-              <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1 flex items-center gap-1">
-                <Shield size={10} className="text-brand" /> Role
-              </p>
-              <p className="text-sm font-black text-slate-700">{user.role}</p>
+            <div className="p-4 bg-slate-50 rounded-xl border border-slate-100">
+              <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Access Role</p>
+              <div className="flex items-center gap-2 text-slate-900 font-bold">
+                <Shield size={16} className="text-slate-400" />
+                {user.role}
+              </div>
             </div>
-            <div className="p-4 bg-slate-50 rounded-[24px] border border-slate-100">
-              <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1 flex items-center gap-1">
-                <Calendar size={10} className="text-brand" /> Joined
-              </p>
-              <p className="text-sm font-black text-slate-700">{user.createdAt}</p>
+            <div className="p-4 bg-slate-50 rounded-xl border border-slate-100">
+              <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Member Since</p>
+              <div className="flex items-center gap-2 text-slate-900 font-bold">
+                <Calendar size={16} className="text-slate-400" />
+                {user.createdAt}
+              </div>
             </div>
-            <div className="col-span-2 p-4 bg-slate-50 rounded-[24px] border border-slate-100">
-              <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Internal Reference ID</p>
-              <p className="text-sm font-bold text-slate-700 font-mono tracking-tighter">USR-{user.id}-X92</p>
+            <div className="col-span-2 p-4 bg-slate-50 rounded-xl border border-slate-100">
+              <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Last Authentication</p>
+              <div className="flex items-center gap-2 text-slate-900 font-bold">
+                <Lock size={16} className="text-slate-400" />
+                Jan 21, 2026 • 14:25 PM
+              </div>
             </div>
           </div>
 
-          <button onClick={onClose} className="w-full mt-8 py-4 bg-slate-900 text-white rounded-[24px] font-black hover:bg-slate-800 transition-all shadow-xl shadow-slate-200 active:scale-95">
-            Dismiss Profile
+          <button onClick={onClose} className="w-full mt-8 py-2.5 bg-slate-900 text-white rounded-lg font-bold hover:bg-slate-800 transition-all shadow-lg active:scale-95">
+            Close Profile
           </button>
         </div>
       </div>

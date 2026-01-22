@@ -48,7 +48,7 @@ export default function Meetings() {
   );
 
   return (
-    <div className="min-h-screen bg-slate-50/50 p-3 md:p-6 animate-in fade-in duration-500">
+    <div className="min-h-screen bg-slate-50 p-3 md:p-6 animate-in fade-in duration-500">
       <div className="space-y-8">
         
         {/* Header Section */}
@@ -75,12 +75,12 @@ export default function Meetings() {
                 placeholder="Search meetings..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-12 pr-4 py-3 bg-white border border-slate-200 rounded-2xl text-sm focus:outline-none focus:ring-4 focus:ring-red-400/10 focus:border-red-400 transition-all w-full md:w-72 shadow-sm font-medium"
+                className="pl-12 pr-4 py-3 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-4 focus:ring-red-400/10 focus:border-red-400 transition-all w-full md:w-72 shadow-sm font-medium"
               />
             </div>
 
             <button
-              className="flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white px-6 py-3 rounded-2xl text-sm font-bold transition-all shadow-xl active:scale-95"
+              className="flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white px-6 py-3 rounded-xl text-sm font-bold transition-all shadow-xl active:scale-95"
             >
               <Plus size={18} />
               <span className="hidden sm:inline">Schedule Meeting</span>
@@ -89,7 +89,7 @@ export default function Meetings() {
         </div>
 
         {/* Calendar View Strip (Mock) */}
-        <div className="bg-white border border-slate-200 rounded-[32px] p-6 shadow-sm overflow-hidden">
+        <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm overflow-hidden">
           <div className="flex items-center justify-between mb-6">
             <h3 className="text-lg font-black text-slate-900">January 2024</h3>
             <div className="flex gap-2">
@@ -112,8 +112,8 @@ export default function Meetings() {
         {/* Meeting Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filtered.map((meeting) => (
-            <div key={meeting.id} className="bg-white border border-slate-200 rounded-[32px] p-8 shadow-sm hover:shadow-xl transition-all group relative overflow-hidden">
-              <div className={`absolute top-0 right-0 w-24 h-24 ${meeting.status === 'Completed' ? 'bg-emerald-400' : 'bg-red-400'} opacity-[0.03] rounded-bl-[100px] -mr-8 -mt-8 transition-all group-hover:scale-110`}></div>
+            <div key={meeting.id} className="bg-white border border-slate-200 rounded-xl p-8 shadow-sm hover:shadow-xl transition-all group relative overflow-hidden">
+              <div className={`absolute top-0 right-0 w-24 h-24 ${meeting.status === 'Completed' ? 'bg-emerald-400' : 'bg-red-400'} opacity-[0.03] rounded-bl-3xl -mr-8 -mt-8 transition-all group-hover:scale-110`}></div>
               
               <div className="flex justify-between items-start mb-6 relative z-10">
                 <div className={`h-12 w-12 rounded-2xl flex items-center justify-center shadow-sm ${meeting.type === 'Online' ? 'bg-blue-50 text-blue-500' : 'bg-purple-50 text-purple-500'}`}>

@@ -112,107 +112,124 @@ export default function VMS() {
   };
 
   return (
-    <div className="min-h-screen bg-[#f8f9fa] animate-in fade-in duration-500 p-4 md:p-8">
-      <div className="max-w-[1600px] mx-auto space-y-8">
+    <div className="space-y-6 pb-10 animate-in fade-in duration-700 bg-slate-50">
+      <div className="max-w-7xl mx-auto space-y-6">
         
-        {/* Header */}
-        <div className="flex flex-row items-center justify-between gap-6">
-          <div>
-            <h1 className="text-3xl md:text-4xl font-black text-slate-900 flex items-center gap-3 tracking-tight">
-              <span className="w-2.5 h-10 bg-brand rounded-full"></span>
-              Vendor Ecosystem
-            </h1>
-            <p className="text-slate-500 mt-1 font-medium flex items-center gap-2">
-              <ShieldCheck size={16} />
-              VMS › Vendor Management & Procurement
-            </p>
-          </div>
-
-          <div className="flex items-center gap-3">
-            <div className="hidden md:block relative group">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-brand transition-colors" size={18} />
-              <input
-                type="text"
-                placeholder="Search vendors..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-12 pr-4 py-3 bg-white border border-slate-200 rounded-2xl text-sm focus:outline-none focus:ring-4 focus:ring-brand/10 focus:border-brand transition-all w-64 shadow-sm font-medium"
-              />
+        {/* Cinematic Header Section */}
+        <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-6">
+          <div className="relative flex flex-col lg:flex-row lg:items-center justify-between gap-8">
+            <div className="flex items-center gap-6">
+              <div className="w-16 h-16 bg-slate-900 rounded-xl flex items-center justify-center shadow-sm">
+                <Truck className="text-white w-8 h-8" />
+              </div>
+              <div>
+                <div className="flex items-center gap-3">
+                  <h1 className="text-2xl font-black text-slate-900">
+                    Vendor <span className="text-emerald-600">Ecosystem</span>
+                  </h1>
+                  <span className="px-3 py-1 bg-slate-900 text-white text-[9px] font-black uppercase tracking-widest rounded-full">
+                    VMS v4.0
+                  </span>
+                </div>
+                <p className="text-sm text-slate-500 font-medium mt-1">
+                  Strategic Partner Governance & Quality Control
+                </p>
+              </div>
             </div>
-            
-            <button 
-              onClick={() => setShowAddForm(true)}
-              className="flex items-center gap-2 bg-brand hover:opacity-90 text-white px-6 py-3 rounded-2xl text-sm font-bold transition-all shadow-xl active:scale-95 whitespace-nowrap"
-            >
-              <Plus size={18} />
-              <span className="hidden sm:inline">Register Vendor</span>
-              <span className="sm:hidden">Register</span>
-            </button>
+
+            <div className="flex flex-wrap items-center gap-4">
+              <div className="relative group">
+                <Search
+                  className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"
+                  size={16}
+                />
+                <input
+                  type="text"
+                  placeholder="Query directory..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="pl-10 pr-4 py-2 bg-white border border-slate-200 rounded-lg text-sm focus:outline-none focus:border-slate-900 transition-all w-64 shadow-sm font-medium"
+                />
+              </div>
+
+              <button 
+                onClick={() => setShowAddForm(true)}
+                className="flex items-center gap-2 bg-slate-900 text-white px-6 py-2.5 rounded-lg text-[10px] font-black uppercase tracking-widest hover:bg-slate-800 transition-all shadow-sm active:scale-95"
+              >
+                <Plus size={16} />
+                <span>REGISTER VENDOR</span>
+              </button>
+            </div>
           </div>
         </div>
 
-        {/* Stats Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          <StatCard title="Annual Procurement" value={`₹${(totalSpend / 1000000).toFixed(1)}M`} icon={<DollarSign size={24} />} trend="Total lifecycle spend" color="bg-emerald-500" />
-          <StatCard title="Active Contracts" value={activeContracts.toString()} icon={<Briefcase size={24} />} trend="Across all vendors" color="bg-brand" />
-          <StatCard title="Vendor Quality" value={avgRating} icon={<Star size={24} />} trend="Average rating" color="bg-amber-500" />
-          <StatCard title="Total Vendors" value={vendors.length.toString()} icon={<Truck size={24} />} trend="Partnership count" color="bg-indigo-500" />
+        {/* Premium Stats Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <StatCard title="Annual Procurement" value={`₹${(totalSpend / 1000000).toFixed(1)}M`} icon={<DollarSign size={24} />} trend="Total lifecycle spend" color="emerald" />
+          <StatCard title="Active Contracts" value={activeContracts.toString()} icon={<Briefcase size={24} />} trend="Live agreements" color="blue" />
+          <StatCard title="Vendor Quality" value={avgRating} icon={<Star size={24} />} trend="Average rating" color="amber" />
+          <StatCard title="Total Vendors" value={vendors.length.toString()} icon={<Truck size={24} />} trend="Partnership count" color="slate" />
         </div>
 
-        {/* Vendor Table */}
-        <div className="bg-white border border-slate-200 rounded-[24px] shadow-sm overflow-hidden transition-all">
+        {/* Content Section */}
+        <div className="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden">
+          <div className="p-4 border-b border-slate-50 flex items-center justify-between bg-slate-50">
+            <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
+              Partnership Directory
+            </h3>
+          </div>
           <div className="overflow-x-auto">
             <table className="w-full text-left">
-              <thead className="bg-slate-50/50 border-b border-slate-100">
-                <tr>
+              <thead>
+                <tr className="border-b border-slate-100">
                   {["Vendor Details", "Contact Person", "Performance", "Lifecycle Spend", "Status", "Actions"].map((h) => (
-                    <th key={h} className="px-8 py-5 text-[11px] font-black text-slate-400 uppercase tracking-widest">{h}</th>
+                    <th key={h} className="px-6 py-4 text-[10px] font-black text-slate-400 uppercase tracking-widest">{h}</th>
                   ))}
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-50">
                 {paginated.map((vendor) => (
-                  <tr key={vendor.id} className="hover:bg-slate-50/50 transition-colors group">
-                    <td className="px-8 py-5">
-                      <div className="flex items-center gap-4">
-                        <div className="h-12 w-12 rounded-2xl bg-slate-100 flex items-center justify-center text-slate-400 group-hover:bg-brand/10 group-hover:text-brand transition-all">
+                  <tr key={vendor.id} className="hover:bg-slate-50 transition-colors group">
+                    <td className="px-6 py-4">
+                      <div className="flex items-center gap-3">
+                        <div className="h-10 w-10 rounded-lg bg-slate-50 text-slate-400 group-hover:bg-emerald-600 group-hover:text-white flex items-center justify-center border border-slate-100 transition-all shadow-sm">
                           <Briefcase size={20} />
                         </div>
                         <div>
-                          <div className="font-bold text-slate-900 text-base">{vendor.name}</div>
-                          <div className="text-xs text-slate-400 font-black uppercase tracking-widest">{vendor.category} • {vendor.id}</div>
+                          <div className="font-bold text-slate-900 text-sm">{vendor.name}</div>
+                          <div className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">{vendor.category} • {vendor.id}</div>
                         </div>
                       </div>
                     </td>
-                    <td className="px-8 py-5">
+                    <td className="px-6 py-4">
                       <div className="flex flex-col">
-                        <span className="font-bold text-slate-700 text-sm">{vendor.contactPerson}</span>
-                        <span className="text-xs text-slate-400">{vendor.email}</span>
+                        <span className="font-bold text-slate-700 text-xs">{vendor.contactPerson}</span>
+                        <span className="text-[10px] text-slate-400 font-bold">{vendor.email}</span>
                       </div>
                     </td>
-                    <td className="px-8 py-5">
-                      <div className="flex items-center gap-1.5">
+                    <td className="px-6 py-4">
+                      <div className="flex items-center gap-1">
                         <div className="flex text-amber-400">
                           {Array.from({ length: 5 }).map((_, i) => (
-                            <Star key={i} size={14} fill={i < Math.floor(vendor.rating) ? "currentColor" : "none"} className={i < Math.floor(vendor.rating) ? "" : "text-slate-200"} />
+                            <Star key={i} size={12} fill={i < Math.floor(vendor.rating) ? "currentColor" : "none"} className={i < Math.floor(vendor.rating) ? "" : "text-slate-200"} />
                           ))}
                         </div>
-                        <span className="text-sm font-black text-slate-900">{vendor.rating}</span>
+                        <span className="text-[11px] font-black text-slate-900">{vendor.rating}</span>
                       </div>
                     </td>
-                    <td className="px-8 py-5 font-black text-slate-900 text-sm">
+                    <td className="px-6 py-4 font-bold text-slate-900 text-xs">
                       ₹{vendor.totalSpend.toLocaleString()}
                     </td>
-                    <td className="px-8 py-5">
+                    <td className="px-6 py-4">
                       <StatusBadge status={vendor.status} />
                     </td>
-                    <td className="px-8 py-5">
+                    <td className="px-6 py-4">
                       <div className="flex gap-2">
-                        <button onClick={() => { setSelectedVendor(vendor); setShowVendorModal(true); }} className="p-2.5 rounded-xl bg-blue-50 text-blue-500 hover:bg-blue-500 hover:text-white transition-all">
-                          <Eye size={18} />
+                        <button onClick={() => { setSelectedVendor(vendor); setShowVendorModal(true); }} className="p-2 rounded-lg bg-slate-50 text-slate-400 hover:text-blue-600 transition-colors">
+                          <Eye size={16} />
                         </button>
-                        <button onClick={() => handleDelete(vendor.id)} className="p-2.5 rounded-xl bg-rose-50 text-rose-500 hover:bg-rose-500 hover:text-white transition-all">
-                          <Trash2 size={18} />
+                        <button onClick={() => handleDelete(vendor.id)} className="p-2 rounded-lg bg-slate-50 text-slate-400 hover:text-red-600 transition-colors">
+                          <Trash2 size={16} />
                         </button>
                       </div>
                     </td>
@@ -226,23 +243,23 @@ export default function VMS() {
         {/* Pagination */}
         {totalPages > 1 && (
           <div className="flex flex-col sm:flex-row items-center justify-between gap-6 pt-6">
-            <p className="text-sm font-bold text-slate-400">
+            <p className="text-[11px] font-bold text-slate-400 uppercase tracking-widest">
               Showing <span className="text-slate-900 font-black">{(currentPage - 1) * ITEMS_PER_PAGE + 1}-{Math.min(currentPage * ITEMS_PER_PAGE, filtered.length)}</span> of <span className="text-slate-900 font-black">{filtered.length}</span> Vendors
             </p>
-            <div className="flex items-center gap-3 bg-white border border-slate-200 p-1.5 rounded-2xl shadow-sm">
+            <div className="flex items-center gap-2 bg-white border border-slate-100 p-1 rounded-lg shadow-sm">
               <button
                 onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
                 disabled={currentPage === 1}
-                className="p-2 rounded-xl hover:bg-slate-50 disabled:opacity-30 transition-all"
+                className="p-2 rounded-md hover:bg-slate-50 disabled:opacity-20 transition-all text-slate-600"
               >
-                <ChevronLeft size={20} />
+                <ChevronLeft size={16} />
               </button>
               <div className="flex items-center gap-1">
                 {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
                   <button
                     key={p}
                     onClick={() => setCurrentPage(p)}
-                    className={`w-9 h-9 rounded-xl text-sm font-black transition-all ${currentPage === p ? 'bg-brand text-white shadow-lg shadow-brand/20' : 'text-slate-400 hover:bg-slate-50'}`}
+                    className={`h-8 w-8 rounded-md text-[10px] font-black transition-all ${currentPage === p ? 'bg-slate-900 text-white shadow-sm' : 'text-slate-400 hover:bg-slate-50'}`}
                   >
                     {p}
                   </button>
@@ -251,9 +268,9 @@ export default function VMS() {
               <button
                 onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
                 disabled={currentPage === totalPages}
-                className="p-2 rounded-xl hover:bg-slate-50 disabled:opacity-30 transition-all"
+                className="p-2 rounded-md hover:bg-slate-50 disabled:opacity-20 transition-all text-slate-600"
               >
-                <ChevronRight size={20} />
+                <ChevronRight size={16} />
               </button>
             </div>
           </div>
@@ -264,10 +281,10 @@ export default function VMS() {
       {showVendorModal && selectedVendor && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
           <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm animate-in fade-in duration-300" onClick={() => setShowVendorModal(false)}></div>
-          <div className="relative bg-white rounded-[24px] shadow-2xl w-full max-w-2xl overflow-hidden animate-in zoom-in duration-300">
-            <div className="p-8 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
+          <div className="relative bg-white rounded-xl shadow-2xl w-full max-w-2xl overflow-hidden animate-in zoom-in duration-300">
+            <div className="p-8 border-b border-slate-100 flex justify-between items-center bg-slate-50">
               <div className="flex items-center gap-4">
-                <div className="h-14 w-14 rounded-2xl bg-brand text-white flex items-center justify-center shadow-lg shadow-brand/20">
+                <div className="h-14 w-14 rounded-xl bg-brand text-white flex items-center justify-center shadow-lg shadow-brand/20">
                   <Briefcase size={28} />
                 </div>
                 <div>
@@ -275,7 +292,7 @@ export default function VMS() {
                   <p className="text-sm font-bold text-slate-400 uppercase tracking-widest">{selectedVendor.id} • {selectedVendor.category}</p>
                 </div>
               </div>
-              <button onClick={() => setShowVendorModal(false)} className="p-3 rounded-2xl hover:bg-white transition-colors shadow-sm"><X size={20} /></button>
+              <button onClick={() => setShowVendorModal(false)} className="p-3 rounded-xl hover:bg-white transition-colors shadow-sm"><X size={20} /></button>
             </div>
             
             <div className="p-8 space-y-8">
@@ -299,7 +316,7 @@ export default function VMS() {
                 <div className="space-y-4">
                   <div>
                     <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-1.5">Procurement Summary</label>
-                    <div className="bg-slate-50 rounded-2xl p-4 border border-slate-100">
+                    <div className="bg-slate-50 rounded-xl p-4 border border-slate-100">
                       <div className="flex justify-between items-center mb-2">
                         <span className="text-xs font-medium text-slate-500">Active Contracts</span>
                         <span className="text-sm font-black text-slate-900">{selectedVendor.activeContracts}</span>
@@ -323,8 +340,8 @@ export default function VMS() {
               </div>
 
               <div className="flex gap-4">
-                <button className="flex-1 py-4 rounded-2xl bg-slate-900 text-white font-bold hover:bg-slate-800 transition-all shadow-lg active:scale-95">View Contracts</button>
-                <button className="flex-1 py-4 rounded-2xl bg-brand text-white font-bold hover:opacity-90 transition-all shadow-lg active:scale-95">Initiate PO</button>
+                <button className="flex-1 py-4 rounded-xl bg-slate-900 text-white font-bold hover:bg-slate-800 transition-all shadow-lg active:scale-95">View Contracts</button>
+                <button className="flex-1 py-4 rounded-xl bg-brand text-white font-bold hover:opacity-90 transition-all shadow-lg active:scale-95">Initiate PO</button>
               </div>
             </div>
           </div>
@@ -335,13 +352,13 @@ export default function VMS() {
       {showAddForm && (
         <div className="fixed inset-0 z-[110] flex items-center justify-center p-4">
           <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm animate-in fade-in duration-300" onClick={() => setShowAddForm(false)}></div>
-          <div className="relative bg-white rounded-[24px] shadow-2xl w-full max-w-lg overflow-hidden animate-in slide-in-from-bottom-8 duration-500">
+          <div className="relative bg-white rounded-xl shadow-2xl w-full max-w-lg overflow-hidden animate-in slide-in-from-bottom-8 duration-500">
             <div className="p-8 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
               <div>
                 <h2 className="text-2xl font-black text-slate-900">New Vendor Registration</h2>
                 <p className="text-sm font-bold text-slate-400 uppercase tracking-widest mt-1">Onboarding & Compliance</p>
               </div>
-              <button onClick={() => setShowAddForm(false)} className="p-3 rounded-2xl hover:bg-white transition-colors shadow-sm"><X size={20} /></button>
+              <button onClick={() => setShowAddForm(false)} className="p-3 rounded-xl hover:bg-white transition-colors shadow-sm"><X size={20} /></button>
             </div>
             
             <form onSubmit={(e) => {
@@ -357,11 +374,11 @@ export default function VMS() {
             }} className="p-8 space-y-6">
               <div className="space-y-2">
                 <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Vendor Name</label>
-                <input name="name" required className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl text-sm font-bold focus:outline-none focus:ring-4 focus:ring-brand/10 focus:border-brand transition-all" />
+                <input name="name" required className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-xl text-sm font-bold focus:outline-none focus:ring-4 focus:ring-brand/10 focus:border-brand transition-all" />
               </div>
               <div className="space-y-2">
                 <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Category</label>
-                <select name="category" className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl text-sm font-bold focus:outline-none focus:ring-4 focus:ring-brand/10 focus:border-brand transition-all">
+                <select name="category" className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-xl text-sm font-bold focus:outline-none focus:ring-4 focus:ring-brand/10 focus:border-brand transition-all">
                   <option value="Parts">Parts & Hardware</option>
                   <option value="Services">Maintenance Services</option>
                   <option value="Logistics">Logistics & Freight</option>
@@ -371,16 +388,16 @@ export default function VMS() {
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Primary Contact</label>
-                  <input name="contactPerson" required className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl text-sm font-bold focus:outline-none focus:ring-4 focus:ring-brand/10 focus:border-brand transition-all" />
+                  <input name="contactPerson" required className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-xl text-sm font-bold focus:outline-none focus:ring-4 focus:ring-brand/10 focus:border-brand transition-all" />
                 </div>
                 <div className="space-y-2">
                   <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Email Address</label>
-                  <input name="email" type="email" required className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl text-sm font-bold focus:outline-none focus:ring-4 focus:ring-brand/10 focus:border-brand transition-all" />
+                  <input name="email" type="email" required className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-xl text-sm font-bold focus:outline-none focus:ring-4 focus:ring-brand/10 focus:border-brand transition-all" />
                 </div>
               </div>
               <div className="flex gap-4 pt-4">
-                <button type="button" onClick={() => setShowAddForm(false)} className="flex-1 py-4 rounded-2xl border border-slate-200 text-slate-500 font-bold hover:bg-slate-50 transition-all">Discard</button>
-                <button type="submit" className="flex-1 py-4 rounded-2xl bg-brand text-white font-bold hover:opacity-90 transition-all shadow-xl active:scale-95">Register</button>
+                <button type="button" onClick={() => setShowAddForm(false)} className="flex-1 py-4 rounded-xl border border-slate-200 text-slate-500 font-bold hover:bg-slate-50 transition-all">Discard</button>
+                <button type="submit" className="flex-1 py-4 rounded-xl bg-brand text-white font-bold hover:opacity-90 transition-all shadow-xl active:scale-95">Register</button>
               </div>
             </form>
           </div>
@@ -400,21 +417,37 @@ interface StatCardProps {
   color: string;
 }
 
-function StatCard({ title, value, icon, trend, color }: StatCardProps) {
+function StatCard({ title, value, icon, trend, color }: { title: string; value: string; icon: React.ReactNode; trend: string; color: "emerald" | "blue" | "amber" | "slate" }) {
+  const colorMap = {
+    emerald: "bg-emerald-50 text-emerald-600 shadow-emerald-100",
+    blue: "bg-blue-50 text-blue-600 shadow-blue-100",
+    amber: "bg-amber-50 text-amber-600 shadow-amber-100",
+    slate: "bg-slate-50 text-slate-600 shadow-slate-100"
+  };
+
+  const iconBgMap = {
+    emerald: "bg-emerald-600",
+    blue: "bg-blue-600",
+    amber: "bg-amber-600",
+    slate: "bg-slate-900"
+  };
+
   return (
-    <div className="bg-white border border-slate-200 p-8 rounded-[24px] shadow-sm relative overflow-hidden group">
-      <div className={`absolute top-0 right-0 w-24 h-24 ${color} opacity-[0.03] rounded-bl-[100px] -mr-8 -mt-8 transition-all group-hover:scale-110`}></div>
-      <div className="flex items-center gap-6 relative z-10">
-        <div className={`h-16 w-16 rounded-[20px] ${color} text-white flex items-center justify-center shadow-lg shadow-current/20`}>
+    <div className="bg-white rounded-xl p-6 border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group overflow-hidden relative">
+      <div className={`absolute top-0 right-0 w-24 h-24 ${iconBgMap[color]} opacity-[0.03] rounded-bl-[100px] -mr-8 -mt-8 transition-all group-hover:scale-150`}></div>
+      <div className="flex items-center justify-between mb-4 relative z-10">
+        <div className={`w-12 h-12 rounded-xl flex items-center justify-center transition-transform group-hover:scale-110 duration-300 ${colorMap[color]}`}>
           {icon}
         </div>
-        <div>
-          <p className="text-[11px] font-black text-slate-400 uppercase tracking-widest mb-1">{title}</p>
-          <div className="flex flex-col">
-            <h3 className="text-3xl font-black text-slate-900 tracking-tight">{value}</h3>
-            <span className="text-[10px] font-black text-slate-400 mt-1">{trend}</span>
-          </div>
+        <div className="flex items-center gap-1 text-[10px] font-black px-2 py-1 bg-emerald-50 text-emerald-600 rounded-lg">
+          <CheckCircle size={12} />
+          Verified
         </div>
+      </div>
+      <div className="relative z-10">
+        <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.15em] mb-1">{title}</p>
+        <h3 className="text-3xl font-black text-slate-900 tracking-tighter">{value}</h3>
+        <p className="text-[10px] font-bold text-slate-400 mt-2">{trend}</p>
       </div>
     </div>
   );
@@ -422,31 +455,27 @@ function StatCard({ title, value, icon, trend, color }: StatCardProps) {
 
 function StatusBadge({ status }: { status: VendorStatus }) {
   const configs: Record<VendorStatus, string> = {
-    Verified: "bg-emerald-100 text-emerald-600 border-emerald-200",
-    Pending: "bg-amber-100 text-amber-600 border-amber-200",
-    Blacklisted: "bg-rose-100 text-rose-600 border-rose-200",
-    "Under Review": "bg-blue-100 text-blue-600 border-blue-200",
+    Verified: "bg-emerald-600 text-white border-transparent",
+    Pending: "bg-amber-50 text-amber-600 border-amber-100",
+    Blacklisted: "bg-rose-600 text-white border-transparent",
+    "Under Review": "bg-blue-50 text-blue-600 border-blue-100",
   };
 
   return (
-    <span className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider border ${configs[status]}`}>
+    <span className={`px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-[0.1em] border shadow-sm ${configs[status]}`}>
       {status}
     </span>
   );
 }
 
-interface ComplianceCardProps {
-  icon: ReactNode;
-  label: string;
-  status: string;
-}
-
 function ComplianceCard({ icon, label, status }: ComplianceCardProps) {
   return (
-    <div className="bg-slate-50 border border-slate-100 rounded-[24px] p-4 flex flex-col items-center text-center gap-2">
-      {icon}
-      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-tighter">{label}</span>
-      <span className="text-xs font-black text-slate-900">{status}</span>
+    <div className="bg-slate-50 border border-slate-100 rounded-xl p-5 flex flex-col items-center text-center gap-3 group hover:bg-white hover:shadow-lg transition-all">
+      <div className="transition-transform group-hover:scale-110 duration-300">
+        {icon}
+      </div>
+      <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{label}</span>
+      <span className="text-sm font-black text-slate-900">{status}</span>
     </div>
   );
 }

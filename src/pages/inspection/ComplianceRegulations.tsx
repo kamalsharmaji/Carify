@@ -116,7 +116,7 @@ export default function ComplianceRegulations() {
 
   return (
     <div 
-      className="min-h-screen bg-[#f8f9fa] animate-in fade-in duration-500"
+      className="min-h-screen bg-slate-50 animate-in fade-in duration-500"
        
     >
       <div className="max-w-[1600px] mx-auto space-y-10">
@@ -148,11 +148,11 @@ export default function ComplianceRegulations() {
                 placeholder="Search regulations..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-12 pr-4 py-3.5 bg-white border border-slate-200 rounded-[20px] text-sm focus:outline-none focus:ring-4 focus:ring-brand/10 focus:border-brand transition-all w-full md:w-64 shadow-sm font-medium"
+                className="pl-12 pr-4 py-3.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-4 focus:ring-brand/10 focus:border-brand transition-all w-full md:w-64 shadow-sm font-medium"
                />
             </div>
 
-            <div className="flex border border-slate-200 rounded-[20px] bg-white p-1.5 shadow-sm">
+            <div className="flex border border-slate-200 rounded-xl bg-white p-1.5 shadow-sm">
               <button
                 onClick={() => setView("table")}
                 className={`p-2.5 rounded-xl transition-all ${
@@ -182,7 +182,7 @@ export default function ComplianceRegulations() {
                 setEditReg(null);
                 setShowForm(true);
               }}
-              className="flex items-center gap-2 text-white px-8 py-3.5 rounded-[20px] text-sm font-black transition-all shadow-xl active:scale-95 whitespace-nowrap"
+              className="flex items-center gap-2 text-white px-8 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-xl text-sm font-black transition-all shadow-xl active:scale-95 whitespace-nowrap"
                >
               <Plus size={18} strokeWidth={3} />
               <span className="hidden sm:inline">Add Regulation</span>
@@ -199,7 +199,7 @@ export default function ComplianceRegulations() {
 
         {/* List View */}
         {view === "table" ? (
-          <div className="bg-white border border-slate-100 rounded-[32px] shadow-sm overflow-hidden transition-all hover:shadow-md">
+          <div className="bg-white border border-slate-100 rounded-xl shadow-sm overflow-hidden transition-all hover:shadow-md">
             <div className="overflow-x-auto custom-scrollbar">
               <table className="w-full text-left border-collapse">
                 <thead className="bg-slate-50/50">
@@ -232,7 +232,7 @@ export default function ComplianceRegulations() {
                       <td className="px-10 py-8">
                         <div className="flex items-center gap-5">
                           <div 
-                            className="h-14 w-14 rounded-2xl flex items-center justify-center font-black text-xl border border-brand/10 group-hover:scale-110 transition-transform shadow-sm"
+                            className="h-14 w-14 rounded-xl flex items-center justify-center font-black text-xl border border-brand/10 group-hover:scale-110 transition-transform shadow-sm"
                            >
                             <ShieldCheck size={24} />
                           </div>
@@ -288,7 +288,7 @@ export default function ComplianceRegulations() {
             {filteredRegs.map((r) => (
               <div
                 key={r.id}
-                className="bg-white border border-slate-100 rounded-[32px] p-8 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 group relative overflow-hidden"
+                className="bg-white border border-slate-100 rounded-xl p-8 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 group relative overflow-hidden"
               >
                 <div 
                   className="absolute top-0 right-0 w-32 h-32 rounded-bl-[100px] -mr-12 -mt-12 opacity-5 transition-all group-hover:scale-110"
@@ -297,7 +297,7 @@ export default function ComplianceRegulations() {
                 
                 <div className="flex justify-between items-start mb-8 relative z-10">
                   <div 
-                    className="h-14 w-14 rounded-2xl flex items-center justify-center shadow-lg transition-all group-hover:scale-110"
+                    className="h-14 w-14 rounded-xl flex items-center justify-center shadow-lg transition-all group-hover:scale-110"
                    >
                     <FileText size={24} />
                   </div>
@@ -315,7 +315,7 @@ export default function ComplianceRegulations() {
                   </div>
                 </div>
 
-                <div className="p-6 bg-slate-50 rounded-[24px] mb-8 group-hover:bg-white group-hover:shadow-inner transition-all border border-transparent group-hover:border-slate-100">
+                <div className="p-6 bg-slate-50 rounded-xl mb-8 group-hover:bg-white group-hover:shadow-inner transition-all border border-transparent group-hover:border-slate-100">
                    <p className="text-[12px] text-slate-600 line-clamp-3 leading-relaxed font-medium italic">
                      "{r.description}"
                    </p>
@@ -324,7 +324,7 @@ export default function ComplianceRegulations() {
                 <div className="flex gap-3 relative z-10">
                   <button
                     onClick={() => setViewReg(r)}
-                    className="flex-1 py-4 rounded-2xl bg-slate-900 text-white text-[10px] font-black uppercase tracking-widest hover:opacity-90 transition-all active:scale-95 shadow-xl shadow-slate-200 flex items-center justify-center gap-2"
+                    className="flex-1 py-4 rounded-xl bg-slate-900 text-white text-[10px] font-black uppercase tracking-widest hover:opacity-90 transition-all active:scale-95 shadow-xl shadow-slate-200 flex items-center justify-center gap-2"
                   >
                     View Details
                     <ArrowUpRight size={14} />
@@ -334,7 +334,7 @@ export default function ComplianceRegulations() {
                       setEditReg(r);
                       setShowForm(true);
                     }}
-                    className="p-4 rounded-2xl bg-brand/10 text-brand hover:bg-brand hover:text-white transition-all border border-brand/10"
+                    className="p-4 rounded-xl bg-brand/10 text-brand hover:bg-brand hover:text-white transition-all border border-brand/10"
                    
                   >
                     <Pencil size={20} />
@@ -350,27 +350,27 @@ export default function ComplianceRegulations() {
       {viewReg && (
         <Modal onClose={() => setViewReg(null)} title="Regulation Policy Detail">
           <div className="space-y-8">
-            <div className="p-10 rounded-[40px] border flex flex-col items-center text-center relative overflow-hidden group bg-slate-50 border-slate-100">
+            <div className="p-10 rounded-xl border flex flex-col items-center text-center relative overflow-hidden group bg-slate-50 border-slate-100">
               <div 
                 className="absolute top-0 right-0 w-48 h-48 rounded-bl-full -mr-16 -mt-16 opacity-5"
                
               ></div>
               
               <div 
-                className="h-24 w-24 rounded-[32px] flex items-center justify-center shadow-2xl text-white mb-6 relative z-10"
+                className="h-24 w-24 rounded-xl flex items-center justify-center shadow-2xl text-white mb-6 relative z-10"
                >
                 <ShieldCheck size={40} />
               </div>
               
               <h2 className="text-3xl font-black text-slate-900 leading-tight mb-2 relative z-10">{viewReg.name}</h2>
-              <div className="px-5 py-2 bg-white rounded-2xl border border-slate-100 shadow-sm relative z-10">
+              <div className="px-5 py-2 bg-white rounded-xl border border-slate-100 shadow-sm relative z-10">
                 <span className="text-[11px] font-black text-slate-400 uppercase tracking-widest">Effective Date: </span>
                 <span className="text-[11px] font-black text-slate-900 uppercase tracking-widest ml-1">{viewReg.effectiveDate}</span>
               </div>
             </div>
 
             <div className="space-y-6">
-               <div className="p-8 rounded-[32px] bg-white border border-slate-100 shadow-sm relative group overflow-hidden">
+               <div className="p-8 rounded-xl bg-white border border-slate-100 shadow-sm relative group overflow-hidden">
                  <div className="absolute top-0 left-0 w-1.5 h-full"  ></div>
                  <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-4 flex items-center gap-2">
                    <FileText size={14}   />
@@ -382,11 +382,11 @@ export default function ComplianceRegulations() {
                </div>
 
                <div className="grid grid-cols-2 gap-4">
-                  <div className="p-6 rounded-[28px] bg-emerald-50 border border-emerald-100/50">
+                  <div className="p-6 rounded-xl bg-emerald-50 border border-emerald-100/50">
                     <p className="text-[10px] font-black text-emerald-600 uppercase tracking-widest mb-1">Status</p>
                     <p className="font-black text-emerald-700">ACTIVE</p>
                   </div>
-                  <div className="p-6 rounded-[28px] bg-slate-50 border border-slate-100">
+                  <div className="p-6 rounded-xl bg-slate-50 border border-slate-100">
                     <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">ID</p>
                     <p className="font-black text-slate-700">REG-{viewReg.id}</p>
                   </div>
@@ -395,7 +395,7 @@ export default function ComplianceRegulations() {
 
             <button 
               onClick={() => setViewReg(null)}
-              className="w-full py-5 bg-slate-900 text-white rounded-[28px] font-black uppercase tracking-widest hover:bg-slate-800 transition-all shadow-2xl shadow-slate-200 active:scale-[0.98]"
+              className="w-full py-5 bg-slate-900 text-white rounded-xl font-black uppercase tracking-widest hover:bg-slate-800 transition-all shadow-2xl shadow-slate-200 active:scale-[0.98]"
             >
               Close Record
             </button>
@@ -432,7 +432,7 @@ export default function ComplianceRegulations() {
                 name="name"
                 defaultValue={editReg?.name}
                 required
-                className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-4 focus:border-brand transition-all font-bold text-slate-700"
+                className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-xl focus:outline-none focus:ring-4 focus:border-brand transition-all font-bold text-slate-700"
                  placeholder="Enter regulation title..."
               />
             </div>
@@ -445,7 +445,7 @@ export default function ComplianceRegulations() {
                 placeholder="DD-MM-YYYY"
                 defaultValue={editReg?.effectiveDate}
                 required
-                className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-4 focus:border-brand transition-all font-bold text-slate-700"
+                className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-xl focus:outline-none focus:ring-4 focus:border-brand transition-all font-bold text-slate-700"
                />
             </div>
 
@@ -456,7 +456,7 @@ export default function ComplianceRegulations() {
                 defaultValue={editReg?.description}
                 required
                 rows={4}
-                className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-4 focus:border-brand transition-all font-bold text-slate-700 resize-none"
+                className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-xl focus:outline-none focus:ring-4 focus:border-brand transition-all font-bold text-slate-700 resize-none"
                  placeholder="Describe the scope and requirements of this regulation..."
               />
             </div>
@@ -465,13 +465,13 @@ export default function ComplianceRegulations() {
               <button
                 type="button"
                 onClick={() => setShowForm(false)}
-                className="flex-1 py-4 bg-slate-100 text-slate-500 rounded-2xl font-black uppercase tracking-widest hover:bg-slate-200 transition-all active:scale-95"
+                className="flex-1 py-4 bg-slate-100 text-slate-500 rounded-xl font-black uppercase tracking-widest hover:bg-slate-200 transition-all active:scale-95"
               >
                 Cancel
               </button>
               <button
                 type="submit"
-                className="flex-2 py-4 px-10 text-white rounded-2xl font-black uppercase tracking-widest hover:opacity-90 transition-all shadow-xl active:scale-95"
+                className="flex-2 py-4 px-10 text-white rounded-xl font-black uppercase tracking-widest hover:opacity-90 transition-all shadow-xl active:scale-95"
                >
                 {editReg ? "Update Policy" : "Publish Regulation"}
               </button>
@@ -487,10 +487,10 @@ export default function ComplianceRegulations() {
 
 function StatCard({ label, value, color, icon }: { label: string; value: number | string; color: string; icon: React.ReactNode }) {
   return (
-    <div className="bg-white border border-slate-100 rounded-[32px] p-8 shadow-sm group hover:shadow-xl transition-all duration-500">
+    <div className="bg-white border border-slate-100 rounded-xl p-8 shadow-sm group hover:shadow-xl transition-all duration-500">
       <div className="flex items-center justify-between mb-4">
         <div 
-          className="h-12 w-12 rounded-2xl flex items-center justify-center transition-transform group-hover:rotate-12"
+          className="h-12 w-12 rounded-xl flex items-center justify-center transition-transform group-hover:rotate-12"
           style={{ backgroundColor: `${color}15`, color: color }}
         >
           {icon}
@@ -544,7 +544,7 @@ function Modal({
           <h3 className="text-xl font-black text-slate-900 uppercase tracking-tight">{title}</h3>
           <button
             onClick={onClose}
-            className="p-3 bg-white hover:bg-rose-50 hover:text-rose-500 rounded-2xl transition-all text-slate-400 shadow-sm border border-slate-100 active:scale-90"
+            className="p-3 bg-white hover:bg-rose-50 hover:text-rose-500 rounded-xl transition-all text-slate-400 shadow-sm border border-slate-100 active:scale-90"
           >
             <Plus className="rotate-45" size={20} />
           </button>

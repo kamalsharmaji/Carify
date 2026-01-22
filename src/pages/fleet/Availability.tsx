@@ -1,6 +1,23 @@
 import { useState, useEffect } from "react";
-import { Plus, Eye, Pencil, Trash2, LayoutGrid, Table as TableIcon, Search } from "lucide-react";
+import {
+  Plus,
+  Eye,
+  Pencil,
+  Trash2,
+  LayoutGrid,
+  Table as TableIcon,
+  Search,
+  Calendar,
+  Clock,
+  CheckCircle2,
+  AlertCircle,
+  Navigation,
+  ChevronRight,
+  Info,
+  X
+} from "lucide-react";
 
+/* ================= TYPES ================= */
 interface Availability {
   id: number;
   vehicleNo: string;
@@ -10,19 +27,30 @@ interface Availability {
   notes: string;
 }
 
-const STORAGE_KEY = "fleet_availability";
+/* ================= LOCAL STORAGE KEY ================= */
+const STORAGE_KEY = "fleet_availability_v2";
 
+/* ================= DEFAULT DATA ================= */
 const seedData: Availability[] = [
   {
     id: 1,
     vehicleNo: "DL09AB1234",
-    date: "16-01-2025",
+    date: "2025-01-20",
     status: "Available",
     timeSlot: "09:00 - 17:00",
-    notes: "Full day available",
+    notes: "Full day available for deployment",
+  },
+  {
+    id: 2,
+    vehicleNo: "MH01CD5678",
+    date: "2025-01-21",
+    status: "Maintenance",
+    timeSlot: "10:00 - 14:00",
+    notes: "Scheduled engine checkup",
   },
 ];
 
+/* ================= MAIN COMPONENT ================= */
 export default function Availability() {
   const [records, setRecords] = useState<Availability[]>(() => {
     try {
@@ -63,91 +91,125 @@ export default function Availability() {
     setEditRecord(null);
   };
 
-  const filtered = records.filter((r) => r.vehicleNo.toLowerCase().includes(searchTerm.toLowerCase()));
+  const filtered = records.filter((r) =>
+    r.vehicleNo.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const stats = {
+    total: records.length,
+    available: records.filter(r => r.status === "Available").length,
+    scheduled: records.filter(r => r.status === "Maintenance" || r.status === "Booked").length
+  };
 
   return (
-    <div className="min-h-screen bg-slate-50/50 p-3 md:p-6">
-      <div className="space-y-6">
+    <div className="min-h-screen bg-slate-50 p-4 md:p-6 lg:p-8">
+      <div className="max-w-7xl mx-auto space-y-6">
+        
+        {/* Standard Header Section */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
-            <h1 className="text-3xl font-extrabold text-slate-900 flex items-center gap-2">
-              <span className="w-2 h-8 bg-red-400 rounded-full"></span>
+            <h1 className="text-2xl font-bold text-slate-900 flex items-center gap-3">
+              <Calendar className="w-8 h-8 text-slate-900" />
               Vehicle Availability
             </h1>
-            <p className="text-slate-500 mt-1 font-medium">Fleet Management › Availability Calendar</p>
+            <p className="text-slate-500 mt-1 font-medium">
+              Manage vehicle readiness and deployment schedules
+            </p>
           </div>
 
           <div className="flex items-center gap-3">
-            <div className="relative group">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-red-400 transition-colors" size={18} />
-              <input
-                type="text"
-                placeholder="Search..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10 pr-4 py-2 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400/20 focus:border-indigo-400 transition-all w-full md:w-64"
-              />
-            </div>
-
-            <div className="flex border border-slate-200 rounded-xl bg-white p-1">
-              <button onClick={() => setView("table")} className={`p-2 rounded-lg transition-all ${view === "table" ? "bg-red-400 text-white shadow-sm" : "text-slate-500 hover:bg-slate-50"}`}>
+            <div className="flex bg-slate-200/50 p-1 rounded-lg border border-slate-200">
+              <button
+                onClick={() => setView("table")}
+                className={`p-2 rounded-md transition-all ${view === "table" ? "bg-white text-slate-900 shadow-sm" : "text-slate-400 hover:text-slate-600"}`}
+              >
                 <TableIcon size={18} />
               </button>
-              <button onClick={() => setView("card")} className={`p-2 rounded-lg transition-all ${view === "card" ? "bg-red-400 text-white shadow-sm" : "text-slate-500 hover:bg-slate-50"}`}>
+              <button
+                onClick={() => setView("card")}
+                className={`p-2 rounded-md transition-all ${view === "card" ? "bg-white text-slate-900 shadow-sm" : "text-slate-400 hover:text-slate-600"}`}
+              >
                 <LayoutGrid size={18} />
               </button>
             </div>
 
-            <button onClick={() => { setEditRecord(null); setShowForm(true); }} className="flex items-center gap-2 bg-red-400 hover:bg-red-400 text-white px-5 py-2.5 rounded-xl text-sm font-bold transition-all shadow-lg shadow-indigo-400/20 active:scale-95">
-              <Plus size={18} strokeWidth={3} />
-              <span className="hidden sm:inline">Add Record</span>
+            <button
+              onClick={() => { setEditRecord(null); setShowForm(true); }}
+              className="flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white px-4 py-2 rounded-lg font-semibold transition-all active:scale-95 shadow-sm"
+            >
+              <Plus size={18} />
+              <span>Schedule Asset</span>
             </button>
           </div>
         </div>
 
-        {view === "table" && (
-          <div className="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden">
-            <div className="overflow-x-auto custom-scrollbar">
-              <table className="w-full text-sm text-left">
-                <thead className="bg-slate-50 border-b border-slate-100">
-                  <tr>
-                    {["VEHICLE", "DATE", "TIME SLOT", "STATUS", "NOTES", "ACTIONS"].map((h) => (
-                      <th key={h} className="px-6 py-4 text-[11px] font-bold text-slate-500 uppercase tracking-wider">
+        {/* Stats Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <StatCard label="Total Capacity" value={stats.total.toString()} icon={Calendar} color="blue" />
+          <StatCard label="Ready to Deploy" value={stats.available.toString()} icon={CheckCircle2} color="emerald" />
+          <StatCard label="Scheduled / Maintenance" value={stats.scheduled.toString()} icon={AlertCircle} color="orange" />
+        </div>
+
+        {/* Search Bar */}
+        <div className="relative w-full max-w-md group">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-slate-900 transition-colors" size={18} />
+          <input
+            type="text"
+            placeholder="Search by vehicle ID..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="w-full pl-10 pr-4 py-2 bg-white border border-slate-200 rounded-lg text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-slate-900/5 focus:border-slate-900 transition-all shadow-sm"
+          />
+        </div>
+
+        {view === "table" ? (
+          <div className="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden">
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm text-left border-collapse">
+                <thead>
+                  <tr className="bg-slate-50 border-b border-slate-200">
+                    {["Vehicle ID", "Date", "Time Slot", "Status", "Notes", "Actions"].map((h) => (
+                      <th key={h} className="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">
                         {h}
                       </th>
                     ))}
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-50">
+                <tbody className="divide-y divide-slate-100">
                   {filtered.map((r) => (
-                    <tr key={r.id} className="hover:bg-slate-50/80 transition-colors group">
+                    <tr key={r.id} className="hover:bg-slate-50/50 transition-colors group">
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-3">
-                          <div className="h-10 w-10 rounded-xl bg-indigo-50 text-red-500 flex items-center justify-center font-bold text-sm border border-red-100 group-hover:scale-110 transition-transform">
+                          <div className="h-8 w-8 rounded-lg bg-slate-100 text-slate-900 flex items-center justify-center font-bold text-xs border border-slate-200 group-hover:bg-slate-900 group-hover:text-white transition-colors">
                             {r.vehicleNo.charAt(0)}
                           </div>
-                          <span className="font-bold text-slate-900">{r.vehicleNo}</span>
+                          <div className="font-bold text-slate-900">{r.vehicleNo}</div>
                         </div>
                       </td>
-                      <td className="px-6 py-4 font-medium text-slate-600">{r.date}</td>
-                      <td className="px-6 py-4 font-medium text-slate-600">{r.timeSlot}</td>
+                      <td className="px-6 py-4 text-slate-600 font-medium">{r.date}</td>
                       <td className="px-6 py-4">
-                        <span className={`px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wide ${r.status === "Available" ? "bg-green-50 text-green-600" : "bg-red-50 text-red-600"}`}>
-                          {r.status}
-                        </span>
+                        <div className="flex items-center gap-2 text-slate-900 font-semibold">
+                          <Clock size={14} className="text-slate-400" />
+                          {r.timeSlot}
+                        </div>
                       </td>
-                      <td className="px-6 py-4 text-slate-600">{r.notes}</td>
                       <td className="px-6 py-4">
-                        <div className="flex gap-1.5">
-                          <button onClick={() => setViewRecord(r)} className="p-2 rounded-lg text-blue-500 hover:bg-blue-50 hover:text-blue-600">
+                        <StatusBadge status={r.status} />
+                      </td>
+                      <td className="px-6 py-4 text-slate-500 font-medium italic truncate max-w-[200px]">
+                        {r.notes}
+                      </td>
+                      <td className="px-6 py-4">
+                        <div className="flex gap-1">
+                          <ActionBtn color="blue" onClick={() => setViewRecord(r)}>
                             <Eye size={16} />
-                          </button>
-                          <button onClick={() => { setEditRecord(r); setShowForm(true); }} className="p-2 rounded-lg text-orange-500 hover:bg-orange-50 hover:text-orange-600">
+                          </ActionBtn>
+                          <ActionBtn color="orange" onClick={() => { setEditRecord(r); setShowForm(true); }}>
                             <Pencil size={16} />
-                          </button>
-                          <button onClick={() => remove(r.id)} className="p-2 rounded-lg text-red-500 hover:bg-red-50 hover:text-red-600">
+                          </ActionBtn>
+                          <ActionBtn color="red" onClick={() => remove(r.id)}>
                             <Trash2 size={16} />
-                          </button>
+                          </ActionBtn>
                         </div>
                       </td>
                     </tr>
@@ -155,37 +217,53 @@ export default function Availability() {
                 </tbody>
               </table>
             </div>
+            {filtered.length === 0 && (
+              <div className="py-20 text-center bg-slate-50/50">
+                <div className="inline-flex h-16 w-16 items-center justify-center rounded-xl bg-white border border-slate-200 text-slate-300 mb-4 shadow-sm">
+                  <Search size={32} />
+                </div>
+                <h3 className="text-lg font-bold text-slate-900">No records found</h3>
+                <p className="text-slate-500 text-sm">Try adjusting your search terms</p>
+              </div>
+            )}
           </div>
-        )}
-
-        {view === "card" && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filtered.map((r) => (
-              <div key={r.id} className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm hover:shadow-md transition-all group">
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-indigo-400 to-indigo-500 text-white flex items-center justify-center font-bold text-xl shadow-lg shadow-indigo-400/20">
+              <div key={r.id} className="group bg-white border border-slate-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300">
+                <div className="flex items-center justify-between mb-6">
+                  <div className="h-12 w-12 rounded-lg bg-slate-50 text-slate-900 flex items-center justify-center font-bold text-xl border border-slate-200 group-hover:bg-slate-900 group-hover:text-white transition-colors">
                     {r.vehicleNo.charAt(0)}
                   </div>
-                  <div>
-                    <h3 className="font-bold text-slate-900">{r.vehicleNo}</h3>
-                    <p className="text-xs text-slate-500">{r.date}</p>
+                  <StatusBadge status={r.status} />
+                </div>
+
+                <div className="mb-6">
+                  <h3 className="text-lg font-bold text-slate-900">{r.vehicleNo}</h3>
+                  <div className="flex items-center gap-2 text-slate-500 mt-1 font-medium">
+                    <Clock size={14} className="text-slate-400" />
+                    {r.timeSlot}
                   </div>
                 </div>
 
-                <div className="space-y-2 text-sm">
-                  <div className="flex justify-between"><span className="text-slate-400">Time</span><span className="font-bold">{r.timeSlot}</span></div>
-                  <div className="flex justify-between">
-                    <span className="text-slate-400">Status</span>
-                    <span className={`px-2 py-0.5 rounded-md text-[10px] font-black uppercase ${r.status === "Available" ? "bg-green-100 text-green-600" : "bg-red-100 text-red-600"}`}>{r.status}</span>
-                  </div>
-                  <div className="text-slate-600 mt-3">{r.notes}</div>
+                <div className="grid grid-cols-2 gap-4 py-4 border-y border-slate-50">
+                  <CardRow label="Date" value={r.date} />
+                  <CardRow label="Status" value={r.status} />
+                </div>
+
+                <div className="mt-4 p-3 bg-slate-50 rounded-lg border border-slate-100 text-slate-500 text-sm font-medium italic">
+                  "{r.notes}"
                 </div>
 
                 <div className="flex gap-2 mt-6">
-                  <button onClick={() => setViewRecord(r)} className="flex-1 py-2 rounded-xl bg-slate-50 text-slate-600 hover:bg-slate-100 text-xs font-bold">View</button>
-                  <button onClick={() => { setEditRecord(r); setShowForm(true); }} className="flex-1 py-2 rounded-xl bg-indigo-50 text-red-600 hover:bg-red-400 text-xs font-bold">Edit</button>
-                  <button onClick={() => remove(r.id)} className="p-2 rounded-xl text-slate-400 hover:text-red-500 hover:bg-red-50">
-                    <Trash2 size={16} />
+                  <button onClick={() => setViewRecord(r)} className="flex-1 py-2 rounded-lg bg-slate-100 text-slate-900 font-bold text-sm transition-all hover:bg-slate-200 active:scale-95">
+                    View Details
+                  </button>
+                  <button onClick={() => { setEditRecord(r); setShowForm(true); }} className="p-2 rounded-lg bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 transition-all active:scale-95">
+                    <Pencil size={18} />
+                  </button>
+                  <button onClick={() => remove(r.id)} className="p-2 rounded-lg bg-white border border-slate-200 text-slate-400 hover:text-red-600 hover:bg-red-50 hover:border-red-100 transition-all active:scale-95">
+                    <Trash2 size={18} />
                   </button>
                 </div>
               </div>
@@ -194,32 +272,54 @@ export default function Availability() {
         )}
       </div>
 
+      {/* Detail Modal */}
       {viewRecord && (
-        <Modal onClose={() => setViewRecord(null)} title="Availability Details">
-          <div className="space-y-4">
-            <div className="flex items-center gap-4 p-4 bg-slate-50 rounded-2xl mb-6">
-              <div className="h-16 w-16 rounded-2xl bg-red-400 text-white flex items-center justify-center text-2xl font-black shadow-lg shadow-indigo-400/20">
-                {viewRecord.vehicleNo.charAt(0)}
+        <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-xl w-full max-w-lg shadow-xl overflow-hidden border border-slate-200 animate-in fade-in zoom-in duration-200">
+            <div className="p-6 border-b border-slate-100 flex items-center justify-between">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 bg-slate-900 rounded-lg flex items-center justify-center shadow-sm">
+                  <Info className="text-white w-6 h-6" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-slate-900">Availability Report</h3>
+                  <p className="text-slate-500 text-xs font-medium uppercase tracking-wider mt-0.5">Asset deployment details</p>
+                </div>
               </div>
-              <div>
-                <h2 className="text-xl font-bold text-slate-900">{viewRecord.vehicleNo}</h2>
-                <p className="text-sm text-slate-500">{viewRecord.date}</p>
-              </div>
+              <button onClick={() => setViewRecord(null)} className="h-10 w-10 flex items-center justify-center rounded-lg hover:bg-slate-100 transition-colors text-slate-400">
+                <X size={20} />
+              </button>
             </div>
-            <div className="grid grid-cols-2 gap-4">
-              {Object.entries(viewRecord).map(([k, v]) =>
-                k !== "id" && k !== "vehicleNo" ? (
-                  <div key={k} className="p-3 border border-slate-100 rounded-xl">
-                    <p className="text-[10px] uppercase font-black text-slate-400 tracking-widest mb-1">{k.replace(/([A-Z])/g, " $1")}</p>
-                    <p className="text-sm font-bold text-slate-700">{v}</p>
-                  </div>
-                ) : null
-              )}
+
+            <div className="p-6 space-y-6">
+              <div className="grid grid-cols-2 gap-4">
+                <DetailCard label="Vehicle ID" value={viewRecord.vehicleNo} icon={Calendar} color="blue" />
+                <DetailCard label="Availability Date" value={viewRecord.date} icon={Calendar} color="indigo" />
+                <DetailCard label="Time Window" value={viewRecord.timeSlot} icon={Clock} color="orange" />
+                <DetailCard label="Current Status" value={viewRecord.status} icon={CheckCircle2} color="emerald" />
+              </div>
+
+              <div className="p-4 bg-slate-50 rounded-lg border border-slate-100">
+                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2">Operational Notes</p>
+                <p className="text-slate-600 font-medium italic leading-relaxed text-sm">
+                  "{viewRecord.notes}"
+                </p>
+              </div>
+
+              <div className="flex justify-end">
+                <button 
+                  onClick={() => setViewRecord(null)}
+                  className="px-6 py-2 bg-slate-900 text-white rounded-lg font-bold text-sm hover:bg-slate-800 transition-all shadow-md shadow-slate-900/10"
+                >
+                  Close
+                </button>
+              </div>
             </div>
           </div>
-        </Modal>
+        </div>
       )}
 
+      {/* Form Modal */}
       {showForm && (
         <FormModal
           editData={editRecord}
@@ -231,70 +331,175 @@ export default function Availability() {
   );
 }
 
-function Modal({ children, onClose, title }: { children: React.ReactNode; onClose: () => void; title: string }) {
+/* ================= HELPER COMPONENTS ================= */
+
+function StatCard({ label, value, icon: Icon, color }: { label: string; value: string; icon: any; color: string }) {
+  const colors: Record<string, string> = {
+    blue: "text-blue-600 bg-blue-50 border-blue-100",
+    emerald: "text-emerald-600 bg-emerald-50 border-emerald-100",
+    orange: "text-orange-600 bg-orange-50 border-orange-100",
+  };
   return (
-    <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-in">
-      <div className="bg-white rounded-3xl w-full max-w-md shadow-2xl overflow-hidden">
-        <div className="p-6 border-b border-slate-50 flex justify-between items-center bg-slate-50/50">
-          <h3 className="font-black text-slate-800 uppercase tracking-tight">{title}</h3>
-          <button onClick={onClose} className="h-8 w-8 flex items-center justify-center rounded-full hover:bg-slate-200 transition-colors text-slate-500">✕</button>
-        </div>
-        <div className="p-6">{children}</div>
+    <div className="bg-white border border-slate-200 p-5 rounded-xl flex items-center gap-4 shadow-sm">
+      <div className={`w-12 h-12 rounded-lg flex items-center justify-center border ${colors[color]}`}>
+        <Icon size={24} />
+      </div>
+      <div>
+        <p className="text-xs font-bold text-slate-500 uppercase tracking-wider">{label}</p>
+        <p className="text-2xl font-bold text-slate-900 mt-0.5">{value}</p>
+      </div>
+    </div>
+  );
+}
+
+function StatusBadge({ status }: { status: string }) {
+  const isAvailable = status === "Available";
+  return (
+    <span className={`px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wide border ${
+      isAvailable 
+      ? "bg-emerald-50 text-emerald-600 border-emerald-100" 
+      : "bg-orange-50 text-orange-600 border-orange-100"
+    }`}>
+      {status}
+    </span>
+  );
+}
+
+function ActionBtn({ children, color, onClick }: { children: React.ReactNode; color: 'blue' | 'orange' | 'red'; onClick: () => void }) {
+  const colors = {
+    blue: "text-blue-600 hover:bg-blue-50 border-transparent hover:border-blue-100",
+    orange: "text-orange-600 hover:bg-orange-50 border-transparent hover:border-orange-100",
+    red: "text-red-600 hover:bg-red-50 border-transparent hover:border-red-100"
+  };
+  return (
+    <button onClick={onClick} className={`p-2 rounded-lg border transition-all active:scale-95 ${colors[color]}`}>
+      {children}
+    </button>
+  );
+}
+
+function CardRow({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="space-y-1">
+      <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">{label}</p>
+      <p className="font-semibold text-sm text-slate-900">{value}</p>
+    </div>
+  );
+}
+
+function DetailCard({ label, value, icon: Icon, color }: { label: string; value: string; icon: any; color: string }) {
+  const colors: Record<string, string> = {
+    blue: "bg-blue-50 text-blue-600 border-blue-100",
+    orange: "bg-orange-50 text-orange-600 border-orange-100",
+    emerald: "bg-emerald-50 text-emerald-600 border-emerald-100",
+    indigo: "bg-indigo-50 text-indigo-600 border-indigo-100"
+  };
+  
+  return (
+    <div className="p-4 bg-white border border-slate-100 rounded-lg flex items-center gap-3 shadow-sm">
+      <div className={`w-10 h-10 rounded-lg border ${colors[color] || 'bg-slate-50 text-slate-600'} flex items-center justify-center`}>
+        <Icon size={20} />
+      </div>
+      <div>
+        <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">{label}</p>
+        <p className="text-slate-900 font-bold text-sm">{value}</p>
       </div>
     </div>
   );
 }
 
 function FormModal({ editData, onClose, onSave }: { editData: Availability | null; onClose: () => void; onSave: (data: Availability) => void }) {
-  const [form, setForm] = useState<Availability>(editData || { id: 0, vehicleNo: "", date: "", status: "Available", timeSlot: "", notes: "" });
+  const [form, setForm] = useState<Availability>(
+    editData || { id: 0, vehicleNo: "", date: "", status: "Available", timeSlot: "", notes: "" }
+  );
+
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   const validate = () => {
     const newErrors: Record<string, string> = {};
-    if (!form.vehicleNo.trim()) newErrors.vehicleNo = "Required";
-    if (!form.date.trim()) newErrors.date = "Required";
+    if (!form.vehicleNo.trim()) newErrors.vehicleNo = "Vehicle ID Required";
+    if (!form.date.trim()) newErrors.date = "Date Required";
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSave = () => {
-    if (validate()) onSave(form);
-  };
-
   return (
-    <Modal onClose={onClose} title={editData ? "Edit Record" : "Add Record"}>
-      <div className="space-y-4">
-        <div className="grid grid-cols-2 gap-4">
-          <FormInput label="Vehicle No" value={form.vehicleNo} onChange={(v) => setForm({ ...form, vehicleNo: v })} error={errors.vehicleNo} />
-          <FormInput label="Date" value={form.date} onChange={(v) => setForm({ ...form, date: v })} error={errors.date} placeholder="DD-MM-YYYY" />
+    <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center z-[60] p-4">
+      <div className="bg-white rounded-xl w-full max-w-lg shadow-xl overflow-hidden border border-slate-200 animate-in fade-in zoom-in duration-200">
+        <div className="p-6 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
+          <div>
+            <h3 className="text-xl font-bold text-slate-900">{editData ? "Edit" : "Schedule"} Availability</h3>
+            <p className="text-slate-500 text-xs font-medium uppercase tracking-wider mt-0.5">Asset deployment data entry</p>
+          </div>
+          <button onClick={onClose} className="h-10 w-10 flex items-center justify-center rounded-lg hover:bg-slate-200 transition-colors text-slate-400">
+            <X size={20} />
+          </button>
         </div>
-        <div className="grid grid-cols-2 gap-4">
-          <FormInput label="Time Slot" value={form.timeSlot} onChange={(v) => setForm({ ...form, timeSlot: v })} placeholder="HH:MM - HH:MM" />
+        
+        <div className="p-6 space-y-5">
+          <div className="grid grid-cols-2 gap-4">
+            <FormInput label="Vehicle ID" value={form.vehicleNo} onChange={(v) => setForm({ ...form, vehicleNo: v })} error={errors.vehicleNo} placeholder="e.g. DL01AB1234" />
+            <FormInput label="Deployment Date" type="date" value={form.date} onChange={(v) => setForm({ ...form, date: v })} error={errors.date} />
+          </div>
+
+          <div className="grid grid-cols-2 gap-4">
+            <FormInput label="Time Window" value={form.timeSlot} onChange={(v) => setForm({ ...form, timeSlot: v })} placeholder="e.g. 09:00 - 17:00" />
+            <div className="space-y-1.5">
+              <label className="text-[10px] font-bold text-slate-500 uppercase tracking-wider ml-1">Status</label>
+              <select 
+                value={form.status} 
+                onChange={(e) => setForm({ ...form, status: e.target.value })}
+                className="w-full bg-white border border-slate-200 rounded-lg px-4 py-2.5 text-sm font-semibold focus:outline-none focus:border-slate-900 focus:ring-4 focus:ring-slate-900/5 transition-all"
+              >
+                <option value="Available">Available</option>
+                <option value="Maintenance">Maintenance</option>
+                <option value="Booked">Booked</option>
+              </select>
+            </div>
+          </div>
+
           <div className="space-y-1.5">
-            <label htmlFor="status-select" className="text-[11px] font-bold text-slate-500 uppercase tracking-wider ml-1">Status</label>
-            <select id="status-select" value={form.status} onChange={(e) => setForm({ ...form, status: e.target.value })} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2 text-sm focus:ring-2 focus:ring-indigo-400/20 focus:border-indigo-400 outline-none">
-              <option value="Available">Available</option>
-              <option value="Unavailable">Unavailable</option>
-            </select>
+            <label className="text-[10px] font-bold text-slate-500 uppercase tracking-wider ml-1">Operational Notes</label>
+            <textarea
+              value={form.notes}
+              onChange={(e) => setForm({ ...form, notes: e.target.value })}
+              placeholder="Enter deployment notes..."
+              rows={3}
+              className="w-full bg-white border border-slate-200 rounded-lg px-4 py-2.5 text-sm font-semibold focus:outline-none focus:border-slate-900 focus:ring-4 focus:ring-slate-900/5 transition-all"
+            />
+          </div>
+
+          <div className="pt-2 flex gap-3">
+            <button onClick={onClose} className="flex-1 px-4 py-2.5 rounded-lg bg-slate-100 text-slate-600 font-bold text-sm hover:bg-slate-200 transition-all">Cancel</button>
+            <button 
+              onClick={() => {
+                if (validate()) onSave(form);
+              }}
+              className="flex-1 px-4 py-2.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-white font-bold text-sm shadow-lg shadow-slate-900/10 transition-all active:scale-95"
+            >
+              {editData ? "Update Schedule" : "Confirm Schedule"}
+            </button>
           </div>
         </div>
-        <FormInput label="Notes" value={form.notes} onChange={(v) => setForm({ ...form, notes: v })} fullWidth />
-        <div className="pt-6 flex gap-3">
-          <button onClick={onClose} className="flex-1 px-6 py-3 rounded-2xl border border-slate-200 text-slate-600 font-bold hover:bg-slate-50">Cancel</button>
-          <button onClick={handleSave} className="flex-1 px-6 py-3 rounded-2xl bg-red-400 hover:bg-red-400 text-white font-bold shadow-lg shadow-indigo-400/20">{editData ? "Update" : "Create"}</button>
-        </div>
       </div>
-    </Modal>
+    </div>
   );
 }
 
-function FormInput({ label, value, onChange, error, placeholder, fullWidth }: { label: string; value: string; onChange: (v: string) => void; error?: string; placeholder?: string; fullWidth?: boolean }) {
-  const id = label.toLowerCase().replace(/\s+/g, "-");
+function FormInput({ label, value, onChange, error, placeholder, type = "text" }: { label: string; value: string; onChange: (v: string) => void; error?: string; placeholder?: string; type?: string }) {
   return (
-    <div className={`space-y-1.5 ${fullWidth ? "col-span-2" : ""}`}>
-      <label htmlFor={id} className="text-[11px] font-bold text-slate-500 uppercase tracking-wider ml-1">{label} {error && <span className="text-red-400">*</span>}</label>
-      <input id={id} type="text" value={value} onChange={(e) => onChange(e.target.value)} placeholder={placeholder} className={`w-full bg-slate-50 border rounded-xl px-4 py-2 text-sm focus:ring-2 focus:ring-indigo-400/20 focus:border-indigo-400 outline-none ${error ? "border-red-300" : "border-slate-200"}`} />
-      {error && <p className="text-[10px] text-red-500 font-medium ml-1">{error}</p>}
+    <div className="space-y-1.5">
+      <label className="text-[10px] font-bold text-slate-500 uppercase tracking-wider ml-1">{label}</label>
+      <input
+        type={type}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder={placeholder}
+        className={`w-full bg-white border rounded-lg px-4 py-2.5 text-sm font-medium focus:outline-none transition-all ${
+          error ? "border-red-500 bg-red-50" : "border-slate-200 focus:border-slate-900 focus:ring-4 focus:ring-slate-900/5"
+        }`}
+      />
+      {error && <p className="text-[10px] text-red-500 font-bold uppercase tracking-tight ml-1">{error}</p>}
     </div>
   );
 }

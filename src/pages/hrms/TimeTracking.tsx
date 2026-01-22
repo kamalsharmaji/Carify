@@ -48,7 +48,7 @@ export default function TimeTracking() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50/50 p-3 md:p-6 animate-in fade-in duration-500">
+    <div className="min-h-screen bg-slate-50 p-3 md:p-6 animate-in fade-in duration-500">
       <div className="space-y-8">
         
         {/* Header Section */}
@@ -64,7 +64,7 @@ export default function TimeTracking() {
             </p>
           </div>
 
-          <div className="flex bg-white border border-slate-200 p-2 rounded-[24px] shadow-sm items-center gap-4">
+          <div className="flex bg-white border border-slate-200 p-2 rounded-xl shadow-sm items-center gap-4">
              <div className="text-right px-4 border-r border-slate-100">
                 <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Total Today</p>
                 <p className="text-lg font-black text-slate-900">7.5 Hours</p>
@@ -79,8 +79,8 @@ export default function TimeTracking() {
         </div>
 
         {/* Active Timer Card */}
-        <div className="bg-slate-900 rounded-[40px] p-10 text-white relative overflow-hidden shadow-2xl">
-           <div className="absolute right-0 top-0 w-64 h-64 bg-white/5 rounded-bl-[200px] -mr-20 -mt-20"></div>
+        <div className="bg-slate-900 rounded-xl p-10 text-white relative overflow-hidden shadow-2xl">
+           <div className="absolute right-0 top-0 w-64 h-64 bg-white/5 rounded-bl-[120px] -mr-20 -mt-20"></div>
            <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-10">
               <div className="space-y-4 text-center md:text-left">
                  <h2 className="text-xl font-bold text-slate-400 uppercase tracking-[0.2em]">Now Tracking</h2>
@@ -116,7 +116,7 @@ export default function TimeTracking() {
         </div>
 
         {/* Recent Logs Table */}
-        <div className="bg-white border border-slate-200 rounded-[32px] shadow-sm overflow-hidden transition-all">
+        <div className="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden transition-all">
           <div className="p-8 border-b border-slate-100 flex items-center justify-between">
             <h3 className="text-xl font-black text-slate-900 flex items-center gap-3">
                <History className="text-red-400" size={20} />

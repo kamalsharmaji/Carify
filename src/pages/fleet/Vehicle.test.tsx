@@ -1,26 +1,39 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, within } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { BrowserRouter } from "react-router-dom";
 import { vi } from "vitest";
 import Vehicle from "./Vehicle";
 
-describe("Vehicle Page", () => {
+describe("Vehicle Page - Cinematic Redesign", () => {
   beforeEach(() => {
     localStorage.clear();
     vi.clearAllMocks();
   });
 
-  test("renders Vehicle page with header", () => {
+  test("renders redesigned Vehicle page with cinematic header", () => {
     render(
       <BrowserRouter>
         <Vehicle />
       </BrowserRouter>
     );
-    expect(screen.getByText("Manage Vehicles")).toBeInTheDocument();
-    expect(screen.getByText(/Fleet Management › Vehicle Directory/i)).toBeInTheDocument();
+    expect(screen.getByText("Fleet")).toBeInTheDocument();
+    expect(screen.getByText("Directory")).toBeInTheDocument();
+    expect(screen.getByText(/Fleet Management › Vehicle Assets/i)).toBeInTheDocument();
   });
 
-  test("toggles between table and card view", () => {
+  test("displays fleet intelligence stats", () => {
+    render(
+      <BrowserRouter>
+        <Vehicle />
+      </BrowserRouter>
+    );
+    // Use getAllByText for 'Active' and 'Maintenance' since they appear as both stat labels and status badges
+    expect(screen.getByText("Total Fleet")).toBeInTheDocument();
+    expect(screen.getAllByText("Active")[0]).toBeInTheDocument();
+    expect(screen.getAllByText("Maintenance")[0]).toBeInTheDocument();
+  });
+
+  test("toggles between table and cinematic card view", () => {
     const { container } = render(
       <BrowserRouter>
         <Vehicle />
@@ -30,7 +43,7 @@ describe("Vehicle Page", () => {
     // Default is table view
     expect(container.querySelector("table")).toBeInTheDocument();
     
-    // Switch to card view
+    // Switch to card view (looking for the layout grid icon button)
     const buttons = Array.from(container.querySelectorAll('button'));
     const cardViewBtn = buttons.find(btn => 
       btn.querySelector('svg')?.classList.contains('lucide-layout-grid')
@@ -39,18 +52,18 @@ describe("Vehicle Page", () => {
     if (cardViewBtn) {
       fireEvent.click(cardViewBtn);
       expect(container.querySelector("table")).not.toBeInTheDocument();
-      // Should show cards (looking for vehicle names in cards)
-      expect(screen.getByText(/Toyota Fortuner/i)).toBeInTheDocument();
+      // Should show cards with upgraded typography
+      expect(screen.getAllByText(/Toyota Fortuner/i)[0]).toBeInTheDocument();
     }
   });
 
-  test("filters vehicles based on search term", () => {
+  test("filters assets using the upgraded search intelligence", () => {
     render(
       <BrowserRouter>
         <Vehicle />
       </BrowserRouter>
     );
-    const searchInput = screen.getByPlaceholderText("Search vehicles or drivers...");
+    const searchInput = screen.getByPlaceholderText("Search by vehicle name or driver...");
     
     fireEvent.change(searchInput, { target: { value: "Deepak" } });
     
@@ -58,7 +71,7 @@ describe("Vehicle Page", () => {
     expect(screen.queryByText(/Honda City/i)).not.toBeInTheDocument();
   });
 
-  test("opens add vehicle form modal", () => {
+  test("opens high-end asset creation modal", () => {
     render(
       <BrowserRouter>
         <Vehicle />
@@ -68,24 +81,28 @@ describe("Vehicle Page", () => {
     
     fireEvent.click(addBtn);
     
-    expect(screen.getByText("Add New Vehicle")).toBeInTheDocument();
+    expect(screen.getByText("New Fleet Asset")).toBeInTheDocument();
   });
 
-  test("opens vehicle details modal", () => {
+  test("opens cinematic vehicle profile modal", () => {
     render(
       <BrowserRouter>
         <Vehicle />
       </BrowserRouter>
     );
     
-    // Find view button in table
+    // Find view button (Eye icon) in the redesigned table
     const viewButtons = screen.getAllByRole('button').filter(btn => 
         btn.querySelector('svg')?.classList.contains('lucide-eye')
     );
     
     if (viewButtons.length > 0) {
       fireEvent.click(viewButtons[0]);
-      expect(screen.getByText("Vehicle Details")).toBeInTheDocument();
+      
+      // Verify modal content using role="dialog"
+      const modal = screen.getByRole('dialog');
+      expect(within(modal).getByText("Vehicle Profile")).toBeInTheDocument();
+      expect(within(modal).getByText(/Toyota Fortuner/i)).toBeInTheDocument();
     }
   });
 });

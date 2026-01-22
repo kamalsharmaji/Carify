@@ -27,10 +27,12 @@ describe("Driver Component Responsiveness and UI", () => {
     vi.clearAllMocks();
   });
 
-  test("renders Manage Drivers title and initial state", () => {
+  test("renders Driver Personnel title and initial state", () => {
     render(<Driver />);
-    expect(screen.getByText(/Manage Drivers/i)).toBeInTheDocument();
-    expect(screen.getByText(/Fleet Management › Driver Directory/i)).toBeInTheDocument();
+    expect(screen.getByText(/Driver/i)).toBeInTheDocument();
+    expect(screen.getByText(/Personnel/i)).toBeInTheDocument();
+    expect(screen.getByText(/Fleet Management/i)).toBeInTheDocument();
+    expect(screen.getByText(/Personnel Directory/i)).toBeInTheDocument();
   });
 
   test("toggles between table and card view", () => {
@@ -47,20 +49,20 @@ describe("Driver Component Responsiveness and UI", () => {
     expect(screen.queryByRole("table")).not.toBeInTheDocument();
   });
 
-  test("opens Add Driver form", () => {
+  test("opens Onboard Driver form", () => {
     render(<Driver />);
-    const addBtn = screen.getByText(/Add Driver/i);
+    const addBtn = screen.getByText(/Onboard Driver/i);
     fireEvent.click(addBtn);
     
-    expect(screen.getByText(/Add New Driver/i)).toBeInTheDocument();
-    expect(screen.getByPlaceholderText(/John Doe/i)).toBeInTheDocument();
+    expect(screen.getByText(/Register New Personnel/i)).toBeInTheDocument();
+    expect(screen.getByPlaceholderText(/e.g. Deepak Sharma/i)).toBeInTheDocument();
   });
 
   test("filters drivers based on search input", () => {
     render(<Driver />);
-    const searchInput = screen.getByPlaceholderText(/Search drivers.../i);
+    const searchInput = screen.getByPlaceholderText(/Search by name or email.../i);
     
     fireEvent.change(searchInput, { target: { value: "NonExistent" } });
-    expect(screen.getByText(/No drivers found/i)).toBeInTheDocument();
+    expect(screen.getByText(/No Personnel Records/i)).toBeInTheDocument();
   });
 });

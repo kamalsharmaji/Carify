@@ -153,106 +153,121 @@ export default function Ecom() {
 
   return (
     <div 
-      className="min-h-screen bg-[#f8f9fa] animate-in fade-in duration-500 p-4 md:p-8"
+      className="min-h-screen bg-[#f8fafc] p-4 sm:p-6 lg:p-6 animate-in fade-in duration-700"
     >
-      <div className="max-w-[1600px] mx-auto space-y-8">
+      <div className="max-w-[1600px] mx-auto space-y-6">
         
-        {/* Header */}
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-          <div>
-            <h1 className="text-3xl md:text-4xl font-black text-slate-900 flex items-center gap-3 tracking-tight">
-              <span className="w-2.5 h-10 brand rounded-full"></span>
-              E-Commerce Hub
-            </h1>
-            <p className="text-slate-500 mt-1 font-medium flex items-center gap-2">
-              <ShoppingCart size={16} />
-              Storefront Management & Order Fulfillment
-            </p>
-          </div>
-
-          <div className="flex flex-wrap items-center gap-3">
-            <div className="relative group">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-brand transition-colors" size={18} />
-              <input
-                type="text"
-                placeholder={`Search ${activeTab}...`}
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-12 pr-4 py-3 bg-white border border-slate-200 rounded-2xl text-sm focus:outline-none focus:ring-4 focus:ring-brand/10 focus:border-brand transition-all w-64 shadow-sm font-medium"
-              />
+        {/* Header Section */}
+        <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-6">
+          <div className="relative flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 bg-emerald-600 rounded-xl flex items-center justify-center shadow-lg">
+                <ShoppingCart className="text-white w-6 h-6" />
+              </div>
+              <div>
+                <h1 className="text-2xl font-black text-slate-900 tracking-tight">
+                  Commerce <span className="text-emerald-500">Hub</span>
+                </h1>
+                <p className="text-sm text-slate-500 font-medium">
+                  Unified Storefront & Order Orchestration
+                </p>
+              </div>
             </div>
-            
-            <button 
-              onClick={() => setShowAddModal(true)}
-              className="flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white px-6 py-3 rounded-2xl text-sm font-bold transition-all shadow-xl active:scale-95 whitespace-nowrap"
-            >
-              <Plus size={18} />
-              <span className="hidden sm:inline">{activeTab === "orders" ? "New Order" : "Add Product"}</span>
-              <span className="sm:hidden">{activeTab === "orders" ? "Order" : "Product"}</span>
-            </button>
+
+            <div className="flex flex-wrap items-center gap-4">
+              <div className="relative group">
+                <Search
+                  className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-emerald-600 transition-colors"
+                  size={18}
+                />
+                <input
+                  type="text"
+                  placeholder={`Search ${activeTab}...`}
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="pl-11 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/10 focus:border-emerald-500 transition-all w-64 lg:w-80 font-bold placeholder:text-slate-400"
+                />
+              </div>
+
+              <button
+                onClick={() => setShowAddModal(true)}
+                className="flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white px-6 py-2.5 rounded-xl text-sm font-bold transition-all shadow-md active:scale-95"
+              >
+                <Plus size={18} />
+                <span>{activeTab === "orders" ? "NEW ORDER" : "ADD PRODUCT"}</span>
+              </button>
+            </div>
           </div>
         </div>
 
-        {/* Quick Stats */}
+        {/* Stats Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          <StatCard title="Total Revenue" value={`₹${(totalRevenue / 1000).toFixed(1)}K`} icon={<DollarSign size={24} />} trend="+15.2%" color="bg-emerald-500" />
-          <StatCard title="Pending Orders" value={pendingOrders.toString()} icon={<Clock size={24} />} trend="Needs attention" color="bg-amber-500" />
-          <StatCard title="Total Sales" value={orders.length.toString()} icon={<TrendingUp size={24} />} trend="+8 this week" color="bg-blue-500" />
-          <StatCard title="Active Customers" value={totalCustomers.toString()} icon={<Users size={24} />} trend="Engaged" color="bg-indigo-500" />
+          <StatCard title="Total Revenue" value={`₹${(totalRevenue / 1000).toFixed(1)}K`} icon={<DollarSign size={24} />} trend="+15.2%" color="emerald" />
+          <StatCard title="Pending Orders" value={pendingOrders.toString()} icon={<Clock size={24} />} trend="Action Required" color="amber" />
+          <StatCard title="Total Sales" value={orders.length.toString()} icon={<TrendingUp size={24} />} trend="+8 this week" color="blue" />
+          <StatCard title="Active Customers" value={totalCustomers.toString()} icon={<Users size={24} />} trend="Highly Engaged" color="indigo" />
         </div>
 
         {/* Tab Switcher */}
-        <div className="flex items-center gap-2 p-1.5 bg-white border border-slate-200 rounded-2xl w-fit shadow-sm">
+        <div className="flex items-center gap-2 p-1 bg-white border border-slate-200 rounded-xl w-fit shadow-sm">
           <button
             onClick={() => { setActiveTab("orders"); setCurrentPage(1); }}
-            className={`px-6 py-2.5 rounded-xl text-sm font-black transition-all ${activeTab === "orders" ? "bg-brand text-white shadow-lg shadow-brand/20" : "text-slate-400 hover:bg-slate-50"}`}
+            className={`px-6 py-2 rounded-lg text-sm font-bold transition-all ${
+              activeTab === "orders" 
+                ? "bg-emerald-600 text-white shadow-md" 
+                : "text-slate-400 hover:bg-emerald-50 hover:text-emerald-600"
+            }`}
           >
-            Orders
+            Order Registry
           </button>
           <button
             onClick={() => { setActiveTab("products"); setCurrentPage(1); }}
-            className={`px-6 py-2.5 rounded-xl text-sm font-black transition-all ${activeTab === "products" ? "bg-brand text-white shadow-lg shadow-brand/20" : "text-slate-400 hover:bg-slate-50"}`}
+            className={`px-6 py-2 rounded-lg text-sm font-bold transition-all ${
+              activeTab === "products" 
+                ? "bg-emerald-600 text-white shadow-md" 
+                : "text-slate-400 hover:bg-emerald-50 hover:text-emerald-600"
+            }`}
           >
-            Products
+            Product Catalog
           </button>
         </div>
 
         {/* Content Section */}
-        <div className="bg-white border border-slate-200 rounded-[24px] shadow-sm overflow-hidden transition-all">
+        <div className="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden">
           <div className="overflow-x-auto custom-scrollbar">
             {activeTab === "orders" ? (
               <table className="w-full text-left">
-                <thead className="bg-slate-50/50 border-b border-slate-100">
-                  <tr>
+                <thead>
+                  <tr className="bg-slate-50 border-b border-slate-100">
                     {["Order ID", "Customer", "Date", "Total", "Status", "Payment", "Actions"].map((h) => (
-                      <th key={h} className="px-8 py-5 text-[11px] font-black text-slate-400 uppercase tracking-widest">{h}</th>
+                      <th key={h} className="px-6 py-4 text-[11px] font-bold text-slate-500 uppercase tracking-wider">{h}</th>
                     ))}
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-50">
+                <tbody className="divide-y divide-slate-100">
                   {paginatedData.map((order) => {
                     const o = order as Order;
                     return (
-                      <tr key={o.id} className="hover:bg-slate-50/50 transition-colors group">
-                        <td className="px-8 py-5 font-black text-brand text-sm">{o.id}</td>
-                        <td className="px-8 py-5">
-                          <div className="font-bold text-slate-900">{o.customerName}</div>
-                          <div className="text-xs text-slate-400">{o.items} items ordered</div>
+                      <tr key={o.id} className="hover:bg-slate-50/50 transition-all group">
+                        <td className="px-6 py-4 font-bold text-emerald-600 text-sm">{o.id}</td>
+                        <td className="px-6 py-4">
+                          <div className="font-bold text-slate-900 text-sm">{o.customerName}</div>
+                          <div className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">{o.items} items</div>
                         </td>
-                        <td className="px-8 py-5 text-sm font-medium text-slate-500">{o.date}</td>
-                        <td className="px-8 py-5 font-black text-slate-900 text-sm">₹{o.total.toLocaleString()}</td>
-                        <td className="px-8 py-5">
+                        <td className="px-6 py-4 text-sm font-medium text-slate-500">{o.date}</td>
+                        <td className="px-6 py-4 font-black text-slate-900 text-sm">₹{o.total.toLocaleString()}</td>
+                        <td className="px-6 py-4">
                           <StatusBadge status={o.status} />
                         </td>
-                        <td className="px-8 py-5">
-                          <span className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider ${o.paymentStatus === 'Paid' ? 'bg-emerald-100 text-emerald-600' : 'bg-rose-100 text-rose-600'}`}>
+                        <td className="px-6 py-4">
+                          <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider border ${o.paymentStatus === 'Paid' ? 'bg-emerald-50 text-emerald-600 border-emerald-100' : 'bg-rose-50 text-rose-600 border-rose-100'}`}>
                             {o.paymentStatus}
                           </span>
                         </td>
-                        <td className="px-8 py-5">
-                          <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                            <button onClick={() => { setSelectedOrder(o); setShowOrderModal(true); }} className="p-2.5 rounded-xl bg-blue-50 text-blue-500 hover:bg-blue-500 hover:text-white transition-all"><Eye size={18} /></button>
-                            <button onClick={() => handleDeleteOrder(o.id)} className="p-2.5 rounded-xl bg-rose-50 text-rose-500 hover:bg-rose-500 hover:text-white transition-all"><Trash2 size={18} /></button>
+                        <td className="px-6 py-4">
+                          <div className="flex gap-2">
+                            <ActionBtn color="blue" onClick={() => { setSelectedOrder(o); setShowOrderModal(true); }} icon={<Eye size={16} />} />
+                            <ActionBtn color="red" onClick={() => handleDeleteOrder(o.id)} icon={<Trash2 size={16} />} />
                           </div>
                         </td>
                       </tr>
@@ -262,46 +277,51 @@ export default function Ecom() {
               </table>
             ) : (
               <table className="w-full text-left">
-                <thead className="bg-slate-50/50 border-b border-slate-100">
-                  <tr>
-                    {["Product", "Category", "Price", "Inventory", "Sales", "Status", "Actions"].map((h) => (
-                      <th key={h} className="px-8 py-5 text-[11px] font-black text-slate-400 uppercase tracking-widest">{h}</th>
+                <thead>
+                  <tr className="bg-slate-50 border-b border-slate-100">
+                    {["Product", "Category", "Price", "Stock", "Sales", "Status", "Actions"].map((h) => (
+                      <th key={h} className="px-6 py-4 text-[11px] font-bold text-slate-500 uppercase tracking-wider">{h}</th>
                     ))}
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-50">
+                <tbody className="divide-y divide-slate-100">
                   {paginatedData.map((product) => {
                     const p = product as EcomProduct;
                     return (
-                      <tr key={p.id} className="hover:bg-slate-50/50 transition-colors group">
-                        <td className="px-8 py-5">
+                      <tr key={p.id} className="hover:bg-slate-50/50 transition-all group">
+                        <td className="px-6 py-4">
                           <div className="flex items-center gap-3">
-                            <div className="h-10 w-10 rounded-xl bg-slate-100 flex items-center justify-center text-slate-400">
+                            <div className="h-10 w-10 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center border border-emerald-100 shadow-sm">
                               <Package size={20} />
                             </div>
-                            <div className="font-bold text-slate-900">{p.name}</div>
-                          </div>
-                        </td>
-                        <td className="px-8 py-5">
-                          <span className="px-3 py-1 bg-slate-100 text-slate-600 rounded-full text-[10px] font-black uppercase tracking-wider">{p.category}</span>
-                        </td>
-                        <td className="px-8 py-5 font-black text-slate-900 text-sm">₹{p.price.toLocaleString()}</td>
-                        <td className="px-8 py-5">
-                          <div className="flex flex-col gap-1">
-                            <span className={`text-sm font-bold ${p.stock === 0 ? 'text-rose-500' : 'text-slate-700'}`}>{p.stock} in stock</span>
-                            <div className="w-20 h-1 bg-slate-100 rounded-full overflow-hidden">
-                              <div className="h-full bg-emerald-400 rounded-full" style={{ width: `${Math.min(100, (p.stock / 50) * 100)}%` }}></div>
+                            <div>
+                              <div className="font-bold text-slate-900 text-sm">{p.name}</div>
+                              <div className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">ID: {p.id}</div>
                             </div>
                           </div>
                         </td>
-                        <td className="px-8 py-5 font-bold text-slate-600 text-sm">{p.sales} units sold</td>
-                        <td className="px-8 py-5">
-                          <StatusBadge status={p.status} />
+                        <td className="px-6 py-4">
+                          <span className="px-2 py-0.5 bg-slate-100 text-slate-600 rounded-lg text-[10px] font-bold uppercase tracking-wider border border-slate-200">{p.category}</span>
                         </td>
-                        <td className="px-8 py-5">
+                        <td className="px-6 py-4 font-bold text-slate-900 text-sm">₹{p.price.toLocaleString()}</td>
+                        <td className="px-6 py-4">
+                          <div className="flex flex-col gap-1">
+                            <span className={`text-[11px] font-bold ${p.stock === 0 ? 'text-rose-500' : 'text-slate-600'}`}>{p.stock} Units</span>
+                            <div className="w-24 h-1.5 bg-slate-100 rounded-full overflow-hidden">
+                              <div className={`h-full rounded-full transition-all duration-1000 ${p.stock === 0 ? 'bg-rose-400' : 'bg-emerald-400'}`} style={{ width: `${Math.min(100, (p.stock / 50) * 100)}%` }}></div>
+                            </div>
+                          </div>
+                        </td>
+                        <td className="px-6 py-4">
+                          <div className="font-bold text-slate-900 text-sm">{p.sales}</div>
+                        </td>
+                        <td className="px-6 py-4">
+                          <StatusBadge status={p.status as any} />
+                        </td>
+                        <td className="px-6 py-4">
                           <div className="flex gap-2">
-                            <button className="p-2.5 rounded-xl bg-orange-50 text-orange-500 hover:bg-orange-500 hover:text-white transition-all"><Pencil size={18} /></button>
-                            <button className="p-2.5 rounded-xl bg-rose-50 text-rose-500 hover:bg-rose-500 hover:text-white transition-all"><Trash2 size={18} /></button>
+                            <ActionBtn color="orange" onClick={() => {}} icon={<Pencil size={16} />} />
+                            <ActionBtn color="red" onClick={() => {}} icon={<Trash2 size={16} />} />
                           </div>
                         </td>
                       </tr>
@@ -315,24 +335,24 @@ export default function Ecom() {
 
         {/* Pagination */}
         {totalPages > 1 && (
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-6 pt-6">
-            <p className="text-sm font-bold text-slate-400">
-              Showing <span className="text-slate-900 font-black">{(currentPage - 1) * ITEMS_PER_PAGE + 1}-{Math.min(currentPage * ITEMS_PER_PAGE, displayData.length)}</span> of <span className="text-slate-900 font-black">{displayData.length}</span> {activeTab}
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4">
+            <p className="text-xs font-bold text-slate-500 uppercase tracking-wider">
+              Showing <span className="text-slate-900 font-bold">{(currentPage - 1) * ITEMS_PER_PAGE + 1}-{Math.min(currentPage * ITEMS_PER_PAGE, displayData.length)}</span> of <span className="text-slate-900 font-bold">{displayData.length}</span> Records
             </p>
-            <div className="flex items-center gap-3 bg-white border border-slate-200 p-1.5 rounded-2xl shadow-sm">
+            <div className="flex items-center gap-2 bg-white border border-slate-200 p-1.5 rounded-xl shadow-sm">
               <button
                 onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
                 disabled={currentPage === 1}
-                className="p-2 rounded-xl hover:bg-slate-50 disabled:opacity-30 disabled:hover:bg-transparent transition-all"
+                className="p-2 rounded-lg hover:bg-slate-50 disabled:opacity-20 transition-all text-slate-600"
               >
                 <ChevronLeft size={20} />
               </button>
-              <div className="flex items-center gap-1 px-2">
+              <div className="flex items-center gap-1">
                 {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
                   <button
                     key={p}
                     onClick={() => setCurrentPage(p)}
-                    className={`w-9 h-9 rounded-xl text-sm font-black transition-all ${currentPage === p ? 'bg-brand text-white shadow-lg shadow-brand/20' : 'text-slate-400 hover:bg-slate-50'}`}
+                    className={`h-9 w-9 rounded-lg text-xs font-bold transition-all ${currentPage === p ? 'bg-emerald-600 text-white shadow-md' : 'text-slate-400 hover:bg-slate-50'}`}
                   >
                     {p}
                   </button>
@@ -341,7 +361,7 @@ export default function Ecom() {
               <button
                 onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
                 disabled={currentPage === totalPages}
-                className="p-2 rounded-xl hover:bg-slate-50 disabled:opacity-30 disabled:hover:bg-transparent transition-all"
+                className="p-2 rounded-lg hover:bg-slate-50 disabled:opacity-20 transition-all text-slate-600"
               >
                 <ChevronRight size={20} />
               </button>
@@ -350,189 +370,66 @@ export default function Ecom() {
         )}
       </div>
 
-      {/* Order Detail Modal */}
+      {/* Modals */}
       {showOrderModal && selectedOrder && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-          <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm animate-in fade-in duration-300" onClick={() => setShowOrderModal(false)}></div>
-          <div className="relative bg-white rounded-[24px] shadow-2xl w-full max-w-2xl overflow-hidden animate-in zoom-in duration-300">
-            <div className="p-8 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
-              <div>
-                <div className="flex items-center gap-3 mb-1">
-                  <h2 className="text-2xl font-black text-slate-900">Order Details</h2>
-                  <StatusBadge status={selectedOrder.status} />
-                </div>
-                <p className="text-sm font-bold text-slate-400 uppercase tracking-widest">{selectedOrder.id}</p>
-              </div>
-              <button onClick={() => setShowOrderModal(false)} className="p-3 rounded-2xl hover:bg-white transition-colors shadow-sm"><X size={20} /></button>
-            </div>
-            
-            <div className="p-8 space-y-8">
-              <div className="grid grid-cols-2 gap-8">
-                <div>
-                  <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-2">Customer Info</label>
-                  <p className="font-bold text-slate-900 text-lg">{selectedOrder.customerName}</p>
-                  <p className="text-sm text-slate-500">Contact details and shipping address would appear here in a real system.</p>
-                </div>
-                <div>
-                  <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-2">Order Timeline</label>
-                  <p className="font-bold text-slate-900">Placed on {selectedOrder.date}</p>
-                  <p className="text-sm text-slate-500">Last updated: Today, 10:45 AM</p>
-                </div>
-              </div>
-
-              <div className="bg-slate-50 rounded-[24px] p-6 border border-slate-100">
-                <div className="flex justify-between items-center mb-6">
-                  <span className="font-black text-slate-900 uppercase text-xs tracking-widest">Order Summary</span>
-                  <span className="px-3 py-1 bg-white border border-slate-200 rounded-lg text-xs font-bold text-slate-600">{selectedOrder.items} Items</span>
-                </div>
-                <div className="space-y-4">
-                  <div className="flex justify-between text-sm">
-                    <span className="text-slate-500 font-medium">Subtotal</span>
-                    <span className="font-bold text-slate-900">₹{(selectedOrder.total * 0.85).toLocaleString()}</span>
-                  </div>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-slate-500 font-medium">GST (18%)</span>
-                    <span className="font-bold text-slate-900">₹{(selectedOrder.total * 0.15).toLocaleString()}</span>
-                  </div>
-                  <div className="pt-4 border-t border-slate-200 flex justify-between">
-                    <span className="font-black text-slate-900 uppercase text-xs tracking-widest">Grand Total</span>
-                    <span className="text-2xl font-black text-brand">₹{selectedOrder.total.toLocaleString()}</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex gap-4">
-                <button className="flex-1 py-4 rounded-2xl bg-slate-900 text-white font-bold hover:bg-slate-800 transition-all shadow-lg active:scale-95">Print Invoice</button>
-                {selectedOrder.status !== "Delivered" && (
-                  <button 
-                    onClick={() => handleUpdateStatus(selectedOrder.id, "Shipped")}
-                    className="flex-1 py-4 rounded-2xl bg-brand text-white font-bold hover:bg-brand transition-all shadow-lg active:scale-95"
-                  >
-                    Mark as Shipped
-                  </button>
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
+        <OrderDetailsModal 
+          order={selectedOrder} 
+          onClose={() => { setShowOrderModal(false); setSelectedOrder(null); }} 
+          onUpdateStatus={handleUpdateStatus}
+        />
       )}
 
-      {/* Add New Modal */}
       {showAddModal && (
-        <div className="fixed inset-0 z-[110] flex items-center justify-center p-4">
-          <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm animate-in fade-in duration-300" onClick={() => setShowAddModal(false)}></div>
-          <div className="relative bg-white rounded-[24px] shadow-2xl w-full max-w-lg overflow-hidden animate-in slide-in-from-bottom-8 duration-500">
-            <div className="p-8 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
-              <div>
-                <h2 className="text-2xl font-black text-slate-900">{activeTab === "orders" ? "Create New Order" : "New Product Entry"}</h2>
-                <p className="text-sm font-bold text-slate-400 uppercase tracking-widest mt-1">{activeTab === "orders" ? "Transaction Details" : "Catalog Specification"}</p>
-              </div>
-              <button onClick={() => setShowAddModal(false)} className="p-3 rounded-2xl hover:bg-white transition-colors shadow-sm"><X size={20} /></button>
-            </div>
-            
-            <form onSubmit={(e) => {
-              e.preventDefault();
-              const formData = new FormData(e.currentTarget);
-              if (activeTab === "orders") {
-                const data: NewOrderData = {
-                  customerName: formData.get("customerName") as string,
-                  total: Number(formData.get("total")),
-                  items: Number(formData.get("items")),
-                  status: "Pending",
-                  paymentStatus: "Unpaid",
-                };
-                handleAddData(data);
-              } else {
-                const data: NewProductData = {
-                  name: formData.get("name") as string,
-                  category: formData.get("category") as string,
-                  price: Number(formData.get("price")),
-                  stock: Number(formData.get("stock")),
-                  status: "Active",
-                };
-                handleAddData(data);
-              }
-            }} className="p-8 space-y-6">
-              {activeTab === "orders" ? (
-                <>
-                  <div className="space-y-2">
-                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Customer Name</label>
-                    <input name="customerName" required className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl text-sm font-bold focus:outline-none focus:ring-4 focus:ring-brand/10 focus:border-brand transition-all" />
-                  </div>
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Items Count</label>
-                      <input name="items" type="number" required className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl text-sm font-bold focus:outline-none focus:ring-4 focus:ring-brand/10 focus:border-brand transition-all" />
-                    </div>
-                    <div className="space-y-2">
-                      <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Grand Total (₹)</label>
-                      <input name="total" type="number" required className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl text-sm font-bold focus:outline-none focus:ring-4 focus:ring-brand/10 focus:border-brand transition-all" />
-                    </div>
-                  </div>
-                </>
-              ) : (
-                <>
-                  <div className="space-y-2">
-                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Product Name</label>
-                    <input name="name" required className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl text-sm font-bold focus:outline-none focus:ring-4 focus:ring-brand/10 focus:border-brand transition-all" />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Category</label>
-                    <select name="category" className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl text-sm font-bold focus:outline-none focus:ring-4 focus:ring-brand/10 focus:border-brand transition-all">
-                      <option>Parts</option>
-                      <option>Fluids</option>
-                      <option>Electrical</option>
-                      <option>Accessories</option>
-                    </select>
-                  </div>
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Price (₹)</label>
-                      <input name="price" type="number" required className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl text-sm font-bold focus:outline-none focus:ring-4 focus:ring-brand/10 focus:border-brand transition-all" />
-                    </div>
-                    <div className="space-y-2">
-                      <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Initial Stock</label>
-                      <input name="stock" type="number" required className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl text-sm font-bold focus:outline-none focus:ring-4 focus:ring-brand/10 focus:border-brand transition-all" />
-                    </div>
-                  </div>
-                </>
-              )}
-              <div className="flex gap-4 pt-4">
-                <button type="button" onClick={() => setShowAddModal(false)} className="flex-1 py-4 rounded-2xl border border-slate-200 text-slate-500 font-bold hover:bg-slate-50 transition-all">Cancel</button>
-                <button type="submit" className="flex-1 py-4 rounded-2xl bg-brand text-white font-bold hover:bg-brand transition-all shadow-xl shadow-brand/20 active:scale-95">Save {activeTab === "orders" ? "Order" : "Product"}</button>
-              </div>
-            </form>
-          </div>
-        </div>
+        <AddDataModal 
+          type={activeTab} 
+          onClose={() => setShowAddModal(false)} 
+          onSubmit={handleAddData} 
+        />
       )}
     </div>
   );
 }
 
 /* ================= HELPER COMPONENTS ================= */
+
 interface StatCardProps {
   title: string;
   value: string;
   icon: ReactNode;
   trend: string;
-  color: string;
+  color: "emerald" | "amber" | "blue" | "indigo";
 }
 
 function StatCard({ title, value, icon, trend, color }: StatCardProps) {
+  const colorMap = {
+    emerald: "bg-emerald-50 text-emerald-600 border-emerald-100",
+    amber: "bg-amber-50 text-amber-600 border-amber-100",
+    blue: "bg-blue-50 text-blue-600 border-blue-100",
+    indigo: "bg-indigo-50 text-indigo-600 border-indigo-100"
+  };
+
+  const iconBgMap = {
+    emerald: "bg-emerald-600",
+    amber: "bg-amber-600",
+    blue: "bg-blue-600",
+    indigo: "bg-indigo-600"
+  };
+
   return (
-    <div className="bg-white border border-slate-200 p-8 rounded-[24px] shadow-sm relative overflow-hidden group">
-      <div className={`absolute top-0 right-0 w-24 h-24 ${color} opacity-[0.03] rounded-bl-[100px] -mr-8 -mt-8 transition-all group-hover:scale-110`}></div>
-      <div className="flex items-center gap-6 relative z-10">
-        <div className={`h-16 w-16 rounded-[24px] ${color} text-white flex items-center justify-center shadow-lg shadow-current/20`}>
+    <div className="bg-white rounded-xl p-6 border border-slate-100 shadow-sm hover:shadow-md transition-all group overflow-hidden relative">
+      <div className={`absolute top-0 right-0 w-16 h-16 ${iconBgMap[color]} opacity-[0.03] rounded-bl-full -mr-4 -mt-4 transition-all group-hover:scale-150`}></div>
+      <div className="flex items-center justify-between mb-4 relative z-10">
+        <div className={`w-10 h-10 rounded-lg flex items-center justify-center transition-transform group-hover:scale-110 duration-300 ${colorMap[color]}`}>
           {icon}
         </div>
-        <div>
-          <p className="text-[11px] font-black text-slate-400 uppercase tracking-widest mb-1">{title}</p>
-          <div className="flex items-baseline gap-2">
-            <h3 className="text-3xl font-black text-slate-900 tracking-tight">{value}</h3>
-            <span className="text-[10px] font-black text-emerald-500 flex items-center gap-0.5">{trend}</span>
-          </div>
+        <div className="flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 bg-emerald-50 text-emerald-600 rounded-md">
+          <TrendingUp size={12} />
+          {trend}
         </div>
+      </div>
+      <div className="relative z-10">
+        <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">{title}</p>
+        <h3 className="text-2xl font-black text-slate-900 tracking-tight">{value}</h3>
       </div>
     </div>
   );
@@ -540,21 +437,197 @@ function StatCard({ title, value, icon, trend, color }: StatCardProps) {
 
 function StatusBadge({ status }: { status: string }) {
   const configs: Record<string, string> = {
-    // Order Statuses
-    Pending: "bg-amber-100 text-amber-600 border-amber-200",
-    Processing: "bg-blue-100 text-blue-600 border-blue-200",
-    Shipped: "bg-indigo-100 text-indigo-600 border-indigo-200",
-    Delivered: "bg-emerald-100 text-emerald-600 border-emerald-200",
-    Cancelled: "bg-rose-100 text-rose-600 border-rose-200",
-    // Product Statuses
-    Active: "bg-emerald-100 text-emerald-600 border-emerald-200",
-    Draft: "bg-slate-100 text-slate-600 border-slate-200",
-    "Out of Stock": "bg-rose-100 text-rose-600 border-rose-200",
+    Pending: "bg-amber-50 text-amber-600 border-amber-100",
+    Processing: "bg-blue-50 text-blue-600 border-blue-100",
+    Shipped: "bg-indigo-50 text-indigo-600 border-indigo-100",
+    Delivered: "bg-emerald-50 text-emerald-600 border-emerald-100",
+    Cancelled: "bg-rose-50 text-rose-600 border-rose-100",
+    Active: "bg-emerald-50 text-emerald-600 border-emerald-100",
+    Draft: "bg-slate-50 text-slate-600 border-slate-100",
+    "Out of Stock": "bg-rose-50 text-rose-600 border-rose-100",
   };
 
   return (
-    <span className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider border ${configs[status] || "bg-slate-100 text-slate-600"}`}>
+    <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider border ${configs[status] || "bg-slate-50 text-slate-600 border-slate-100"}`}>
       {status}
     </span>
   );
 }
+
+function ActionBtn({ icon, onClick, color }: { icon: ReactNode; onClick: () => void; color: "blue" | "red" | "orange" }) {
+  const colors = {
+    blue: "bg-blue-50 text-blue-600 hover:bg-blue-600 hover:text-white",
+    red: "bg-rose-50 text-rose-600 hover:bg-rose-600 hover:text-white",
+    orange: "bg-amber-50 text-amber-600 hover:bg-amber-600 hover:text-white"
+  };
+
+  return (
+    <button
+      onClick={onClick}
+      className={`p-2 rounded-lg transition-all active:scale-90 ${colors[color]}`}
+    >
+      {icon}
+    </button>
+  );
+}
+
+/* ================= MODALS ================= */
+
+function OrderDetailsModal({ order, onClose, onUpdateStatus }: { order: Order; onClose: () => void; onUpdateStatus: (id: string, s: OrderStatus) => void }) {
+  return (
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+      <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-300" onClick={onClose}></div>
+      <div className="relative bg-white border border-slate-200 rounded-xl shadow-2xl w-full max-w-2xl overflow-hidden animate-in zoom-in duration-300">
+        <div className="p-6 border-b border-slate-100 flex justify-between items-center bg-slate-50">
+          <div>
+            <div className="flex items-center gap-3 mb-1">
+              <h2 className="text-xl font-black text-slate-900 tracking-tight">Order <span className="text-emerald-600">Details</span></h2>
+              <StatusBadge status={order.status} />
+            </div>
+            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">{order.id}</p>
+          </div>
+          <button onClick={onClose} className="p-2 rounded-lg bg-white border border-slate-200 hover:bg-rose-50 text-slate-400 hover:text-rose-500 transition-all active:scale-90">
+            <X size={20} />
+          </button>
+        </div>
+        
+        <div className="p-6 space-y-6">
+          <div className="grid grid-cols-2 gap-6">
+            <div className="space-y-2">
+              <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block ml-1">Customer Entity</label>
+              <div className="p-4 bg-slate-50 border border-slate-100 rounded-xl">
+                <p className="font-bold text-slate-900 text-base">{order.customerName}</p>
+                <p className="text-xs text-slate-500 mt-1 font-medium">Verified Enterprise Partner</p>
+              </div>
+            </div>
+            <div className="space-y-2">
+              <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block ml-1">Timeline Core</label>
+              <div className="p-4 bg-slate-50 border border-slate-100 rounded-xl">
+                <p className="font-bold text-slate-900 text-base">{order.date}</p>
+                <p className="text-xs text-slate-500 mt-1 font-medium flex items-center gap-1"><Clock size={12} /> Synced 2m ago</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-slate-900 text-white rounded-xl p-6 relative overflow-hidden shadow-lg">
+            <div className="relative flex justify-between items-center mb-6 pb-6 border-b border-white/10">
+              <span className="font-bold uppercase text-[10px] tracking-wider text-emerald-400">Transaction Summary</span>
+              <span className="px-3 py-1 bg-white/10 rounded-full text-[10px] font-bold tracking-wider uppercase">{order.items} Items</span>
+            </div>
+            <div className="relative space-y-3">
+              <div className="flex justify-between items-center text-sm">
+                <span className="text-slate-400 font-medium">Subtotal</span>
+                <span className="font-bold text-white">₹{(order.total * 0.82).toLocaleString()}</span>
+              </div>
+              <div className="flex justify-between items-center text-sm">
+                <span className="text-slate-400 font-medium">GST (18%)</span>
+                <span className="font-bold text-emerald-400">₹{(order.total * 0.18).toLocaleString()}</span>
+              </div>
+              <div className="pt-4 mt-4 border-t border-white/10 flex justify-between items-center">
+                <span className="font-bold uppercase text-[10px] tracking-wider text-emerald-500">Grand Total</span>
+                <span className="text-2xl font-black text-white tracking-tight">₹{order.total.toLocaleString()}</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex gap-4">
+            <button className="flex-1 py-3 rounded-xl bg-slate-100 text-slate-900 font-bold uppercase tracking-wider hover:bg-slate-200 transition-all active:scale-95 text-xs">Print Invoice</button>
+            {order.status !== "Delivered" && (
+              <button 
+                onClick={() => { onUpdateStatus(order.id, "Shipped"); onClose(); }}
+                className="flex-1 py-3 rounded-xl bg-emerald-600 text-white font-bold uppercase tracking-wider hover:bg-emerald-700 transition-all shadow-md active:scale-95 text-xs"
+              >
+                Authorize Shipment
+              </button>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function AddDataModal({ type, onClose, onSubmit }: { type: "orders" | "products"; onClose: () => void; onSubmit: (data: any) => void }) {
+  return (
+    <div className="fixed inset-0 z-[110] flex items-center justify-center p-4">
+      <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-300" onClick={onClose}></div>
+      <div className="relative bg-white border border-slate-200 rounded-xl shadow-2xl w-full max-w-md overflow-hidden animate-in slide-in-from-bottom-8 duration-500">
+        <div className="p-6 border-b border-slate-100 flex justify-between items-center bg-slate-50">
+          <div>
+            <h2 className="text-xl font-black text-slate-900 tracking-tight">{type === "orders" ? "Create Order" : "New Product"}</h2>
+            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mt-1">Initialize Core Registry</p>
+          </div>
+          <button onClick={onClose} className="p-2 rounded-lg bg-white border border-slate-200 hover:bg-rose-50 text-slate-400 hover:text-rose-500 transition-all active:scale-90">
+            <X size={20} />
+          </button>
+        </div>
+        
+        <form onSubmit={(e) => {
+          e.preventDefault();
+          const formData = new FormData(e.currentTarget);
+          if (type === "orders") {
+            onSubmit({
+              customerName: formData.get("customerName"),
+              total: Number(formData.get("total")),
+              items: Number(formData.get("items")),
+              status: "Pending",
+              paymentStatus: "Unpaid",
+            });
+          } else {
+            onSubmit({
+              name: formData.get("name"),
+              category: formData.get("category"),
+              price: Number(formData.get("price")),
+              stock: Number(formData.get("stock")),
+              status: "Active",
+            });
+          }
+        }} className="p-6 space-y-4">
+          {type === "orders" ? (
+            <div className="space-y-4">
+              <FormInput label="Customer Entity" name="customerName" required />
+              <div className="grid grid-cols-2 gap-4">
+                <FormInput label="Module Count" name="items" type="number" required />
+                <FormInput label="Grand Total (₹)" name="total" type="number" required />
+              </div>
+            </div>
+          ) : (
+            <div className="space-y-4">
+              <FormInput label="Product Specification" name="name" required />
+              <div className="space-y-1.5">
+                <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider ml-1">Categorization</label>
+                <select name="category" className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-bold focus:ring-2 focus:ring-emerald-500/10 focus:border-emerald-600 outline-none transition-all appearance-none cursor-pointer">
+                  <option>Parts</option>
+                  <option>Fluids</option>
+                  <option>Electrical</option>
+                  <option>Accessories</option>
+                </select>
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <FormInput label="Unit Valuation (₹)" name="price" type="number" required />
+                <FormInput label="Inventory Core" name="stock" type="number" required />
+              </div>
+            </div>
+          )}
+          <div className="flex gap-4 pt-2">
+            <button type="button" onClick={onClose} className="flex-1 py-3 rounded-xl border border-slate-200 text-slate-500 font-bold uppercase tracking-wider hover:bg-slate-50 transition-all text-xs">Discard</button>
+            <button type="submit" className="flex-1 py-3 rounded-xl bg-slate-900 text-white font-bold uppercase tracking-wider hover:bg-slate-800 transition-all shadow-md active:scale-95 text-xs">Commit Entry</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+}
+
+function FormInput({ label, ...props }: { label: string } & React.InputHTMLAttributes<HTMLInputElement>) {
+  return (
+    <div className="space-y-1.5">
+      <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider ml-1">{label}</label>
+      <input 
+        {...props} 
+        className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-bold focus:ring-2 focus:ring-emerald-500/10 focus:border-emerald-600 outline-none transition-all placeholder:text-slate-300" 
+      />
+    </div>
+  );
+}
+
