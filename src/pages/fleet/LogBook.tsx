@@ -97,7 +97,7 @@ export default function LogBook() {
   const totalKm = logs.reduce((acc, curr) => acc + parseFloat(curr.totalKm || "0"), 0);
 
   return (
-    <div className="min-h-screen bg-slate-50 p-4 lg:p-8">
+    <div className="min-h-screen bg-slate-50 ">
       <div className="max-w-[1600px] mx-auto space-y-8">
         
         {/* Standard Header Section */}

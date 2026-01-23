@@ -111,20 +111,18 @@ export default function UserList() {
   const paginated = filtered.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
 
   return (
-    <div className="min-h-screen bg-slate-50 p-4 md:p-6 lg:p-8 animate-in fade-in duration-700">
+    <div className="min-h-screen bg-slate-50  animate-in fade-in duration-700">
       <div className="max-w-7xl mx-auto space-y-8">
         
         {/* Standard Header Section */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="flex items-center gap-4">
-            <div className="w-12 h-12 bg-slate-900 rounded-xl flex items-center justify-center shadow-lg shadow-slate-900/10">
-              <UserIcon className="text-white w-6 h-6" />
-            </div>
+            
             <div>
-              <h1 className="text-2xl font-bold text-slate-900">
+              <h1 className="text-2xl font-bold text-slate-900  pl-2 md:pl-3 lg:pl-0">
                 User Management
               </h1>
-              <p className="text-slate-500 mt-1 font-medium">
+              <p className="text-slate-500 mt-1 font-medium  pl-2 md:pl-3 lg:pl-0">
                 Manage system access and workforce permissions
               </p>
             </div>
@@ -145,13 +143,13 @@ export default function UserList() {
             <div className="flex bg-slate-200/50 p-1 rounded-lg border border-slate-200">
               <button 
                 onClick={() => setViewMode("table")} 
-                className={`p-2 rounded-md transition-all ${viewMode === "table" ? "bg-white text-slate-900 shadow-sm" : "text-slate-400 hover:text-slate-600"}`}
+                className={`p-2 rounded-md transition-all ${viewMode === "table" ? "bg-white text-red-500 shadow-sm" : "text-slate-400 hover:text-slate-600"}`}
               >
                 <TableIcon size={18} />
               </button>
               <button 
                 onClick={() => setViewMode("card")} 
-                className={`p-2 rounded-md transition-all ${viewMode === "card" ? "bg-white text-slate-900 shadow-sm" : "text-slate-400 hover:text-slate-600"}`}
+                className={`p-2 rounded-md transition-all ${viewMode === "card" ? "bg-white text-red-500 shadow-sm" : "text-slate-400 hover:text-slate-600"}`}
               >
                 <LayoutGrid size={18} />
               </button>
@@ -159,7 +157,7 @@ export default function UserList() {
 
             <button
               onClick={() => { setSelectedUser(null); setShowForm(true); }}
-              className="flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white px-4 py-2 rounded-lg font-semibold transition-all active:scale-95 whitespace-nowrap"
+              className="flex items-center gap-2 bg-red-500 hover:bg-slate-800 text-white px-4 py-2 rounded-lg font-semibold transition-all active:scale-95 whitespace-nowrap"
             >
               <Plus size={18} />
               <span>Add Personnel</span>
@@ -186,7 +184,7 @@ export default function UserList() {
                     <tr key={user.id} className="hover:bg-slate-50/50 transition-colors group">
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-3">
-                          <div className="h-10 w-10 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center font-bold text-xs border border-slate-200 group-hover:bg-slate-900 group-hover:text-white transition-colors">
+                          <div className="h-10 w-10 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center font-bold text-xs border border-slate-200 group-hover:bg-red-500 group-hover:text-white transition-colors">
                             {user.name.charAt(0)}
                           </div>
                           <div>
@@ -220,11 +218,11 @@ export default function UserList() {
             </div>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
             {paginated.map((user) => (
-              <div key={user.id} className="group bg-white border border-slate-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300">
-                <div className="flex justify-between items-start mb-6">
-                  <div className="h-14 w-14 rounded-xl bg-slate-50 text-slate-900 flex items-center justify-center font-bold text-2xl border border-slate-200 group-hover:bg-slate-900 group-hover:text-white transition-colors">
+              <div key={user.id} className="group bg-white border border-slate-200 rounded-xl p-4 shadow-sm hover:shadow-md transition-all duration-300">
+                <div className="flex justify-between items-start mb-3">
+                  <div className="h-10 w-10 rounded-xl bg-slate-50 text-slate-900 flex items-center justify-center font-bold text-lg border border-slate-200 group-hover:bg-red-500 group-hover:text-white transition-colors">
                     {user.name.charAt(0)}
                   </div>
                   <StatusBadge status={user.status} />
@@ -455,7 +453,7 @@ function UserForm({ user, onClose, onSave }: { user: User | null, onClose: () =>
             </button>
             <button
               type="submit"
-              className="flex-1 px-4 py-2 bg-slate-900 text-white rounded-lg font-bold hover:bg-slate-800 transition-all shadow-lg active:scale-95"
+              className="flex-1 px-4 py-2 bg-red-500 text-white rounded-lg font-bold hover:bg-slate-800 transition-all shadow-lg active:scale-95"
             >
               {user ? "Update User" : "Create Account"}
             </button>
@@ -519,7 +517,7 @@ function UserDetails({ user, onClose }: { user: User, onClose: () => void }) {
             </div>
           </div>
 
-          <button onClick={onClose} className="w-full mt-8 py-2.5 bg-slate-900 text-white rounded-lg font-bold hover:bg-slate-800 transition-all shadow-lg active:scale-95">
+          <button onClick={onClose} className="w-full mt-8 py-2.5 bg-red-500 text-white rounded-lg font-bold hover:bg-slate-800 transition-all shadow-lg active:scale-95">
             Close Profile
           </button>
         </div>

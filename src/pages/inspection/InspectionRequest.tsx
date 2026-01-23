@@ -10,9 +10,11 @@ import {
   X,
   User,
   ShieldCheck,
-  ClipboardList
+  ClipboardList,
+  ChevronRight,
+  Clock,
+  ClipboardCheck
 } from "lucide-react";
- 
 
 /* ================= TYPES ================= */
 interface InspectionRequest {
@@ -119,72 +121,49 @@ export default function InspectionRequest() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F1F5F9] animate-in fade-in duration-500 p-6 md:p-12">
-      <div className="max-w-[1600px] mx-auto space-y-12">
-        
-        {/* Cinematic Header */}
-        <div className="bg-white/60 backdrop-blur-2xl p-10 md:p-14 rounded-[40px] border border-white/50 shadow-2xl shadow-slate-200/50 flex flex-col lg:flex-row lg:items-center justify-between gap-12 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-brand/5 rounded-full blur-3xl -mr-48 -mt-48"></div>
-          
-          <div className="flex flex-col md:flex-row items-start md:items-center gap-10 relative z-10">
-            <div className="bg-slate-900 p-8 rounded-[32px] shadow-2xl rotate-3 hover:rotate-0 transition-all duration-500 group">
-              <ShieldCheck className="text-white w-12 h-12 group-hover:scale-110 transition-transform" />
-            </div>
-            <div>
-              <div className="flex items-center gap-4 mb-3">
-                <span className="bg-brand/10 text-brand text-[10px] font-black uppercase tracking-[0.3em] px-4 py-1.5 rounded-full">
-                  Inspection Engine
-                </span>
-                <span className="w-2 h-2 rounded-full bg-slate-300"></span>
-                <span className="text-slate-400 text-[10px] font-black uppercase tracking-[0.3em]">
-                  v2.0 Core
-                </span>
-              </div>
-              <h1 className="text-5xl md:text-6xl font-black text-slate-900 tracking-tight leading-none">
-                Inspection <span className="text-brand" style={{ color: "#dc2626" }}>Requests</span>
-              </h1>
-              <p className="text-slate-500 mt-6 font-bold flex items-center gap-3 text-sm uppercase tracking-widest opacity-70">
-                <div className="w-8 h-[2px] bg-slate-200"></div>
-                Request Processing Pipeline
-              </p>
-            </div>
+    <div className="min-h-screen bg-slate-50 font-sans text-slate-900">
+      {/* --- Standardized Header --- */}
+      <header className="mb-3 p-3 rounded-xl bg-white border border-slate-200 shadow-sm overflow-hidden">
+        <div className="relative flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+          <div className="space-y-1">
+            <h1 className="text-3xl font-bold text-slate-900 tracking-tight">
+              Inspection <span className="text-red-500">Requests</span>
+            </h1>
+            <nav className="flex items-center gap-2 text-sm font-medium text-slate-500">
+              <span className="hover:text-red-500 transition-colors cursor-pointer">Vehicle Inspection</span>
+              <ChevronRight size={14} />
+              <span className="text-slate-600">Processing Pipeline</span>
+            </nav>
           </div>
 
-          <div className="flex flex-wrap items-center gap-6 relative z-10">
-            <div className="relative group">
-              <Search
-                className="absolute left-6 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-brand transition-colors"
-                size={20}
-              />
+          <div className="flex flex-wrap items-center gap-4">
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
               <input
                 type="text"
-                placeholder="Search queue..."
+                placeholder="Search requests..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-16 pr-8 py-6 bg-slate-50/50 border-none rounded-[24px] text-sm focus:outline-none focus:ring-4 focus:ring-brand/10 transition-all w-full md:w-80 font-bold shadow-inner"
+                className="pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all w-full lg:w-64"
               />
             </div>
 
-            <div className="flex bg-slate-100/50 p-2 rounded-[24px] backdrop-blur-md">
+            <div className="flex p-1 bg-slate-100 border border-slate-200 rounded-lg">
               <button
                 onClick={() => setView("table")}
-                className={`p-4 rounded-[18px] transition-all ${
-                  view === "table"
-                    ? "bg-white text-slate-900 shadow-xl"
-                    : "text-slate-400 hover:text-slate-600"
+                className={`p-2 rounded-md transition-all ${
+                  view === "table" ? "bg-white text-red-500 shadow-sm" : "text-slate-500 hover:text-slate-700"
                 }`}
               >
-                <TableIcon size={22} />
+                <TableIcon size={18} />
               </button>
               <button
                 onClick={() => setView("card")}
-                className={`p-4 rounded-[18px] transition-all ${
-                  view === "card"
-                    ? "bg-white text-slate-900 shadow-xl"
-                    : "text-slate-400 hover:text-slate-600"
+                className={`p-2 rounded-md transition-all ${
+                  view === "card" ? "bg-white text-red-500 shadow-sm" : "text-slate-500 hover:text-slate-700"
                 }`}
               >
-                <LayoutGrid size={22} />
+                <LayoutGrid size={18} />
               </button>
             </div>
 
@@ -193,107 +172,85 @@ export default function InspectionRequest() {
                 setEditRequest(null);
                 setShowForm(true);
               }}
-              className="group flex items-center gap-4 text-white px-10 py-6 rounded-[28px] text-sm font-black transition-all hover:scale-[1.02] active:scale-95 shadow-2xl shadow-brand/30 relative overflow-hidden"
-              style={{ backgroundColor: "#dc2626" }}
+              className="flex items-center gap-2 bg-red-500 text-white px-5 py-2.5 rounded-lg text-sm font-semibold hover:bg-indigo-700 transition-all active:scale-95"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-              <Plus size={20} strokeWidth={3} />
-              <span className="uppercase tracking-widest">Initialize Request</span>
+              <Plus size={18} />
+              <span>Initialize Request</span>
             </button>
           </div>
         </div>
+      </header>
 
-        {/* List View */}
+      {/* --- Stats Quick Grid --- */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-3">
+        <StatCard icon={<ClipboardList className="text-red-500" />} label="Total Requests" value={requests.length} />
+        <StatCard icon={<Clock className="text-amber-600" />} label="Pending Review" value={requests.filter(r => r.status === 'Pending').length} />
+        <StatCard icon={<ClipboardCheck className="text-emerald-600" />} label="Completed Tasks" value={requests.filter(r => r.status === 'Completed').length} />
+      </div>
+
+      {/* --- Main Content Area --- */}
+      <main className="transition-all duration-300">
         {view === "table" ? (
-          <div className="bg-white/80 backdrop-blur-xl rounded-[40px] border border-white shadow-2xl shadow-slate-200/50 overflow-hidden transition-all">
+          <div className="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full text-left border-collapse">
                 <thead>
-                  <tr className="border-b border-slate-50">
+                  <tr className="border-b border-slate-100 bg-slate-50">
                     {[
                       "Request ID",
                       "Inspector Entity",
                       "Vehicle",
                       "Assigned To",
                       "Status",
-                      "Actions",
+                      "Operations",
                     ].map((h) => (
-                      <th
-                        key={h}
-                        className="px-12 py-10 text-[11px] font-black text-slate-400 uppercase tracking-[0.2em]"
-                      >
+                      <th key={h} className="px-6 py-4 text-xs font-semibold text-slate-500 uppercase tracking-wider">
                         {h}
                       </th>
                     ))}
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-50">
+                <tbody className="divide-y divide-slate-100">
                   {filteredRequests.map((r) => (
-                    <tr
-                      key={r.id}
-                      className="hover:bg-slate-50/30 transition-all group"
-                    >
-                      <td className="px-12 py-10">
-                        <span 
-                          className="font-black px-5 py-2 rounded-2xl text-[10px] tracking-[0.1em] border uppercase"
-                          style={{ color: "#dc2626", backgroundColor: `#dc262610`, borderColor: `#dc262620` }}
-                        >
+                    <tr key={r.id} className="hover:bg-slate-50 transition-all">
+                      <td className="px-6 py-4">
+                        <span className="font-mono text-xs font-semibold text-red-500 bg-indigo-50 px-2 py-1 rounded border border-indigo-100">
                           {r.requestId}
                         </span>
                       </td>
-                      <td className="px-12 py-10">
-                        <div className="flex items-center gap-6">
-                          <div 
-                            className="h-16 w-16 rounded-[22px] bg-slate-900 flex items-center justify-center font-black text-white text-lg shadow-xl group-hover:rotate-6 transition-all duration-500"
-                          >
+                      <td className="px-6 py-4">
+                        <div className="flex items-center gap-3">
+                          <div className="h-10 w-10 rounded-lg bg-indigo-100 text-red-500 flex items-center justify-center font-bold text-base">
                             {r.inspectorName.charAt(0)}
                           </div>
                           <div>
-                            <span className="font-black text-slate-900 text-xl tracking-tight block mb-1">{r.inspectorName}</span>
-                            <span className="text-[10px] text-slate-400 font-black uppercase tracking-[0.2em]">{r.createdAt}</span>
+                            <div className="font-semibold text-slate-900">{r.inspectorName}</div>
+                            <div className="text-xs text-slate-500">{r.createdAt}</div>
                           </div>
                         </div>
                       </td>
-                      <td className="px-12 py-10">
-                        <div className="flex items-center gap-4">
-                          <div className="p-3 bg-slate-50 rounded-xl">
-                            <ClipboardList size={20} className="text-slate-400" />
-                          </div>
-                          <span className="text-sm text-slate-600 font-bold max-w-[200px] truncate">{r.vehicle}</span>
+                      <td className="px-6 py-4">
+                        <div className="flex items-center gap-2 text-sm font-medium text-slate-700">
+                          <ClipboardList size={14} className="text-slate-400" />
+                          {r.vehicle}
                         </div>
                       </td>
-                      <td className="px-12 py-10">
-                        <div className="flex items-center gap-3 bg-slate-50 w-fit px-5 py-2.5 rounded-2xl border border-slate-100">
-                          <User size={14} className="text-slate-400" />
-                          <span className="text-[10px] font-black text-slate-700 uppercase tracking-widest">{r.assignStaff || "UNASSIGNED"}</span>
+                      <td className="px-6 py-4">
+                        <div className="flex items-center gap-2">
+                           <User size={14} className="text-slate-400" />
+                           <span className="text-xs font-semibold text-slate-600">{r.assignStaff || "UNASSIGNED"}</span>
                         </div>
                       </td>
-                      <td className="px-12 py-10">
-                        <span className={`inline-flex items-center gap-3 px-6 py-2.5 rounded-[18px] text-[10px] font-black uppercase tracking-[0.15em] border ${getStatusBadge(r.status)}`}>
-                          <div className={`w-2 h-2 rounded-full ${r.status === "Completed" ? "bg-emerald-500" : r.status === "In Progress" ? "bg-amber-500" : "bg-rose-500"}`}></div>
+                      <td className="px-6 py-4">
+                        <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold uppercase border ${getStatusBadge(r.status)}`}>
                           {r.status}
                         </span>
                       </td>
-                      <td className="px-12 py-10 text-right">
-                        <div className="flex gap-4">
-                          <ActionBtn
-                            color="blue"
-                            onClick={() => setViewRequest(r)}
-                            icon={<Eye size={20} />}
-                          />
-                          <ActionBtn
-                            color="orange"
-                            onClick={() => {
-                              setEditRequest(r);
-                              setShowForm(true);
-                            }}
-                            icon={<Pencil size={20} />}
-                          />
-                          <ActionBtn 
-                            color="red" 
-                            onClick={() => remove(r.id)} 
-                            icon={<Trash2 size={20} />}
-                          />
+                      <td className="px-6 py-4">
+                        <div className="flex items-center gap-2">
+                          <ActionBtn color="blue" onClick={() => setViewRequest(r)} icon={<Eye size={16} />} />
+                          <ActionBtn color="indigo" onClick={() => { setEditRequest(r); setShowForm(true); }} icon={<Pencil size={16} />} />
+                          <ActionBtn color="red" onClick={() => remove(r.id)} icon={<Trash2 size={16} />} />
                         </div>
                       </td>
                     </tr>
@@ -301,136 +258,87 @@ export default function InspectionRequest() {
                 </tbody>
               </table>
             </div>
+            {filteredRequests.length === 0 && <EmptyState />}
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
             {filteredRequests.map((r) => (
-              <div
-                key={r.id}
-                className="bg-white rounded-[40px] p-12 shadow-2xl shadow-slate-200/50 hover:shadow-brand/20 hover:-translate-y-3 transition-all duration-500 group relative overflow-hidden border border-white"
-              >
-                <div 
-                  className="absolute -right-20 -top-20 w-64 h-64 bg-slate-50 rounded-full transition-all group-hover:scale-110"
-                ></div>
-                
-                <div className="flex justify-between items-start mb-12 relative z-10">
-                  <span 
-                    className="font-black px-5 py-2 rounded-2xl text-[10px] tracking-widest border uppercase"
-                    style={{ color: "#dc2626", backgroundColor: `#dc262610`, borderColor: `#dc262620` }}
-                  >
+              <div key={r.id} className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-all group">
+                <div className="flex justify-between items-start mb-6">
+                  <span className="font-mono text-xs font-bold text-red-500 bg-indigo-50 px-2 py-1 rounded border border-indigo-100">
                     {r.requestId}
                   </span>
-                  <span className={`inline-flex items-center gap-2 px-5 py-2 rounded-2xl text-[9px] font-black uppercase tracking-widest border ${getStatusBadge(r.status)}`}>
+                  <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold uppercase border ${getStatusBadge(r.status)}`}>
                     {r.status}
                   </span>
                 </div>
-
-                <div className="space-y-8 mb-12 relative z-10">
-                  <div>
-                    <h3 className="font-black text-slate-900 group-hover:text-brand transition-colors text-2xl tracking-tight leading-tight mb-3">
-                      {r.vehicle}
-                    </h3>
-                    <div className="flex items-center gap-3">
-                      <div className="w-6 h-[2px] bg-brand/30"></div>
-                      <p className="text-[10px] text-slate-400 font-black uppercase tracking-[0.2em]">{r.createdAt}</p>
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 gap-6 pt-8 border-t border-slate-50">
-                    <div className="flex items-center justify-between">
-                      <p className="text-[10px] font-black text-slate-300 uppercase tracking-[0.2em]">Inspector</p>
-                      <p className="text-sm font-black text-slate-900">{r.inspectorName}</p>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <p className="text-[10px] font-black text-slate-300 uppercase tracking-[0.2em]">Assignee</p>
-                      <p className="text-sm font-black text-brand tracking-tight italic" style={{ color: "#dc2626" }}>{r.assignStaff || "UNASSIGNED"}</p>
-                    </div>
-                  </div>
+                <div className="mb-6">
+                  <h3 className="font-bold text-slate-900 group-hover:text-red-500 transition-colors line-clamp-1 mb-1">{r.vehicle}</h3>
+                  <p className="text-xs text-slate-400 font-medium">Created: {r.createdAt}</p>
                 </div>
-
-                <div className="flex gap-4 relative z-10">
-                  <button
-                    onClick={() => setViewRequest(r)}
-                    className="flex-[2] py-5 rounded-[24px] bg-slate-900 text-white text-[10px] font-black uppercase tracking-[0.2em] hover:bg-slate-800 transition-all active:scale-95 shadow-xl shadow-slate-200"
-                  >
-                    Details
+                <div className="space-y-3 mb-6 pt-4 border-t border-slate-50">
+                  <CardRow label="Inspector" value={r.inspectorName} />
+                  <CardRow label="Assignee" value={r.assignStaff || "UNASSIGNED"} />
+                </div>
+                <div className="flex gap-2">
+                  <button onClick={() => setViewRequest(r)} className="flex-1 py-2 rounded-lg bg-slate-50 text-slate-600 hover:bg-slate-100 text-xs font-semibold transition-all border border-slate-200">
+                    DETAILS
                   </button>
-                  <button
-                    onClick={() => {
-                      setEditRequest(r);
-                      setShowForm(true);
-                    }}
-                    className="flex-1 flex items-center justify-center rounded-[24px] bg-slate-50 text-slate-400 hover:text-brand hover:bg-brand/5 transition-all border border-slate-100 hover:border-brand/20"
-                  >
-                    <Pencil size={20} />
+                  <button onClick={() => { setEditRequest(r); setShowForm(true); }} className="flex-1 py-2 rounded-lg bg-indigo-50 text-red-500 hover:bg-indigo-100 text-xs font-semibold transition-all border border-indigo-100">
+                    MODIFY
                   </button>
-                  <button
-                    onClick={() => remove(r.id)}
-                    className="flex-1 flex items-center justify-center rounded-[24px] bg-slate-50 text-slate-400 hover:text-rose-500 hover:bg-rose-50 transition-all border border-slate-100 hover:border-rose-200"
-                  >
-                    <Trash2 size={20} />
+                  <button onClick={() => remove(r.id)} className="p-2 rounded-lg text-slate-400 hover:text-red-600 hover:bg-red-50 transition-all border border-transparent hover:border-red-100">
+                    <Trash2 size={16} />
                   </button>
                 </div>
               </div>
             ))}
           </div>
         )}
-      </div>
+      </main>
 
-      {/* Details Modal */}
+      {/* --- Modals --- */}
       {viewRequest && (
         <Modal onClose={() => setViewRequest(null)} title="Request Specification">
-          <div className="space-y-10">
-            <div className="p-10 bg-slate-900 rounded-[32px] flex items-center justify-between relative overflow-hidden group">
-              <div 
-                className="absolute top-0 right-0 w-64 h-64 bg-brand/10 rounded-full blur-3xl -mr-32 -mt-32 transition-all group-hover:scale-110"
-              ></div>
-              
-              <div className="flex items-center gap-8 relative z-10">
-                <div 
-                  className="h-20 w-20 rounded-[24px] bg-white flex items-center justify-center text-brand shadow-2xl rotate-3"
-                  style={{ color: "#dc2626" }}
-                >
-                  <ShieldCheck size={40} />
-                </div>
-                <div>
-                  <p className="text-[10px] font-black text-white/40 uppercase tracking-[0.3em] mb-2">Workflow Status</p>
-                  <span className={`inline-flex items-center gap-3 px-6 py-2.5 rounded-2xl text-[10px] font-black uppercase tracking-[0.2em] border relative z-10 bg-white/10 text-white border-white/20 backdrop-blur-md`}>
-                    {viewRequest.status}
+          <div className="space-y-8">
+            <div className="flex items-center gap-6 p-8 bg-gradient-to-br from-slate-900 to-slate-800 rounded-[2.5rem] text-white shadow-2xl relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-40 h-40 bg-white/5 rounded-full -mr-20 -mt-20 blur-2xl" />
+              <div className="h-24 w-24 rounded-[2rem] bg-indigo-500 flex items-center justify-center text-4xl font-black shadow-2xl shadow-indigo-500/40 border-4 border-white/10">
+                {viewRequest.inspectorName.charAt(0)}
+              </div>
+              <div className="space-y-1">
+                <h2 className="text-2xl font-black tracking-tight">{viewRequest.requestId}</h2>
+                <div className="flex flex-col">
+                  <span className="text-slate-400 text-sm font-medium">{viewRequest.vehicle}</span>
+                  <span className={`text-[10px] font-bold uppercase tracking-widest mt-2 ${viewRequest.status === 'Completed' ? 'text-emerald-400' : 'text-amber-400'}`}>
+                    {viewRequest.status} Status
                   </span>
                 </div>
               </div>
-              <div className="text-right relative z-10">
-                <p className="text-[10px] font-black text-white/40 uppercase tracking-[0.3em] mb-2">Creation Node</p>
-                <p className="text-xl font-black text-white">{viewRequest.createdAt}</p>
-              </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <DetailBox label="Registry ID" value={viewRequest.requestId} brandColor={"#dc2626"} />
-              <DetailBox label="Source Inspector" value={viewRequest.inspectorName} />
-              <DetailBox label="Asset Entity" value={viewRequest.vehicle} colSpan={2} />
-              <DetailBox label="Assigned Operator" value={viewRequest.assignStaff || "Awaiting Assignment"} brandColor={"#dc2626"} />
+            <div className="grid grid-cols-2 gap-4">
+              <DetailBox label="Registry ID" value={viewRequest.requestId} />
+              <DetailBox label="Inspector" value={viewRequest.inspectorName} />
+              <DetailBox label="Vehicle" value={viewRequest.vehicle} />
+              <DetailBox label="Created At" value={viewRequest.createdAt} />
+              <DetailBox label="Assigned Staff" value={viewRequest.assignStaff || "Not Assigned"} />
             </div>
-
+            
             <button
               onClick={() => setViewRequest(null)}
-              className="w-full py-5 bg-slate-900 text-white rounded-xl font-black uppercase tracking-widest hover:opacity-90 transition-all shadow-2xl shadow-slate-200 active:scale-[0.98]"
+              className="w-full py-4 bg-slate-900 text-white rounded-2xl font-bold hover:bg-red-500 transition-all shadow-xl shadow-slate-200 active:scale-[0.98]"
             >
-              Close Record
+              Close Specification
             </button>
           </div>
         </Modal>
       )}
 
-      {/* Form Modal */}
       {showForm && (
         <RequestForm
           editData={editRequest}
-          onClose={() => {
-            setShowForm(false);
-            setEditRequest(null);
-          }}
+          onClose={() => { setShowForm(false); setEditRequest(null); }}
           onSave={saveRequest}
         />
       )}
@@ -438,219 +346,161 @@ export default function InspectionRequest() {
   );
 }
 
-/* ================= HELPER COMPONENTS ================= */
+/* ================= SUB-COMPONENTS ================= */
 
-function DetailBox({ label, value, colSpan = 1, brandColor }: { label: string; value: string; colSpan?: number; brandColor?: string }) {
+function StatCard({ icon, label, value }: any) {
   return (
-    <div className={`p-6 border border-slate-100 rounded-xl bg-white shadow-sm transition-all hover:shadow-md ${colSpan === 2 ? 'md:col-span-2' : ''}`}>
-      <p className="text-[10px] font-black text-slate-300 uppercase tracking-[0.2em] mb-2">{label}</p>
-      <p className="text-sm font-black text-slate-900 tracking-tight" style={{ color: brandColor }}>{value}</p>
+    <div className="p-6 bg-white border border-slate-200 rounded-xl shadow-sm hover:shadow-md transition-all">
+      <div className="flex items-center gap-4">
+        <div className="p-3 bg-indigo-50 rounded-lg text-red-500">{icon}</div>
+        <div>
+          <p className="text-xs font-medium text-slate-500 uppercase tracking-wider mb-0.5">{label}</p>
+          <h3 className="text-2xl font-bold text-slate-900">{value}</h3>
+        </div>
+      </div>
     </div>
   );
 }
 
-function ActionBtn({
-  icon,
-  onClick,
-  color,
-}: {
-  icon: React.ReactNode;
-  onClick: () => void;
-  color: "blue" | "orange" | "red";
-}) {
-  const styles = {
-    blue: "text-blue-500 hover:bg-blue-50 border-blue-100",
-    orange: "text-orange-500 hover:bg-orange-50 border-orange-100",
-    red: "text-rose-500 hover:bg-rose-50 border-rose-100",
+function ActionBtn({ onClick, icon, color }: any) {
+  const styles: any = {
+    blue: "text-blue-600 hover:bg-blue-50 border-blue-100",
+    indigo: "text-red-500 hover:bg-indigo-50 border-indigo-100",
+    red: "text-red-600 hover:bg-red-50 border-red-100",
   };
   return (
     <button
       onClick={onClick}
-      className={`p-2.5 rounded-xl transition-all border border-transparent hover:border-current active:scale-90 ${styles[color]}`}
+      className={`p-2 rounded-lg transition-all border border-transparent hover:border-current active:scale-90 ${styles[color]}`}
     >
       {icon}
     </button>
   );
 }
 
-function Modal({
-  children,
-  onClose,
-  title,
-}: {
-  children: React.ReactNode;
-  onClose: () => void;
-  title: string;
-}) {
+function EmptyState() {
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/80 backdrop-blur-xl animate-in fade-in duration-300">
-      <div className="bg-white rounded-xl w-full max-w-2xl overflow-hidden shadow-2xl animate-in zoom-in-95 duration-300 border border-white/20">
-        <div className="px-10 py-8 bg-slate-900 flex justify-between items-center relative overflow-hidden">
-          <div className="absolute top-0 left-0 w-full h-1.5 bg-brand" style={{ backgroundColor: "#dc2626" }}></div>
-          <div 
-            className="absolute -right-8 -top-8 w-32 h-32 rounded-full blur-3xl opacity-20"
-            style={{ backgroundColor: "#dc2626" }}
-          ></div>
-          
-          <h3 className="text-2xl font-black text-white relative z-10 tracking-tight uppercase tracking-[0.05em]">{title}</h3>
-          <button
-            onClick={onClose}
-            className="p-3 bg-white/10 hover:bg-white/20 rounded-2xl transition-all text-white relative z-10 active:scale-90"
-          >
-            <X size={24} strokeWidth={3} />
+    <div className="flex flex-col items-center justify-center py-20 bg-slate-50/50">
+      <div className="h-20 w-20 bg-white rounded-3xl shadow-sm flex items-center justify-center mb-4 border border-slate-100">
+        <ClipboardList className="text-slate-300" size={40} />
+      </div>
+      <h3 className="text-lg font-bold text-slate-900 mb-1">No requests found</h3>
+      <p className="text-sm text-slate-500">Try adjusting your search or add a new request.</p>
+    </div>
+  );
+}
+
+function Modal({ children, onClose, title }: any) {
+  return (
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm transition-all">
+      <div className="bg-white rounded-[2.5rem] w-full max-w-2xl overflow-hidden shadow-2xl border border-slate-100 animate-in zoom-in-95 duration-200">
+        <div className="px-10 py-8 border-b border-slate-50 flex justify-between items-center bg-slate-50/50">
+          <h3 className="text-xl font-bold text-slate-900 uppercase tracking-tight">{title}</h3>
+          <button onClick={onClose} className="p-2 hover:bg-white rounded-xl transition-all text-slate-400 hover:text-slate-600 shadow-sm border border-transparent hover:border-slate-100">
+            <X size={20} />
           </button>
         </div>
-        <div className="p-10">
-          {children}
-        </div>
+        <div className="p-10">{children}</div>
       </div>
     </div>
   );
 }
 
-function RequestForm({
-  editData,
-  onClose,
-  onSave,
-}: {
-  editData: InspectionRequest | null;
-  onClose: () => void;
-  onSave: (data: InspectionRequest) => void;
-}) {
-  const [formData, setFormData] = useState<InspectionRequest>(
+function CardRow({ label, value }: any) {
+  return (
+    <div className="flex justify-between items-center py-1">
+      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">{label}</span>
+      <span className="text-xs font-semibold text-slate-700">{value}</span>
+    </div>
+  );
+}
+
+function DetailBox({ label, value }: any) {
+  return (
+    <div className="p-5 bg-slate-50 border border-slate-100 rounded-3xl group hover:border-indigo-200 transition-colors">
+      <p className="text-[10px] uppercase font-black text-slate-400 tracking-[0.2em] mb-2">{label}</p>
+      <p className="text-sm font-black text-slate-800 group-hover:text-red-500 transition-colors">{value}</p>
+    </div>
+  );
+}
+
+function RequestForm({ editData, onClose, onSave }: any) {
+  const [formData, setFormData] = useState<any>(
     editData || {
-      id: 0,
       requestId: "",
       inspectorName: "",
       vehicle: "",
-      createdAt: new Date().toLocaleDateString('en-GB').replace(/\//g, '-'),
+      createdAt: new Date().toLocaleDateString("en-GB").replace(/\//g, "-"),
       assignStaff: "",
       status: "Pending",
     }
   );
 
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    onSave(formData);
+  };
+
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/80 backdrop-blur-xl animate-in fade-in duration-300">
-      <div className="bg-white rounded-xl w-full max-w-2xl overflow-hidden shadow-2xl animate-in zoom-in-95 duration-300 border border-white/20">
-        <div className="px-12 py-10 bg-slate-900 flex justify-between items-center relative overflow-hidden">
-          <div className="absolute top-0 left-0 w-full h-1.5 bg-brand" style={{ backgroundColor: "#dc2626" }}></div>
-          <div 
-            className="absolute -right-12 -top-12 w-48 h-48 rounded-full blur-3xl opacity-20"
-            style={{ backgroundColor: "#dc2626" }}
-          ></div>
-          
-          <div>
-            <h3 className="text-3xl font-black text-white relative z-10 tracking-tight uppercase">
-              {editData ? "Refine Request" : "Spawn Request"}
-            </h3>
-            <p className="text-slate-400 text-sm mt-2 relative z-10 font-bold uppercase tracking-widest">Inspection Logic Core</p>
-          </div>
-          <button
-            onClick={onClose}
-            className="p-4 bg-white/10 hover:bg-white/20 rounded-2xl transition-all text-white relative z-10 active:scale-90"
-          >
-            <X size={28} strokeWidth={3} />
-          </button>
-        </div>
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            onSave(formData);
-          }}
-          className="p-12"
-        >
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <FormInput
-              label="System Request ID"
+    <Modal onClose={onClose} title={editData ? "Update Request" : "New Inspection Request"}>
+      <form onSubmit={handleSubmit} className="space-y-6">
+        <div className="grid grid-cols-2 gap-4">
+          <div className="space-y-2">
+            <label className="text-[10px] font-bold text-slate-400 uppercase ml-1">Request ID</label>
+            <input
+              required
+              className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none transition-all font-semibold"
               value={formData.requestId}
-              onChange={(v) => setFormData({ ...formData, requestId: v })}
-              placeholder="#IREQ-XXXX"
+              onChange={(e) => setFormData({ ...formData, requestId: e.target.value })}
+              placeholder="#IREQ000"
             />
-            <FormInput
-              label="Source Inspector"
+          </div>
+          <div className="space-y-2">
+            <label className="text-[10px] font-bold text-slate-400 uppercase ml-1">Inspector Name</label>
+            <input
+              required
+              className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none transition-all font-semibold"
               value={formData.inspectorName}
-              onChange={(v) => setFormData({ ...formData, inspectorName: v })}
-              placeholder="e.g. John Doe"
+              onChange={(e) => setFormData({ ...formData, inspectorName: e.target.value })}
+              placeholder="Full Name"
             />
-            <FormInput
-              label="Asset Designation"
+          </div>
+          <div className="col-span-2 space-y-2">
+            <label className="text-[10px] font-bold text-slate-400 uppercase ml-1">Vehicle Details</label>
+            <input
+              required
+              className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none transition-all font-semibold"
               value={formData.vehicle}
-              onChange={(v) => setFormData({ ...formData, vehicle: v })}
-              placeholder="Vehicle Identifier"
-              colSpan={2}
+              onChange={(e) => setFormData({ ...formData, vehicle: e.target.value })}
+              placeholder="Make, Model, VIN"
             />
-            <FormInput
-              label="Assigned Operator"
+          </div>
+          <div className="space-y-2">
+            <label className="text-[10px] font-bold text-slate-400 uppercase ml-1">Assign To</label>
+            <input
+              className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none transition-all font-semibold"
               value={formData.assignStaff}
-              onChange={(v) => setFormData({ ...formData, assignStaff: v })}
+              onChange={(e) => setFormData({ ...formData, assignStaff: e.target.value })}
               placeholder="Staff Name"
             />
-            <div className="space-y-4">
-              <div className="flex items-center gap-3 ml-1">
-                <div className="w-1.5 h-4 bg-brand rounded-full" style={{ backgroundColor: "#dc2626" }}></div>
-                <label className="text-[11px] font-black text-slate-400 uppercase tracking-[0.2em]">Flow Status</label>
-              </div>
-              <select
-                value={formData.status}
-                onChange={(e) => setFormData({ ...formData, status: e.target.value as any })}
-                className="w-full px-6 py-5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-4 focus:ring-brand/10 focus:border-brand transition-all text-slate-900 font-bold shadow-inner appearance-none"
-              >
-                <option value="Pending">Pending</option>
-                <option value="In Progress">In Progress</option>
-                <option value="Completed">Completed</option>
-              </select>
-            </div>
           </div>
-          <div className="mt-12 flex gap-5">
-            <button
-              type="button"
-              onClick={onClose}
-              className="flex-1 py-5 rounded-xl border-2 border-slate-100 text-slate-400 font-black uppercase tracking-widest hover:bg-slate-50 hover:border-slate-200 transition-all active:scale-[0.98]"
+          <div className="space-y-2">
+            <label className="text-[10px] font-bold text-slate-400 uppercase ml-1">Status</label>
+            <select
+              className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none transition-all font-semibold appearance-none"
+              value={formData.status}
+              onChange={(e) => setFormData({ ...formData, status: e.target.value })}
             >
-              Abort
-            </button>
-            <button
-              type="submit"
-              className="flex-1 py-5 rounded-xl text-white font-black uppercase tracking-widest hover:opacity-90 shadow-2xl transition-all active:scale-[0.98]"
-              style={{ backgroundColor: "#dc2626", boxShadow: `0 20px 30px -10px #dc262640` }}
-            >
-              {editData ? "Sync Changes" : "Commit Request"}
-            </button>
+              <option value="Pending">Pending</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Completed">Completed</option>
+            </select>
           </div>
-        </form>
-      </div>
-    </div>
-  );
-}
-
-function FormInput({
-  label,
-  value,
-  onChange,
-  placeholder,
-  colSpan = 1
-}: {
-  label: string;
-  value: string;
-  onChange: (v: string) => void;
-  placeholder: string;
-  colSpan?: number;
-}) {
-  return (
-    <div className={`space-y-4 ${colSpan === 2 ? 'md:col-span-2' : ''}`}>
-      <div className="flex items-center gap-3 ml-1">
-        <div className="w-1.5 h-4 bg-brand rounded-full" style={{ backgroundColor: "#dc2626" }}></div>
-        <label className="text-[11px] font-black text-slate-400 uppercase tracking-[0.2em]">
-          {label}
-        </label>
-      </div>
-      <input
-        type="text"
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        placeholder={placeholder}
-        className="w-full px-6 py-5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-4 focus:ring-brand/10 focus:border-brand transition-all text-slate-900 font-bold shadow-inner"
-      />
-    </div>
+        </div>
+        <button className="w-full py-5 bg-red-500 text-white rounded-[2rem] font-bold hover:bg-indigo-700 transition-all shadow-xl shadow-indigo-100 active:scale-[0.98] mt-4">
+          {editData ? "Confirm Changes" : "Initialize Request"}
+        </button>
+      </form>
+    </Modal>
   );
 }

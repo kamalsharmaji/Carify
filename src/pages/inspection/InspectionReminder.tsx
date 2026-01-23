@@ -7,13 +7,14 @@ import {
   LayoutGrid,
   Table as TableIcon,
   Search,
-  Bell,
-  MessageSquare,
   X,
-  History,
-  Calendar
+  ChevronRight,
+  Bell,
+  Calendar,
+  MessageSquare,
+  Clock,
+  AlertCircle
 } from "lucide-react";
- 
 
 /* ================= TYPES ================= */
 interface Reminder {
@@ -96,162 +97,124 @@ export default function InspectionReminder() {
   );
 
   return (
-    <div 
-      className="min-h-screen bg-[#F1F5F9] p-4 md:p-6 lg:p-10 animate-in fade-in duration-700"
-    >
-      <div className="max-w-[1600px] mx-auto space-y-10">
-        
-        {/* Cinematic Header Section */}
-        <div className="bg-white/70 backdrop-blur-2xl border border-white/50 rounded-[40px] p-8 md:p-10 shadow-2xl shadow-slate-200/50">
-          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8">
-            <div className="flex items-center gap-6">
-              <div className="w-20 h-20 bg-slate-900 rounded-[30px] flex items-center justify-center shadow-2xl shadow-slate-900/20 rotate-3 hover:rotate-0 transition-transform duration-500">
-                <Bell className="text-white w-10 h-10" />
-              </div>
-              <div>
-                <div className="flex items-center gap-3">
-                  <h1 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight">
-                    Smart <span className="text-brand">Reminders</span>
-                  </h1>
-                  <span className="px-4 py-1.5 bg-slate-900 text-white text-[10px] font-black uppercase tracking-[0.2em] rounded-full shadow-lg">
-                    ALERTS v2.0
-                  </span>
-                </div>
-                <p className="text-slate-500 mt-2 font-semibold text-lg">
-                  Vehicle Inspection › Alert Notifications
-                </p>
-              </div>
+    <div className="min-h-screen bg-slate-50 font-sans text-slate-900">
+      {/* --- Standardized Header --- */}
+      <header className="mb-3 p-3 rounded-xl bg-white border border-slate-200 shadow-sm overflow-hidden">
+        <div className="relative flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+          <div className="space-y-1">
+            <h1 className="text-3xl font-bold text-slate-900 tracking-tight">
+              Inspection <span className="text-indigo-600">Reminders</span>
+            </h1>
+            <nav className="flex items-center gap-2 text-sm font-medium text-slate-500">
+              <span className="hover:text-indigo-600 transition-colors cursor-pointer">Vehicle Inspection</span>
+              <ChevronRight size={14} />
+              <span className="text-slate-600">Smart Alerts</span>
+            </nav>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-4">
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
+              <input
+                type="text"
+                placeholder="Search alerts..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all w-full lg:w-64"
+              />
             </div>
 
-            <div className="flex flex-wrap items-center gap-4">
-              <div className="relative group flex-1 md:flex-none">
-                <Search
-                  className="absolute left-6 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-brand transition-colors"
-                  size={20}
-                />
-                <input
-                  type="text"
-                  placeholder="Search alerts..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-14 pr-6 py-4 bg-white/70 backdrop-blur-xl border border-white/50 rounded-2xl text-sm font-bold text-slate-900 focus:outline-none focus:ring-4 focus:ring-brand/10 focus:border-brand transition-all w-full md:w-64 shadow-xl shadow-slate-200/50"
-                />
-              </div>
-
-              <div className="flex bg-white/50 backdrop-blur-md p-1.5 rounded-2xl border border-white shadow-xl">
-                <button
-                  onClick={() => setView("table")}
-                  className={`p-3 rounded-xl transition-all ${
-                    view === "table"
-                      ? "bg-slate-900 text-white shadow-lg scale-105"
-                      : "text-slate-400 hover:text-slate-600"
-                  }`}
-                >
-                  <TableIcon size={20} />
-                </button>
-                <button
-                  onClick={() => setView("card")}
-                  className={`p-3 rounded-xl transition-all ${
-                    view === "card"
-                      ? "bg-slate-900 text-white shadow-lg scale-105"
-                      : "text-slate-400 hover:text-slate-600"
-                  }`}
-                >
-                  <LayoutGrid size={20} />
-                </button>
-              </div>
-
+            <div className="flex p-1 bg-slate-100 border border-slate-200 rounded-lg">
               <button
-                onClick={() => {
-                  setEditReminder(null);
-                  setShowForm(true);
-                }}
-                className="flex items-center gap-3 bg-brand text-white px-8 py-4 rounded-2xl text-xs font-black uppercase tracking-widest hover:opacity-90 transition-all shadow-xl shadow-brand/20 active:scale-95 group"
+                onClick={() => setView("table")}
+                className={`p-2 rounded-md transition-all ${
+                  view === "table" ? "bg-white text-indigo-600 shadow-sm" : "text-slate-500 hover:text-slate-700"
+                }`}
               >
-                <Plus size={18} className="group-hover:rotate-90 transition-transform" />
-                <span>Set Alert</span>
+                <TableIcon size={18} />
+              </button>
+              <button
+                onClick={() => setView("card")}
+                className={`p-2 rounded-md transition-all ${
+                  view === "card" ? "bg-white text-indigo-600 shadow-sm" : "text-slate-500 hover:text-slate-700"
+                }`}
+              >
+                <LayoutGrid size={18} />
               </button>
             </div>
+
+            <button
+              onClick={() => {
+                setEditReminder(null);
+                setShowForm(true);
+              }}
+              className="flex items-center gap-2 bg-indigo-600 text-white px-5 py-2.5 rounded-lg text-sm font-semibold hover:bg-indigo-700 transition-all active:scale-95"
+            >
+              <Plus size={18} />
+              <span>Set Alert</span>
+            </button>
           </div>
         </div>
+      </header>
 
-        {/* Dynamic List View */}
+      {/* --- Stats Quick Grid --- */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-3">
+        <StatCard icon={<Bell className="text-indigo-600" />} label="Active Reminders" value={reminders.length} />
+        <StatCard icon={<Clock className="text-amber-600" />} label="Upcoming Tasks" value={reminders.length} />
+        <StatCard icon={<AlertCircle className="text-rose-600" />} label="Critical Alerts" value={0} />
+      </div>
+
+      {/* --- Main Content Area --- */}
+      <main className="transition-all duration-300">
         {view === "table" ? (
-          <div className="bg-white/70 backdrop-blur-xl border border-white/50 rounded-[40px] shadow-2xl shadow-slate-200/50 overflow-hidden">
-            <div className="overflow-x-auto custom-scrollbar">
-              <table className="w-full text-left">
+          <div className="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden">
+            <div className="overflow-x-auto">
+              <table className="w-full text-left border-collapse">
                 <thead>
-                  <tr className="border-b border-slate-100">
+                  <tr className="border-b border-slate-100 bg-slate-50">
                     {[
-                      "NO",
-                      "VEHICLE DESIGNATION",
-                      "ALERT DATE",
-                      "NOTIFICATION",
-                      "ACTIONS",
+                      "Vehicle Entity",
+                      "Alert Date",
+                      "Contextual Message",
+                      "Operations",
                     ].map((h) => (
-                      <th
-                        key={h}
-                        className="px-10 py-8 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]"
-                      >
+                      <th key={h} className="px-6 py-4 text-xs font-semibold text-slate-500 uppercase tracking-wider">
                         {h}
                       </th>
                     ))}
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-50">
-                  {filteredReminders.map((r, idx) => (
-                    <tr
-                      key={r.id}
-                      className="hover:bg-white/80 transition-all group"
-                    >
-                      <td className="px-10 py-8 font-black text-slate-300 text-base">
-                        {String(idx + 1).padStart(2, '0')}
-                      </td>
-                      <td className="px-10 py-8">
-                        <div className="flex items-center gap-5">
-                          <div 
-                            className="h-14 w-14 rounded-2xl bg-slate-900 text-white flex items-center justify-center font-black text-xl shadow-xl group-hover:rotate-6 transition-transform"
-                           >
-                            <Bell size={24} />
+                <tbody className="divide-y divide-slate-100">
+                  {filteredReminders.map((r) => (
+                    <tr key={r.id} className="hover:bg-slate-50 transition-all">
+                      <td className="px-6 py-4">
+                        <div className="flex items-center gap-3">
+                          <div className="h-10 w-10 rounded-lg bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold text-base">
+                            {r.vehicle.charAt(0)}
                           </div>
                           <div>
-                            <span className="font-black text-slate-900 text-lg tracking-tight block">{r.vehicle}</span>
-                            <span className="text-[10px] font-black text-brand uppercase tracking-widest">Alert ID: {r.id}</span>
+                            <div className="font-semibold text-slate-900">{r.vehicle}</div>
+                            <div className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Asset ID: #{r.id}</div>
                           </div>
                         </div>
                       </td>
-                      <td className="px-10 py-8">
-                        <div className="flex items-center gap-3 text-white font-black text-[10px] uppercase tracking-widest bg-slate-900 px-5 py-2 rounded-xl shadow-lg w-fit">
-                          <Calendar size={14} className="text-white" />
+                      <td className="px-6 py-4">
+                        <div className="flex items-center gap-2 text-sm font-semibold text-slate-700">
+                          <Calendar size={14} className="text-slate-400" />
                           {r.reminderDate}
                         </div>
                       </td>
-                      <td className="px-10 py-8">
-                        <div className="flex items-center gap-4 text-sm text-slate-500 font-semibold max-w-md italic leading-relaxed">
-                          <MessageSquare size={18} className="text-slate-300 shrink-0" />
+                      <td className="px-6 py-4">
+                        <div className="flex items-center gap-2 text-xs text-slate-500 font-medium max-w-md italic truncate">
+                          <MessageSquare size={14} className="text-slate-300 shrink-0" />
                           {r.message}
                         </div>
                       </td>
-                      <td className="px-10 py-8">
-                        <div className="flex gap-3">
-                          <ActionBtn
-                            color="blue"
-                            onClick={() => setViewReminder(r)}
-                            icon={<Eye size={20} />}
-                          />
-                          <ActionBtn
-                            color="orange"
-                            onClick={() => {
-                              setEditReminder(r);
-                              setShowForm(true);
-                            }}
-                            icon={<Pencil size={20} />}
-                          />
-                          <ActionBtn 
-                            color="red" 
-                            onClick={() => remove(r.id)} 
-                            icon={<Trash2 size={20} />}
-                          />
+                      <td className="px-6 py-4">
+                        <div className="flex items-center gap-2">
+                          <ActionBtn color="blue" onClick={() => setViewReminder(r)} icon={<Eye size={16} />} />
+                          <ActionBtn color="indigo" onClick={() => { setEditReminder(r); setShowForm(true); }} icon={<Pencil size={16} />} />
+                          <ActionBtn color="red" onClick={() => remove(r.id)} icon={<Trash2 size={16} />} />
                         </div>
                       </td>
                     </tr>
@@ -259,137 +222,85 @@ export default function InspectionReminder() {
                 </tbody>
               </table>
             </div>
+            {filteredReminders.length === 0 && <EmptyState />}
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
             {filteredReminders.map((r) => (
-              <div
-                key={r.id}
-                className="group bg-white/70 backdrop-blur-xl rounded-[40px] p-8 border border-white/50 shadow-2xl shadow-slate-200/50 hover:scale-[1.02] transition-all duration-500 relative overflow-hidden"
-              >
-                <div className="flex justify-between items-start mb-8">
-                  <div className="h-20 w-20 rounded-[30px] bg-slate-900 text-white flex items-center justify-center font-black text-2xl shadow-2xl shadow-slate-900/20 group-hover:rotate-12 transition-transform duration-500">
-                    <Bell size={32} />
+              <div key={r.id} className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-all group">
+                <div className="flex justify-between items-start mb-6">
+                  <div className="h-12 w-12 rounded-lg bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold text-xl">
+                    {r.vehicle.charAt(0)}
                   </div>
                   <div className="text-right">
-                    <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1">Due Date</p>
-                    <p className="text-xs font-black text-white bg-slate-900 px-4 py-1.5 rounded-xl shadow-lg">{r.reminderDate}</p>
+                    <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1">Alert Date</p>
+                    <p className="text-xs font-bold text-indigo-600">{r.reminderDate}</p>
                   </div>
                 </div>
-
-                <div className="space-y-4 mb-8 relative z-10">
-                  <div>
-                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Target Asset</p>
-                    <h3 className="text-2xl font-black text-slate-900 group-hover:text-brand transition-colors tracking-tight line-clamp-1">
-                      {r.vehicle}
-                    </h3>
-                  </div>
-                  <div className="p-6 bg-slate-50/50 rounded-2xl border border-slate-100/50 group-hover:bg-white group-hover:shadow-inner transition-all">
-                    <p className="text-[10px] text-slate-400 font-black uppercase tracking-widest mb-3 flex items-center gap-2">
-                      <MessageSquare size={14} className="text-brand" />
-                      Alert Context
-                    </p>
-                    <p className="text-sm text-slate-600 font-semibold line-clamp-3 italic leading-relaxed">"{r.message}"</p>
+                <div className="mb-6">
+                  <h3 className="font-bold text-slate-900 group-hover:text-indigo-600 transition-colors line-clamp-1 mb-2">{r.vehicle}</h3>
+                  <div className="p-3 bg-slate-50 rounded-lg border border-slate-100">
+                    <p className="text-[10px] text-slate-500 italic line-clamp-2 leading-relaxed">"{r.message}"</p>
                   </div>
                 </div>
-
-                <div className="flex gap-3 relative z-10">
-                  <button
-                    onClick={() => setViewReminder(r)}
-                    className="flex-1 py-4 rounded-2xl bg-slate-900 text-white font-black text-[10px] uppercase tracking-[0.2em] transition-all hover:bg-slate-800 hover:shadow-xl hover:shadow-slate-900/20 active:scale-95 shadow-xl"
-                  >
-                    View Alert
+                <div className="flex gap-2">
+                  <button onClick={() => setViewReminder(r)} className="flex-1 py-2 rounded-lg bg-slate-50 text-slate-600 hover:bg-slate-100 text-xs font-semibold transition-all border border-slate-200">
+                    PREVIEW
                   </button>
-                  <button
-                    onClick={() => {
-                      setEditReminder(r);
-                      setShowForm(true);
-                    }}
-                    className="p-4 rounded-2xl bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 hover:border-slate-300 transition-all active:scale-95 shadow-sm"
-                  >
-                    <Pencil size={20} />
+                  <button onClick={() => { setEditReminder(r); setShowForm(true); }} className="flex-1 py-2 rounded-lg bg-indigo-50 text-indigo-600 hover:bg-indigo-100 text-xs font-semibold transition-all border border-indigo-100">
+                    MODIFY
                   </button>
-                  <button
-                    onClick={() => remove(r.id)}
-                    className="p-4 rounded-2xl bg-white border border-slate-200 text-slate-400 hover:text-brand hover:bg-brand/5 hover:border-brand/10 transition-all active:scale-95 shadow-sm"
-                  >
-                    <Trash2 size={20} />
+                  <button onClick={() => remove(r.id)} className="p-2 rounded-lg text-slate-400 hover:text-red-600 hover:bg-red-50 transition-all border border-transparent hover:border-red-100">
+                    <Trash2 size={16} />
                   </button>
                 </div>
               </div>
             ))}
           </div>
         )}
-      </div>
+      </main>
 
-      {/* Details Modal */}
+      {/* --- Modals --- */}
       {viewReminder && (
         <Modal onClose={() => setViewReminder(null)} title="Reminder Insight">
           <div className="space-y-8">
-            <div className="p-8 bg-slate-50 rounded-xl border border-slate-100 flex items-center justify-between relative overflow-hidden group">
-              <div 
-                className="absolute top-0 right-0 w-40 h-40 rounded-bl-[100px] -mr-8 -mt-8 opacity-10 transition-all group-hover:scale-110"
-                style={{ backgroundColor: "#dc2626" }}
-              ></div>
-              
-              <div className="flex items-center gap-6 relative z-10">
-                <div 
-                  className="h-20 w-20 rounded-xl flex items-center justify-center border shadow-2xl"
-                  style={{ backgroundColor: `#dc262610`, color: "#dc2626", borderColor: `#dc262620` }}
-                >
-                  <Bell size={40} />
-                </div>
-                <div>
-                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-1">Target Inspection Date</p>
-                  <p className="text-3xl font-black text-slate-900 tracking-tight leading-tight">{viewReminder.reminderDate}</p>
+            <div className="flex items-center gap-6 p-8 bg-gradient-to-br from-slate-900 to-slate-800 rounded-[2.5rem] text-white shadow-2xl relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-40 h-40 bg-white/5 rounded-full -mr-20 -mt-20 blur-2xl" />
+              <div className="h-24 w-24 rounded-[2rem] bg-indigo-500 flex items-center justify-center text-4xl font-black shadow-2xl shadow-indigo-500/40 border-4 border-white/10">
+                {viewReminder.vehicle.charAt(0)}
+              </div>
+              <div className="space-y-1">
+                <h2 className="text-2xl font-black tracking-tight">{viewReminder.reminderDate}</h2>
+                <div className="flex flex-col">
+                  <span className="text-slate-400 text-sm font-medium">{viewReminder.vehicle}</span>
+                  <span className="text-[10px] text-indigo-400 font-bold uppercase tracking-widest mt-2">Active Alert Node</span>
                 </div>
               </div>
             </div>
 
-            <div className="grid grid-cols-1 gap-6">
-              <div className="p-8 border border-slate-100 rounded-xl bg-white shadow-sm relative overflow-hidden group">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-1.5 h-6 bg-brand rounded-full" style={{ backgroundColor: "#dc2626" }}></div>
-                  <p className="text-[11px] uppercase font-black text-slate-400 tracking-[0.2em]">Vehicle Entity</p>
-                </div>
-                <p className="text-xl font-black text-slate-900 tracking-tight group-hover:text-brand transition-colors" style={{ '--tw-group-hover-color': "#dc2626" } as any}>{viewReminder.vehicle}</p>
-                <div className="absolute bottom-4 right-8 opacity-[0.03]">
-                  <History size={100} />
-                </div>
-              </div>
-
-              <div className="p-8 border border-slate-100 rounded-xl bg-white shadow-inner relative">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-1.5 h-6 bg-brand rounded-full" style={{ backgroundColor: "#dc2626" }}></div>
-                  <p className="text-[11px] uppercase font-black text-slate-400 tracking-[0.2em]">Detailed Alert Message</p>
-                </div>
-                <p className="text-slate-600 font-medium text-lg leading-relaxed italic pr-4">
-                  "{viewReminder.message}"
-                </p>
-                <div className="absolute bottom-6 right-8 opacity-5">
-                  <MessageSquare size={60} />
-                </div>
+            <div className="space-y-4">
+              <DetailBox label="Vehicle Designation" value={viewReminder.vehicle} />
+              <DetailBox label="Scheduled Date" value={viewReminder.reminderDate} />
+              <div className="p-5 bg-slate-50 border border-slate-100 rounded-3xl">
+                <p className="text-[10px] uppercase font-black text-slate-400 tracking-[0.2em] mb-2">Contextual Message</p>
+                <p className="text-sm font-semibold text-slate-700 leading-relaxed italic">"{viewReminder.message}"</p>
               </div>
             </div>
-
+            
             <button
               onClick={() => setViewReminder(null)}
-              className="w-full py-5 bg-slate-900 text-white rounded-xl font-black uppercase tracking-widest hover:opacity-90 transition-all shadow-2xl shadow-slate-200 active:scale-[0.98]"
+              className="w-full py-4 bg-slate-900 text-white rounded-2xl font-bold hover:bg-indigo-600 transition-all shadow-xl shadow-slate-200 active:scale-[0.98]"
             >
-              Acknowledge Alert
+              Close Analysis
             </button>
           </div>
         </Modal>
       )}
 
-      {/* Form Modal */}
       {showForm && (
         <ReminderForm
           editData={editReminder}
-          onClose={() => {
-            setShowForm(false);
-            setEditReminder(null);
-          }}
+          onClose={() => { setShowForm(false); setEditReminder(null); }}
           onSave={saveReminder}
         />
       )}
@@ -397,189 +308,128 @@ export default function InspectionReminder() {
   );
 }
 
-/* ================= HELPER COMPONENTS ================= */
+/* ================= SUB-COMPONENTS ================= */
 
-function ActionBtn({
-  icon,
-  onClick,
-  color,
-}: {
-  icon: React.ReactNode;
-  onClick: () => void;
-  color: "blue" | "orange" | "red";
-}) {
-  const styles = {
-    blue: "text-blue-500 hover:bg-blue-50 border-blue-100",
-    orange: "text-orange-500 hover:bg-orange-50 border-orange-100",
-    red: "text-rose-500 hover:bg-rose-50 border-rose-100",
+function StatCard({ icon, label, value }: any) {
+  return (
+    <div className="p-6 bg-white border border-slate-200 rounded-xl shadow-sm hover:shadow-md transition-all">
+      <div className="flex items-center gap-4">
+        <div className="p-3 bg-indigo-50 rounded-lg text-indigo-600">{icon}</div>
+        <div>
+          <p className="text-xs font-medium text-slate-500 uppercase tracking-wider mb-0.5">{label}</p>
+          <h3 className="text-2xl font-bold text-slate-900">{value}</h3>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ActionBtn({ onClick, icon, color }: any) {
+  const styles: any = {
+    blue: "text-blue-600 hover:bg-blue-50 border-blue-100",
+    indigo: "text-indigo-600 hover:bg-indigo-50 border-indigo-100",
+    red: "text-red-600 hover:bg-red-50 border-red-100",
   };
   return (
     <button
       onClick={onClick}
-      className={`p-2.5 rounded-xl transition-all border border-transparent hover:border-current active:scale-90 ${styles[color]}`}
+      className={`p-2 rounded-lg transition-all border border-transparent hover:border-current active:scale-90 ${styles[color]}`}
     >
       {icon}
     </button>
   );
 }
 
-function Modal({
-  children,
-  onClose,
-  title,
-}: {
-  children: React.ReactNode;
-  onClose: () => void;
-  title: string;
-}) {
+function EmptyState() {
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/80 backdrop-blur-xl animate-in fade-in duration-300">
-      <div className="bg-white rounded-[40px] w-full max-w-xl overflow-hidden shadow-2xl animate-in zoom-in-95 duration-300 border border-white/20">
-        <div className="px-10 py-8 bg-slate-900 flex justify-between items-center relative overflow-hidden">
-          <div className="absolute top-0 left-0 w-full h-1.5 bg-brand" style={{ backgroundColor: "#dc2626" }}></div>
-          <div 
-            className="absolute -right-8 -top-8 w-32 h-32 rounded-full blur-3xl opacity-20"
-            style={{ backgroundColor: "#dc2626" }}
-          ></div>
-          
-          <h3 className="text-2xl font-black text-white relative z-10 tracking-tight uppercase tracking-[0.05em]">{title}</h3>
-          <button
-            onClick={onClose}
-            className="p-3 bg-white/10 hover:bg-white/20 rounded-xl transition-all text-white relative z-10 active:scale-90"
-          >
-            <X size={24} strokeWidth={3} />
+    <div className="flex flex-col items-center justify-center py-20 bg-slate-50/50">
+      <div className="h-20 w-20 bg-white rounded-3xl shadow-sm flex items-center justify-center mb-4 border border-slate-100">
+        <Bell className="text-slate-300" size={40} />
+      </div>
+      <h3 className="text-lg font-bold text-slate-900 mb-1">No alerts found</h3>
+      <p className="text-sm text-slate-500">Try adjusting your search or add a new reminder.</p>
+    </div>
+  );
+}
+
+function Modal({ children, onClose, title }: any) {
+  return (
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm transition-all">
+      <div className="bg-white rounded-[2.5rem] w-full max-w-xl overflow-hidden shadow-2xl border border-slate-100 animate-in zoom-in-95 duration-200">
+        <div className="px-10 py-8 border-b border-slate-50 flex justify-between items-center bg-slate-50/50">
+          <h3 className="text-xl font-bold text-slate-900 uppercase tracking-tight">{title}</h3>
+          <button onClick={onClose} className="p-2 hover:bg-white rounded-xl transition-all text-slate-400 hover:text-slate-600 shadow-sm border border-transparent hover:border-slate-100">
+            <X size={20} />
           </button>
         </div>
-        <div className="p-10">
-          {children}
-        </div>
+        <div className="p-10">{children}</div>
       </div>
     </div>
   );
 }
 
-function ReminderForm({
-  editData,
-  onClose,
-  onSave,
-}: {
-  editData: Reminder | null;
-  onClose: () => void;
-  onSave: (data: Reminder) => void;
-}) {
-  const [formData, setFormData] = useState<Reminder>(
+function DetailBox({ label, value }: any) {
+  return (
+    <div className="p-5 bg-slate-50 border border-slate-100 rounded-3xl group hover:border-indigo-200 transition-colors">
+      <p className="text-[10px] uppercase font-black text-slate-400 tracking-[0.2em] mb-2">{label}</p>
+      <p className="text-sm font-black text-slate-800 group-hover:text-indigo-600 transition-colors">{value}</p>
+    </div>
+  );
+}
+
+function ReminderForm({ editData, onClose, onSave }: any) {
+  const [formData, setFormData] = useState<any>(
     editData || {
-      id: 0,
       vehicle: "",
       reminderDate: "",
       message: "",
     }
   );
 
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    onSave(formData);
+  };
+
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/80 backdrop-blur-xl animate-in fade-in duration-300">
-      <div className="bg-white rounded-[40px] w-full max-w-2xl overflow-hidden shadow-2xl animate-in zoom-in-95 duration-300 border border-white/20">
-        <div className="px-12 py-10 bg-slate-900 flex justify-between items-center relative overflow-hidden">
-          <div className="absolute top-0 left-0 w-full h-1.5 bg-brand" style={{ backgroundColor: "#dc2626" }}></div>
-          <div 
-            className="absolute -right-12 -top-12 w-48 h-48 rounded-full blur-3xl opacity-20"
-            style={{ backgroundColor: "#dc2626" }}
-          ></div>
-          
-          <div>
-            <h3 className="text-3xl font-black text-white relative z-10 tracking-tight uppercase">
-              {editData ? "Edit Alert" : "Set Alert"}
-            </h3>
-            <p className="text-slate-400 text-sm mt-2 relative z-10 font-bold uppercase tracking-widest">Notification Engine</p>
-          </div>
-          <button
-            onClick={onClose}
-            className="p-4 bg-white/10 hover:bg-white/20 rounded-xl transition-all text-white relative z-10 active:scale-90"
-          >
-            <X size={28} strokeWidth={3} />
-          </button>
-        </div>
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            onSave(formData);
-          }}
-          className="p-12"
-        >
-          <div className="grid grid-cols-1 gap-10">
-            <FormInput
-              label="Target Vehicle Identification"
+    <Modal onClose={onClose} title={editData ? "Refine Alert" : "Set New Alert"}>
+      <form onSubmit={handleSubmit} className="space-y-6">
+        <div className="space-y-4">
+          <div className="space-y-2">
+            <label className="text-[10px] font-bold text-slate-400 uppercase ml-1">Vehicle Identification</label>
+            <input
+              required
+              className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none transition-all font-semibold"
               value={formData.vehicle}
-              onChange={(v) => setFormData({ ...formData, vehicle: v })}
-              placeholder="e.g. Tesla Model S (VIN: 4582...)"
+              onChange={(e) => setFormData({ ...formData, vehicle: e.target.value })}
+              placeholder="e.g. BMW X5 (2147483647)"
             />
-            <FormInput
-              label="Scheduled Alert Date"
+          </div>
+          <div className="space-y-2">
+            <label className="text-[10px] font-bold text-slate-400 uppercase ml-1">Reminder Date</label>
+            <input
+              required
+              className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none transition-all font-semibold"
               value={formData.reminderDate}
-              onChange={(v) => setFormData({ ...formData, reminderDate: v })}
+              onChange={(e) => setFormData({ ...formData, reminderDate: e.target.value })}
               placeholder="DD-MM-YYYY"
             />
-            <div className="space-y-4">
-              <div className="flex items-center gap-3 ml-1">
-                <div className="w-1.5 h-4 bg-brand rounded-full" style={{ backgroundColor: "#dc2626" }}></div>
-                <label className="text-[11px] font-black text-slate-400 uppercase tracking-[0.2em]">Contextual Notification</label>
-              </div>
-              <textarea
-                value={formData.message}
-                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                placeholder="What should this alert inform the operator about?"
-                className="w-full px-6 py-5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-4 focus:ring-brand/10 focus:border-brand transition-all text-slate-700 font-medium min-h-[160px] resize-none shadow-inner"
-              />
-            </div>
           </div>
-          <div className="mt-12 flex gap-5">
-            <button
-              type="button"
-              onClick={onClose}
-              className="flex-1 py-5 rounded-xl border-2 border-slate-100 text-slate-400 font-black uppercase tracking-widest hover:bg-slate-50 hover:border-slate-200 transition-all active:scale-[0.98]"
-            >
-              Cancel
-            </button>
-            <button
-              type="submit"
-              className="flex-1 py-5 rounded-xl text-white font-black uppercase tracking-widest hover:opacity-90 shadow-2xl transition-all active:scale-[0.98]"
-              style={{ backgroundColor: "#dc2626", boxShadow: `0 20px 30px -10px #dc262640` }}
-            >
-              {editData ? "Update Alert" : "Confirm Alert"}
-            </button>
+          <div className="space-y-2">
+            <label className="text-[10px] font-bold text-slate-400 uppercase ml-1">Alert Message</label>
+            <textarea
+              required
+              className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none transition-all font-semibold min-h-[120px] resize-none"
+              value={formData.message}
+              onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+              placeholder="Enter reminder details..."
+            />
           </div>
-        </form>
-      </div>
-    </div>
-  );
-}
-
-function FormInput({
-  label,
-  value,
-  onChange,
-  placeholder,
-}: {
-  label: string;
-  value: string;
-  onChange: (v: string) => void;
-  placeholder: string;
-}) {
-  return (
-    <div className="space-y-4">
-      <div className="flex items-center gap-3 ml-1">
-        <div className="w-1.5 h-4 bg-brand rounded-full" style={{ backgroundColor: "#dc2626" }}></div>
-        <label className="text-[11px] font-black text-slate-400 uppercase tracking-[0.2em]">
-          {label}
-        </label>
-      </div>
-      <input
-        type="text"
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        placeholder={placeholder}
-        className="w-full px-6 py-5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-4 focus:ring-brand/10 focus:border-brand transition-all text-slate-900 font-bold shadow-inner"
-      />
-    </div>
+        </div>
+        <button className="w-full py-5 bg-indigo-600 text-white rounded-[2rem] font-bold hover:bg-indigo-700 transition-all shadow-xl shadow-indigo-100 active:scale-[0.98] mt-4">
+          {editData ? "Sync Alert" : "Deploy Alert"}
+        </button>
+      </form>
+    </Modal>
   );
 }

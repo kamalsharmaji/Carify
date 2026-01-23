@@ -99,7 +99,7 @@ export default function Insurance() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 p-4 lg:p-8">
+    <div className="min-h-screen bg-slate-50 p-2 md:p-0 lg:p-0 lg:pt-0">
       <div className="max-w-[1600px] mx-auto space-y-8">
         
         {/* Standard Header Section */}

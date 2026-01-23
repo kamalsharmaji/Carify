@@ -147,20 +147,18 @@ export default function RoleList() {
   const paginated = filtered.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
 
   return (
-    <div className="min-h-screen bg-slate-50 p-4 md:p-6 lg:p-8 animate-in fade-in duration-700">
+    <div className="min-h-screen bg-slate-50  animate-in fade-in duration-700">
       <div className="max-w-7xl mx-auto space-y-8">
         
         {/* Standard Header Section */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="flex items-center gap-4">
-            <div className="w-12 h-12 bg-slate-900 rounded-xl flex items-center justify-center shadow-lg shadow-slate-900/10">
-              <ShieldCheck className="text-white w-6 h-6" />
-            </div>
+            
             <div>
-              <h1 className="text-2xl font-bold text-slate-900">
+               <h1 className="text-2xl font-bold text-slate-900 pl-2 md:pl-3 lg:pl-0">
                 Roles & Permissions
               </h1>
-              <p className="text-slate-500 mt-1 font-medium">
+              <p className="text-slate-500 mt-1 font-medium pl-2 md:pl-3 lg:pl-0">
                 Define system roles and capability sets
               </p>
             </div>
@@ -174,20 +172,20 @@ export default function RoleList() {
                 placeholder="Search roles..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10 pr-4 py-2 bg-white border border-slate-200 rounded-lg text-sm font-medium focus:outline-none focus:ring-2 focus:ring-slate-900/5 focus:border-slate-900 transition-all shadow-sm w-full md:w-64"
+                className="pl-10 pr-4 py-2 bg-white border border-slate-200 rounded-lg text-sm font-medium focus:outline-none focus:ring-2 focus:ring-red-500/5 focus:border-slate-900 transition-all shadow-sm w-full md:w-64"
               />
             </div>
 
             <div className="flex bg-slate-200/50 p-1 rounded-lg border border-slate-200">
               <button 
                 onClick={() => setViewMode("table")} 
-                className={`p-2 rounded-md transition-all ${viewMode === "table" ? "bg-white text-slate-900 shadow-sm" : "text-slate-400 hover:text-slate-600"}`}
+                className={`p-2 rounded-md transition-all ${viewMode === "table" ? "bg-white text-red-500 shadow-sm" : "text-slate-400 hover:text-slate-600"}`}
               >
                 <TableIcon size={18} />
               </button>
               <button 
                 onClick={() => setViewMode("card")} 
-                className={`p-2 rounded-md transition-all ${viewMode === "card" ? "bg-white text-slate-900 shadow-sm" : "text-slate-400 hover:text-slate-600"}`}
+                className={`p-2 rounded-md transition-all ${viewMode === "card" ? "bg-white text-red-500 shadow-sm" : "text-slate-400 hover:text-slate-600"}`}
               >
                 <LayoutGrid size={18} />
               </button>
@@ -195,7 +193,7 @@ export default function RoleList() {
 
             <button
               onClick={() => { setSelectedRole(null); setShowForm(true); }}
-              className="flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white px-4 py-2 rounded-lg font-semibold transition-all active:scale-95 whitespace-nowrap"
+              className="flex items-center gap-2 bg-red-500 hover:bg-slate-800 text-white px-4 py-2 rounded-lg font-semibold transition-all active:scale-95 whitespace-nowrap"
             >
               <Plus size={18} />
               <span>Create Role</span>
@@ -222,7 +220,7 @@ export default function RoleList() {
                     <tr key={role.id} className="hover:bg-slate-50/50 transition-colors group">
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-3">
-                          <div className="h-10 w-10 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center font-bold text-xs border border-slate-200 group-hover:bg-slate-900 group-hover:text-white transition-colors">
+                          <div className="h-10 w-10 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center font-bold text-xs border border-slate-200 group-hover:bg-red-500 group-hover:text-white transition-colors">
                             <Shield size={18} />
                           </div>
                           <div className="font-semibold text-slate-900">{role.name}</div>
@@ -259,11 +257,11 @@ export default function RoleList() {
             </div>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {paginated.map((role) => (
-              <div key={role.id} className="group bg-white border border-slate-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300">
-                <div className="flex justify-between items-start mb-6">
-                  <div className="h-12 w-12 rounded-xl bg-slate-50 text-slate-900 flex items-center justify-center font-bold border border-slate-200 group-hover:bg-slate-900 group-hover:text-white transition-colors">
+              <div key={role.id} className="group bg-white border border-slate-200 rounded-xl p-4 shadow-sm hover:shadow-md transition-all duration-300">
+                <div className="flex justify-between items-start mb-4">
+                  <div className="h-12 w-12 rounded-xl bg-slate-50 text-slate-900 flex items-center justify-center font-bold border border-slate-200 group-hover:bg-red-500 group-hover:text900 group-hover:text-white transition-colors">
                     <ShieldCheck size={24} />
                   </div>
                   <StatusBadge status={role.status} />

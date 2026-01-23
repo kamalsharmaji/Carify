@@ -70,7 +70,7 @@ export default function Reports() {
   );
 
   return (
-    <div className="min-h-screen bg-slate-50 p-4 md:p-6 lg:p-8">
+    <div className="min-h-screen bg-slate-50  p-2 md:p-0 lg:p-0 lg:pt-0">
       <div className="max-w-7xl mx-auto space-y-6">
         
         {/* Standard Header Section */}

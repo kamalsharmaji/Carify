@@ -234,7 +234,7 @@ export function Sidebar({ onClose, isCollapsed, onToggleCollapse }: SidebarProps
               {!isCollapsed && <ChevronDown size={14} className={`text-slate-900 transition-transform duration-300 ${openMenus.inspection ? 'rotate-180' : ''}`} />}
             </button>
             <div className={`overflow-hidden transition-all duration-300 ease-in-out ${openMenus.inspection && !isCollapsed ? 'max-h-[800px] opacity-100 mt-1 pb-2' : 'max-h-0 opacity-0'}`}>
-              <NavLink to="/inspection" onClick={onClose} className={subLinkClass}>
+              <NavLink to="inspection/vehicleinspection" onClick={onClose} className={subLinkClass}>
                 Vehicle
               </NavLink>
                <NavLink to="/inspection/list" onClick={onClose} className={subLinkClass}>

@@ -53,11 +53,11 @@ export default function Recruitment() {
   );
 
   return (
-    <div className="min-h-screen bg-slate-50 p-3 md:p-6 animate-in fade-in duration-500">
-      <div className="space-y-8">
+    <div className="min-h-screen bg-slate-50  p-2 md:p-0 lg:p-0 lg:pt-0 animate-in fade-in duration-500">
+      <div className="space-y-3">
         
         {/* Header Section */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
           <div>
             <h1 className="text-4xl font-black text-slate-900 flex items-center gap-3 tracking-tight">
               <span className="w-2.5 h-10 bg-red-400 rounded-full"></span>

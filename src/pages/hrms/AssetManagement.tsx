@@ -1,16 +1,19 @@
+
 import { useState } from "react";
 import {
   Monitor,
   Search,
   Plus,
-  MoreVertical,
   Laptop,
   Smartphone,
   HardDrive,
   User,
   CheckCircle2,
   History,
-  Tag
+  Tag,
+  ChevronRight,
+  LayoutGrid,
+  Table as TableIcon
 } from "lucide-react";
 
 /* ================= TYPES ================= */
@@ -42,6 +45,7 @@ const defaultAssets: Asset[] = [
 export default function AssetManagement() {
   const [assets] = useState<Asset[]>(defaultAssets);
   const [searchTerm, setSearchTerm] = useState("");
+  const [viewMode, setViewMode] = useState<"table" | "card">("table");
 
   const filtered = assets.filter(
     (a) =>
@@ -51,123 +55,149 @@ export default function AssetManagement() {
   );
 
   return (
-    <div className="min-h-screen bg-slate-50 p-3 md:p-6 animate-in fade-in duration-500">
-      <div className="space-y-8">
-        
-        {/* Header Section */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-          <div>
-            <h1 className="text-4xl font-black text-slate-900 flex items-center gap-3 tracking-tight">
-              <span className="w-2.5 h-10 bg-red-400 rounded-full"></span>
-              Inventory Tracking
+    <div className="min-h-screen bg-slate-50 font-sans text-slate-900">
+      {/* --- Standardized Header --- */}
+      <header className="mb-3 p-3 rounded-xl bg-white border border-slate-200 shadow-sm overflow-hidden">
+        <div className="relative flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+          <div className="space-y-1">
+            <h1 className="text-3xl font-bold text-slate-900 tracking-tight">
+              Inventory <span className="text-indigo-600">Tracking</span>
             </h1>
-            <p className="text-slate-500 mt-2 font-medium flex items-center gap-2">
-              <Monitor size={16} />
-              HRMS › Enterprise Asset & Resource Hub
-            </p>
+            <nav className="flex items-center gap-2 text-sm font-medium text-slate-500">
+              <span className="hover:text-indigo-600 transition-colors cursor-pointer">HRMS</span>
+              <ChevronRight size={14} />
+              <span className="text-slate-600">Enterprise Asset Hub</span>
+            </nav>
           </div>
 
-          <div className="flex flex-wrap items-center gap-3">
-            <div className="relative group flex-1 md:flex-none">
-              <Search
-                className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-red-400 transition-colors"
-                size={18}
-              />
+          <div className="flex flex-wrap items-center gap-4">
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
               <input
                 type="text"
                 placeholder="Search assets..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-12 pr-4 py-3 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-4 focus:ring-red-400/10 focus:border-red-400 transition-all w-full md:w-72 shadow-sm font-medium"
+                className="pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all w-full lg:w-64"
               />
             </div>
 
-            <button
-              className="flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white px-6 py-3 rounded-xl text-sm font-bold transition-all shadow-xl active:scale-95"
-            >
+            <div className="flex p-1 bg-slate-100 border border-slate-200 rounded-lg">
+              <button
+                onClick={() => setViewMode("table")}
+                className={`p-2 rounded-md transition-all ${
+                  viewMode === "table" ? "bg-white text-indigo-600 shadow-sm" : "text-slate-500 hover:text-slate-700"
+                }`}
+              >
+                <TableIcon size={18} />
+              </button>
+              <button
+                onClick={() => setViewMode("card")}
+                className={`p-2 rounded-md transition-all ${
+                  viewMode === "card" ? "bg-white text-indigo-600 shadow-sm" : "text-slate-500 hover:text-slate-700"
+                }`}
+              >
+                <LayoutGrid size={18} />
+              </button>
+            </div>
+
+            <button className="flex items-center gap-2 bg-indigo-600 text-white px-5 py-2.5 rounded-lg text-sm font-semibold hover:bg-indigo-700 transition-all active:scale-95">
               <Plus size={18} />
-              <span className="hidden sm:inline">Add Asset</span>
+              <span>Add Asset</span>
             </button>
           </div>
         </div>
+      </header>
 
-        {/* Quick Stats */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          <StatCard title="Total Assets" value="245" icon={<HardDrive size={24} />} trend="₹1.2Cr Valuation" color="bg-blue-500" />
-          <StatCard title="Allocated" value="184" icon={<User size={24} />} trend="75% utilization" color="bg-emerald-500" />
-          <StatCard title="In Service" value="12" icon={<History size={24} />} trend="3 pending repair" color="bg-amber-500" />
-          <StatCard title="Available" value="49" icon={<CheckCircle2 size={24} />} trend="Ready for issuance" color="bg-indigo-500" />
-        </div>
-
-        {/* Asset Table */}
-        <div className="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden transition-all">
-          <div className="overflow-x-auto">
-            <table className="w-full text-left">
-              <thead className="bg-slate-50/50 border-b border-slate-100">
-                <tr>
-                  {["Asset Detail", "Tag", "Category", "Assigned To", "Status", "Actions"].map((h) => (
-                    <th key={h} className="px-8 py-5 text-[11px] font-black text-slate-400 uppercase tracking-widest">
-                      {h}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-slate-50">
-                {filtered.map((asset) => (
-                  <tr key={asset.id} className="hover:bg-slate-50/50 transition-colors group">
-                    <td className="px-8 py-5">
-                      <div className="flex items-center gap-4">
-                        <div className="h-10 w-10 rounded-xl bg-slate-100 text-slate-400 flex items-center justify-center border border-slate-200 group-hover:text-red-400 transition-colors">
-                          <AssetCategoryIcon category={asset.category} />
-                        </div>
-                        <div className="font-bold text-slate-900 text-sm">{asset.name}</div>
-                      </div>
-                    </td>
-                    <td className="px-8 py-5">
-                      <div className="flex items-center gap-2 text-slate-500 font-black text-[10px] tracking-widest bg-slate-50 px-2 py-1 rounded-lg border border-slate-100">
-                        <Tag size={12} />
-                        {asset.tag}
-                      </div>
-                    </td>
-                    <td className="px-8 py-5 text-xs font-bold text-slate-500">{asset.category}</td>
-                    <td className="px-8 py-5">
-                      <div className="text-sm font-bold text-slate-700">{asset.assignedTo}</div>
-                    </td>
-                    <td className="px-8 py-5">
-                      <StatusBadge status={asset.status} />
-                    </td>
-                    <td className="px-8 py-5">
-                      <button className="p-2 hover:bg-slate-50 text-slate-400 hover:text-red-400 rounded-xl transition-colors">
-                        <MoreVertical size={18} />
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
+      {/* --- Stats Quick Grid --- */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 mb-3">
+        <StatCard icon={<HardDrive className="text-indigo-600" />} label="Total Assets" value="245" />
+        <StatCard icon={<User className="text-indigo-600" />} label="Allocated" value="184" />
+        <StatCard icon={<History className="text-indigo-600" />} label="In Service" value="12" />
+        <StatCard icon={<CheckCircle2 className="text-indigo-600" />} label="Available" value="49" />
       </div>
+
+      {/* --- Main Content Area --- */}
+      <main className="transition-all duration-300">
+        <div className="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden">
+          {viewMode === "table" ? (
+            <div className="overflow-x-auto">
+              <table className="w-full text-left border-collapse">
+                <thead>
+                  <tr className="border-b border-slate-100 bg-slate-50">
+                    {["Asset Detail", "Tag", "Category", "Assigned To", "Status"].map((h) => (
+                      <th key={h} className="px-6 py-4 text-xs font-semibold text-slate-500 uppercase tracking-wider">
+                        {h}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-100">
+                  {filtered.map((asset) => (
+                    <tr key={asset.id} className="hover:bg-slate-50 transition-all">
+                      <td className="px-6 py-4">
+                        <div className="flex items-center gap-3">
+                          <div className="h-10 w-10 rounded-lg bg-indigo-100 text-indigo-600 flex items-center justify-center border border-indigo-100">
+                            <AssetCategoryIcon category={asset.category} />
+                          </div>
+                          <div className="font-semibold text-slate-900 text-sm">{asset.name}</div>
+                        </div>
+                      </td>
+                      <td className="px-6 py-4">
+                        <span className="font-mono text-[10px] font-bold text-slate-600 bg-slate-100 px-2 py-1 rounded border border-slate-200 tracking-wider">
+                          {asset.tag}
+                        </span>
+                      </td>
+                      <td className="px-6 py-4 text-xs font-semibold text-slate-500">{asset.category}</td>
+                      <td className="px-6 py-4">
+                        <div className="text-sm font-semibold text-slate-700">{asset.assignedTo}</div>
+                      </td>
+                      <td className="px-6 py-4">
+                        <StatusBadge status={asset.status} />
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 p-4 bg-slate-50/50">
+              {filtered.map((asset) => (
+                <div key={asset.id} className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-all group">
+                  <div className="flex justify-between items-start mb-4">
+                    <div className="h-12 w-12 rounded-lg bg-indigo-100 text-indigo-600 flex items-center justify-center shadow-sm">
+                      <AssetCategoryIcon category={asset.category} />
+                    </div>
+                    <StatusBadge status={asset.status} />
+                  </div>
+                  <div className="mb-4">
+                    <h3 className="font-bold text-slate-900 truncate group-hover:text-indigo-600 transition-colors">{asset.name}</h3>
+                    <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mt-1">{asset.tag}</p>
+                  </div>
+                  <div className="pt-4 border-t border-slate-50">
+                    <div className="flex justify-between items-center text-xs">
+                      <span className="text-slate-400 font-medium uppercase tracking-wider text-[10px]">Holder</span>
+                      <span className="font-bold text-slate-700">{asset.assignedTo}</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </main>
     </div>
   );
 }
 
-/* ================= HELPER COMPONENTS ================= */
-
-function StatCard({ title, value, icon, trend, color }: any) {
+function StatCard({ icon, label, value }: any) {
   return (
-    <div className="bg-white border border-slate-200 p-8 rounded-xl shadow-sm relative overflow-hidden group">
-      <div className={`absolute top-0 right-0 w-24 h-24 ${color} opacity-[0.03] rounded-bl-3xl -mr-8 -mt-8 transition-all group-hover:scale-110`}></div>
-      <div className="flex items-center gap-6 relative z-10">
-        <div className={`h-16 w-16 rounded-xl ${color} text-white flex items-center justify-center shadow-lg shadow-current/20`}>
-          {icon}
-        </div>
+    <div className="p-6 bg-white border border-slate-200 rounded-xl shadow-sm hover:shadow-md transition-all">
+      <div className="flex items-center gap-4">
+        <div className="p-3 bg-indigo-50 rounded-lg text-indigo-600">{icon}</div>
         <div>
-          <p className="text-[11px] font-black text-slate-400 uppercase tracking-widest mb-1">{title}</p>
-          <div className="flex flex-col">
-            <h3 className="text-3xl font-black text-slate-900 tracking-tight">{value}</h3>
-            <span className="text-[10px] font-black text-slate-400 mt-1">{trend}</span>
-          </div>
+          <p className="text-xs font-medium text-slate-500 uppercase tracking-wider mb-0.5">{label}</p>
+          <h3 className="text-2xl font-bold text-slate-900">{value}</h3>
         </div>
       </div>
     </div>
@@ -176,14 +206,14 @@ function StatCard({ title, value, icon, trend, color }: any) {
 
 function StatusBadge({ status }: { status: AssetStatus }) {
   const styles: Record<AssetStatus, string> = {
-    Allocated: "bg-blue-100 text-blue-600",
-    Available: "bg-emerald-100 text-emerald-600",
-    Maintenance: "bg-amber-100 text-amber-600",
-    Retired: "bg-slate-100 text-slate-600",
+    Allocated: "bg-blue-50 text-blue-600 border-blue-100",
+    Available: "bg-emerald-50 text-emerald-600 border-emerald-100",
+    Maintenance: "bg-amber-50 text-amber-600 border-amber-100",
+    Retired: "bg-slate-100 text-slate-600 border-slate-200",
   };
 
   return (
-    <span className={`px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-wider ${styles[status]}`}>
+    <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold uppercase border ${styles[status]}`}>
       {status}
     </span>
   );
@@ -191,9 +221,9 @@ function StatusBadge({ status }: { status: AssetStatus }) {
 
 function AssetCategoryIcon({ category }: { category: string }) {
   switch (category) {
-    case "Laptop": return <Laptop size={20} />;
-    case "Mobile": return <Smartphone size={20} />;
-    case "Peripheral": return <Monitor size={20} />;
-    default: return <Tag size={20} />;
+    case "Laptop": return <Laptop size={18} />;
+    case "Mobile": return <Smartphone size={18} />;
+    case "Peripheral": return <Monitor size={18} />;
+    default: return <Tag size={18} />;
   }
 }

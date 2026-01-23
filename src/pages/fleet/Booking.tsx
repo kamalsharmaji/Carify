@@ -142,7 +142,7 @@ export default function Booking() {
   const paginated = filtered.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
 
   return (
-    <div className="min-h-screen bg-slate-50 p-4 lg:p-8">
+    <div className="min-h-screen bg-slate-50 p-2 md:p-0 lg:p-0 lg:pt-0">
       {/* --- Standard Header --- */}
       <header className="mb-8 bg-white rounded-xl border border-slate-200 p-6 shadow-sm">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">

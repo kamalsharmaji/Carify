@@ -147,9 +147,9 @@ export default function Customer() {
   const paginated = filtered.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
 
   return (
-    <div className="min-h-screen bg-slate-50 p-4 lg:p-8 font-sans text-slate-900">
+    <div className="min-h-screen bg-slate-50  font-sans text-slate-900">
       {/* --- Standardized Header --- */}
-      <header className="mb-8 p-6 rounded-xl bg-white border border-slate-200 shadow-sm overflow-hidden">
+      <header className="mb-3 p-3 rounded-xl bg-white border border-slate-200 shadow-sm overflow-hidden">
         <div className="relative flex flex-col lg:flex-row lg:items-center justify-between gap-6">
           <div className="space-y-1">
             <h1 className="text-3xl font-bold text-slate-900 tracking-tight">
@@ -208,7 +208,7 @@ export default function Customer() {
       </header>
 
       {/* --- Stats Grid --- */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 mb-3">
         <StatCard icon={<Users className="text-indigo-600" />} label="Total Registered" value={customers.length} />
         <StatCard icon={<Building2 className="text-indigo-600" />} label="Corporate Assets" value={customers.filter(c => c.type === "Corporate").length} />
         <StatCard icon={<ShieldCheck className="text-indigo-600" />} label="VIP Accounts" value={customers.filter(c => c.type === "VIP").length} />
@@ -297,7 +297,7 @@ export default function Customer() {
             {filtered.length === 0 && <EmptyState />}
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
             {paginated.map((c) => (
               <div key={c.id} className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-all overflow-hidden group">
                 <div className="flex justify-between items-start mb-6">

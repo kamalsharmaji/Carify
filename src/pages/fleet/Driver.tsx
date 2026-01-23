@@ -102,9 +102,9 @@ export default function Driver() {
 
   /* ================= UI ================= */
   return (
-    <div className="min-h-screen bg-slate-50 p-4 lg:p-8 font-sans text-slate-900">
+    <div className="min-h-screen bg-slate-50 font-sans text-slate-900">
       {/* --- Standardized Header --- */}
-      <header className="mb-8 p-6 rounded-xl bg-white border border-slate-200 shadow-sm overflow-hidden">
+      <header className="mb-3 p-3 rounded-xl bg-white border border-slate-200 shadow-sm overflow-hidden">
         <div className="relative flex flex-col lg:flex-row lg:items-center justify-between gap-6">
           <div className="space-y-1">
             <h1 className="text-3xl font-bold text-slate-900 tracking-tight">
@@ -163,7 +163,7 @@ export default function Driver() {
       </header>
 
       {/* --- Stats Quick Grid --- */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-3">
         <StatCard icon={<Users className="text-indigo-600" />} label="Total Fleet Personnel" value={drivers.length} />
         <StatCard icon={<ShieldCheck className="text-indigo-600" />} label="Certified & Active" value={drivers.length} />
         <StatCard icon={<Clock className="text-indigo-600" />} label="Expiring Licences" value={0} />
@@ -248,7 +248,7 @@ export default function Driver() {
             {filteredDrivers.length === 0 && <EmptyState />}
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
             {filteredDrivers.map((d) => (
               <div
                 key={d.id}

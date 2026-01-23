@@ -1,64 +1,93 @@
- 
-import { Users, Building2, UserPlus, Search } from "lucide-react";
+
+import { Users, Building2, UserPlus, Search, ChevronRight, LayoutGrid, Table as TableIcon } from "lucide-react";
+import { useState } from "react";
 
 export default function Customers() {
+  const [view, setView] = useState<"table" | "card">("table");
+  const [searchTerm, setSearchTerm] = useState("");
+
   return (
-    <div className="min-h-screen bg-[#F1F5F9] p-4 sm:p-6 lg:p-10 animate-in fade-in duration-700">
-      <div className="max-w-[1600px] mx-auto space-y-10">
-        <div className="relative overflow-hidden bg-white/70 backdrop-blur-2xl border border-white/50 rounded-[40px] p-10 shadow-2xl shadow-slate-200/50">
-          <div className="relative flex flex-col lg:flex-row lg:items-center justify-between gap-8">
-            <div className="flex items-center gap-6">
-              <div className="w-20 h-20 bg-slate-900 rounded-[30px] flex items-center justify-center shadow-2xl shadow-slate-900/20 rotate-3 hover:rotate-0 transition-transform duration-500">
-                <Building2 className="text-white w-10 h-10" />
-              </div>
-              <div>
-                <div className="flex items-center gap-3">
-                  <h1 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight">
-                    Customer <span className="text-red-600">Database</span>
-                  </h1>
-                </div>
-                <p className="text-slate-500 mt-2 font-semibold text-lg">
-                  CRM › Manage your valued customer relationships
-                </p>
-              </div>
+    <div className="min-h-screen bg-slate-50 font-sans text-slate-900">
+      {/* --- Standardized Header --- */}
+      <header className="mb-3 p-3 rounded-xl bg-white border border-slate-200 shadow-sm overflow-hidden">
+        <div className="relative flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+          <div className="space-y-1">
+            <h1 className="text-3xl font-bold text-slate-900 tracking-tight">
+              Customer <span className="text-indigo-600">Database</span>
+            </h1>
+            <nav className="flex items-center gap-2 text-sm font-medium text-slate-500">
+              <span className="hover:text-indigo-600 transition-colors cursor-pointer">CRM</span>
+              <ChevronRight size={14} />
+              <span className="text-slate-600">Customer Directory</span>
+            </nav>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-4">
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
+              <input
+                type="text"
+                placeholder="Search customers..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all w-full lg:w-64"
+              />
             </div>
-            <button className="flex items-center gap-3 bg-slate-900 hover:bg-red-600 text-white px-8 py-4 rounded-[24px] font-bold transition-all duration-300 shadow-2xl shadow-slate-900/20 active:scale-95">
-              <UserPlus size={20} />
+
+            <div className="flex p-1 bg-slate-100 border border-slate-200 rounded-lg">
+              <button
+                onClick={() => setView("table")}
+                className={`p-2 rounded-md transition-all ${
+                  view === "table" ? "bg-white text-indigo-600 shadow-sm" : "text-slate-500 hover:text-slate-700"
+                }`}
+              >
+                <TableIcon size={18} />
+              </button>
+              <button
+                onClick={() => setView("card")}
+                className={`p-2 rounded-md transition-all ${
+                  view === "card" ? "bg-white text-indigo-600 shadow-sm" : "text-slate-500 hover:text-slate-700"
+                }`}
+              >
+                <LayoutGrid size={18} />
+              </button>
+            </div>
+
+            <button className="flex items-center gap-2 bg-indigo-600 text-white px-5 py-2.5 rounded-lg text-sm font-semibold hover:bg-indigo-700 transition-all active:scale-95">
+              <UserPlus size={18} />
               <span>Add New Customer</span>
             </button>
           </div>
         </div>
+      </header>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {[
-            { label: "Total Customers", value: "856", icon: Users, color: "blue" },
-            { label: "Active Contracts", value: "642", icon: Building2, color: "emerald" },
-            { label: "Retention Rate", value: "94%", icon: Building2, color: "rose" },
-          ].map((stat, i) => (
-            <div key={i} className="bg-white/70 backdrop-blur-xl border border-white/50 p-8 rounded-[40px] shadow-2xl shadow-slate-200/50">
-              <div className="flex items-center gap-5">
-                <div className={`w-14 h-14 rounded-2xl flex items-center justify-center ${
-                  stat.color === 'blue' ? 'bg-blue-500/10 text-blue-600' : 
-                  stat.color === 'emerald' ? 'bg-emerald-500/10 text-emerald-600' : 
-                  'bg-rose-500/10 text-rose-600'
-                }`}>
-                  <stat.icon size={28} />
-                </div>
-                <div>
-                  <p className="text-slate-400 text-[10px] font-black uppercase tracking-widest">{stat.label}</p>
-                  <p className="text-3xl font-black text-slate-900">{stat.value}</p>
-                </div>
-              </div>
-            </div>
-          ))}
+      {/* --- Stats Quick Grid --- */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-3">
+        <StatCard icon={<Users className="text-indigo-600" />} label="Total Customers" value="856" />
+        <StatCard icon={<Building2 className="text-indigo-600" />} label="Active Contracts" value="642" />
+        <StatCard icon={<Building2 className="text-indigo-600" />} label="Retention Rate" value="94%" />
+      </div>
+
+      {/* --- Main Content Area --- */}
+      <main className="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden min-h-[400px] flex flex-col items-center justify-center text-center p-8">
+        <div className="w-20 h-20 bg-slate-50 rounded-2xl flex items-center justify-center text-slate-300 mb-6 border border-slate-100">
+          <Users size={40} />
         </div>
+        <h3 className="text-xl font-bold text-slate-900">No Customers Found</h3>
+        <p className="text-slate-500 mt-2 text-sm">Your customer database is currently empty. Add your first customer to start managing relationships.</p>
+      </main>
+    </div>
+  );
+}
 
-        <div className="bg-white/70 backdrop-blur-xl border border-white/50 rounded-[40px] p-8 shadow-2xl shadow-slate-200/50 min-h-[400px] flex flex-col items-center justify-center text-center">
-          <div className="w-24 h-24 bg-slate-50 rounded-[32px] flex items-center justify-center text-slate-200 mb-6 border border-slate-100">
-            <Search size={48} />
-          </div>
-          <h3 className="text-2xl font-black text-slate-900">No Customers Found</h3>
-          <p className="text-slate-500 mt-2 font-semibold">Your customer database is currently empty</p>
+function StatCard({ icon, label, value }: any) {
+  return (
+    <div className="p-6 bg-white border border-slate-200 rounded-xl shadow-sm hover:shadow-md transition-all">
+      <div className="flex items-center gap-4">
+        <div className="p-3 bg-indigo-50 rounded-lg text-indigo-600">{icon}</div>
+        <div>
+          <p className="text-xs font-medium text-slate-500 uppercase tracking-wider mb-0.5">{label}</p>
+          <h3 className="text-2xl font-bold text-slate-900">{value}</h3>
         </div>
       </div>
     </div>

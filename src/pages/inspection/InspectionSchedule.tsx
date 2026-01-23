@@ -7,13 +7,14 @@ import {
   LayoutGrid,
   Table as TableIcon,
   Search,
-  Calendar,
-  CheckCircle2,
-  XCircle,
-  Clock,
   X,
+  ChevronRight,
+  Calendar,
+  Clock,
   User,
-  Activity
+  Activity,
+  CheckCircle2,
+  XCircle
 } from "lucide-react";
 
 /* ================= TYPES ================= */
@@ -119,58 +120,49 @@ export default function InspectionSchedule() {
   };
 
   return (
-    <div className="min-h-screen bg-[#f8f9fa] animate-in fade-in duration-500 p-4 md:p-8">
-      <div className="max-w-[1600px] mx-auto space-y-10">
-        
-        {/* Header Section */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-8">
-          <div>
-            <h1 className="text-4xl font-black text-slate-900 tracking-tight">
-              Operational <span style={{ color: "#dc2626" }}>Schedule</span>
+    <div className="min-h-screen bg-slate-50 font-sans text-slate-900">
+      {/* --- Standardized Header --- */}
+      <header className="mb-3 p-3 rounded-xl bg-white border border-slate-200 shadow-sm overflow-hidden">
+        <div className="relative flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+          <div className="space-y-1">
+            <h1 className="text-3xl font-bold text-slate-900 tracking-tight">
+              Operational <span className="text-indigo-600">Schedule</span>
             </h1>
-            <p className="text-slate-500 mt-2 font-medium flex items-center gap-2 text-sm">
-              <Calendar size={16} className="text-slate-400" />
-              Vehicle Inspection › Resource Planning
-            </p>
+            <nav className="flex items-center gap-2 text-sm font-medium text-slate-500">
+              <span className="hover:text-indigo-600 transition-colors cursor-pointer">Vehicle Inspection</span>
+              <ChevronRight size={14} />
+              <span className="text-slate-600">Resource Planning</span>
+            </nav>
           </div>
 
           <div className="flex flex-wrap items-center gap-4">
-            <div className="relative group">
-              <Search
-                className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-brand transition-colors"
-                size={18}
-              />
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
               <input
                 type="text"
                 placeholder="Search schedule..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-12 pr-4 py-3.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-4 focus:ring-brand/10 focus:border-brand transition-all w-full md:w-64 shadow-sm font-medium"
+                className="pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all w-full lg:w-64"
               />
             </div>
 
-            <div className="flex border border-slate-200 rounded-xl bg-white p-1.5 shadow-sm">
+            <div className="flex p-1 bg-slate-100 border border-slate-200 rounded-lg">
               <button
                 onClick={() => setView("table")}
-                className={`p-2.5 rounded-xl transition-all ${
-                  view === "table"
-                    ? "bg-brand text-white shadow-lg shadow-brand/20"
-                    : "text-slate-400 hover:bg-slate-50"
+                className={`p-2 rounded-md transition-all ${
+                  view === "table" ? "bg-white text-indigo-600 shadow-sm" : "text-slate-500 hover:text-slate-700"
                 }`}
-                style={{ backgroundColor: view === "table" ? "#dc2626" : undefined }}
               >
-                <TableIcon size={20} />
+                <TableIcon size={18} />
               </button>
               <button
                 onClick={() => setView("card")}
-                className={`p-2.5 rounded-xl transition-all ${
-                  view === "card"
-                    ? "bg-brand text-white shadow-lg shadow-brand/20"
-                    : "text-slate-400 hover:bg-slate-50"
+                className={`p-2 rounded-md transition-all ${
+                  view === "card" ? "bg-white text-indigo-600 shadow-sm" : "text-slate-500 hover:text-slate-700"
                 }`}
-                style={{ backgroundColor: view === "card" ? "#dc2626" : undefined }}
               >
-                <LayoutGrid size={20} />
+                <LayoutGrid size={18} />
               </button>
             </div>
 
@@ -179,99 +171,79 @@ export default function InspectionSchedule() {
                 setEditSchedule(null);
                 setShowForm(true);
               }}
-              className="flex items-center gap-2 text-white px-8 py-3.5 rounded-xl text-sm font-black transition-all shadow-xl active:scale-95 whitespace-nowrap"
-              style={{ backgroundColor: "#dc2626", boxShadow: `0 10px 25px -5px #dc262640` }}
+              className="flex items-center gap-2 bg-indigo-600 text-white px-5 py-2.5 rounded-lg text-sm font-semibold hover:bg-indigo-700 transition-all active:scale-95"
             >
-              <Plus size={18} strokeWidth={3} />
-              <span className="hidden sm:inline">New Booking</span>
+              <Plus size={18} />
+              <span>New Booking</span>
             </button>
           </div>
         </div>
+      </header>
 
-        {/* Dynamic View */}
+      {/* --- Stats Quick Grid --- */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-3">
+        <StatCard icon={<Calendar className="text-indigo-600" />} label="Total Bookings" value={schedules.length} />
+        <StatCard icon={<Clock className="text-amber-600" />} label="Scheduled" value={schedules.filter(s => s.status === 'Scheduled').length} />
+        <StatCard icon={<Activity className="text-emerald-600" />} label="Completed" value={schedules.filter(s => s.status === 'Completed').length} />
+      </div>
+
+      {/* --- Main Content Area --- */}
+      <main className="transition-all duration-300">
         {view === "table" ? (
-          <div className="bg-white border border-slate-100 rounded-xl shadow-sm overflow-hidden transition-all hover:shadow-md">
-            <div className="overflow-x-auto custom-scrollbar">
-              <table className="w-full text-left">
-                <thead className="bg-slate-50/50">
-                  <tr>
+          <div className="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden">
+            <div className="overflow-x-auto">
+              <table className="w-full text-left border-collapse">
+                <thead>
+                  <tr className="border-b border-slate-100 bg-slate-50">
                     {[
-                      "NO",
-                      "INSPECTION TYPE",
-                      "DATE & TIME",
-                      "ASSIGNED INSPECTOR",
-                      "STATUS",
-                      "ACTIONS",
+                      "Inspection Type",
+                      "Date & Time",
+                      "Assigned Inspector",
+                      "Status",
+                      "Operations",
                     ].map((h) => (
-                      <th
-                        key={h}
-                        className="px-10 py-6 text-[11px] font-black text-slate-400 uppercase tracking-[0.2em]"
-                      >
+                      <th key={h} className="px-6 py-4 text-xs font-semibold text-slate-500 uppercase tracking-wider">
                         {h}
                       </th>
                     ))}
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-50">
-                  {filteredSchedules.map((s, idx) => (
-                    <tr
-                      key={s.id}
-                      className="hover:bg-slate-50/50 transition-colors group"
-                    >
-                      <td className="px-10 py-6 font-black text-slate-300">
-                        {String(idx + 1).padStart(2, '0')}
-                      </td>
-                      <td className="px-10 py-6">
-                        <div className="flex items-center gap-4">
-                          <div 
-                            className="h-12 w-12 rounded-xl flex items-center justify-center font-black text-lg border group-hover:scale-110 transition-transform shadow-sm"
-                            style={{ backgroundColor: "#dc262610", color: "#dc2626", borderColor: "#dc262620" }}
-                          >
-                            <Activity size={22} />
+                <tbody className="divide-y divide-slate-100">
+                  {filteredSchedules.map((s) => (
+                    <tr key={s.id} className="hover:bg-slate-50 transition-all">
+                      <td className="px-6 py-4">
+                        <div className="flex items-center gap-3">
+                          <div className="h-10 w-10 rounded-lg bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold text-base">
+                            <Activity size={18} />
                           </div>
-                          <span className="font-black text-slate-900 text-base tracking-tight">{s.inspectionName}</span>
+                          <div className="font-semibold text-slate-900">{s.inspectionName}</div>
                         </div>
                       </td>
-                      <td className="px-10 py-6">
-                        <div className="flex items-center gap-2 text-slate-500 font-black text-[11px] uppercase tracking-widest bg-slate-100/50 px-4 py-2 rounded-xl border border-slate-200/50 w-fit">
+                      <td className="px-6 py-4">
+                        <div className="flex items-center gap-2 text-sm font-semibold text-slate-700">
                           <Calendar size={14} className="text-slate-400" />
                           {s.scheduleDate}
                         </div>
                       </td>
-                      <td className="px-10 py-6">
-                        <div className="flex items-center gap-3">
+                      <td className="px-6 py-4">
+                        <div className="flex items-center gap-2">
                           <div className="h-8 w-8 rounded-full bg-slate-100 flex items-center justify-center text-[10px] font-black text-slate-400">
                             {s.inspector.charAt(0)}
                           </div>
-                          <span className="font-black text-slate-700 text-sm tracking-tight">{s.inspector}</span>
+                          <span className="text-sm font-semibold text-slate-700">{s.inspector}</span>
                         </div>
                       </td>
-                      <td className="px-10 py-6">
-                        <span className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest border ${getStatusBadge(s.status)}`}>
+                      <td className="px-6 py-4">
+                        <span className={`inline-flex items-center gap-2 px-2 py-0.5 rounded-full text-[10px] font-semibold uppercase border ${getStatusBadge(s.status)}`}>
                           {s.status === "Completed" ? <CheckCircle2 size={12} /> : s.status === "Cancelled" ? <XCircle size={12} /> : <Clock size={12} />}
                           {s.status}
                         </span>
                       </td>
-                      <td className="px-10 py-6">
-                        <div className="flex gap-2">
-                          <ActionBtn
-                            color="blue"
-                            onClick={() => setViewSchedule(s)}
-                            icon={<Eye size={18} />}
-                          />
-                          <ActionBtn
-                            color="orange"
-                            onClick={() => {
-                              setEditSchedule(s);
-                              setShowForm(true);
-                            }}
-                            icon={<Pencil size={18} />}
-                          />
-                          <ActionBtn 
-                            color="red" 
-                            onClick={() => remove(s.id)} 
-                            icon={<Trash2 size={18} />}
-                          />
+                      <td className="px-6 py-4">
+                        <div className="flex items-center gap-2">
+                          <ActionBtn color="blue" onClick={() => setViewSchedule(s)} icon={<Eye size={16} />} />
+                          <ActionBtn color="indigo" onClick={() => { setEditSchedule(s); setShowForm(true); }} icon={<Pencil size={16} />} />
+                          <ActionBtn color="red" onClick={() => remove(s.id)} icon={<Trash2 size={16} />} />
                         </div>
                       </td>
                     </tr>
@@ -279,133 +251,83 @@ export default function InspectionSchedule() {
                 </tbody>
               </table>
             </div>
+            {filteredSchedules.length === 0 && <EmptyState />}
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
             {filteredSchedules.map((s) => (
-              <div
-                key={s.id}
-                className="bg-white border border-slate-100 rounded-xl p-8 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 group relative overflow-hidden"
-              >
-                <div 
-                  className="absolute top-0 right-0 w-24 h-24 rounded-bl-[80px] -mr-8 -mt-8 opacity-5 transition-all group-hover:scale-110"
-                  style={{ backgroundColor: "#dc2626" }}
-                ></div>
-                
-                <div className="flex justify-between items-start mb-8 relative z-10">
-                  <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest border ${getStatusBadge(s.status)}`}>
+              <div key={s.id} className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-all group">
+                <div className="flex justify-between items-start mb-6">
+                  <div className="h-12 w-12 rounded-lg bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold text-xl shadow-sm">
+                    <Activity size={24} />
+                  </div>
+                  <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold uppercase border ${getStatusBadge(s.status)}`}>
                     {s.status}
                   </span>
-                  <Calendar size={20} className="text-slate-200 group-hover:text-brand transition-colors" style={{ '--tw-group-hover-text': "#dc2626" } as any} />
                 </div>
-
-                <div className="space-y-4 mb-8 relative z-10">
-                  <h3 className="font-black text-slate-900 group-hover:text-brand transition-colors line-clamp-1 text-lg tracking-tight" style={{ '--tw-group-hover-text': "#dc2626" } as any}>
-                    {s.inspectionName}
-                  </h3>
-                  <div className="grid grid-cols-1 gap-3 pt-6 border-t border-slate-50">
-                    <div className="flex items-center justify-between">
-                      <p className="text-[10px] font-black text-slate-300 uppercase tracking-widest">Inspection Date</p>
-                      <p className="text-xs font-bold text-slate-600 tracking-tight italic">{s.scheduleDate}</p>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <p className="text-[10px] font-black text-slate-300 uppercase tracking-widest">Inspector</p>
-                      <p className="text-xs font-black text-slate-900 tracking-tight">{s.inspector}</p>
-                    </div>
+                <div className="mb-6">
+                  <h3 className="font-bold text-slate-900 group-hover:text-indigo-600 transition-colors line-clamp-1 mb-2">{s.inspectionName}</h3>
+                  <div className="space-y-2">
+                    <CardRow label="Date" value={s.scheduleDate} />
+                    <CardRow label="Inspector" value={s.inspector} />
                   </div>
                 </div>
-
-                <div className="flex gap-2 relative z-10">
-                  <button
-                    onClick={() => setViewSchedule(s)}
-                    className="flex-1 py-4 rounded-xl bg-slate-900 text-white text-[10px] font-black uppercase tracking-widest hover:opacity-90 transition-all active:scale-95 shadow-xl shadow-slate-200"
-                  >
-                    View Card
+                <div className="flex gap-2">
+                  <button onClick={() => setViewSchedule(s)} className="flex-1 py-2 rounded-lg bg-slate-50 text-slate-600 hover:bg-slate-100 text-xs font-semibold transition-all border border-slate-200">
+                    PREVIEW
                   </button>
-                  <button
-                    onClick={() => {
-                      setEditSchedule(s);
-                      setShowForm(true);
-                    }}
-                    className="p-4 rounded-xl bg-brand/10 text-brand hover:bg-brand hover:text-white transition-all border border-brand/10"
-                    style={{ '--tw-hover-bg': "#dc2626" } as any}
-                  >
-                    <Pencil size={18} />
+                  <button onClick={() => { setEditSchedule(s); setShowForm(true); }} className="flex-1 py-2 rounded-lg bg-indigo-50 text-indigo-600 hover:bg-indigo-100 text-xs font-semibold transition-all border border-indigo-100">
+                    MODIFY
                   </button>
-                  <button
-                    onClick={() => remove(s.id)}
-                    className="p-4 rounded-xl bg-slate-50 text-slate-300 hover:text-rose-500 hover:bg-rose-50 transition-all border border-transparent hover:border-rose-100"
-                  >
-                    <Trash2 size={18} />
+                  <button onClick={() => remove(s.id)} className="p-2 rounded-lg text-slate-400 hover:text-red-600 hover:bg-red-50 transition-all border border-transparent hover:border-red-100">
+                    <Trash2 size={16} />
                   </button>
                 </div>
               </div>
             ))}
           </div>
         )}
-      </div>
+      </main>
 
-      {/* Details Modal */}
+      {/* --- Modals --- */}
       {viewSchedule && (
         <Modal onClose={() => setViewSchedule(null)} title="Schedule Details">
           <div className="space-y-8">
-            <div className="p-8 bg-slate-50 rounded-xl border border-slate-100 flex items-center justify-between relative overflow-hidden group">
-              <div 
-                className="absolute top-0 right-0 w-40 h-40 rounded-bl-[100px] -mr-8 -mt-8 opacity-10 transition-all group-hover:scale-110"
-                style={{ backgroundColor: "#dc2626" }}
-              ></div>
-              
-              <div className="flex items-center gap-6 relative z-10">
-                <div 
-                  className="h-16 w-16 rounded-xl flex items-center justify-center font-black text-lg border bg-white shadow-xl"
-                  style={{ color: "#dc2626", borderColor: "#dc262620" }}
-                >
-                  <Calendar size={32} />
-                </div>
-                <div>
-                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-1">Execution Date</p>
-                  <p className="text-2xl font-black text-slate-900 tracking-tight">{viewSchedule.scheduleDate}</p>
-                </div>
+            <div className="flex items-center gap-6 p-8 bg-gradient-to-br from-slate-900 to-slate-800 rounded-[2.5rem] text-white shadow-2xl relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-40 h-40 bg-white/5 rounded-full -mr-20 -mt-20 blur-2xl" />
+              <div className="h-24 w-24 rounded-[2rem] bg-indigo-500 flex items-center justify-center text-4xl font-black shadow-2xl shadow-indigo-500/40 border-4 border-white/10">
+                <Calendar size={40} />
               </div>
-              <span className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest border relative z-10 ${getStatusBadge(viewSchedule.status)}`}>
-                {viewSchedule.status}
-              </span>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="p-8 border border-slate-100 rounded-xl bg-white shadow-sm md:col-span-2">
-                <p className="text-[10px] font-black text-slate-300 uppercase tracking-[0.2em] mb-3">Inspection Type</p>
-                <p className="text-xl font-black text-slate-900 tracking-tight" style={{ color: "#dc2626" }}>{viewSchedule.inspectionName}</p>
-              </div>
-              <div className="p-8 border border-slate-100 rounded-xl bg-white shadow-sm md:col-span-2 flex items-center justify-between">
-                <div>
-                  <p className="text-[10px] font-black text-slate-300 uppercase tracking-[0.2em] mb-2">Assigned Specialist</p>
-                  <p className="text-base font-black text-slate-700 tracking-tight">{viewSchedule.inspector}</p>
-                </div>
-                <div className="h-12 w-12 rounded-full bg-slate-50 flex items-center justify-center text-slate-300">
-                  <User size={24} />
+              <div className="space-y-1">
+                <h2 className="text-2xl font-black tracking-tight">{viewSchedule.scheduleDate}</h2>
+                <div className="flex flex-col">
+                  <span className="text-slate-400 text-sm font-medium">{viewSchedule.inspectionName}</span>
+                  <span className="text-[10px] text-indigo-400 font-bold uppercase tracking-widest mt-2">{viewSchedule.status} Planning</span>
                 </div>
               </div>
             </div>
 
+            <div className="grid grid-cols-2 gap-4">
+              <DetailBox label="Inspection Type" value={viewSchedule.inspectionName} />
+              <DetailBox label="Inspector" value={viewSchedule.inspector} />
+              <DetailBox label="Scheduled Date" value={viewSchedule.scheduleDate} />
+              <DetailBox label="Current Status" value={viewSchedule.status} />
+            </div>
+            
             <button
               onClick={() => setViewSchedule(null)}
-              className="w-full py-5 bg-slate-900 text-white rounded-xl font-black uppercase tracking-widest hover:opacity-90 transition-all shadow-2xl shadow-slate-200 active:scale-[0.98]"
+              className="w-full py-4 bg-slate-900 text-white rounded-2xl font-bold hover:bg-indigo-600 transition-all shadow-xl shadow-slate-200 active:scale-[0.98]"
             >
-              Close Schedule Record
+              Close Record
             </button>
           </div>
         </Modal>
       )}
 
-      {/* Form Modal */}
       {showForm && (
         <ScheduleForm
           editData={editSchedule}
-          onClose={() => {
-            setShowForm(false);
-            setEditSchedule(null);
-          }}
+          onClose={() => { setShowForm(false); setEditSchedule(null); }}
           onSave={saveSchedule}
         />
       )}
@@ -413,79 +335,87 @@ export default function InspectionSchedule() {
   );
 }
 
-/* ================= HELPER COMPONENTS ================= */
+/* ================= SUB-COMPONENTS ================= */
 
-function ActionBtn({
-  icon,
-  onClick,
-  color,
-}: {
-  icon: React.ReactNode;
-  onClick: () => void;
-  color: "blue" | "orange" | "red";
-}) {
-  const styles = {
-    blue: "text-blue-500 hover:bg-blue-50 border-blue-100",
-    orange: "text-orange-500 hover:bg-orange-50 border-orange-100",
-    red: "text-rose-500 hover:bg-rose-50 border-rose-100",
-  };
+function StatCard({ icon, label, value }: any) {
   return (
-    <button
-      onClick={onClick}
-      className={`p-2.5 rounded-xl transition-all border border-transparent hover:border-current active:scale-90 ${styles[color]}`}
-    >
-      {icon}
-    </button>
-  );
-}
-
-function Modal({
-  children,
-  onClose,
-  title,
-}: {
-  children: React.ReactNode;
-  onClose: () => void;
-  title: string;
-}) {
-  return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/80 backdrop-blur-xl animate-in fade-in duration-300">
-      <div className="bg-white rounded-[40px] w-full max-w-xl overflow-hidden shadow-2xl animate-in zoom-in-95 duration-300 border border-white/20">
-        <div className="px-10 py-8 bg-slate-900 flex justify-between items-center relative overflow-hidden">
-          <div className="absolute top-0 left-0 w-full h-1.5 bg-brand" style={{ backgroundColor: "#dc2626" }}></div>
-          <div 
-            className="absolute -right-8 -top-8 w-32 h-32 rounded-full blur-3xl opacity-20"
-            style={{ backgroundColor: "#dc2626" }}
-          ></div>
-          
-          <h3 className="text-2xl font-black text-white relative z-10 tracking-tight uppercase tracking-[0.05em]">{title}</h3>
-          <button
-            onClick={onClose}
-            className="p-3 bg-white/10 hover:bg-white/20 rounded-xl transition-all text-white relative z-10 active:scale-90"
-          >
-            <X size={24} strokeWidth={3} />
-          </button>
-        </div>
-        <div className="p-10">
-          {children}
+    <div className="p-6 bg-white border border-slate-200 rounded-xl shadow-sm hover:shadow-md transition-all">
+      <div className="flex items-center gap-4">
+        <div className="p-3 bg-indigo-50 rounded-lg text-indigo-600">{icon}</div>
+        <div>
+          <p className="text-xs font-medium text-slate-500 uppercase tracking-wider mb-0.5">{label}</p>
+          <h3 className="text-2xl font-bold text-slate-900">{value}</h3>
         </div>
       </div>
     </div>
   );
 }
 
-function ScheduleForm({
-  editData,
-  onClose,
-  onSave,
-}: {
-  editData: Schedule | null;
-  onClose: () => void;
-  onSave: (data: Schedule) => void;
-}) {
-  const [formData, setFormData] = useState<Schedule>(
+function ActionBtn({ onClick, icon, color }: any) {
+  const styles: any = {
+    blue: "text-blue-600 hover:bg-blue-50 border-blue-100",
+    indigo: "text-indigo-600 hover:bg-indigo-50 border-indigo-100",
+    red: "text-red-600 hover:bg-red-50 border-red-100",
+  };
+  return (
+    <button
+      onClick={onClick}
+      className={`p-2 rounded-lg transition-all border border-transparent hover:border-current active:scale-90 ${styles[color]}`}
+    >
+      {icon}
+    </button>
+  );
+}
+
+function EmptyState() {
+  return (
+    <div className="flex flex-col items-center justify-center py-20 bg-slate-50/50">
+      <div className="h-20 w-20 bg-white rounded-3xl shadow-sm flex items-center justify-center mb-4 border border-slate-100">
+        <Calendar className="text-slate-300" size={40} />
+      </div>
+      <h3 className="text-lg font-bold text-slate-900 mb-1">No bookings found</h3>
+      <p className="text-sm text-slate-500">Try adjusting your search or add a new schedule.</p>
+    </div>
+  );
+}
+
+function Modal({ children, onClose, title }: any) {
+  return (
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm transition-all">
+      <div className="bg-white rounded-[2.5rem] w-full max-w-2xl overflow-hidden shadow-2xl border border-slate-100 animate-in zoom-in-95 duration-200">
+        <div className="px-10 py-8 border-b border-slate-50 flex justify-between items-center bg-slate-50/50">
+          <h3 className="text-xl font-bold text-slate-900 uppercase tracking-tight">{title}</h3>
+          <button onClick={onClose} className="p-2 hover:bg-white rounded-xl transition-all text-slate-400 hover:text-slate-600 shadow-sm border border-transparent hover:border-slate-100">
+            <X size={20} />
+          </button>
+        </div>
+        <div className="p-10">{children}</div>
+      </div>
+    </div>
+  );
+}
+
+function CardRow({ label, value }: any) {
+  return (
+    <div className="flex justify-between items-center py-1">
+      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">{label}</span>
+      <span className="text-xs font-semibold text-slate-700">{value}</span>
+    </div>
+  );
+}
+
+function DetailBox({ label, value }: any) {
+  return (
+    <div className="p-5 bg-slate-50 border border-slate-100 rounded-3xl group hover:border-indigo-200 transition-colors">
+      <p className="text-[10px] uppercase font-black text-slate-400 tracking-[0.2em] mb-2">{label}</p>
+      <p className="text-sm font-black text-slate-800 group-hover:text-indigo-600 transition-colors">{value}</p>
+    </div>
+  );
+}
+
+function ScheduleForm({ editData, onClose, onSave }: any) {
+  const [formData, setFormData] = useState<any>(
     editData || {
-      id: 0,
       inspectionName: "",
       scheduleDate: "",
       inspector: "",
@@ -493,122 +423,64 @@ function ScheduleForm({
     }
   );
 
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    onSave(formData);
+  };
+
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/80 backdrop-blur-xl animate-in fade-in duration-300">
-      <div className="bg-white rounded-[40px] w-full max-w-2xl overflow-hidden shadow-2xl animate-in zoom-in-95 duration-300 border border-white/20">
-        <div className="px-12 py-10 bg-slate-900 flex justify-between items-center relative overflow-hidden">
-          <div className="absolute top-0 left-0 w-full h-1.5 bg-brand" style={{ backgroundColor: "#dc2626" }}></div>
-          <div 
-            className="absolute -right-12 -top-12 w-48 h-48 rounded-full blur-3xl opacity-20"
-            style={{ backgroundColor: "#dc2626" }}
-          ></div>
-          
-          <div>
-            <h3 className="text-3xl font-black text-white relative z-10 tracking-tight uppercase">
-              {editData ? "Update Slot" : "Book Slot"}
-            </h3>
-            <p className="text-slate-400 text-sm mt-2 relative z-10 font-bold uppercase tracking-widest">Calendar Scheduling Engine</p>
-          </div>
-          <button
-            onClick={onClose}
-            className="p-4 bg-white/10 hover:bg-white/20 rounded-xl transition-all text-white relative z-10 active:scale-90"
-          >
-            <X size={28} strokeWidth={3} />
-          </button>
-        </div>
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            onSave(formData);
-          }}
-          className="p-12"
-        >
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-            <FormInput
-              label="Inspection Category"
+    <Modal onClose={onClose} title={editData ? "Refine Booking" : "New Inspection Booking"}>
+      <form onSubmit={handleSubmit} className="space-y-6">
+        <div className="space-y-4">
+          <div className="space-y-2">
+            <label className="text-[10px] font-bold text-slate-400 uppercase ml-1">Inspection Type</label>
+            <input
+              required
+              className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none transition-all font-semibold"
               value={formData.inspectionName}
-              onChange={(v) => setFormData({ ...formData, inspectionName: v })}
-              placeholder="e.g. Structural Integrity Audit"
-              colSpan={2}
+              onChange={(e) => setFormData({ ...formData, inspectionName: e.target.value })}
+              placeholder="e.g. Annual Safety Check"
             />
-            <FormInput
-              label="Operational Date"
-              value={formData.scheduleDate}
-              onChange={(v) => setFormData({ ...formData, scheduleDate: v })}
-              placeholder="DD-MM-YYYY"
-            />
-            <FormInput
-              label="Assigned Specialist"
-              value={formData.inspector}
-              onChange={(v) => setFormData({ ...formData, inspector: v })}
-              placeholder="Inspector Name"
-            />
-            <div className="space-y-4 md:col-span-2">
-              <div className="flex items-center gap-3 ml-1">
-                <div className="w-1.5 h-4 bg-brand rounded-full" style={{ backgroundColor: "#dc2626" }}></div>
-                <label className="text-[11px] font-black text-slate-400 uppercase tracking-[0.2em]">Initial Status</label>
-              </div>
-              <select
-                value={formData.status}
-                onChange={(e) => setFormData({ ...formData, status: e.target.value as any })}
-                className="w-full px-6 py-5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-4 focus:ring-brand/10 focus:border-brand transition-all text-slate-900 font-bold shadow-inner appearance-none"
-              >
-                <option value="Scheduled">Scheduled</option>
-                <option value="Completed">Completed</option>
-                <option value="Cancelled">Cancelled</option>
-              </select>
+          </div>
+          <div className="grid grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <label className="text-[10px] font-bold text-slate-400 uppercase ml-1">Inspector</label>
+              <input
+                required
+                className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none transition-all font-semibold"
+                value={formData.inspector}
+                onChange={(e) => setFormData({ ...formData, inspector: e.target.value })}
+                placeholder="Name"
+              />
+            </div>
+            <div className="space-y-2">
+              <label className="text-[10px] font-bold text-slate-400 uppercase ml-1">Schedule Date</label>
+              <input
+                required
+                className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none transition-all font-semibold"
+                value={formData.scheduleDate}
+                onChange={(e) => setFormData({ ...formData, scheduleDate: e.target.value })}
+                placeholder="DD-MM-YYYY"
+              />
             </div>
           </div>
-          <div className="mt-12 flex gap-5">
-            <button
-              type="button"
-              onClick={onClose}
-              className="flex-1 py-5 rounded-xl border-2 border-slate-100 text-slate-400 font-black uppercase tracking-widest hover:bg-slate-50 hover:border-slate-200 transition-all active:scale-[0.98]"
+          <div className="space-y-2">
+            <label className="text-[10px] font-bold text-slate-400 uppercase ml-1">Current Status</label>
+            <select
+              className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none transition-all font-semibold appearance-none"
+              value={formData.status}
+              onChange={(e) => setFormData({ ...formData, status: e.target.value })}
             >
-              Cancel
-            </button>
-            <button
-              type="submit"
-              className="flex-1 py-5 rounded-xl text-white font-black uppercase tracking-widest hover:opacity-90 shadow-2xl transition-all active:scale-[0.98]"
-              style={{ backgroundColor: "#dc2626", boxShadow: `0 20px 30px -10px #dc262640` }}
-            >
-              {editData ? "Confirm Update" : "Finalize Booking"}
-            </button>
+              <option value="Scheduled">Scheduled</option>
+              <option value="Completed">Completed</option>
+              <option value="Cancelled">Cancelled</option>
+            </select>
           </div>
-        </form>
-      </div>
-    </div>
-  );
-}
-
-function FormInput({
-  label,
-  value,
-  onChange,
-  placeholder,
-  colSpan = 1
-}: {
-  label: string;
-  value: string;
-  onChange: (v: string) => void;
-  placeholder: string;
-  colSpan?: number;
-}) {
-  return (
-    <div className={`space-y-4 ${colSpan === 2 ? 'md:col-span-2' : ''}`}>
-      <div className="flex items-center gap-3 ml-1">
-        <div className="w-1.5 h-4 bg-brand rounded-full" style={{ backgroundColor: "#dc2626" }}></div>
-        <label className="text-[11px] font-black text-slate-400 uppercase tracking-[0.2em]">
-          {label}
-        </label>
-      </div>
-      <input
-        type="text"
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        placeholder={placeholder}
-        className="w-full px-6 py-5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-4 focus:ring-brand/10 focus:border-brand transition-all text-slate-900 font-bold shadow-inner"
-      />
-    </div>
+        </div>
+        <button className="w-full py-5 bg-indigo-600 text-white rounded-[2rem] font-bold hover:bg-indigo-700 transition-all shadow-xl shadow-indigo-100 active:scale-[0.98] mt-4">
+          {editData ? "Sync Booking" : "Deploy Schedule"}
+        </button>
+      </form>
+    </Modal>
   );
 }

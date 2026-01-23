@@ -10,7 +10,7 @@ import {
   CheckCircle,
   XCircle,
   History,
-  MessageSquare,
+  ChevronRight,
   X,
   ClipboardList
 } from "lucide-react";
@@ -117,167 +117,141 @@ export default function InspectionHistory() {
   );
 
   return (
-    <div 
-      className="min-h-screen bg-[#F1F5F9] p-4 md:p-6 lg:p-10 animate-in fade-in duration-700"
-    >
-      <div className="max-w-[1600px] mx-auto space-y-10">
-        
-        {/* Cinematic Header Section */}
-        <div className="bg-white/70 backdrop-blur-2xl border border-white/50 rounded-[40px] p-8 md:p-10 shadow-2xl shadow-slate-200/50">
-          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8">
-            <div className="flex items-center gap-6">
-              <div className="w-20 h-20 bg-slate-900 rounded-[30px] flex items-center justify-center shadow-2xl shadow-slate-900/20 rotate-3 hover:rotate-0 transition-transform duration-500">
-                <History className="text-white w-10 h-10" />
-              </div>
-              <div>
-                <div className="flex items-center gap-3">
-                  <h1 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight">
-                    Inspection <span className="text-brand">History</span>
-                  </h1>
-                  <span className="px-4 py-1.5 bg-slate-900 text-white text-[10px] font-black uppercase tracking-[0.2em] rounded-full shadow-lg">
-                    LOGS v4.0
-                  </span>
-                </div>
-                <p className="text-slate-500 mt-2 font-semibold text-lg">
-                  Vehicle Inspection › Past Audit Logs
-                </p>
-              </div>
+    <div className="min-h-screen bg-slate-50 font-sans text-slate-900">
+      {/* --- Standardized Header --- */}
+      <header className="mb-3 p-3 rounded-xl bg-white border border-slate-200 shadow-sm overflow-hidden">
+        <div className="relative flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+          <div className="space-y-1">
+            <h1 className="text-3xl font-bold text-slate-900 tracking-tight">
+              Inspection <span className="text-indigo-600">History</span>
+            </h1>
+            <nav className="flex items-center gap-2 text-sm font-medium text-slate-500">
+              <span className="hover:text-indigo-600 transition-colors cursor-pointer">Vehicle Inspection</span>
+              <ChevronRight size={14} />
+              <span className="text-slate-600">Past Audit Logs</span>
+            </nav>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-4">
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
+              <input
+                type="text"
+                placeholder="Search audit logs..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all w-full lg:w-64"
+              />
             </div>
 
-            <div className="flex flex-wrap items-center gap-4">
-              <div className="relative group flex-1 md:flex-none">
-                <Search
-                  className="absolute left-6 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-brand transition-colors"
-                  size={20}
-                />
-                <input
-                  type="text"
-                  placeholder="Search audit logs..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-14 pr-6 py-4 bg-white/70 backdrop-blur-xl border border-white/50 rounded-2xl text-sm font-bold text-slate-900 focus:outline-none focus:ring-4 focus:ring-brand/10 focus:border-brand transition-all w-full md:w-64 shadow-xl shadow-slate-200/50"
-                />
-              </div>
-
-              <div className="flex bg-white/50 backdrop-blur-md p-1.5 rounded-2xl border border-white shadow-xl">
-                <button
-                  onClick={() => setView("table")}
-                  className={`p-3 rounded-xl transition-all ${
-                    view === "table"
-                      ? "bg-slate-900 text-white shadow-lg scale-105"
-                      : "text-slate-400 hover:text-slate-600"
-                  }`}
-                >
-                  <TableIcon size={20} />
-                </button>
-                <button
-                  onClick={() => setView("card")}
-                  className={`p-3 rounded-xl transition-all ${
-                    view === "card"
-                      ? "bg-slate-900 text-white shadow-lg scale-105"
-                      : "text-slate-400 hover:text-slate-600"
-                  }`}
-                >
-                  <LayoutGrid size={20} />
-                </button>
-              </div>
-
+            <div className="flex p-1 bg-slate-100 border border-slate-200 rounded-lg">
               <button
-                onClick={() => {
-                  setEditItem(null);
-                  setShowForm(true);
-                }}
-                className="flex items-center gap-3 bg-brand text-white px-8 py-4 rounded-2xl text-xs font-black uppercase tracking-widest hover:opacity-90 transition-all shadow-xl shadow-brand/20 active:scale-95 group"
+                onClick={() => setView("table")}
+                className={`p-2 rounded-md transition-all ${
+                  view === "table" ? "bg-white text-indigo-600 shadow-sm" : "text-slate-500 hover:text-slate-700"
+                }`}
               >
-                <Plus size={18} className="group-hover:rotate-90 transition-transform" />
-                <span>New Record</span>
+                <TableIcon size={18} />
+              </button>
+              <button
+                onClick={() => setView("card")}
+                className={`p-2 rounded-md transition-all ${
+                  view === "card" ? "bg-white text-indigo-600 shadow-sm" : "text-slate-500 hover:text-slate-700"
+                }`}
+              >
+                <LayoutGrid size={18} />
               </button>
             </div>
+
+            <button
+              onClick={() => {
+                setEditItem(null);
+                setShowForm(true);
+              }}
+              className="flex items-center gap-2 bg-indigo-600 text-white px-5 py-2.5 rounded-lg text-sm font-semibold hover:bg-indigo-700 transition-all active:scale-95"
+            >
+              <Plus size={18} />
+              <span>New Record</span>
+            </button>
           </div>
         </div>
+      </header>
 
-        {/* Content Section */}
+      {/* --- Stats Quick Grid --- */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-3">
+        <StatCard icon={<History className="text-indigo-600" />} label="Total Audits" value={history.length} />
+        <StatCard icon={<CheckCircle className="text-emerald-600" />} label="Passed Inspections" value={history.filter(h => h.result === "Passed").length} />
+        <StatCard icon={<XCircle className="text-rose-600" />} label="Failed Inspections" value={history.filter(h => h.result === "Failed").length} />
+      </div>
+
+      {/* --- Main Content Area --- */}
+      <main className="transition-all duration-300">
         {view === "table" ? (
-          <div className="bg-white/70 backdrop-blur-xl border border-white/50 rounded-[40px] shadow-2xl shadow-slate-200/50 overflow-hidden">
+          <div className="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full text-left border-collapse">
                 <thead>
-                  <tr className="border-b border-slate-100">
+                  <tr className="border-b border-slate-100 bg-slate-50">
                     {[
                       "NO",
                       "VEHICLE & INSPECTOR",
                       "INSPECTION TYPE",
                       "DATE",
                       "RESULT",
-                      "ACTIONS",
+                      "OPERATIONS",
                     ].map((h) => (
-                      <th
-                        key={h}
-                        className="px-10 py-6 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]"
-                      >
+                      <th key={h} className="px-6 py-4 text-xs font-semibold text-slate-500 uppercase tracking-wider">
                         {h}
                       </th>
                     ))}
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-50">
+                <tbody className="divide-y divide-slate-100">
                   {filteredHistory.map((h, idx) => (
-                    <tr
-                      key={h.id}
-                      className="hover:bg-white/80 transition-all group"
-                    >
-                      <td className="px-10 py-6 font-black text-slate-300">
+                    <tr key={h.id} className="hover:bg-slate-50 transition-all">
+                      <td className="px-6 py-4 text-sm font-medium text-slate-400">
                         {String(idx + 1).padStart(2, '0')}
                       </td>
-                      <td className="px-10 py-6">
-                        <div className="flex items-center gap-4">
-                          <div className="h-12 w-12 rounded-2xl bg-slate-900 text-white flex items-center justify-center font-black text-sm shadow-xl group-hover:rotate-6 transition-transform">
+                      <td className="px-6 py-4">
+                        <div className="flex items-center gap-3">
+                          <div className="h-10 w-10 rounded-lg bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold text-base">
                             {h.vehicle.charAt(0)}
                           </div>
                           <div>
-                            <div className="font-black text-slate-900 text-sm tracking-tight">{h.vehicle}</div>
-                            <div className="text-[10px] text-slate-400 font-black uppercase tracking-widest mt-0.5">Inspector: {h.inspector || "N/A"}</div>
+                            <div className="font-semibold text-slate-900">
+                              {h.vehicle}
+                            </div>
+                            <div className="text-xs text-slate-500">
+                              Inspector: {h.inspector || "N/A"}
+                            </div>
                           </div>
                         </div>
                       </td>
-                      <td className="px-10 py-6">
-                        <span className="px-4 py-1.5 bg-slate-100/50 text-slate-600 rounded-xl text-[9px] font-black uppercase tracking-widest border border-slate-200/50">
+                      <td className="px-6 py-4">
+                        <span className="inline-flex items-center px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 text-[10px] font-semibold uppercase border border-slate-200">
                           {h.inspectionName}
                         </span>
                       </td>
-                      <td className="px-10 py-6 text-slate-500 font-black text-[11px] uppercase tracking-widest">
-                        {h.inspectionDate}
+                      <td className="px-6 py-4">
+                        <span className="text-sm font-medium text-slate-600 uppercase">
+                          {h.inspectionDate}
+                        </span>
                       </td>
-                      <td className="px-10 py-6">
-                        <span className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-xl text-[9px] font-black uppercase tracking-widest border ${
+                      <td className="px-6 py-4">
+                        <span className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold uppercase border ${
                           h.result === "Passed" 
                             ? "bg-emerald-50 text-emerald-600 border-emerald-100" 
                             : "bg-rose-50 text-rose-600 border-rose-100"
                         }`}>
-                          {h.result === "Passed" ? <CheckCircle size={14} /> : <XCircle size={14} />}
+                          {h.result === "Passed" ? <CheckCircle size={12} /> : <XCircle size={12} />}
                           {h.result}
                         </span>
                       </td>
-                      <td className="px-10 py-6">
-                        <div className="flex gap-3">
-                          <ActionBtn
-                            color="blue"
-                            onClick={() => setViewItem(h)}
-                            icon={<Eye size={18} />}
-                          />
-                          <ActionBtn
-                            color="orange"
-                            onClick={() => {
-                              setEditItem(h);
-                              setShowForm(true);
-                            }}
-                            icon={<Pencil size={18} />}
-                          />
-                          <ActionBtn 
-                            color="red" 
-                            onClick={() => remove(h.id)} 
-                            icon={<Trash2 size={18} />}
-                          />
+                      <td className="px-6 py-4">
+                        <div className="flex items-center gap-2">
+                          <ActionBtn color="blue" onClick={() => setViewItem(h)} icon={<Eye size={16} />} />
+                          <ActionBtn color="indigo" onClick={() => { setEditItem(h); setShowForm(true); }} icon={<Pencil size={16} />} />
+                          <ActionBtn color="red" onClick={() => remove(h.id)} icon={<Trash2 size={16} />} />
                         </div>
                       </td>
                     </tr>
@@ -285,157 +259,118 @@ export default function InspectionHistory() {
                 </tbody>
               </table>
             </div>
+            {filteredHistory.length === 0 && <EmptyState />}
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
             {filteredHistory.map((h) => (
               <div
                 key={h.id}
-                className="group bg-white/70 backdrop-blur-xl rounded-[40px] p-8 border border-white/50 shadow-2xl shadow-slate-200/50 hover:scale-[1.02] transition-all duration-500 relative overflow-hidden"
+                className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-all overflow-hidden group"
               >
-                <div className="flex justify-between items-start mb-8 relative z-10">
-                  <span className={`inline-flex items-center gap-1.5 px-4 py-1.5 rounded-xl text-[9px] font-black uppercase tracking-widest border ${
+                <div className="flex items-center justify-between mb-6">
+                  <div className="flex items-center gap-4">
+                    <div className="h-12 w-12 rounded-lg bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold text-xl">
+                      {h.vehicle.charAt(0)}
+                    </div>
+                    <div className="overflow-hidden">
+                      <h3 className="font-bold text-slate-900 group-hover:text-indigo-600 transition-colors truncate">
+                        {h.vehicle}
+                      </h3>
+                      <p className="text-xs text-slate-500 truncate">
+                        {h.inspectionName}
+                      </p>
+                    </div>
+                  </div>
+                  <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold uppercase border ${
                     h.result === "Passed" 
                       ? "bg-emerald-50 text-emerald-600 border-emerald-100" 
                       : "bg-rose-50 text-rose-600 border-rose-100"
                   }`}>
                     {h.result}
                   </span>
-                  <div className="h-12 w-12 rounded-2xl bg-slate-900 text-white flex items-center justify-center font-black text-sm shadow-xl group-hover:rotate-12 transition-transform">
-                    {h.vehicle.charAt(0)}
-                  </div>
                 </div>
 
-                <div className="mb-8 relative z-10">
-                  <h3 className="text-xl font-black text-slate-900 group-hover:text-brand transition-colors tracking-tight line-clamp-1">
-                    {h.vehicle}
-                  </h3>
-                  <div className="flex items-center gap-2 text-[10px] text-slate-400 font-black mt-2 uppercase tracking-[0.2em]">
-                    <ClipboardList size={14} className="text-brand" />
-                    {h.inspectionName}
-                  </div>
+                <div className="space-y-3 mb-6">
+                  <CardRow label="Inspector" value={h.inspector} />
+                  <CardRow label="Audit Date" value={h.inspectionDate} />
                 </div>
 
-                <div className="space-y-4 py-6 border-y border-slate-100/50">
-                  <div className="flex justify-between items-center">
-                    <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Inspector</span>
-                    <span className="text-slate-900 font-black text-xs tracking-tight uppercase">{h.inspector}</span>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Audit Date</span>
-                    <span className="text-slate-900 font-black text-xs tracking-tight uppercase">{h.inspectionDate}</span>
-                  </div>
-                </div>
-
-                <div className="flex gap-3 mt-8">
+                <div className="flex gap-2">
                   <button
                     onClick={() => setViewItem(h)}
-                    className="flex-1 py-4 rounded-2xl bg-slate-900 text-white font-black text-[10px] uppercase tracking-[0.2em] transition-all hover:bg-slate-800 hover:shadow-xl hover:shadow-slate-900/20 active:scale-95"
+                    className="flex-1 py-2 rounded-lg bg-slate-50 text-slate-600 hover:bg-slate-100 text-xs font-semibold transition-all border border-slate-200"
                   >
-                    View Record
+                    VIEW
                   </button>
                   <button
-                    onClick={() => {
-                      setEditItem(h);
-                      setShowForm(true);
-                    }}
-                    className="p-4 rounded-2xl bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 hover:border-slate-300 transition-all active:scale-95"
+                    onClick={() => { setEditItem(h); setShowForm(true); }}
+                    className="flex-1 py-2 rounded-lg bg-indigo-50 text-indigo-600 hover:bg-indigo-100 text-xs font-semibold transition-all border border-indigo-100"
                   >
-                    <Pencil size={20} />
+                    MODIFY
+                  </button>
+                  <button
+                    onClick={() => remove(h.id)}
+                    className="p-2 rounded-lg text-slate-400 hover:text-red-600 hover:bg-red-50 transition-all border border-transparent hover:border-red-100"
+                  >
+                    <Trash2 size={16} />
                   </button>
                 </div>
               </div>
             ))}
           </div>
         )}
-      </div>
+      </main>
 
+      {/* --- Modals --- */}
       {viewItem && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xl animate-in fade-in duration-300">
-          <div className="bg-white/90 backdrop-blur-2xl rounded-[40px] w-full max-w-2xl shadow-3xl overflow-hidden border border-white/50 animate-in zoom-in duration-500">
-            <div className="p-10 border-b border-slate-100 flex items-center justify-between bg-slate-50/30">
-              <div className="flex items-center gap-6">
-                <div className="w-16 h-16 bg-slate-900 rounded-[24px] flex items-center justify-center shadow-2xl rotate-3">
-                  <ClipboardList className="text-white w-8 h-8" />
-                </div>
-                <div>
-                  <h3 className="text-3xl font-black text-slate-900 tracking-tight">Audit Insight</h3>
-                  <p className="text-brand text-[10px] font-black uppercase tracking-[0.2em] mt-1.5">Inspection Intelligence Profile</p>
+        <Modal onClose={() => setViewItem(null)} title="Audit Insight">
+          <div className="space-y-8">
+            <div className="flex items-center gap-6 p-8 bg-gradient-to-br from-slate-900 to-slate-800 rounded-[2.5rem] text-white shadow-2xl relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-40 h-40 bg-white/5 rounded-full -mr-20 -mt-20 blur-2xl" />
+              <div className="h-24 w-24 rounded-[2rem] bg-indigo-500 flex items-center justify-center text-4xl font-black shadow-2xl shadow-indigo-500/40 border-4 border-white/10">
+                {viewItem.vehicle.charAt(0)}
+              </div>
+              <div className="space-y-1">
+                <h2 className="text-2xl font-black tracking-tight">{viewItem.vehicle}</h2>
+                <div className="flex flex-col">
+                  <span className="text-slate-400 text-sm font-medium">{viewItem.inspectionName}</span>
+                  <span className={`text-[10px] font-bold uppercase tracking-widest mt-2 ${viewItem.result === "Passed" ? "text-emerald-400" : "text-rose-400"}`}>
+                    Audit Status: {viewItem.result}
+                  </span>
                 </div>
               </div>
-              <button onClick={() => setViewItem(null)} className="h-12 w-12 flex items-center justify-center rounded-2xl hover:bg-white hover:shadow-xl transition-all text-slate-400 hover:text-slate-900">
-                <X size={24} />
-              </button>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4">
+              <div className="p-5 bg-slate-50 border border-slate-100 rounded-3xl">
+                <p className="text-[10px] uppercase font-black text-slate-400 tracking-[0.2em] mb-2">Inspector</p>
+                <p className="text-sm font-black text-slate-800">{viewItem.inspector}</p>
+              </div>
+              <div className="p-5 bg-slate-50 border border-slate-100 rounded-3xl">
+                <p className="text-[10px] uppercase font-black text-slate-400 tracking-[0.2em] mb-2">Audit Date</p>
+                <p className="text-sm font-black text-slate-800">{viewItem.inspectionDate}</p>
+              </div>
+              <div className="p-5 bg-slate-50 border border-slate-100 rounded-3xl col-span-2">
+                <p className="text-[10px] uppercase font-black text-slate-400 tracking-[0.2em] mb-2">Details</p>
+                <p className="text-sm font-medium text-slate-700 leading-relaxed">{viewItem.details}</p>
+              </div>
             </div>
             
-            <div className="p-10 space-y-8">
-              <div className={`p-8 rounded-[32px] border flex items-center justify-between relative overflow-hidden group ${
-                viewItem.result === "Passed" ? "bg-emerald-500/10 border-emerald-500/20" : "bg-rose-500/10 border-rose-500/20"
-              }`}>
-                <div className="flex items-center gap-6">
-                  <div className={`h-16 w-16 rounded-2xl flex items-center justify-center shadow-2xl text-white ${
-                    viewItem.result === "Passed" ? "bg-emerald-500 shadow-emerald-500/30" : "bg-rose-500 shadow-rose-500/30"
-                  }`}>
-                    {viewItem.result === "Passed" ? <CheckCircle size={32} /> : <XCircle size={32} />}
-                  </div>
-                  <div>
-                    <p className={`text-[10px] font-black uppercase tracking-[0.2em] mb-1 ${
-                      viewItem.result === "Passed" ? "text-emerald-500" : "text-rose-500"
-                    }`}>Evaluation Result</p>
-                    <p className={`text-3xl font-black tracking-tight ${
-                      viewItem.result === "Passed" ? "text-emerald-700" : "text-rose-700"
-                    }`}>{viewItem.result}</p>
-                  </div>
-                </div>
-                <div className="text-right">
-                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Audit Date</p>
-                  <p className="text-xl font-black text-slate-900">{viewItem.inspectionDate}</p>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-2 gap-6">
-                <div className="p-6 bg-slate-50/50 border border-slate-100 rounded-[24px]">
-                  <p className="text-[10px] uppercase font-black text-slate-400 tracking-[0.2em] mb-2">Technical Subject</p>
-                  <p className="text-xl font-black text-slate-900 tracking-tight">{viewItem.vehicle}</p>
-                </div>
-                <div className="p-6 bg-slate-50/50 border border-slate-100 rounded-[24px]">
-                  <p className="text-[10px] uppercase font-black text-slate-400 tracking-[0.2em] mb-2">Protocol Lead</p>
-                  <p className="text-xl font-black text-slate-900 tracking-tight">{viewItem.inspector}</p>
-                </div>
-                <div className="col-span-2 p-6 bg-slate-50/50 border border-slate-100 rounded-[24px]">
-                  <p className="text-[10px] uppercase font-black text-slate-400 tracking-[0.2em] mb-2">Inspection Procedure</p>
-                  <p className="text-xl font-black text-slate-900 tracking-tight">{viewItem.inspectionName}</p>
-                </div>
-              </div>
-
-              <div className="p-8 bg-slate-900 rounded-[32px] shadow-2xl shadow-slate-900/20">
-                <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-4 flex items-center gap-2">
-                  <MessageSquare size={14} className="text-brand" />
-                  Detailed Assessment Findings
-                </p>
-                <p className="text-white text-lg font-medium leading-relaxed italic opacity-90">
-                  "{viewItem.details}"
-                </p>
-              </div>
-
-              <button 
-                onClick={() => setViewItem(null)} 
-                className="w-full py-5 bg-slate-900 text-white rounded-[24px] font-black text-[12px] uppercase tracking-[0.3em] hover:bg-slate-800 transition-all shadow-xl shadow-slate-900/20 active:scale-[0.98]"
-              >
-                Close Audit Profile
-              </button>
-            </div>
+            <button
+              onClick={() => setViewItem(null)}
+              className="w-full py-4 bg-slate-900 text-white rounded-2xl font-bold hover:bg-indigo-600 transition-all shadow-xl shadow-slate-200 active:scale-[0.98]"
+            >
+              Close Analysis
+            </button>
           </div>
-        </div>
+        </Modal>
       )}
 
       {showForm && (
         <HistoryForm
           editData={editItem}
-          onClose={() => {
-            setShowForm(false);
-            setEditItem(null);
-          }}
+          onClose={() => { setShowForm(false); setEditItem(null); }}
           onSave={saveItem}
         />
       )}
@@ -443,78 +378,87 @@ export default function InspectionHistory() {
   );
 }
 
-function ActionBtn({
-  icon,
-  onClick,
-  color,
-}: {
-  icon: React.ReactNode;
-  onClick: () => void;
-  color: "blue" | "orange" | "red";
-}) {
-  const styles = {
-    blue: "text-blue-500 bg-blue-50/50 border-blue-100 hover:bg-blue-100 hover:text-blue-600",
-    orange: "text-orange-500 bg-orange-50/50 border-orange-100 hover:bg-orange-100 hover:text-orange-600",
-    red: "text-rose-500 bg-rose-50/50 border-rose-100 hover:bg-rose-100 hover:text-rose-600",
-  };
-  return (
-    <button
-      onClick={onClick}
-      className={`p-3 rounded-xl transition-all active:scale-90 border shadow-sm ${styles[color]}`}
-    >
-      {icon}
-    </button>
-  );
-}
+/* ================= SUB-COMPONENTS ================= */
 
-function Modal({
-  children,
-  onClose,
-  title,
-}: {
-  children: React.ReactNode;
-  onClose: () => void;
-  title: string;
-}) {
-   
+function StatCard({ icon, label, value }: any) {
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-md animate-in fade-in duration-300">
-      <div className="bg-white rounded-[40px] w-full max-w-2xl overflow-hidden shadow-2xl animate-in zoom-in-95 duration-300">
-        <div className="px-10 py-8 bg-slate-900 flex justify-between items-center relative overflow-hidden">
-          <div className="absolute top-0 left-0 w-full h-1.5"  ></div>
-          <div className="absolute -right-8 -top-8 w-32 h-32 opacity-10 rounded-full blur-2xl"  ></div>
-          
-          <h3 className="text-2xl font-black text-white relative z-10 tracking-tight">{title}</h3>
-          <button
-            onClick={onClose}
-            className="p-3 bg-white/10 hover:bg-white/20 rounded-xl transition-all text-white relative z-10 active:scale-90 border border-white/10"
-          >
-            <X size={20} strokeWidth={3} />
-          </button>
-        </div>
-        <div className="p-10 max-h-[70vh] overflow-y-auto custom-scrollbar">
-          {children}
+    <div className="p-6 bg-white border border-slate-200 rounded-xl shadow-sm hover:shadow-md transition-all">
+      <div className="flex items-center gap-4">
+        <div className="p-3 bg-indigo-50 rounded-lg text-indigo-600">{icon}</div>
+        <div>
+          <p className="text-xs font-medium text-slate-500 uppercase tracking-wider mb-0.5">{label}</p>
+          <h3 className="text-2xl font-bold text-slate-900">{value}</h3>
         </div>
       </div>
     </div>
   );
 }
 
-function HistoryForm({
-  editData,
-  onClose,
-  onSave,
-}: {
-  editData: HistoryItem | null;
-  onClose: () => void;
-  onSave: (data: HistoryItem) => void;
-}) {
-   const [formData, setFormData] = useState<HistoryItem>(
+function ActionBtn({ onClick, icon, color }: any) {
+  const styles: any = {
+    blue: "text-blue-600 hover:bg-blue-50 border-blue-100",
+    indigo: "text-indigo-600 hover:bg-indigo-50 border-indigo-100",
+    red: "text-red-600 hover:bg-red-50 border-red-100",
+  };
+  return (
+    <button
+      onClick={onClick}
+      className={`p-2 rounded-lg border transition-all active:scale-90 ${styles[color]}`}
+    >
+      {icon}
+    </button>
+  );
+}
+
+function CardRow({ label, value, isBadge }: any) {
+  return (
+    <div className="flex justify-between items-center text-sm">
+      <span className="text-slate-500 font-medium">{label}</span>
+      {isBadge ? (
+        <span className="px-2 py-0.5 rounded-full bg-indigo-50 text-indigo-600 text-[10px] font-bold border border-indigo-100">
+          {value}
+        </span>
+      ) : (
+        <span className="text-slate-900 font-semibold">{value}</span>
+      )}
+    </div>
+  );
+}
+
+function EmptyState() {
+  return (
+    <div className="flex flex-col items-center justify-center py-20 bg-slate-50/50">
+      <div className="h-20 w-20 bg-slate-100 rounded-full flex items-center justify-center text-slate-400 mb-4">
+        <ClipboardList size={40} />
+      </div>
+      <h3 className="text-lg font-bold text-slate-900">No records found</h3>
+      <p className="text-slate-500 text-sm">Try adjusting your search or add a new record.</p>
+    </div>
+  );
+}
+
+function Modal({ children, onClose, title }: any) {
+  return (
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm animate-in fade-in duration-300">
+      <div className="bg-white rounded-[2rem] w-full max-w-2xl shadow-2xl overflow-hidden animate-in zoom-in duration-300">
+        <div className="px-8 py-6 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
+          <h3 className="text-xl font-bold text-slate-900">{title}</h3>
+          <button onClick={onClose} className="p-2 hover:bg-white hover:shadow-md rounded-xl transition-all text-slate-400 hover:text-slate-900">
+            <X size={20} />
+          </button>
+        </div>
+        <div className="p-8">{children}</div>
+      </div>
+    </div>
+  );
+}
+
+function HistoryForm({ editData, onClose, onSave }: any) {
+  const [formData, setFormData] = useState(
     editData || {
-      id: 0,
       vehicle: "",
       inspectionName: "",
-      inspectionDate: new Date().toISOString().split("T")[0],
+      inspectionDate: "",
       result: "Passed",
       details: "",
       inspector: ""
@@ -522,112 +466,107 @@ function HistoryForm({
   );
 
   return (
-    <Modal onClose={onClose} title={editData ? "Edit Record" : "Add Record"}>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          onSave(formData);
-        }}
-        className="space-y-6"
-      >
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="space-y-2">
-            <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Vehicle Information</label>
-            <input
-              required
-              type="text"
-              placeholder="e.g. Toyota Camry (ABC-123)"
-              value={formData.vehicle}
-              onChange={(e) => setFormData({ ...formData, vehicle: e.target.value })}
-              className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-xl focus:outline-none focus:ring-4 focus:ring-brand/10 focus:border-brand transition-all font-bold text-slate-900"
-            />
-          </div>
-          <div className="space-y-2">
-            <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Inspector Name</label>
-            <input
-              required
-              type="text"
-              placeholder="e.g. John Doe"
-              value={formData.inspector}
-              onChange={(e) => setFormData({ ...formData, inspector: e.target.value })}
-              className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-xl focus:outline-none focus:ring-4 focus:ring-brand/10 focus:border-brand transition-all font-bold text-slate-900"
-            />
-          </div>
-          <div className="space-y-2">
-            <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Inspection Type</label>
-            <select
-              required
-              value={formData.inspectionName}
-              onChange={(e) => setFormData({ ...formData, inspectionName: e.target.value })}
-              className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-xl focus:outline-none focus:ring-4 focus:ring-brand/10 focus:border-brand transition-all font-bold text-slate-900 appearance-none"
-            >
-              <option value="">Select Type</option>
-              <option value="Post-accident Inspection">Post-accident</option>
-              <option value="Pre-purchase Inspection">Pre-purchase</option>
-              <option value="Emissions Inspection">Emissions</option>
-              <option value="Comprehensive Vehicle Inspection">Comprehensive</option>
-            </select>
-          </div>
-          <div className="space-y-2">
-            <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Date of Audit</label>
-            <input
-              required
-              type="date"
-              value={formData.inspectionDate}
-              onChange={(e) => setFormData({ ...formData, inspectionDate: e.target.value })}
-              className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-xl focus:outline-none focus:ring-4 focus:ring-brand/10 focus:border-brand transition-all font-bold text-slate-900"
-            />
-          </div>
-          <div className="space-y-2 md:col-span-2">
-            <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Inspection Result</label>
-            <div className="flex gap-4">
-              {["Passed", "Failed"].map((res) => (
-                <button
-                  key={res}
-                  type="button"
-                  onClick={() => setFormData({ ...formData, result: res as any })}
-                  className={`flex-1 py-4 rounded-xl font-black text-sm transition-all border-2 ${
-                    formData.result === res
-                      ? res === "Passed" 
-                        ? "bg-emerald-50 border-emerald-500 text-emerald-600" 
-                        : "bg-rose-50 border-rose-500 text-rose-600"
-                      : "bg-white border-slate-100 text-slate-400"
-                  }`}
-                >
-                  {res}
-                </button>
-              ))}
-            </div>
-          </div>
-          <div className="space-y-2 md:col-span-2">
-            <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Detailed Findings</label>
-            <textarea
-              required
-              rows={4}
-              placeholder="Enter detailed observations..."
-              value={formData.details}
-              onChange={(e) => setFormData({ ...formData, details: e.target.value })}
-              className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-xl focus:outline-none focus:ring-4 focus:ring-brand/10 focus:border-brand transition-all font-bold text-slate-900 resize-none"
-            />
-          </div>
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm animate-in fade-in duration-300">
+      <div className="bg-white rounded-[2rem] w-full max-w-lg shadow-2xl overflow-hidden animate-in zoom-in duration-300">
+        <div className="px-8 py-6 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
+          <h3 className="text-xl font-bold text-slate-900">
+            {editData ? "Edit History Record" : "New History Record"}
+          </h3>
+          <button onClick={onClose} className="p-2 hover:bg-white hover:shadow-md rounded-xl transition-all text-slate-400 hover:text-slate-900">
+            <X size={20} />
+          </button>
         </div>
 
-        <div className="flex gap-4 pt-4">
-          <button
-            type="button"
-            onClick={onClose}
-            className="flex-1 py-4 bg-slate-100 text-slate-600 rounded-xl font-black text-xs uppercase tracking-widest hover:bg-slate-200 transition-all"
-          >
-            Cancel
-          </button>
-          <button
-            type="submit"
-            className="flex-1 py-4 text-white rounded-xl font-black text-xs uppercase tracking-widest transition-all shadow-xl active:scale-95"
-           >
-            {editData ? "Update Record" : "Save Record"}
-          </button>
-        </div>
-      </form>
-    </Modal>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            onSave(formData);
+          }}
+          className="p-8 space-y-4"
+        >
+          <div className="grid grid-cols-1 gap-4">
+            <div className="space-y-1">
+              <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider ml-1">Vehicle</label>
+              <input
+                required
+                value={formData.vehicle}
+                onChange={(e) => setFormData({ ...formData, vehicle: e.target.value })}
+                className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all text-sm font-semibold"
+                placeholder="e.g. Nissan Altima"
+              />
+            </div>
+            <div className="space-y-1">
+              <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider ml-1">Inspection Name</label>
+              <input
+                required
+                value={formData.inspectionName}
+                onChange={(e) => setFormData({ ...formData, inspectionName: e.target.value })}
+                className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all text-sm font-semibold"
+                placeholder="e.g. Annual Safety Check"
+              />
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-1">
+                <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider ml-1">Date</label>
+                <input
+                  required
+                  type="text"
+                  value={formData.inspectionDate}
+                  onChange={(e) => setFormData({ ...formData, inspectionDate: e.target.value })}
+                  className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all text-sm font-semibold"
+                  placeholder="DD-MM-YYYY"
+                />
+              </div>
+              <div className="space-y-1">
+                <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider ml-1">Result</label>
+                <select
+                  value={formData.result}
+                  onChange={(e) => setFormData({ ...formData, result: e.target.value as any })}
+                  className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all text-sm font-semibold"
+                >
+                  <option value="Passed">Passed</option>
+                  <option value="Failed">Failed</option>
+                </select>
+              </div>
+            </div>
+            <div className="space-y-1">
+              <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider ml-1">Inspector</label>
+              <input
+                required
+                value={formData.inspector}
+                onChange={(e) => setFormData({ ...formData, inspector: e.target.value })}
+                className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all text-sm font-semibold"
+                placeholder="e.g. John Doe"
+              />
+            </div>
+            <div className="space-y-1">
+              <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider ml-1">Details</label>
+              <textarea
+                value={formData.details}
+                onChange={(e) => setFormData({ ...formData, details: e.target.value })}
+                className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all text-sm font-semibold min-h-[100px]"
+                placeholder="Audit notes and observations..."
+              />
+            </div>
+          </div>
+
+          <div className="flex gap-3 mt-6">
+            <button
+              type="button"
+              onClick={onClose}
+              className="flex-1 py-3 px-4 rounded-xl border border-slate-200 text-slate-600 font-bold hover:bg-slate-50 transition-all"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              className="flex-1 py-3 px-4 rounded-xl bg-indigo-600 text-white font-bold hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-200"
+            >
+              {editData ? "Update Record" : "Save Record"}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
   );
 }

@@ -9,10 +9,9 @@ import {
   Search,
   ClipboardList,
   X,
-  
+  ChevronRight
 } from "lucide-react";
  
-
 /* ================= TYPES ================= */
 interface InspectionType {
   id: number;
@@ -94,160 +93,124 @@ export default function InspectionList() {
   );
 
   return (
-    <div 
-      className="min-h-screen bg-[#F1F5F9] p-4 md:p-6 lg:p-10 animate-in fade-in duration-700"
-     >
-      <div className="max-w-[1600px] mx-auto space-y-10">
-        
-        {/* Cinematic Header Section */}
-        <div className="bg-white/70 backdrop-blur-2xl border border-white/50 rounded-[40px] p-8 md:p-10 shadow-2xl shadow-slate-200/50">
-          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8">
-            <div className="flex items-center gap-6">
-              <div className="w-20 h-20 bg-slate-900 rounded-[30px] flex items-center justify-center shadow-2xl shadow-slate-900/20 rotate-3 hover:rotate-0 transition-transform duration-500">
-                <ClipboardList className="text-white w-10 h-10" />
-              </div>
-              <div>
-                <div className="flex items-center gap-3">
-                  <h1 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight">
-                    Master <span className="text-brand">Inspection List</span>
-                  </h1>
-                  <span className="px-4 py-1.5 bg-slate-900 text-white text-[10px] font-black uppercase tracking-[0.2em] rounded-full shadow-lg">
-                    CONFIG v2.0
-                  </span>
-                </div>
-                <p className="text-slate-500 mt-2 font-semibold text-lg">
-                  Vehicle Inspection › Configuration Hub
-                </p>
-              </div>
+    <div className="min-h-screen bg-slate-50 font-sans text-slate-900">
+      {/* --- Standardized Header --- */}
+      <header className="mb-3 p-3 rounded-xl bg-white border border-slate-200 shadow-sm overflow-hidden">
+        <div className="relative flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+          <div className="space-y-1">
+            <h1 className="text-3xl font-bold text-slate-900 tracking-tight">
+              Master <span className="text-red-500">Inspection List</span>
+            </h1>
+            <nav className="flex items-center gap-2 text-sm font-medium text-slate-500">
+              <span className="hover:text-red-500 transition-colors cursor-pointer">Vehicle Inspection</span>
+              <ChevronRight size={14} />
+              <span className="text-slate-600">Configuration Hub</span>
+            </nav>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-4">
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
+              <input
+                type="text"
+                placeholder="Search categories..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all w-full lg:w-64"
+              />
             </div>
 
-            <div className="flex flex-wrap items-center gap-4">
-              <div className="relative group flex-1 md:flex-none">
-                <Search
-                  className="absolute left-6 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-brand transition-colors"
-                  size={20}
-                />
-                <input
-                  type="text"
-                  placeholder="Search master list..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-14 pr-6 py-4 bg-white/70 backdrop-blur-xl border border-white/50 rounded-2xl text-sm font-bold text-slate-900 focus:outline-none focus:ring-4 focus:ring-brand/10 focus:border-brand transition-all w-full md:w-64 shadow-xl shadow-slate-200/50"
-                />
-              </div>
-
-              <div className="flex bg-white/50 backdrop-blur-md p-1.5 rounded-2xl border border-white shadow-xl">
-                <button
-                  onClick={() => setView("table")}
-                  className={`p-3 rounded-xl transition-all ${
-                    view === "table"
-                      ? "bg-slate-900 text-white shadow-lg scale-105"
-                      : "text-slate-400 hover:text-slate-600"
-                  }`}
-                >
-                  <TableIcon size={20} />
-                </button>
-                <button
-                  onClick={() => setView("card")}
-                  className={`p-3 rounded-xl transition-all ${
-                    view === "card"
-                      ? "bg-slate-900 text-white shadow-lg scale-105"
-                      : "text-slate-400 hover:text-slate-600"
-                  }`}
-                >
-                  <LayoutGrid size={20} />
-                </button>
-              </div>
-
+            <div className="flex p-1 bg-slate-100 border border-slate-200 rounded-lg">
               <button
-                onClick={() => {
-                  setEditType(null);
-                  setShowForm(true);
-                }}
-                className="flex items-center gap-3 bg-brand text-white px-8 py-4 rounded-2xl text-xs font-black uppercase tracking-widest hover:opacity-90 transition-all shadow-xl shadow-brand/20 active:scale-95 group"
+                onClick={() => setView("table")}
+                className={`p-2 rounded-md transition-all ${
+                  view === "table" ? "bg-white text-red-500 shadow-sm" : "text-slate-500 hover:text-slate-700"
+                }`}
               >
-                <Plus size={18} className="group-hover:rotate-90 transition-transform" />
-                <span>Add Category</span>
+                <TableIcon size={18} />
+              </button>
+              <button
+                onClick={() => setView("card")}
+                className={`p-2 rounded-md transition-all ${
+                  view === "card" ? "bg-white text-red-500 shadow-sm" : "text-slate-500 hover:text-slate-700"
+                }`}
+              >
+                <LayoutGrid size={18} />
               </button>
             </div>
+
+            <button
+              onClick={() => {
+                setEditType(null);
+                setShowForm(true);
+              }}
+              className="flex items-center gap-2 bg-red-500 text-white px-5 py-2.5 rounded-lg text-sm font-semibold hover:bg-indigo-700 transition-all active:scale-95"
+            >
+              <Plus size={18} />
+              <span>Add Category</span>
+            </button>
           </div>
         </div>
+      </header>
 
-        {/* Dynamic List View */}
+      {/* --- Stats Quick Grid --- */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-3">
+        <StatCard icon={<ClipboardList className="text-red-500" />} label="Inspection Categories" value={types.length} />
+        <StatCard icon={<Plus className="text-red-500" />} label="Recent Additions" value={0} />
+        <StatCard icon={<ChevronRight className="text-red-500" />} label="Active Configurations" value={types.length} />
+      </div>
+
+      {/* --- Main Content Area --- */}
+      <main className="transition-all duration-300">
         {view === "table" ? (
-          <div className="bg-white/70 backdrop-blur-xl border border-white/50 rounded-[40px] shadow-2xl shadow-slate-200/50 overflow-hidden">
-            <div className="overflow-x-auto custom-scrollbar">
-              <table className="w-full text-left">
+          <div className="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden">
+            <div className="overflow-x-auto">
+              <table className="w-full text-left border-collapse">
                 <thead>
-                  <tr className="border-b border-slate-100">
+                  <tr className="border-b border-slate-100 bg-slate-50">
                     {[
                       "NO",
-                      "CATEGORY NAME",
-                      "DURATION",
-                      "DESCRIPTION",
-                      "ACTIONS",
+                      "Category Details",
+                      "Duration",
+                      "Description",
+                      "Operations",
                     ].map((h) => (
-                      <th
-                        key={h}
-                        className="px-10 py-8 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]"
-                      >
+                      <th key={h} className="px-6 py-4 text-xs font-semibold text-slate-500 uppercase tracking-wider">
                         {h}
                       </th>
                     ))}
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-50">
+                <tbody className="divide-y divide-slate-100">
                   {filteredTypes.map((t, idx) => (
-                    <tr
-                      key={t.id}
-                      className="hover:bg-white/80 transition-all group"
-                    >
-                      <td className="px-10 py-8 font-black text-slate-300 text-base">
-                        {String(idx + 1).padStart(2, '0')}
+                    <tr key={t.id} className="hover:bg-slate-50 transition-all">
+                      <td className="px-6 py-4 text-sm font-medium text-slate-400">
+                        {String(idx + 1).padStart(2, "0")}
                       </td>
-                      <td className="px-10 py-8">
-                        <div className="flex items-center gap-5">
-                          <div 
-                            className="h-14 w-14 rounded-2xl bg-slate-900 text-white flex items-center justify-center font-black text-xl shadow-xl group-hover:rotate-6 transition-transform"
-                           >
-                            <ClipboardList size={24} />
+                      <td className="px-6 py-4">
+                        <div className="flex items-center gap-3">
+                          <div className="h-10 w-10 rounded-lg bg-indigo-100 text-red-500 flex items-center justify-center font-bold text-base">
+                            <ClipboardList size={20} />
                           </div>
                           <div>
-                            <span className="font-black text-slate-900 text-lg tracking-tight block">{t.name}</span>
-                            <span className="text-[10px] font-black text-brand uppercase tracking-widest">Type ID: {t.id}</span>
+                            <div className="font-semibold text-slate-900">{t.name}</div>
+                            <div className="text-xs text-slate-500">ID: {t.id}</div>
                           </div>
                         </div>
                       </td>
-                      <td className="px-10 py-8">
-                        <span className="px-5 py-2 bg-slate-900 text-white rounded-xl text-[10px] font-black uppercase tracking-widest shadow-lg">
+                      <td className="px-6 py-4">
+                        <span className="inline-flex items-center px-2 py-0.5 rounded-full bg-indigo-50 text-red-500 text-[10px] font-semibold uppercase border border-indigo-100">
                           {t.timePeriod}
                         </span>
                       </td>
-                      <td className="px-10 py-8">
-                        <p className="text-sm text-slate-500 font-semibold max-w-sm italic leading-relaxed">
-                          {t.notes}
-                        </p>
+                      <td className="px-6 py-4">
+                        <p className="text-sm text-slate-600 max-w-md line-clamp-1 italic">"{t.notes}"</p>
                       </td>
-                      <td className="px-10 py-8">
-                        <div className="flex gap-3">
-                          <ActionBtn
-                            color="blue"
-                            onClick={() => setViewType(t)}
-                            icon={<Eye size={20} />}
-                          />
-                          <ActionBtn
-                            color="orange"
-                            onClick={() => {
-                              setEditType(t);
-                              setShowForm(true);
-                            }}
-                            icon={<Pencil size={20} />}
-                          />
-                          <ActionBtn 
-                            color="red" 
-                            onClick={() => remove(t.id)} 
-                            icon={<Trash2 size={20} />}
-                          />
+                      <td className="px-6 py-4">
+                        <div className="flex items-center gap-2">
+                          <ActionBtn color="blue" onClick={() => setViewType(t)} icon={<Eye size={16} />} />
+                          <ActionBtn color="indigo" onClick={() => { setEditType(t); setShowForm(true); }} icon={<Pencil size={16} />} />
+                          <ActionBtn color="red" onClick={() => remove(t.id)} icon={<Trash2 size={16} />} />
                         </div>
                       </td>
                     </tr>
@@ -255,108 +218,71 @@ export default function InspectionList() {
                 </tbody>
               </table>
             </div>
+            {filteredTypes.length === 0 && <EmptyState />}
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
             {filteredTypes.map((t) => (
-              <div
-                key={t.id}
-                className="group bg-white/70 backdrop-blur-xl rounded-[40px] p-8 border border-white/50 shadow-2xl shadow-slate-200/50 hover:scale-[1.02] transition-all duration-500 relative overflow-hidden"
-              >
-                <div className="flex justify-between items-start mb-8">
-                  <div className="h-20 w-20 rounded-[30px] bg-slate-900 text-white flex items-center justify-center font-black text-2xl shadow-2xl shadow-slate-900/20 group-hover:rotate-12 transition-transform duration-500">
-                    <ClipboardList size={32} />
+              <div key={t.id} className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-all group">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="h-12 w-12 rounded-lg bg-indigo-100 text-red-500 flex items-center justify-center font-bold text-xl">
+                    <ClipboardList size={24} />
                   </div>
-                  <span className="px-4 py-1.5 bg-slate-900 text-white rounded-xl text-[9px] font-black uppercase tracking-widest shadow-lg">
-                    {t.timePeriod}
-                  </span>
+                  <div className="overflow-hidden">
+                    <h3 className="font-bold text-slate-900 group-hover:text-red-500 transition-colors truncate">{t.name}</h3>
+                    <span className="inline-flex items-center px-2 py-0.5 rounded-full bg-indigo-50 text-red-500 text-[10px] font-bold uppercase border border-indigo-100">
+                      {t.timePeriod}
+                    </span>
+                  </div>
                 </div>
-                
-                <div className="space-y-4 mb-8 relative z-10">
-                  <h3 className="text-2xl font-black text-slate-900 group-hover:text-brand transition-colors tracking-tight line-clamp-1">
-                    {t.name}
-                  </h3>
-                  <div className="w-12 h-1.5 bg-brand rounded-full"></div>
-                  <p className="text-sm text-slate-500 font-semibold line-clamp-3 italic leading-relaxed">
-                    {t.notes}
-                  </p>
+                <div className="p-4 bg-slate-50 rounded-lg border border-slate-100 mb-6 h-20 overflow-hidden">
+                   <p className="text-xs text-slate-500 line-clamp-3 italic leading-relaxed">"{t.notes}"</p>
                 </div>
-
-                <div className="flex gap-3 mt-auto relative z-10">
-                  <button
-                    onClick={() => setViewType(t)}
-                    className="flex-1 py-4 rounded-2xl bg-slate-900 text-white font-black text-[10px] uppercase tracking-[0.2em] transition-all hover:bg-slate-800 hover:shadow-xl hover:shadow-slate-900/20 active:scale-95"
-                  >
-                    Details
+                <div className="flex gap-2">
+                  <button onClick={() => setViewType(t)} className="flex-1 py-2 rounded-lg bg-slate-50 text-slate-600 hover:bg-slate-100 text-xs font-semibold transition-all border border-slate-200">
+                    DETAILS
                   </button>
-                  <button
-                    onClick={() => {
-                      setEditType(t);
-                      setShowForm(true);
-                    }}
-                    className="p-4 rounded-2xl bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 hover:border-slate-300 transition-all active:scale-95"
-                    
-                  >
-                    <Pencil size={20} />
+                  <button onClick={() => { setEditType(t); setShowForm(true); }} className="flex-1 py-2 rounded-lg bg-indigo-50 text-red-500 hover:bg-indigo-100 text-xs font-semibold transition-all border border-indigo-100">
+                    MODIFY
                   </button>
-                  <button
-                    onClick={() => remove(t.id)}
-                    className="p-4 rounded-2xl bg-white border border-slate-200 text-slate-400 hover:text-brand hover:bg-brand/5 hover:border-brand/10 transition-all active:scale-95"
-                  >
-                    <Trash2 size={20} />
+                  <button onClick={() => remove(t.id)} className="p-2 rounded-lg text-slate-400 hover:text-red-600 hover:bg-red-50 transition-all border border-transparent hover:border-red-100">
+                    <Trash2 size={16} />
                   </button>
                 </div>
               </div>
             ))}
           </div>
         )}
-      </div>
+      </main>
 
-      {/* Details Modal */}
+      {/* --- Modals --- */}
       {viewType && (
         <Modal onClose={() => setViewType(null)} title="Inspection Category Details">
           <div className="space-y-8">
-            <div className="relative p-8 bg-slate-50 rounded-xl border border-slate-100 overflow-hidden group">
-              <div 
-                className="absolute top-0 right-0 w-40 h-40 rounded-bl-[100px] -mr-8 -mt-8 opacity-10 transition-transform group-hover:scale-110"
-               ></div>
-              
-              <div className="flex items-center gap-6 relative z-10">
-                <div 
-                  className="h-20 w-20 rounded-xl flex items-center justify-center border shadow-2xl"
-                 >
-                  <ClipboardList size={40} />
-                </div>
-                <div>
-                  <h2 className="text-3xl font-black text-slate-900 tracking-tight leading-tight">{viewType.name}</h2>
-                  <div className="flex items-center gap-3 mt-2">
-                    <span 
-                      className="px-4 py-1.5 text-white rounded-full text-[10px] font-black uppercase tracking-widest shadow-lg shadow-brand/20"
-                     >
-                      {viewType.timePeriod}
-                    </span>
-                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em]">Expected Interval</span>
-                  </div>
+            <div className="flex items-center gap-6 p-8 bg-gradient-to-br from-slate-900 to-slate-800 rounded-[2.5rem] text-white shadow-2xl relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-40 h-40 bg-white/5 rounded-full -mr-20 -mt-20 blur-2xl" />
+              <div className="h-24 w-24 rounded-[2rem] bg-indigo-500 flex items-center justify-center text-4xl font-black shadow-2xl shadow-indigo-500/40 border-4 border-white/10">
+                <ClipboardList size={40} />
+              </div>
+              <div className="space-y-1">
+                <h2 className="text-2xl font-black tracking-tight">{viewType.name}</h2>
+                <div className="flex flex-col">
+                  <span className="text-slate-400 text-sm font-medium">Configuration Hub</span>
+                  <span className="text-[10px] text-indigo-400 font-bold uppercase tracking-widest mt-2">Duration: {viewType.timePeriod}</span>
                 </div>
               </div>
             </div>
 
-            <div className="p-8 border border-slate-100 rounded-xl bg-white shadow-inner relative">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-1.5 h-6 bg-brand rounded-full"  ></div>
-                <p className="text-[11px] uppercase font-black text-slate-400 tracking-[0.2em]">Compliance Description</p>
-              </div>
-              <p className="text-slate-600 font-medium text-lg leading-relaxed italic pr-4">
+            <div className="p-8 border border-slate-100 rounded-3xl bg-slate-50">
+              <p className="text-[10px] uppercase font-black text-slate-400 tracking-[0.2em] mb-4">Compliance Description</p>
+              <p className="text-sm font-medium text-slate-700 leading-relaxed italic pr-4">
                 "{viewType.notes}"
               </p>
-              <div className="absolute bottom-6 right-8 opacity-5">
-                <ClipboardList size={80} />
-              </div>
             </div>
-
+            
             <button
               onClick={() => setViewType(null)}
-              className="w-full py-5 bg-slate-900 text-white rounded-xl font-black uppercase tracking-widest hover:opacity-90 transition-all shadow-2xl shadow-slate-200 active:scale-[0.98]"
+              className="w-full py-4 bg-slate-900 text-white rounded-2xl font-bold hover:bg-red-500 transition-all shadow-xl shadow-slate-200 active:scale-[0.98]"
             >
               Close Master Record
             </button>
@@ -364,14 +290,10 @@ export default function InspectionList() {
         </Modal>
       )}
 
-      {/* Form Modal */}
       {showForm && (
         <TypeForm
           editData={editType}
-          onClose={() => {
-            setShowForm(false);
-            setEditType(null);
-          }}
+          onClose={() => { setShowForm(false); setEditType(null); }}
           onSave={saveType}
         />
       )}
@@ -379,186 +301,159 @@ export default function InspectionList() {
   );
 }
 
-/* ================= HELPER COMPONENTS ================= */
+/* ================= SUB-COMPONENTS ================= */
 
-function ActionBtn({
-  icon,
-  onClick,
-  color,
-}: {
-  icon: React.ReactNode;
-  onClick: () => void;
-  color: "blue" | "orange" | "red";
-}) {
-  const styles = {
-    blue: "text-blue-500 hover:bg-blue-50 border-blue-100",
-    orange: "text-orange-500 hover:bg-orange-50 border-orange-100",
-    red: "text-rose-500 hover:bg-rose-50 border-rose-100",
+function StatCard({ icon, label, value }: any) {
+  return (
+    <div className="p-6 bg-white border border-slate-200 rounded-xl shadow-sm hover:shadow-md transition-all">
+      <div className="flex items-center gap-4">
+        <div className="p-3 bg-indigo-50 rounded-lg text-red-500">{icon}</div>
+        <div>
+          <p className="text-xs font-medium text-slate-500 uppercase tracking-wider mb-0.5">{label}</p>
+          <h3 className="text-2xl font-bold text-slate-900">{value}</h3>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ActionBtn({ onClick, icon, color }: any) {
+  const styles: any = {
+    blue: "text-blue-600 hover:bg-blue-50 border-blue-100",
+    indigo: "text-red-500 hover:bg-indigo-50 border-indigo-100",
+    red: "text-red-600 hover:bg-red-50 border-red-100",
   };
   return (
     <button
       onClick={onClick}
-      className={`p-2.5 rounded-xl transition-all border border-transparent hover:border-current active:scale-90 ${styles[color]}`}
+      className={`p-2 rounded-lg border transition-all active:scale-90 ${styles[color]}`}
     >
       {icon}
     </button>
   );
 }
 
-function Modal({
-  children,
-  onClose,
-  title,
-}: {
-  children: React.ReactNode;
-  onClose: () => void;
-  title: string;
-}) {
-   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/80 backdrop-blur-xl animate-in fade-in duration-300">
-      <div className="bg-white rounded-[40px] w-full max-w-xl overflow-hidden shadow-2xl animate-in zoom-in-95 duration-300 border border-white/20">
-        <div className="px-10 py-8 bg-slate-900 flex justify-between items-center relative overflow-hidden">
-          <div className="absolute top-0 left-0 w-full h-1.5 bg-brand"  ></div>
-          <div 
-            className="absolute -right-8 -top-8 w-32 h-32 rounded-full blur-3xl opacity-20"
-           ></div>
-          
-          <h3 className="text-2xl font-black text-white relative z-10 tracking-tight uppercase tracking-[0.05em]">{title}</h3>
-          <button
-            onClick={onClose}
-            className="p-3 bg-white/10 hover:bg-white/20 rounded-xl transition-all text-white relative z-10 active:scale-90"
-          >
-            <X size={24} strokeWidth={3} />
+function CardRow({ label, value, isBadge }: any) {
+  return (
+    <div className="flex justify-between items-center text-sm">
+      <span className="text-slate-500 font-medium">{label}</span>
+      {isBadge ? (
+        <span className="px-2 py-0.5 rounded-full bg-indigo-50 text-red-500 text-[10px] font-bold border border-indigo-100">
+          {value}
+        </span>
+      ) : (
+        <span className="text-slate-900 font-semibold">{value}</span>
+      )}
+    </div>
+  );
+}
+
+function EmptyState() {
+  return (
+    <div className="flex flex-col items-center justify-center py-20 bg-slate-50/50">
+      <div className="h-20 w-20 bg-slate-100 rounded-full flex items-center justify-center text-slate-400 mb-4">
+        <ClipboardList size={40} />
+      </div>
+      <h3 className="text-lg font-bold text-slate-900">No categories found</h3>
+      <p className="text-slate-500 text-sm">Try adjusting your search or add a new category.</p>
+    </div>
+  );
+}
+
+function Modal({ children, onClose, title }: any) {
+  return (
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm animate-in fade-in duration-300">
+      <div className="bg-white rounded-[2rem] w-full max-w-2xl shadow-2xl overflow-hidden animate-in zoom-in duration-300">
+        <div className="px-8 py-6 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
+          <h3 className="text-xl font-bold text-slate-900">{title}</h3>
+          <button onClick={onClose} className="p-2 hover:bg-white hover:shadow-md rounded-xl transition-all text-slate-400 hover:text-slate-900">
+            <X size={20} />
           </button>
         </div>
-        <div className="p-10">
-          {children}
-        </div>
+        <div className="p-8">{children}</div>
       </div>
     </div>
   );
 }
 
-function TypeForm({
-  editData,
-  onClose,
-  onSave,
-}: {
-  editData: InspectionType | null;
-  onClose: () => void;
-  onSave: (data: InspectionType) => void;
-}) {
-   const [formData, setFormData] = useState<InspectionType>(
+function TypeForm({ editData, onClose, onSave }: any) {
+  const [formData, setFormData] = useState(
     editData || {
-      id: 0,
       name: "",
       timePeriod: "",
-      notes: "",
+      notes: ""
     }
   );
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/80 backdrop-blur-xl animate-in fade-in duration-300">
-      <div className="bg-white rounded-[40px] w-full max-w-2xl overflow-hidden shadow-2xl animate-in zoom-in-95 duration-300 border border-white/20">
-        <div className="px-12 py-10 bg-slate-900 flex justify-between items-center relative overflow-hidden">
-          <div className="absolute top-0 left-0 w-full h-1.5 bg-brand" ></div>
-          <div 
-            className="absolute -right-12 -top-12 w-48 h-48 rounded-full blur-3xl opacity-20"
-           ></div>
-          
-          <div>
-            <h3 className="text-3xl font-black text-white relative z-10 tracking-tight uppercase">
-              {editData ? "Edit Category" : "New Category"}
-            </h3>
-            <p className="text-slate-400 text-sm mt-2 relative z-10 font-bold uppercase tracking-widest">Master List Configuration</p>
-          </div>
-          <button
-            onClick={onClose}
-            className="p-4 bg-white/10 hover:bg-white/20 rounded-xl transition-all text-white relative z-10 active:scale-90"
-          >
-            <X size={28} strokeWidth={3} />
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm animate-in fade-in duration-300">
+      <div className="bg-white rounded-[2rem] w-full max-w-lg shadow-2xl overflow-hidden animate-in zoom-in duration-300">
+        <div className="px-8 py-6 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
+          <h3 className="text-xl font-bold text-slate-900">
+            {editData ? "Edit Category" : "New Category"}
+          </h3>
+          <button onClick={onClose} className="p-2 hover:bg-white hover:shadow-md rounded-xl transition-all text-slate-400 hover:text-slate-900">
+            <X size={20} />
           </button>
         </div>
+
         <form
           onSubmit={(e) => {
             e.preventDefault();
             onSave(formData);
           }}
-          className="p-12"
+          className="p-8 space-y-4"
         >
-          <div className="grid grid-cols-1 gap-10">
-            <FormInput
-              label="Category Designation"
-              value={formData.name}
-              onChange={(v) => setFormData({ ...formData, name: v })}
-              placeholder="e.g. Strategic Annual Safety Audit"
-            />
-            <FormInput
-              label="Operational Time Window"
-              value={formData.timePeriod}
-              onChange={(v) => setFormData({ ...formData, timePeriod: v })}
-              placeholder="e.g. 72 Hours"
-            />
-            <div className="space-y-4">
-              <div className="flex items-center gap-3 ml-1">
-                <div className="w-1.5 h-4 bg-brand rounded-full"  ></div>
-                <label className="text-[11px] font-black text-slate-400 uppercase tracking-[0.2em]">Protocol Guidelines</label>
-              </div>
+          <div className="grid grid-cols-1 gap-4">
+            <div className="space-y-1">
+              <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider ml-1">Category Name</label>
+              <input
+                required
+                value={formData.name}
+                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all text-sm font-semibold"
+                placeholder="e.g. Post-accident Inspection"
+              />
+            </div>
+            <div className="space-y-1">
+              <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider ml-1">Time Period</label>
+              <input
+                required
+                value={formData.timePeriod}
+                onChange={(e) => setFormData({ ...formData, timePeriod: e.target.value })}
+                className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all text-sm font-semibold"
+                placeholder="e.g. 24 Hours"
+              />
+            </div>
+            <div className="space-y-1">
+              <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider ml-1">Description</label>
               <textarea
+                required
                 value={formData.notes}
                 onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
-                placeholder="Detail the procedural scope and compliance requirements..."
-                className="w-full px-6 py-5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-4 focus:ring-brand/10 focus:border-brand transition-all text-slate-700 font-medium min-h-[160px] resize-none shadow-inner"
+                className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all text-sm font-semibold min-h-[120px]"
+                placeholder="Compliance details and scope..."
               />
             </div>
           </div>
-          <div className="mt-12 flex gap-5">
+
+          <div className="flex gap-3 mt-6">
             <button
               type="button"
               onClick={onClose}
-              className="flex-1 py-5 rounded-xl border-2 border-slate-100 text-slate-400 font-black uppercase tracking-widest hover:bg-slate-50 hover:border-slate-200 transition-all active:scale-[0.98]"
+              className="flex-1 py-3 px-4 rounded-xl border border-slate-200 text-slate-600 font-bold hover:bg-slate-50 transition-all"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="flex-1 py-5 rounded-xl text-white font-black uppercase tracking-widest hover:opacity-90 shadow-2xl transition-all active:scale-[0.98]"
-             >
-              {editData ? "Update Category" : "Finalize Category"}
+              className="flex-1 py-3 px-4 rounded-xl bg-red-500 text-white font-bold hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-200"
+            >
+              {editData ? "Update Category" : "Save Category"}
             </button>
           </div>
         </form>
       </div>
-    </div>
-  );
-}
-
-function FormInput({
-  label,
-  value,
-  onChange,
-  placeholder,
-}: {
-  label: string;
-  value: string;
-  onChange: (v: string) => void;
-  placeholder: string;
-}) {
-   return (
-    <div className="space-y-4">
-      <div className="flex items-center gap-3 ml-1">
-        <div className="w-1.5 h-4 bg-brand rounded-full"  ></div>
-        <label className="text-[11px] font-black text-slate-400 uppercase tracking-[0.2em]">
-          {label}
-        </label>
-      </div>
-      <input
-        type="text"
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        placeholder={placeholder}
-        className="w-full px-6 py-5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-4 focus:ring-brand/10 focus:border-brand transition-all text-slate-900 font-bold shadow-inner"
-      />
     </div>
   );
 }

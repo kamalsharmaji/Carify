@@ -96,7 +96,7 @@ export default function FuelHistory() {
   const totalQty = entries.reduce((acc, curr) => acc + parseFloat(curr.quantity || "0"), 0);
 
   return (
-    <div className="min-h-screen bg-slate-50 p-4 sm:p-6 lg:p-8">
+    <div className="min-h-screen bg-slate-50 p-2 md:p-0 lg:p-0 lg:pt-0">
       <div className="max-w-[1600px] mx-auto space-y-8">
         
         {/* Standardized Header Section */}

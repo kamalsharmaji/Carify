@@ -164,8 +164,7 @@ export default function App() {
           <Route path="fleet/reports" element={<Reports />} />
           <Route path="fleet/setup" element={<SystemSetup />} />
           
-          <Route path="inspection" element={<Vehicleinspection />} />
-          <Route path="inspection/vehicle" element={<Vehicle />} />
+          <Route path="inspection/vehicleinspection" element={<Vehicleinspection />} />
           <Route path="inspection/request" element={<InspectionRequest />} />
           <Route path="inspection/list" element={<InspectionList />} />
           <Route path="inspection/reminder" element={<InspectionReminder />} />

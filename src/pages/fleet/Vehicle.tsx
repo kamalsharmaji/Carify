@@ -106,33 +106,31 @@ export default function Vehicle() {
   const maintenanceVehicles = vehicles.filter(v => v.status === "Maintenance").length;
 
   return (
-    <div className="min-h-screen bg-[#F1F5F9] p-4 md:p-6 lg:p-10 animate-in fade-in duration-700">
-      <div className="max-w-[1600px] mx-auto space-y-10">
+    <div className="min-h-screen bg-[#F1F5F9] animate-in fade-in duration-700">
+      <div className="max-w-[1600px] mx-auto space-y-4">
         
         {/* Cinematic Header Section */}
-        <div className="bg-white/70 backdrop-blur-2xl border border-white/50 rounded-[40px] p-8 md:p-10 shadow-2xl shadow-slate-200/50">
-          <div className="relative flex flex-col lg:flex-row lg:items-center justify-between gap-8">
-            <div className="flex items-center gap-6">
-              <div className="w-20 h-20 bg-slate-900 rounded-[30px] flex items-center justify-center shadow-2xl shadow-slate-900/20 rotate-3 hover:rotate-0 transition-transform duration-500">
-                <Truck className="text-white w-10 h-10" />
-              </div>
+        <div className="bg-white/70 backdrop-blur-2xl border border-white/50 rounded-[10px] p-3  shadow-2xl shadow-slate-200/50">
+          <div className="relative flex flex-col lg:flex-row lg:items-center justify-between gap-3">
+            <div className="flex items-center gap-3">
+              
               <div>
                 <div className="flex items-center gap-3">
-                  <h1 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight">
+                  <h1 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight">
                     Fleet <span className="text-indigo-600">Operations</span>
                   </h1>
                   <span className="px-4 py-1.5 bg-slate-900 text-white text-[10px] font-black uppercase tracking-[0.2em] rounded-full shadow-lg">
                     ASSET v4.0
                   </span>
                 </div>
-                <p className="text-slate-500 mt-2 font-semibold text-lg">
+                <p className="text-slate-500 mt-2 font-semibold text-xs">
                   Vehicle Management › Fleet Directory
                 </p>
               </div>
             </div>
 
             <div className="flex flex-wrap items-center gap-4">
-              <div className="flex bg-white/50 backdrop-blur-md p-1.5 rounded-2xl border border-white shadow-xl">
+              <div className="flex bg-white/50 backdrop-blur-md rounded-2xl border border-white shadow-xl">
                 <button
                   onClick={() => setView("table")}
                   className={`p-3 rounded-xl transition-all ${
@@ -141,7 +139,7 @@ export default function Vehicle() {
                       : "text-slate-400 hover:text-slate-600"
                   }`}
                 >
-                  <TableIcon size={20} />
+                  <TableIcon size={18} />
                 </button>
                 <button
                   onClick={() => setView("card")}
@@ -151,13 +149,13 @@ export default function Vehicle() {
                       : "text-slate-400 hover:text-slate-600"
                   }`}
                 >
-                  <LayoutGrid size={20} />
+                  <LayoutGrid size={18} />
                 </button>
               </div>
 
               <button
                 onClick={() => { setEditVehicle(null); setShowForm(true); }}
-                className="flex items-center gap-3 bg-indigo-600 text-white px-8 py-4 rounded-2xl text-xs font-black uppercase tracking-widest hover:bg-indigo-700 transition-all shadow-xl shadow-indigo-600/20 active:scale-95 group"
+                className="flex items-center gap-3 bg-indigo-600 text-white px-4 py-2 rounded-2xl text-xs font-black uppercase tracking-widest hover:bg-indigo-700 transition-all shadow-xl shadow-indigo-600/20 active:scale-95 group"
               >
                 <Plus size={18} className="group-hover:rotate-90 transition-transform" />
                 <span>Add Vehicle</span>
@@ -166,7 +164,7 @@ export default function Vehicle() {
           </div>
 
           {/* Stats Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
             <StatCard label="Total Fleet" value={totalVehicles.toString()} icon={Truck} color="blue" />
             <StatCard label="Active Units" value={activeVehicles.toString()} icon={Activity} color="emerald" />
             <StatCard label="Maintenance" value={maintenanceVehicles.toString()} icon={Settings} color="orange" />
