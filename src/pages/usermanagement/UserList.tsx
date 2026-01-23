@@ -9,7 +9,7 @@ import {
   Table as TableIcon,
   ChevronLeft,
   ChevronRight,
-  User as UserIcon,
+  User ,
   Mail,
   Shield,
   Calendar,

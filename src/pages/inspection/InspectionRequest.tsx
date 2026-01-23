@@ -9,7 +9,6 @@ import {
   Search,
   X,
   User,
-  ShieldCheck,
   ClipboardList,
   ChevronRight,
   Clock,

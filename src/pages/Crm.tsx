@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import {
   Users,
   UserPlus,
@@ -12,13 +12,11 @@ import {
   Trash2,
   Eye,
   Mail,
-  Phone,
-  Building2,
+   
   X,
   Target,
   Briefcase,
   TrendingUp,
-  Globe,
   DollarSign
 } from "lucide-react";
 import toast from "react-hot-toast";

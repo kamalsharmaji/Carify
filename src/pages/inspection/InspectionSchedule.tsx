@@ -11,7 +11,6 @@ import {
   ChevronRight,
   Calendar,
   Clock,
-  User,
   Activity,
   CheckCircle2,
   XCircle

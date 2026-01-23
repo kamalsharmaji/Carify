@@ -8,14 +8,10 @@ import {
   Filter, 
   Plus, 
   MoreHorizontal,
-  ArrowUpRight,
-  ArrowDownRight,
   Mail,
-  Star,
   PhoneCall,
   Target,
   ChevronRight,
-  Clock
 } from "lucide-react";
 
 export default function CRMDashboard() {

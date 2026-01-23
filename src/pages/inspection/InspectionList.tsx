@@ -333,20 +333,20 @@ function ActionBtn({ onClick, icon, color }: any) {
   );
 }
 
-function CardRow({ label, value, isBadge }: any) {
-  return (
-    <div className="flex justify-between items-center text-sm">
-      <span className="text-slate-500 font-medium">{label}</span>
-      {isBadge ? (
-        <span className="px-2 py-0.5 rounded-full bg-indigo-50 text-red-500 text-[10px] font-bold border border-indigo-100">
-          {value}
-        </span>
-      ) : (
-        <span className="text-slate-900 font-semibold">{value}</span>
-      )}
-    </div>
-  );
-}
+// function CardRow({ label, value, isBadge }: any) {
+//   return (
+//     <div className="flex justify-between items-center text-sm">
+//       <span className="text-slate-500 font-medium">{label}</span>
+//       {isBadge ? (
+//         <span className="px-2 py-0.5 rounded-full bg-indigo-50 text-red-500 text-[10px] font-bold border border-indigo-100">
+//           {value}
+//         </span>
+//       ) : (
+//         <span className="text-slate-900 font-semibold">{value}</span>
+//       )}
+//     </div>
+//   );
+// }
 
 function EmptyState() {
   return (
